@@ -1,0 +1,217 @@
+{
+  "versao": "1.0.0",
+  "data_revisao": "2026-10-20",
+  "dominio": "Sistema Especialista Zootécnico e Econômico para Pecuária Leiteira",
+  "regras": [
+    {
+      "id": "R01",
+      "nome": "Insolvência Operacional Imediata (COE > Receita)",
+      "prioridade": 100,
+      "cf": 1.0,
+      "categoria": "financeira",
+      "condicoes": [
+        { "campo": "margem_bruta_litro", "operador": "<=", "valor": 0 }
+      ],
+      "conclusao": {
+        "status": "CRITICO",
+        "titulo": "Insolvência Operacional Imediata",
+        "resumo": "A receita do leite não cobre nem o desembolso diário em dinheiro (COE).",
+        "recomendacao": "A fazenda está queimando caixa todo dia. É necessário estancar o déficit imediatamente cortando gastos supérfluos, revisando fornecedores de ração e descartando vacas de baixa produção que não pagam a comida.",
+        "fonte": "Embrapa Gado de Leite - Metodologia de Custos COE/COT"
+      }
+    },
+    {
+      "id": "R02",
+      "nome": "Descapitalização e Corrosão Patrimonial (COT > Receita >= COE)",
+      "prioridade": 90,
+      "cf": 0.90,
+      "categoria": "financeira",
+      "condicoes": [
+        { "campo": "margem_bruta_litro", "operador": ">", "valor": 0 },
+        { "campo": "margem_liquida_litro", "operador": "<=", "valor": 0 }
+      ],
+      "conclusao": {
+        "status": "ALERTA",
+        "titulo": "Risco de Descapitalização no Médio/Longo Prazo",
+        "resumo": "A fazenda paga as contas do dia a dia (COE), mas não consegue pagar a depreciação de máquinas/benfeitorias e nem a mão de obra da família.",
+        "recomendacao": "No curto prazo a fazenda sobrevive, mas no médio prazo os maquinários vão quebrar sem reserva financeira para conserto ou substituição. Reavalie a escala de produção e reduza o custo fixo por litro.",
+        "fonte": "Embrapa - Sistema Custopec"
+      }
+    },
+    {
+      "id": "R03",
+      "nome": "Mastite Subclínica Severa e Prejuízo por Qualidade (CCS > 500k)",
+      "prioridade": 85,
+      "cf": 0.95,
+      "categoria": "qualidade",
+      "condicoes": [
+        { "campo": "ccs", "operador": ">", "valor": 500 }
+      ],
+      "conclusao": {
+        "status": "CRITICO",
+        "titulo": "Alerta Sanitário e Penalização de Preço por CCS",
+        "resumo": "CCS acima do limite regulatório (500 mil céls/mL). O rebanho está com alta prevalência de mastite subclínica.",
+        "recomendacao": "1. Perda oculta de 8% a 15% na síntese de leite na glândula mamária. 2. Desconto direto no pagamento por litro pelo laticínio. Ação: Realizar teste CMT em todas as vacas, segregar lote de ordenha para animais infectados, trocar borrachas de teteiras e revisar linha de vácuo.",
+        "fonte": "MAPA IN 76/77 & Embrapa Gado de Leite"
+      }
+    },
+    {
+      "id": "R04",
+      "nome": "Contaminação Bacteriana e Falha de Resfriamento (CBT > 100k)",
+      "prioridade": 80,
+      "cf": 0.85,
+      "categoria": "qualidade",
+      "condicoes": [
+        { "campo": "cbt", "operador": ">", "valor": 100 }
+      ],
+      "conclusao": {
+        "status": "ALERTA",
+        "titulo": "Falha de Higiene na Ordenha ou Resfriamento Lento",
+        "resumo": "CBT acima de 100 mil UFC/mL indica proliferação bacteriana no leite.",
+        "recomendacao": "Revisar imediatamente o protocolo de limpeza do tanque e tubulações (temperatura da água alcalina > 70°C, detergente ácido para pedra do leite) e verificar se o leite atinge 4°C em menos de 3 horas no tanque.",
+        "fonte": "Instrução Normativa MAPA 76/77"
+      }
+    },
+    {
+      "id": "R05",
+      "nome": "Rebanho em Final de Lactação / Atraso de Cobertura (DEL > 200 dias)",
+      "prioridade": 75,
+      "cf": 0.85,
+      "categoria": "zootecnica",
+      "condicoes": [
+        { "campo": "del_medio", "operador": ">", "valor": 200 }
+      ],
+      "conclusao": {
+        "status": "ALERTA",
+        "titulo": "Dias em Lactação (DEL) Elevado - Curva em Declínio",
+        "resumo": "O DEL médio do rebanho está em declínio produtivo (meta: 150 a 180 dias).",
+        "recomendacao": "Indica falha na reprodução 3 a 6 meses atrás. As vacas estão com baixa produção individual persistente e ganho de peso indesejado (engorda). Intensificar protocolo de IATF e programar secagem das vacas com prenhez confirmada.",
+        "fonte": "Embrapa Pecuária Sudeste - Gestão de Rebanho Leiteiro"
+      }
+    },
+    {
+      "id": "R06",
+      "nome": "Ineficiência Reprodutiva e Excesso de Vacas Secas (% Lactação < 75%)",
+      "prioridade": 75,
+      "cf": 0.80,
+      "categoria": "zootecnica",
+      "condicoes": [
+        { "campo": "perc_vacas_lactacao", "operador": "<", "valor": 75 }
+      ],
+      "conclusao": {
+        "status": "ALERTA",
+        "titulo": "Baixo Percentual de Vacas em Produção",
+        "resumo": "Menos de 75% das vacas adultas estão em lactação (ideal: >= 80%).",
+        "recomendacao": "Muitas vacas 'comendo e não produzindo' (secas/vazias por muito tempo). Aumenta o custo fixo por litro produzido. Avaliar descarte involuntário de vacas inférteis e adotar protocolos sincronizados de reprodução.",
+        "fonte": "Embrapa Gado de Leite"
+      }
+    },
+    {
+      "id": "R07",
+      "nome": "Desgaste Econômico por Intervalo entre Partos Excessivo (IEP > 14.5 meses)",
+      "prioridade": 70,
+      "cf": 0.80,
+      "categoria": "zootecnica",
+      "condicoes": [
+        { "campo": "iep_meses", "operador": ">", "valor": 14.5 }
+      ],
+      "conclusao": {
+        "status": "ALERTA",
+        "titulo": "Intervalo entre Partos Excessivo (Perda de Bezerros e Picos de Safra)",
+        "resumo": "IEP superior a 14.5 meses (meta zootécnica: 12.5 a 13.5 meses).",
+        "recomendacao": "A cada mês acima de 13 meses de IEP, o produtor perde em média R$ 250 a R$ 400 por vaca/ano em bezerros não nascidos e leite não atingido no pico de lactação.",
+        "fonte": "Embrapa Gado de Leite - Indicadores Reprodutivos"
+      }
+    },
+    {
+      "id": "R08",
+      "nome": "Crise de Relação de Troca Milho/Leite (Milho CEPEA Alto)",
+      "prioridade": 70,
+      "cf": 0.85,
+      "categoria": "mercado",
+      "condicoes": [
+        { "campo": "relacao_troca_milho", "operador": ">", "valor": 32 },
+        { "campo": "margem_bruta_litro", "operador": "<", "valor": 0.40 }
+      ],
+      "conclusao": {
+        "status": "ALERTA",
+        "titulo": "Relação de Troca Milho:Leite Desfavorável",
+        "resumo": "São necessários mais de 32 litros de leite para comprar 1 saca de milho de 60kg no mercado.",
+        "recomendacao": "O preço do grão de milho está espremendo o lucro do leite. Estratégia: Reformular concentrado utilizando coprodutos energéticos (polpa cítrica, casca de soja, farelo de trigo) ou priorizar forragem/silagem de alto valor energético.",
+        "fonte": "CEPEA / ESALQ-USP"
+      }
+    },
+    {
+      "id": "R09",
+      "nome": "Desperdício e Baixa Eficiência Alimentar do Concentrado (Conversão < 2.0 L/kg)",
+      "prioridade": 65,
+      "cf": 0.75,
+      "categoria": "zootecnica",
+      "condicoes": [
+        { "campo": "eficiencia_alimentar", "operador": "<", "valor": 2.0 },
+        { "campo": "consumo_concentrado_vaca_dia", "operador": ">", "valor": 5.0 }
+      ],
+      "conclusao": {
+        "status": "ALERTA",
+        "titulo": "Baixa Eficiência de Conversão do Concentrado",
+        "resumo": "A fazenda produz menos de 2,0 litros de leite por quilo de ração concentrada fornecida.",
+        "recomendacao": "Fornecimento excessivo de concentrado para vacas de menor potencial genético ou volumoso de baixa qualidade que impede ruminação eficiente. Ajustar o arraçoamento por lotes de produção (evitar ração linear para todo o rebanho).",
+        "fonte": "NRC Dairy Cattle / Embrapa"
+      }
+    },
+    {
+      "id": "R10",
+      "nome": "Inchaço do Custo Nutricional no Custo Operacional (Nutrição > 65% do COE)",
+      "prioridade": 60,
+      "cf": 0.80,
+      "categoria": "financeira",
+      "condicoes": [
+        { "campo": "perc_alimentacao_coe", "operador": ">", "valor": 65 }
+      ],
+      "conclusao": {
+        "status": "ALERTA",
+        "titulo": "Custo de Alimentação Hipertrofiado",
+        "resumo": "Os gastos com volumoso e concentrado ultrapassam 65% de todo o custo desembolsado (COE).",
+        "recomendacao": "A alimentação é o item de maior peso, mas acima de 65% do COE compromete a capacidade de pagar energia, vacinas e funcionários. Buscar compra coletiva de insumos e melhorar a produtividade de matéria seca por hectare de silagem/pasto.",
+        "fonte": "Embrapa Pecuária Sudeste"
+      }
+    },
+    {
+      "id": "R11",
+      "nome": "Bonificação Plena por Qualidade do Leite (CCS < 250k E CBT < 50k)",
+      "prioridade": 50,
+      "cf": 0.95,
+      "categoria": "qualidade",
+      "condicoes": [
+        { "campo": "ccs", "operador": "<=", "valor": 250 },
+        { "campo": "cbt", "operador": "<=", "valor": 50 }
+      ],
+      "conclusao": {
+        "status": "SUCESSO",
+        "titulo": "Excelente Padrão Higiênico-Sanitário e Bônus no Laticínio",
+        "resumo": "Leite com CCS e CBT em níveis de excelência mundial.",
+        "recomendacao": "A propriedade captura o valor máximo da tabela de bonificação por qualidade do laticínio (+R$ 0,05 a R$ 0,15/L) e garante maior longevidade ao rebanho.",
+        "fonte": "MAPA IN 76/77 & CBQL (Conselho Brasileiro de Qualidade do Leite)"
+      }
+    },
+    {
+      "id": "R12",
+      "nome": "Alta Eficiência Zootécnica e Lucratividade Sólida",
+      "prioridade": 50,
+      "cf": 0.95,
+      "categoria": "financeira",
+      "condicoes": [
+        { "campo": "margem_liquida_litro", "operador": ">=", "valor": 0.35 },
+        { "campo": "perc_vacas_lactacao", "operador": ">=", "valor": 80 },
+        { "campo": "del_medio", "operador": "<=", "valor": 180 }
+      ],
+      "conclusao": {
+        "status": "SUCESSO",
+        "titulo": "Propriedade com Alta Eficiência Zootécnica e Sustentabilidade Financeira",
+        "resumo": "Margem líquida saudável (COT coberto), rebanho com DEL ideal e alta proporção de vacas em lactação.",
+        "recomendacao": "A fazenda gera lucro real, remunera a família e acumula reserva de depreciação para expansão e modernização tecnológica contínua.",
+        "fonte": "Embrapa Gado de Leite - Benchmarks de Alta Rentabilidade"
+      }
+    }
+  ]
+}

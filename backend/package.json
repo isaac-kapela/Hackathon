@@ -1,0 +1,17 @@
+{
+  "name": "pecuaria-expert-backend",
+  "version": "1.0.0",
+  "description": "Sistema Especialista com Motor de Inferência Determinístico para Pecuária Leiteira - Hackathon UFJF 2026",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node test/engine.test.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.9",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}
