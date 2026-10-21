@@ -16,6 +16,7 @@ import {
 import CertaintyFactorGauge from '../components/CertaintyFactorGauge';
 import ExplanationModule from '../components/ExplanationModule';
 import KpiCard from '../components/KpiCard';
+import DashboardCharts from '../components/DashboardCharts';
 import WorkingMemoryInspector from '../components/WorkingMemoryInspector';
 import ReportExportModal from '../components/ReportExportModal';
 import { apiService } from '../services/api';
@@ -530,6 +531,14 @@ export default function DiagnosticoPage() {
                 <span>Emitir Laudo Técnico Especialista</span>
               </button>
             </div>
+          )}
+
+          {/* Painel Gráfico Interativo com Recharts */}
+          {indicadores && (
+            <DashboardCharts 
+              indicadores={indicadores} 
+              formData={formData} 
+            />
           )}
 
           {/* Módulo de Explicação - Requisito Mandatório do Hackathon */}
