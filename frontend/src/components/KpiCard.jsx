@@ -16,25 +16,25 @@ export default function KpiCard({ title, value, unit, subtitle, alertType = 'neu
   };
 
   return (
-    <div className={`p-4 rounded-2xl border shadow-sm transition-all duration-200 hover:shadow-md hover:-translate-y-0.5 ${alertStyles[alertType]}`}>
-      <div className="flex items-center justify-between mb-2">
-        <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">{title}</span>
+    <div className={`p-5 sm:p-6 rounded-3xl border shadow-sm transition-all duration-200 hover:shadow-md hover:-translate-y-0.5 ${alertStyles[alertType]} flex flex-col justify-between`}>
+      <div className="flex items-center justify-between mb-3">
+        <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">{title}</span>
         {Icon && (
-          <div className={`p-2 rounded-xl ${badgeStyles[alertType]}`}>
-            <Icon className="w-3.5 h-3.5" />
+          <div className={`p-2.5 rounded-2xl ${badgeStyles[alertType]}`}>
+            <Icon className="w-4 h-4" />
           </div>
         )}
       </div>
 
-      <div className="flex items-baseline space-x-1.5">
-        <span className="text-2xl font-black tracking-tight">{value}</span>
-        {unit && <span className="text-xs font-semibold text-slate-500">{unit}</span>}
+      <div className="flex items-baseline space-x-2 my-1">
+        <span className="text-2xl sm:text-3xl font-black tracking-tight">{value}</span>
+        {unit && <span className="text-xs sm:text-sm font-bold text-slate-500">{unit}</span>}
       </div>
 
-      <div className="mt-2 pt-2 border-t border-slate-100/80 flex items-center justify-between text-[11px]">
-        {subtitle && <span className="text-slate-500 truncate">{subtitle}</span>}
+      <div className="mt-3 pt-3 border-t border-slate-100/90 flex items-center justify-between text-xs gap-2">
+        {subtitle && <span className="text-slate-500 truncate font-medium">{subtitle}</span>}
         {targetText && (
-          <span className="font-semibold text-emerald-700 bg-emerald-100/70 px-1.5 py-0.5 rounded text-[10px]">
+          <span className="font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-md text-[11px] shrink-0 border border-emerald-200/70">
             {targetText}
           </span>
         )}

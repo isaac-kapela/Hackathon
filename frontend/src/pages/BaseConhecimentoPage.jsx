@@ -115,7 +115,7 @@ export default function BaseConhecimentoPage() {
 
         {/* Visualização de Regras de Produção */}
         {activeSubTab === 'regras' && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 pt-2">
             {filteredRegras.map((r) => {
               const isCritico = r.conclusao?.status === 'CRITICO';
               const isAlerta = r.conclusao?.status === 'ALERTA';

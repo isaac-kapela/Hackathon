@@ -44,13 +44,13 @@ export default function WorkingMemoryInspector({ workingMemory }) {
             />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 max-h-80 overflow-y-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3.5 max-h-96 overflow-y-auto p-1">
             {entries.map(([key, value]) => (
-              <div key={key} className="p-3 bg-slate-50 rounded-lg border border-slate-200 text-xs">
-                <span className="font-mono text-indigo-700 block font-semibold truncate" title={key}>
+              <div key={key} className="p-3.5 bg-slate-50/80 hover:bg-slate-100/80 transition-colors rounded-xl border border-slate-200 text-xs flex flex-col justify-between">
+                <span className="font-mono text-indigo-700 block font-bold truncate" title={key}>
                   {key}
                 </span>
-                <span className="font-medium text-slate-800 mt-1 block">
+                <span className="font-semibold text-slate-900 mt-2 block text-sm">
                   {typeof value === 'number' ? (Number.isInteger(value) ? value : value.toFixed(3)) : String(value)}
                 </span>
               </div>
