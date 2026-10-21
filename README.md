@@ -1,110 +1,169 @@
-# RERUM AgroExpert — Sistema Especialista para Pecuária Leiteira
-### Hackathon UFJF 2026 • XXVIII Semana da Computação DCC/UFJF & RERUM Engenharia de Sistemas
+# Sistema Especialista em Pecuária Leiteira: Gestão Zootécnica & Econômica
 
-> **Tema 3:** Análise Econômica e Financeira com Dados Zootécnicos, Qualidade do Leite e Custos de Insumos.
+> **Hackathon UFJF 2026** — XXVIII Semana da Computação DCC/UFJF & RERUM Engenharia de Sistemas  
+> **Tema 3:** Análise Econômica, Zootécnica e Qualidade do Leite  
+> **Instituições de Referência Técnica:** Embrapa Gado de Leite, MAPA (Instruções Normativas 76/77), CEPEA/ESALQ-USP e IBGE.
 
 ---
 
-## 🎯 Visão Geral do Projeto
+## 🎯 Objetivo e Visão Geral
 
-O **RERUM AgroExpert** é um sistema especialista determinístico desenvolvido para apoiar produtores de leite, agrônomos e veterinários na tomada de decisão técnico-econômica. 
+Este projeto é um **Sistema Especialista Baseado em Regras e Conhecimento Especializado** desenvolvido para auxiliar produtores e técnicos na tomada de decisão estratégica na pecuária de leite.
 
 O sistema integra:
-1. **Zootecnia & Reprodução:** Dias em Lactação (DEL), Intervalo entre Partos (IEP), Taxa de Prenhez, % de Vacas em Lactação e Eficiência Alimentar (L de leite/kg de ração).
-2. **Qualidade do Leite (MAPA IN 76/77):** Contagem de Células Somáticas (CCS), Contagem Bacteriana Total (CBT), Gordura e Proteína com cálculo dinâmico de bonificação/penalização no preço por litro.
-3. **Custos Operacionais Embrapa:** Metodologia oficial de Custo Operacional Efetivo (COE), Custo Operacional Total (COT), Custo Total (CT) e Ponto de Equilíbrio.
-4. **Cotações de Mercado Reais:** Ingestão de séries da API oficial do **IBGE (Pesquisa Trimestral do Leite - Tabela 1086)** e indicadores de commodities **CEPEA/ESALQ-USP** (Milho, Farelo de Soja e Leite).
-5. **Módulo de Explicação Auditável:** Responde com total transparência **"Por que?"** e **"Como o sistema chegou a isso?"**, apresentando o traço de inferência das regras disparadas, condições satisfeitas e referências bibliográficas.
+1. **Indicadores Zootécnicos e Reprodutivos:** Dias em Lactação (DEL), Intervalo entre Partos (IEP), Taxa de Prenhez, % Vacas em Lactação e Eficiência Alimentar do Concentrado.
+2. **Qualidade do Leite e Bonificação (MAPA IN 76/77):** Contagem de Células Somáticas (CCS), Contagem Bacteriana Total (CBT), Gordura e Proteína.
+3. **Custos Operacionais e Metodologia Embrapa:** Custo Operacional Efetivo (COE), Custo Operacional Total (COT), Custo Total (CT), Margem Bruta, Margem Líquida e Ponto de Equilíbrio.
+4. **Cotações de Mercado & Relação de Troca:** Preço do milho, farelo de soja e relação de troca milho:leite via CEPEA/ESALQ e histórico de captação IBGE SIDRA.
 
 ---
 
-## 🏗️ Arquitetura da Solução
+## ⚖️ Conformidade com as Regras Oficiais do Hackathon
 
-Conforme as diretrizes obrigatórias da RERUM, **a IA/LLM não atua como motor de inferência**. A decisão sai de uma base de conhecimento explícita e regras auditáveis.
-
-```
-┌────────────────────────────────────────────────────────┐
-│             Interface Web (React + Tailwind)           │
-│    • Painel de Simulação & Presets de Demonstração     │
-│    • Régua de Fator de Certeza (CF: -1.0 a +1.0)       │
-│    • Módulo de Explicação Interativo ("Como chegou?")  │
-└───────────────────────────┬────────────────────────────┘
-                            │ Requisição REST
-                            ▼
-┌────────────────────────────────────────────────────────┐
-│               Backend REST API (Node.js)               │
-│                                                        │
-│  ┌────────────────────────┐    ┌────────────────────┐  │
-│  │ Base de Conhecimento   │    │ Metodologia Custo  │  │
-│  │ • rules.json (R01..R12)│    │ Embrapa (COE/COT)  │  │
-│  │ • variables.json       │    │ • costCalculator.js│  │
-│  └───────────┬────────────┘    └─────────┬──────────┘  │
-│              │                           │             │
-│              ▼                           ▼             │
-│  ┌──────────────────────────────────────────────────┐  │
-│  │         Motor de Inferência Determinístico       │  │
-│  │  • Pattern Matching (Avaliação de Premissas)     │  │
-│  │  • Resolução de Conflitos por Prioridade         │  │
-│  │  • Combinação de Fatores de Certeza (MYCIN CF)   │  │
-│  │  • Geração de Traço Auditável de Explicação      │  │
-│  └──────────────────────────────────────────────────┘  │
-└────────────────────────────────────────────────────────┘
-```
+| Critério Obrigatório | Atendimento no Projeto |
+| :--- | :--- |
+| **Não usar LLM no sistema especialista** | Motor determinístico de inferência (*Forward Chaining*) baseado em regras formais ($R01 \dots R12$) e Fatores de Certeza ($CF$) do MYCIN. Nenhuma decisão ou cálculo depende de IA generativa. |
+| **Execução 100% Localhost** | Todo o sistema roda localmente em Node.js (porta `5000`) e React/Vite (porta `3000`), sem dependências externas obrigatórias. |
+| **Módulo de Explicação Interativo ("Por quê?")** | Trilha de auditoria detalhada (*Audit Trail*) mostrando as premissas avaliadas, os valores da memória de trabalho e a recomendação técnica fundamentada da Embrapa/MAPA. |
+| **Fatores de Certeza ($CF \in [-1.0, +1.0]$)** | Cálculo formal de combinação de evidências do modelo MYCIN e prioridades de regras (50 a 100). |
 
 ---
 
-## 🚀 Como Executar em LOCALHOST
+## 🚀 Como Executar o Projeto
 
-### Requisitos:
-* **Node.js** v18+ instalado.
+### Pré-requisitos
+* **Node.js** (versão 18.x ou superior)
+* **npm** (versão 9.x ou superior)
+* Navegador Web moderno (Chrome, Firefox, Edge)
 
-### Inicialização com 1 Comando:
-Na pasta raiz do projeto, execute:
+---
+
+### Opção 1: Inicialização Rápida (Script Único)
+
+Na raiz do projeto, execute o script de inicialização automatizada:
 
 ```bash
+chmod +x start.sh
 ./start.sh
 ```
 
-Ou inicie manualmente:
+O script irá:
+1. Instalar as dependências do backend e do frontend (caso necessário).
+2. Iniciar o servidor de API Node.js em `http://localhost:5000`.
+3. Iniciar a aplicação React (Vite) em `http://localhost:3000`.
+
+Abra o seu navegador em: **[http://localhost:3000](http://localhost:3000)**
+
+---
+
+### Opção 2: Inicialização Manual (Passo a Passo)
+
+Caso prefira rodar os serviços em terminais separados:
+
+#### 1. Iniciar o Backend
 ```bash
-# 1. Backend (Terminal 1)
 cd backend
 npm install
-npm start
-# -> Rodando em http://localhost:5000
+node src/server.js
+```
+> O backend iniciará na porta **`http://localhost:5000`**.
 
-# 2. Frontend (Terminal 2)
+#### 2. Iniciar o Frontend
+Em outro terminal:
+```bash
 cd frontend
 npm install
 npm run dev
-# -> Rodando em http://localhost:3000
+```
+> O frontend iniciará na porta **`http://localhost:3000`**.
+
+---
+
+## 🧪 Como Executar a Bateria de Testes
+
+O projeto inclui uma suíte de testes automatizados para validar a inferência determinística, a combinação dos fatores de certeza ($CF$) e a ativação das regras Embrapa/MAPA:
+
+```bash
+cd backend
+node test/engine.test.js
 ```
 
-Abra seu navegador em: **`http://localhost:3000`**
+**Resultado esperado:**
+```text
+--- INICIANDO TESTES DO MOTOR DE INFERÊNCIA ---
+[TESTE 1] Fazenda com Mastite (CCS > 500k) e CBT Alta (> 100k): PASSOU
+[TESTE 2] Fazenda Modelo de Alta Eficiência: PASSOU
+--- TODOS OS TESTES EXECUTADOS COM SUCESSO ---
+```
 
 ---
 
-## 🧪 Casos de Demonstração para a Banca
+## 🏛️ Arquitetura do Sistema
 
-O sistema possui botões de **Cenários Pré-configurados (Presets)** para demonstrar em segundos o comportamento do motor:
-
-1. **Fazenda Modelo (Alta Eficiência & Bonificação):**
-   * CCS baixa (180k), CBT baixa (35k), DEL 160 dias, Margem Líquida alta (> R$ 0,35/L).
-   * **Resultado do Motor:** Dispara `R11` (Bonificação Plena) e `R12` (Alta Eficiência Zootécnica). Status: **SAUDÁVEL**.
-
-2. **Fazenda com Crise Sanitária (Mastite & CBT Alta):**
-   * CCS crítica (650k céls/mL), CBT crítica (220k UFC/mL).
-   * **Resultado do Motor:** Dispara `R03` (Mastite Subclínica) e `R04` (Falha de Resfriamento) com penalização financeira e alerta de perda oculta de síntese de leite. Status: **CRÍTICO**.
-
-3. **Fazenda em Risco de Descapitalização (Milho Caro & DEL Atrasado):**
-   * DEL elevado (220 dias), IEP longo (15,2 meses), poucas vacas produzindo (64%) e saca de milho a R$ 82,00.
-   * **Resultado do Motor:** Dispara `R02` (Descapitalização COT), `R05` (DEL Atrasado), `R06` (Excesso de Vacas Secas) e `R08` (Relação de Troca Milho Desfavorável). Status: **ALERTA**.
+```
+hackaton/
+├── backend/                             # API REST & Motor de Inferência (Node.js)
+│   ├── src/
+│   │   ├── engine/                      # Motor Especialista (Forward-Chaining + MYCIN CF)
+│   │   │   └── InferenceEngine.js
+│   │   ├── knowledge/                   # Base de Conhecimento Declarativa (JSON)
+│   │   │   ├── rules.json               # 12 Regras de Produção (Embrapa / MAPA)
+│   │   │   └── variables.json           # Dicionário de 20 variáveis zootécnicas e financeiras
+│   │   ├── services/                    # Lógica de Negócio & Custos
+│   │   │   ├── costCalculator.js        # Fórmulas de COE, COT, CT, DEL, Conversão
+│   │   │   └── marketService.js         # API IBGE SIDRA e CEPEA
+│   │   ├── controllers/                 # Controladores MVC
+│   │   ├── routes/                      # Rotas da API
+│   │   ├── validators/                  # Validação de integridade de dados
+│   │   └── server.js                    # Ponto de entrada do backend
+│   └── test/
+│       └── engine.test.js               # Testes unitários do motor
+│
+├── frontend/                            # Interface do Usuário (React + Tailwind + Vite)
+│   ├── src/
+│   │   ├── services/                    # Cliente HTTP (api.js)
+│   │   ├── components/
+│   │   │   ├── CertaintyFactorGauge.jsx # Medidor visual tri-color do CF
+│   │   │   ├── ExplanationModule.jsx    # Módulo de Explicação ("Por quê?")
+│   │   │   ├── KpiCard.jsx              # Cards reutilizáveis de métricas
+│   │   │   ├── WorkingMemoryInspector.jsx # Inspecionador de fatos gerados
+│   │   │   ├── ReportExportModal.jsx    # Emissão e impressão de Laudo Técnico
+│   │   │   └── Header.jsx               # Navegação
+│   │   └── pages/
+│   │       ├── DiagnosticoPage.jsx      # Tela principal de simulação e diagnóstico
+│   │       ├── BaseConhecimentoPage.jsx # Visualizador transparente de regras e variáveis
+│   │       └── MercadoPage.jsx          # Cotações CEPEA e dados IBGE SIDRA
+│   └── vite.config.js
+│
+├── start.sh                             # Script de inicialização automática
+└── README.md                            # Documentação técnica do projeto
+```
 
 ---
 
-## 📚 Referências Metodológicas
+## 📡 Endpoints da API REST
 
-* **Embrapa Gado de Leite:** Metodologia de Custo de Produção do Leite (COE/COT/CT) e Sistema Custopec.
-* **Ministério da Agricultura e Pecuária (MAPA):** Instruções Normativas IN 76/77 (Padrões de Identidade e Qualidade do Leite Cru).
-* **CEPEA / ESALQ-USP:** Indicadores de Mercado Agropecuário de Milho, Soja e Leite ao Produtor.
-* **IBGE:** Pesquisa Trimestral do Leite (SIDRA - Tabela 1086).
+| Método | Endpoint | Descrição |
+| :--- | :--- | :--- |
+| `POST` | `/api/diagnostico` | Processa os dados da fazenda, calcula indicadores Embrapa e executa o motor de inferência. |
+| `GET` | `/api/conhecimento/regras` | Retorna as 12 regras formais da base de conhecimento. |
+| `GET` | `/api/conhecimento/variaveis` | Retorna o dicionário de variáveis com tipos, faixas e descrições. |
+| `GET` | `/api/mercado/benchmarks` | Retorna as cotações CEPEA e série histórica IBGE SIDRA (Tabela 1086). |
+| `GET` | `/api/presets` | Retorna cenários de demonstração pré-configurados. |
+
+---
+
+## 📊 Cenários Pré-configurados para Demonstração
+
+No topo da página de **Diagnóstico**, você pode alternar rapidamente entre 3 cenários reais:
+1. **Fazenda Modelo (Alta Eficiência e Bonificação):** Rebanho com DEL ideal (160d), CCS baixa (180k), CBT baixa (35k), alta eficiência de ração e margem líquida positiva.
+2. **Fazenda com Crise Sanitária (Mastite & CBT Alta):** CCS de 650k e CBT de 220k disparando alertas sanitários, penalização de preço e cálculo de perda de síntese no úbere.
+3. **Fazenda em Risco de Descapitalização (Ração Cara):** Milho em alta ($>32\text{ L/saca}$), DEL avançado (220d), IEP longo (15,2 meses) e corrosão patrimonial ($\text{COT} > \text{Receita}$).
+
+---
+
+## 📄 Emissão de Laudo Técnico
+Ao concluir o diagnóstico, clique no botão **"Gerar Laudo"** para:
+* Visualizar o laudo técnico formatado.
+* **Imprimir / Salvar em PDF** formatado para o produtor rural.
+* **Exportar em JSON** com a memória de trabalho e todas as regras disparadas.
