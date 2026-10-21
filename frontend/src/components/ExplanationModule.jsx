@@ -1,34 +1,34 @@
 import React, { useState } from 'react';
 import { HelpCircle, ChevronDown, ChevronRight, Check, AlertCircle, Bookmark } from 'lucide-react';
 
-export default function ExplanationModule({ regrasDisparadas, memoriaTrabalho }) {
-  const [openRuleId, setOpenRuleId] = useState(regrasDisparadas[0]?.id || null);
+export default function ExplanationModule({ regrasDisparadas = [], memoriaTrabalho = {} }) {
+  const [openRuleId, setOpenRuleId] = useState(regrasDisparadas?.[0]?.id || null);
 
   if (!regrasDisparadas || regrasDisparadas.length === 0) {
     return (
-      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 text-center text-slate-500">
-        Nenhuma regra de anomalia disparada. O rebanho está dentro dos parâmetros normais.
+      <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 text-center text-slate-500">
+        Nenhuma regra de anomalia disparada. O rebanho está dentro dos parâmetros normais de conformidade.
       </div>
     );
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+    <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
       <div className="flex items-center space-x-2 pb-4 border-b border-slate-100">
         <HelpCircle className="w-5 h-5 text-emerald-600" />
         <h3 className="text-lg font-bold text-slate-800">Módulo de Explicação: Como o sistema chegou a isso?</h3>
       </div>
 
       <p className="text-xs text-slate-500 mt-2 mb-4">
-        O motor de inferência avaliou todas as regras de produção contra os fatos da fazenda. 
+        O motor determinístico avaliou todas as regras formais contra a memória de trabalho. 
         Abaixo está o <strong>traço auditável</strong> das regras que foram disparadas em ordem de prioridade:
       </p>
 
       <div className="space-y-3">
         {regrasDisparadas.map((regra, idx) => {
           const isOpen = openRuleId === regra.id;
-          const isCritico = regra.conclusao.status === 'CRITICO';
-          const isSucesso = regra.conclusao.status === 'SUCESSO';
+          const isCritico = regra.conclusao?.status === 'CRITICO';
+          const isSucesso = regra.conclusao?.status === 'SUCESSO';
 
           let badgeColor = 'bg-amber-100 text-amber-800 border-amber-200';
           if (isCritico) badgeColor = 'bg-rose-100 text-rose-800 border-rose-200';
@@ -37,9 +37,10 @@ export default function ExplanationModule({ regrasDisparadas, memoriaTrabalho })
           return (
             <div
               key={regra.id}
-              className="border border-slate-200 rounded-lg overflow-hidden transition-all bg-slate-50/50 hover:border-slate-300"
+              className="border border-slate-200 rounded-xl overflow-hidden transition-all bg-slate-50/50 hover:border-slate-300"
             >
               <button
+                type="button"
                 onClick={() => setOpenRuleId(isOpen ? null : regra.id)}
                 className="w-full px-4 py-3 text-left flex items-center justify-between focus:outline-none"
               >
@@ -49,7 +50,7 @@ export default function ExplanationModule({ regrasDisparadas, memoriaTrabalho })
                   </span>
                   <span className="font-semibold text-slate-800 text-sm">{regra.nome}</span>
                   <span className={`text-[11px] font-bold px-2 py-0.5 rounded border ${badgeColor}`}>
-                    {regra.conclusao.status}
+                    {regra.conclusao?.status}
                   </span>
                 </div>
                 <div className="flex items-center space-x-3 text-xs text-slate-500">
@@ -66,8 +67,8 @@ export default function ExplanationModule({ regrasDisparadas, memoriaTrabalho })
                     <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">
                       Condições Verificadas na Memória de Trabalho (Premissas SE)
                     </h4>
-                    <div className="bg-slate-50 rounded p-2.5 font-mono text-xs space-y-1 border border-slate-100">
-                      {regra.condicoesAvaliadas.map((c, cIdx) => (
+                    <div className="bg-slate-50 rounded-lg p-2.5 font-mono text-xs space-y-1 border border-slate-100">
+                      {regra.condicoesAvaliadas?.map((c, cIdx) => (
                         <div key={cIdx} className="flex items-center space-x-2 text-slate-700">
                           <Check className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
                           <span>
@@ -84,22 +85,22 @@ export default function ExplanationModule({ regrasDisparadas, memoriaTrabalho })
                     <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">
                       Conclusão / Diagnóstico (ENTÃO)
                     </h4>
-                    <p className="text-slate-800 font-medium">{regra.conclusao.resumo}</p>
+                    <p className="text-slate-800 font-medium">{regra.conclusao?.resumo}</p>
                   </div>
 
                   {/* Recomendação Zootécnica e Econômica */}
-                  <div className="bg-emerald-50/60 border border-emerald-100 rounded p-3 text-emerald-950">
+                  <div className="bg-emerald-50/60 border border-emerald-100 rounded-lg p-3 text-emerald-950">
                     <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-800 mb-1 flex items-center">
                       <AlertCircle className="w-3.5 h-3.5 mr-1" />
                       Recomendação de Ação Imediata
                     </h4>
-                    <p className="text-xs leading-relaxed">{regra.conclusao.recomendacao}</p>
+                    <p className="text-xs leading-relaxed">{regra.conclusao?.recomendacao}</p>
                   </div>
 
                   {/* Fonte Técnica */}
                   <div className="flex items-center text-xs text-slate-400 pt-1">
                     <Bookmark className="w-3 h-3 mr-1 text-slate-400" />
-                    <span>Fonte: <strong>{regra.conclusao.fonte}</strong></span>
+                    <span>Fonte: <strong>{regra.conclusao?.fonte}</strong></span>
                   </div>
                 </div>
               )}

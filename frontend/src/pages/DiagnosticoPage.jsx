@@ -100,6 +100,7 @@ export default function DiagnosticoPage() {
           {Object.entries(presets).map(([key, item]) => (
             <button
               key={key}
+              type="button"
               onClick={() => aplicarPreset(key)}
               className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 hover:bg-emerald-600 border border-slate-700 text-slate-200 hover:text-white transition-all shadow-sm"
             >
@@ -107,6 +108,7 @@ export default function DiagnosticoPage() {
             </button>
           ))}
           <button
+            type="button"
             onClick={() => {
               setFormData(INITIAL_FORM);
               executarDiagnostico(INITIAL_FORM);
@@ -134,6 +136,7 @@ export default function DiagnosticoPage() {
               <p className="text-xs text-slate-500">Ajuste os dados técnicos para disparar a inferência</p>
             </div>
             <button
+              type="button"
               onClick={() => executarDiagnostico()}
               disabled={loading}
               className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-400 text-white font-semibold text-xs rounded-xl shadow-sm flex items-center gap-1.5 transition-all"
@@ -342,33 +345,19 @@ export default function DiagnosticoPage() {
           
           {/* Header de Status Geral do Diagnóstico */}
           {resultado && (
-            <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4">
-                <div>
-                  <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Status Consolidado do Rebanho</span>
-                  <h3 className="text-2xl font-black text-slate-900 mt-0.5">Diagnóstico Especialista</h3>
-                </div>
-                <div className="flex items-center gap-3">
-                  <button
-                    onClick={() => setShowReportModal(true)}
-                    className="px-3 py-1.5 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg flex items-center gap-1.5 transition-colors"
-                  >
-                    <FileText className="w-4 h-4 text-slate-600" />
-                    Gerar Laudo
-                  </button>
-                  <CertaintyFactorGauge 
-                    cf={resultado.fator_certeza_geral} 
-                    status={resultado.status_geral} 
-                  />
-                </div>
-              </div>
+            <div className="space-y-4">
+              <CertaintyFactorGauge 
+                statusGeral={resultado.statusGeral} 
+                cf={resultado.fatorCertezaGeral} 
+                totalRegrasDisparadas={resultado.totalRegrasDisparadas}
+              />
 
               {/* Grid de KPIs Reutilizáveis */}
               {indicadores && (
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                   <KpiCard
                     title="Margem Bruta"
-                    value={`R$ ${indicadores.margem_bruta_litro.toFixed(2)}`}
+                    value={`R$ ${indicadores.margem_bruta_litro ? indicadores.margem_bruta_litro.toFixed(2) : '0.00'}`}
                     unit="/ L"
                     subtitle="Receita líquida - COE"
                     alertType={indicadores.margem_bruta_litro > 0 ? 'success' : 'danger'}
@@ -377,7 +366,7 @@ export default function DiagnosticoPage() {
 
                   <KpiCard
                     title="Margem Líquida"
-                    value={`R$ ${indicadores.margem_liquida_litro.toFixed(2)}`}
+                    value={`R$ ${indicadores.margem_liquida_litro ? indicadores.margem_liquida_litro.toFixed(2) : '0.00'}`}
                     unit="/ L"
                     subtitle="Receita líquida - COT"
                     alertType={indicadores.margem_liquida_litro > 0 ? 'success' : 'warning'}
@@ -386,7 +375,7 @@ export default function DiagnosticoPage() {
 
                   <KpiCard
                     title="DEL Médio"
-                    value={indicadores.del_medio}
+                    value={indicadores.del_medio || 0}
                     unit="dias"
                     subtitle="Meta: 150 a 180 d"
                     alertType={indicadores.del_medio <= 180 ? 'success' : 'warning'}
@@ -395,9 +384,9 @@ export default function DiagnosticoPage() {
 
                   <KpiCard
                     title="Eficiência Ração"
-                    value={indicadores.eficiencia_alimentar.toFixed(2)}
+                    value={indicadores.eficiencia_alimentar ? indicadores.eficiencia_alimentar.toFixed(2) : '0.00'}
                     unit="L / kg"
-                    subtitle="Leite por kg de concentrado"
+                    subtitle="Leite por kg concentrado"
                     alertType={indicadores.eficiencia_alimentar >= 2.2 ? 'success' : 'warning'}
                     icon={Droplets}
                   />
@@ -406,12 +395,25 @@ export default function DiagnosticoPage() {
             </div>
           )}
 
+          {/* Botão de Laudo Técnico */}
+          {resultado && (
+            <div className="flex justify-end">
+              <button
+                type="button"
+                onClick={() => setShowReportModal(true)}
+                className="px-4 py-2 text-xs font-semibold text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 shadow-sm rounded-xl flex items-center gap-1.5 transition-colors"
+              >
+                <FileText className="w-4 h-4 text-emerald-600" />
+                Gerar Laudo Técnico / Imprimir
+              </button>
+            </div>
+          )}
+
           {/* Módulo de Explicação - Requisito Mandatório do Hackathon */}
           {resultado && (
             <ExplanationModule 
-              conclusoes={resultado.conclusoes}
-              auditTrail={resultado.audit_trail}
-              indicadores={indicadores}
+              regrasDisparadas={resultado.regrasDisparadas || []}
+              memoriaTrabalho={indicadores || {}}
             />
           )}
 
