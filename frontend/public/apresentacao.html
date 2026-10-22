@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MicroLeiteMacroNegocios — Apresentação Oficial Unificada (Hackathon UFJF 2026)</title>
   
-  <!-- Google Fonts & Lucide Icons -->
+  <!-- Google Fonts & Lucide Icons & PDF Generation Libraries -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
   <style>
     :root {
@@ -1519,38 +1520,97 @@
       }
     }
 
-    // Exportar para PDF
-    function downloadPDF() {
+    // Exportar para PDF (1 Slide Exato por Página sem Cortes)
+    async function downloadPDF() {
       const btn = document.getElementById('btnPdf');
-      const originalText = btn.innerHTML;
-      btn.innerHTML = '<span>Gerando PDF...</span>';
+      const originalHtml = btn.innerHTML;
+      btn.innerHTML = '<span>Exportando (0/12)...</span>';
       btn.disabled = true;
 
-      slides.forEach(s => s.style.display = 'flex');
+      try {
+        if (!window.jspdf || !window.jspdf.jsPDF) {
+          window.print();
+          return;
+        }
 
-      const element = document.getElementById('presentationDeck');
-      const opt = {
-        margin: [0, 0, 0, 0],
-        filename: 'MicroLeiteMacroNegocios-Apresentacao-Oficial.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' }
-      };
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF({
+          orientation: 'landscape',
+          unit: 'mm',
+          format: 'a4',
+          compress: true
+        });
 
-      html2pdf().set(opt).from(element).save().then(() => {
-        slides.forEach(s => s.style.display = '');
-        updateSlide();
-        btn.innerHTML = originalText;
+        const slideElements = document.querySelectorAll('.slide');
+        const total = slideElements.length;
+        const savedSlide = currentSlide;
+
+        for (let i = 0; i < total; i++) {
+          btn.innerHTML = `<span>Processando Slide ${i + 1}/${total}...</span>`;
+          const slide = slideElements[i];
+
+          // Format single slide strictly for high resolution capture
+          slideElements.forEach((s, idx) => {
+            if (idx === i) {
+              s.style.setProperty('display', 'flex', 'important');
+              s.style.setProperty('width', '1120px', 'important');
+              s.style.setProperty('height', '790px', 'important');
+              s.style.setProperty('min-height', '790px', 'important');
+              s.style.setProperty('max-height', '790px', 'important');
+              s.style.setProperty('box-sizing', 'border-box', 'important');
+              s.style.setProperty('border-radius', '0', 'important');
+              s.style.setProperty('box-shadow', 'none', 'important');
+              s.style.setProperty('border', 'none', 'important');
+              s.style.setProperty('padding', '38px 46px 28px 46px', 'important');
+              s.style.setProperty('margin', '0 auto', 'important');
+            } else {
+              s.style.setProperty('display', 'none', 'important');
+            }
+          });
+
+          await new Promise(r => setTimeout(r, 60));
+
+          const canvas = await html2canvas(slide, {
+            scale: 2,
+            useCORS: true,
+            backgroundColor: '#ffffff',
+            logging: false,
+            windowWidth: 1200,
+            windowHeight: 850
+          });
+
+          const imgData = canvas.toDataURL('image/jpeg', 0.96);
+          if (i > 0) {
+            pdf.addPage([297, 210], 'landscape');
+          }
+          pdf.addImage(imgData, 'JPEG', 0, 0, 297, 210, undefined, 'FAST');
+        }
+
+        // Restore UI state
+        slideElements.forEach(s => {
+          s.style.removeProperty('display');
+          s.style.removeProperty('width');
+          s.style.removeProperty('height');
+          s.style.removeProperty('min-height');
+          s.style.removeProperty('max-height');
+          s.style.removeProperty('box-sizing');
+          s.style.removeProperty('border-radius');
+          s.style.removeProperty('box-shadow');
+          s.style.removeProperty('border');
+          s.style.removeProperty('padding');
+          s.style.removeProperty('margin');
+        });
+        
+        goToSlide(savedSlide);
+        pdf.save('Apresentacao_Slides_Completa.pdf');
+      } catch (err) {
+        console.error('Erro na exportação de PDF:', err);
+        window.print();
+      } finally {
+        btn.innerHTML = originalHtml;
         btn.disabled = false;
-        lucide.createIcons();
-      }).catch(err => {
-        console.error('Erro ao gerar PDF:', err);
-        slides.forEach(s => s.style.display = '');
-        updateSlide();
-        btn.innerHTML = originalText;
-        btn.disabled = false;
-        lucide.createIcons();
-      });
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+      }
     }
 
     // Suporte a Impressão e PDF
