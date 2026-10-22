@@ -8,14 +8,14 @@
   <!-- Google Fonts & Lucide Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
-  <!-- html2pdf.js para download em PDF com 1 clique -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
   <style>
     :root {
-      --bg-body: #f8fafc;
+      --bg-body: #0b0f19;
+      --bg-canvas: #f8fafc;
       --bg-card: #ffffff;
       --border-color: #e2e8f0;
       --border-card: #e2e8f0;
@@ -23,17 +23,18 @@
       --accent-red-hover: #750000;
       --accent-crimson: #b91c1c;
       --accent-rose: #dc2626;
-      --accent-ruby: #881337;
-      --accent-amber: #c2410c;
-      --accent-emerald: #15803d;
-      --accent-blue: #1d4ed8;
+      --accent-amber: #d97706;
+      --accent-emerald: #059669;
+      --accent-blue: #2563eb;
+      --accent-indigo: #4f46e5;
       --text-main: #0f172a;
       --text-body: #334155;
       --text-muted: #64748b;
-      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+      --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.06);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.06);
       --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.04);
-      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.08), 0 8px 10px -6px rgb(0 0 0 / 0.04);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.05);
+      --shadow-glow-red: 0 0 20px rgba(144, 0, 0, 0.18);
     }
 
     * {
@@ -44,13 +45,17 @@
 
     body {
       font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #f1f5f9;
-      background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
-      background-size: 24px 24px;
+      background: #0f172a;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(144, 0, 0, 0.25) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(30, 41, 59, 0.8) 0px, transparent 50%),
+        radial-gradient(#334155 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 32px 32px;
       color: var(--text-body);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      overflow-x: hidden;
     }
 
     /* Barra Superior Fixa */
@@ -59,16 +64,16 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 68px;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border-color);
+      height: 72px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 32px;
+      padding: 0 28px;
       z-index: 100;
-      box-shadow: var(--shadow-sm);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     }
 
     .brand {
@@ -77,17 +82,17 @@
       gap: 12px;
       font-size: 1.15rem;
       font-weight: 800;
-      color: var(--text-main);
+      color: #ffffff;
       letter-spacing: -0.02em;
     }
 
     .brand-logo {
-      width: 40px;
-      height: 40px;
+      width: 42px;
+      height: 42px;
       border-radius: 12px;
       overflow: hidden;
-      border: 1px solid var(--border-color);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      border: 1.5px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -103,7 +108,7 @@
     .header-actions {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .btn {
@@ -115,51 +120,69 @@
       font-size: 0.85rem;
       font-weight: 700;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       text-decoration: none;
       border: none;
+      user-select: none;
     }
 
     .btn-outline {
-      background: #ffffff;
-      border: 1px solid var(--border-color);
-      color: var(--text-body);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #f1f5f9;
+      backdrop-filter: blur(8px);
     }
 
     .btn-outline:hover {
-      background: #f8fafc;
-      border-color: #cbd5e1;
-      color: var(--text-main);
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent-red), var(--accent-crimson));
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
       color: #ffffff;
-      box-shadow: 0 2px 8px rgba(144, 0, 0, 0.25);
-    }
-
-    .btn-primary:hover {
-      background: linear-gradient(135deg, var(--accent-red-hover), var(--accent-red));
-      box-shadow: 0 4px 12px rgba(144, 0, 0, 0.35);
       transform: translateY(-1px);
     }
 
-    /* Barra de Progresso */
+    .btn-primary {
+      background: linear-gradient(135deg, #b91c1c, #900000);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(185, 28, 28, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #dc2626, #991b1b);
+      box-shadow: 0 6px 18px rgba(220, 38, 38, 0.5);
+      transform: translateY(-1px);
+    }
+
+    .timer-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #38bdf8;
+    }
+
+    /* Barra de Progresso Superior */
     .progress-bar-container {
       position: fixed;
-      top: 68px;
+      top: 72px;
       left: 0;
       right: 0;
       height: 4px;
-      background: #e2e8f0;
+      background: rgba(255, 255, 255, 0.1);
       z-index: 99;
     }
 
     .progress-bar {
       height: 100%;
-      background: linear-gradient(90deg, var(--accent-red), var(--accent-rose));
+      background: linear-gradient(90deg, #dc2626, #ef4444, #fbbf24);
       width: 8.33%;
-      transition: width 0.3s ease;
+      transition: width 0.35s ease;
     }
 
     /* Deck Principal de Slides */
@@ -168,8 +191,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 92px 24px 80px 24px;
-      max-width: 1320px;
+      padding: 96px 24px 88px 24px;
+      max-width: 1360px;
       margin: 0 auto;
       width: 100%;
     }
@@ -177,30 +200,36 @@
     .deck-container {
       position: relative;
       width: 100%;
-      min-height: 600px;
+      min-height: 620px;
     }
 
     .slide {
       display: none;
-      background: var(--bg-card);
-      border: 1px solid var(--border-card);
+      background: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.8);
       border-radius: 28px;
-      padding: 44px 52px;
-      box-shadow: var(--shadow-xl);
-      animation: fadeIn 0.35s ease;
-      min-height: 580px;
+      padding: 40px 48px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(0, 0, 0, 0.05);
+      min-height: 600px;
       flex-direction: column;
       justify-content: space-between;
-      gap: 24px;
+      gap: 20px;
+      animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .slide.active {
       display: flex;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes slideIn {
+      from { 
+        opacity: 0; 
+        transform: translateY(12px) scale(0.99); 
+      }
+      to { 
+        opacity: 1; 
+        transform: translateY(0) scale(1); 
+      }
     }
 
     /* Tipografia de Slides */
@@ -212,15 +241,15 @@
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      padding: 4px 12px;
+      padding: 5px 12px;
       border-radius: 9999px;
       width: fit-content;
     }
 
     .badge-red {
-      background: #fef2f2;
-      color: #900000;
-      border: 1px solid #fecaca;
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #fca5a5;
     }
 
     .badge-crimson {
@@ -230,52 +259,50 @@
     }
 
     .badge-amber {
-      background: #fff7ed;
-      color: #c2410c;
-      border: 1px solid #fed7aa;
+      background: #fef3c7;
+      color: #b45309;
+      border: 1px solid #fde68a;
     }
 
     .badge-blue {
-      background: #eff6ff;
+      background: #dbeafe;
       color: #1d4ed8;
       border: 1px solid #bfdbfe;
     }
 
     .badge-emerald {
-      background: #f0fdf4;
-      color: #15803d;
-      border: 1px solid #bbf7d0;
+      background: #d1fae5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
     }
 
     .slide-title {
-      font-size: 2.2rem;
+      font-size: 2.15rem;
       font-weight: 900;
-      color: var(--text-main);
+      color: #0f172a;
       letter-spacing: -0.03em;
       line-height: 1.15;
-      margin-top: 8px;
-      margin-bottom: 6px;
+      margin-top: 6px;
     }
 
     .slide-subtitle {
-      font-size: 1.02rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-      font-weight: 500;
-      max-width: 980px;
+      font-size: 1rem;
+      color: #475569;
+      line-height: 1.45;
+      margin-top: 4px;
     }
 
-    /* Grids & Cards */
+    /* Grids e Cards */
     .grid-2 {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
+      gap: 16px;
     }
 
     .grid-3 {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      gap: 16px;
     }
 
     .grid-4 {
@@ -285,12 +312,11 @@
     }
 
     .card {
-      background: #ffffff;
-      border: 1px solid var(--border-color);
-      border-radius: 20px;
-      padding: 22px;
-      box-shadow: var(--shadow-sm);
-      transition: all 0.2s ease;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 18px;
+      padding: 18px 22px;
+      transition: all 0.25s ease;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
@@ -298,8 +324,25 @@
     }
 
     .card:hover {
-      box-shadow: var(--shadow-md);
+      background: #ffffff;
       border-color: #cbd5e1;
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .card h4 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card p {
+      font-size: 0.88rem;
+      color: #334155;
+      line-height: 1.45;
     }
 
     .card-icon {
@@ -309,75 +352,58 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
     }
 
-    .card h4 {
-      font-size: 1.02rem;
-      font-weight: 800;
-      color: var(--text-main);
-      letter-spacing: -0.01em;
-    }
-
-    .card p {
-      font-size: 0.84rem;
-      color: var(--text-body);
-      line-height: 1.55;
-    }
-
-    .code-box {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.78rem;
-      background: #0f172a;
-      color: #f8fafc;
-      padding: 14px 18px;
+    .metric-box {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
       border-radius: 14px;
-      line-height: 1.6;
-      overflow-x: auto;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      box-shadow: var(--shadow-sm);
     }
 
-    .highlight-pill {
-      background: #fef2f2;
-      border: 1px solid #fecaca;
-      color: #900000;
+    .metric-value {
+      font-size: 1.45rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    .metric-label {
+      font-size: 0.72rem;
       font-weight: 700;
-      padding: 2px 8px;
-      border-radius: 6px;
-      font-size: 0.8rem;
+      text-transform: uppercase;
+      color: #64748b;
+      letter-spacing: 0.05em;
     }
 
-    /* Barra Inferior Fixa de Navegação */
+    /* Barra Inferior de Navegação */
     footer {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
-      height: 64px;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(12px);
-      border-top: 1px solid var(--border-color);
+      height: 72px;
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(16px);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 32px;
       z-index: 100;
-      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.03);
-    }
-
-    .slide-counter {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      font-family: 'JetBrains Mono', monospace;
     }
 
     .nav-btn {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      border: 1px solid var(--border-color);
-      background: #ffffff;
-      color: var(--text-main);
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ffffff;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -386,13 +412,49 @@
     }
 
     .nav-btn:hover {
-      background: #f1f5f9;
-      border-color: #cbd5e1;
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.35);
+      transform: scale(1.05);
     }
 
     .nav-btn:disabled {
-      opacity: 0.35;
+      opacity: 0.3;
       cursor: not-allowed;
+      transform: none;
+    }
+
+    .slide-pills-container {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .slide-pill {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: #94a3b8;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .slide-pill:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+    }
+
+    .slide-pill.active {
+      background: linear-gradient(135deg, #dc2626, #900000);
+      color: #ffffff;
+      border-color: #ef4444;
+      box-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
     }
 
     /* ==========================================================================
@@ -549,6 +611,7 @@
       .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
       .slide-title { font-size: 1.8rem; }
       .slide { padding: 32px 28px; }
+      .slide-pills-container { display: none; }
     }
 
     @media (max-width: 640px) {
@@ -569,23 +632,28 @@
       </div>
       <div>
         <div style="display: flex; align-items: center; gap: 8px;">
-          <span>MicroLeite<span style="color: var(--accent-red);">MacroNegocios</span></span>
+          <span>MicroLeite<span style="color: #ef4444;">MacroNegocios</span></span>
           <span style="background: #ffffff; padding: 2px 8px; border-radius: 6px; border: 1px solid #fecaca; font-size: 0.72rem; font-weight: 900; display: inline-flex; align-items: center; box-shadow: var(--shadow-sm);">
             <span style="color: #dc2626;">Muu</span><span style="color: #000000;">ito Melhor</span>
           </span>
         </div>
-        <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600; display: block;">Hackathon UFJF 2026 (56h) • Tema 3</span>
+        <span style="font-size: 0.72rem; color: #94a3b8; font-weight: 600; display: block;">Hackathon UFJF 2026 (56h) • Tema 3: Zootecnia & Economia</span>
       </div>
     </div>
 
     <div class="header-actions">
-      <button onclick="toggleSpeechModal()" class="btn btn-outline" style="border-color: #fecaca; color: var(--accent-red);" title="Abrir Roteiro de Fala do Apresentador">
-        <i data-lucide="mic" style="width: 16px; height: 16px; color: var(--accent-red);"></i>
+      <div class="timer-badge" id="deckTimerBadge" title="Tempo de Apresentação (Meta: 13:00)">
+        <i data-lucide="clock" style="width: 14px; height: 14px; color: #38bdf8;"></i>
+        <span id="elapsedTime">00:00</span> / 13:00
+      </div>
+
+      <button onclick="toggleSpeechModal()" class="btn btn-outline" style="border-color: rgba(239, 68, 68, 0.4); color: #fca5a5;" title="Abrir Roteiro de Fala (Tecla M)">
+        <i data-lucide="mic" style="width: 16px; height: 16px; color: #ef4444;"></i>
         <span>Roteiro de Fala</span>
       </button>
 
-      <button onclick="downloadPDF()" class="btn btn-outline" id="btnPdf" title="Baixar todos os slides em PDF">
-        <i data-lucide="file-down" style="width: 16px; height: 16px; color: var(--accent-red);"></i>
+      <button onclick="downloadPDF()" class="btn btn-outline" id="btnPdf" title="Baixar todos os slides em PDF A4">
+        <i data-lucide="file-down" style="width: 16px; height: 16px; color: #38bdf8;"></i>
         <span>Baixar PDF</span>
       </button>
 
@@ -594,13 +662,13 @@
         <span>Abrir Sistema</span>
       </a>
 
-      <button onclick="toggleFullscreen()" class="btn btn-outline" title="Tela Cheia (F11)">
+      <button onclick="toggleFullscreen()" class="btn btn-outline" title="Tela Cheia (Tecla F)">
         <i data-lucide="maximize" style="width: 16px; height: 16px;"></i>
       </button>
     </div>
   </header>
 
-  <!-- Barra de Progresso -->
+  <!-- Barra de Progresso Superior -->
   <div class="progress-bar-container">
     <div class="progress-bar" id="progressBar"></div>
   </div>
@@ -615,7 +683,7 @@
       <div class="slide active" data-slide="1">
         <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 24px;">
           <div>
-            <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 6px;">
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px;">
               <span class="slide-badge badge-red">
                 <i data-lucide="award" style="width: 14px; height: 14px;"></i> Hackathon UFJF 2026 (56 Horas) • Tema 3
               </span>
@@ -626,14 +694,14 @@
                 <i data-lucide="git-merge" style="width: 14px; height: 14px;"></i> Sadrey + Scrum
               </span>
             </div>
-            <h1 class="slide-title" style="font-size: 2.7rem; margin-top: 6px;">
+            <h1 class="slide-title" style="font-size: 2.8rem; margin-top: 6px;">
               MicroLeite<span style="color: var(--accent-red);">MacroNegocios</span>
             </h1>
-            <p class="slide-subtitle" style="font-size: 1.12rem; color: var(--text-body);">
+            <p class="slide-subtitle" style="font-size: 1.15rem; color: var(--text-body); max-width: 900px;">
               O copiloto especialista do produtor de leite: inteligência artificial determinística e modelagem zootécnica para estancar prejuízos invisíveis na fazenda.
             </p>
           </div>
-          <div style="width: 90px; height: 90px; border-radius: 22px; overflow: hidden; border: 2px solid var(--border-color); box-shadow: var(--shadow-md); shrink: 0; background: #fff;">
+          <div style="width: 96px; height: 96px; border-radius: 22px; overflow: hidden; border: 2px solid var(--border-color); box-shadow: var(--shadow-md); shrink: 0; background: #fff;">
             <img src="logo.jpeg" alt="Logo" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'">
           </div>
         </div>
@@ -671,9 +739,9 @@
           </div>
         </div>
 
-        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color); padding-top: 12px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color); padding-top: 14px;">
           <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted);">XXVIII Semana da Computação DCC/UFJF & RERUM</span>
-          <span style="font-size: 0.85rem; color: var(--accent-red); font-weight: 700;">Engenharia do Conhecimento + Parceria Humano-IA</span>
+          <span style="font-size: 0.85rem; color: var(--accent-red); font-weight: 800;">Engenharia do Conhecimento + Parceria Humano-IA</span>
         </div>
       </div>
 
@@ -692,26 +760,27 @@
         <div class="slide-body">
           <div class="grid-2">
             <div class="card" style="border-left: 4px solid var(--accent-red); background: #fffcfc;">
-              <h4 style="color: var(--accent-red);">1. A Descapitalização Silenciosa</h4>
+              <h4 style="color: var(--accent-red);"><i data-lucide="trending-down" style="width: 18px; height: 18px;"></i> 1. A Descapitalização Silenciosa</h4>
               <p>O leite entra, as contas do mês são pagas, mas o trator envelhece e as benfeitorias desgastam sem reserva contábil (COT/CT). No fim do ano, o produtor precisa vender vacas para fechar o caixa.</p>
             </div>
             <div class="card" style="border-left: 4px solid var(--accent-amber); background: #fffdfa;">
-              <h4 style="color: var(--accent-amber);">2. O Calor Invisível (Estresse Térmico)</h4>
+              <h4 style="color: var(--accent-amber);"><i data-lucide="thermometer-snowflake" style="width: 18px; height: 18px;"></i> 2. O Calor Invisível (Estresse Térmico)</h4>
               <p>Vaca leiteira sofre acima de 24°C e alta umidade. O ITU alto corta o apetite e derruba até 4 litros de leite por vaca todos os dias sem que o produtor perceba a causa bioclimática.</p>
             </div>
             <div class="card" style="border-left: 4px solid var(--accent-rose); background: #fffdfd;">
-              <h4 style="color: var(--accent-rose);">3. Desperdício na Ração & Acidose (SARA)</h4>
+              <h4 style="color: var(--accent-rose);"><i data-lucide="wheat" style="width: 18px; height: 18px;"></i> 3. Desperdício na Ração & Acidose (SARA)</h4>
               <p>Excesso de concentrado sem volumoso adequado acidifica o rúmen da vaca (pH &lt; 5.8), desperdiça nitrogênio caro (NUL &gt; 16 mg/dL) e causa graves problemas de casco e laminite.</p>
             </div>
             <div class="card" style="border-left: 4px solid var(--accent-crimson); background: #fffcfc;">
-              <h4 style="color: var(--accent-crimson);">4. Mastite e Cortes no Preço do Litro</h4>
+              <h4 style="color: var(--accent-crimson);"><i data-lucide="shield-alert" style="width: 18px; height: 18px;"></i> 4. Mastite e Cortes no Preço do Litro</h4>
               <p>Células somáticas (CCS &gt; 400k) e bactérias (CBT &gt; 100k) estragam a síntese láctea e acionam penalizações de até -R$ 0,25/litro aplicadas pelos laticínios conforme a IN 76/77 do MAPA.</p>
             </div>
           </div>
         </div>
 
-        <div style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">
-          💡 <strong>Missão:</strong> Transformar dados simples do campo em diagnóstico claro, auditável e com plano de ação imediato.
+        <div style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600; display: flex; align-items: center; gap: 6px;">
+          <i data-lucide="lightbulb" style="width: 16px; height: 16px; color: var(--accent-amber);"></i>
+          <span><strong>Missão:</strong> Transformar dados simples do campo em diagnóstico claro, auditável e com plano de ação imediato.</span>
         </div>
       </div>
 
@@ -730,18 +799,19 @@
         <div class="slide-body">
           <div class="grid-2">
             <div class="card" style="border-left: 4px solid var(--accent-rose); background: #fffcfc;">
-              <h4 style="color: var(--accent-rose);">❌ A Armadilha Comum</h4>
+              <h4 style="color: var(--accent-rose);"><i data-lucide="x-circle" style="width: 18px; height: 18px;"></i> A Armadilha Comum</h4>
               <p>Tentar pedir tudo de uma vez à IA (<em>"faça um sistema de leite completo com tudo"</em>) gera código genérico, fórmulas inventadas sem base na Embrapa e sistemas de 'caixa preta' sem rastreabilidade.</p>
             </div>
             <div class="card" style="border-left: 4px solid var(--accent-emerald); background: #fcfdfc;">
-              <h4 style="color: var(--accent-emerald);">✅ Nossa Estratégia Vencedora</h4>
+              <h4 style="color: var(--accent-emerald);"><i data-lucide="check-circle-2" style="width: 18px; height: 18px;"></i> Nossa Estratégia Vencedora</h4>
               <p>Decompor o projeto em <strong>microtarefas encadeadas e auditáveis</strong>: primeiro elicitar as fontes científicas, estruturar o catálogo ontológico de variáveis, formalizar as regras determinísticas e só então codificar a interface reativa.</p>
             </div>
           </div>
         </div>
 
-        <div style="font-size: 0.85rem; color: var(--text-muted);">
-          💡 <strong>Princípio Orientador:</strong> O humano é o arquiteto do conhecimento e o juiz dos resultados; a IA é a executora de alta precisão.
+        <div style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600; display: flex; align-items: center; gap: 6px;">
+          <i data-lucide="lightbulb" style="width: 16px; height: 16px; color: var(--accent-amber);"></i>
+          <span><strong>Princípio Orientador:</strong> O humano é o arquiteto do conhecimento e o juiz dos resultados; a IA é a executora de alta precisão.</span>
         </div>
       </div>
 
@@ -750,368 +820,369 @@
            ========================================== -->
       <div class="slide" data-slide="4">
         <div>
-          <span class="slide-badge badge-red">
+          <span class="slide-badge badge-amber">
             <i data-lucide="git-merge" style="width: 14px; height: 14px;"></i> Metodologias Integradas
           </span>
           <h2 class="slide-title">Metodologia Sadrey (Especialista) + Scrum (Agilidade)</h2>
-          <p class="slide-subtitle">Unimos o rigor científico do ciclo Sadrey na modelagem do conhecimento com a velocidade e entregas contínuas do Scrum em sprints de 56h.</p>
+          <p class="slide-subtitle">Unimos o rigor da engenharia do conhecimento para sistemas especialistas com a velocidade de sprints de curto ciclo do Scrum.</p>
         </div>
 
         <div class="slide-body">
-          <div class="grid-2">
+          <div class="grid-3">
             <div class="card" style="border-top: 3px solid var(--accent-red);">
-              <h4 style="color: var(--accent-red); display: flex; align-items: center; gap: 8px;">
-                <i data-lucide="brain" style="width: 18px; height: 18px;"></i> Ciclo Sadrey (Engenharia de Conhecimento)
-              </h4>
-              <p style="margin-bottom: 6px;">Garante embasamento estrito em publicações da Embrapa, NRC e MAPA:</p>
-              <div class="code-box" style="font-size: 0.78rem;">
-1. Identificação: Dores de descapitalização, ITU e mastite
-2. Aquisição: Elicitação Custopec, Thom (1959) e CEPEA
-3. Conceituação: Catálogo de 33 variáveis ontológicas
-4. Formalização: 25 regras declarativas + Certeza MYCIN
-5. Validação: 5 perfis arquetípicos com auditoria XAI
+              <div class="card-icon" style="background: #fef2f2; color: var(--accent-red);">
+                <i data-lucide="search" style="width: 20px; height: 20px;"></i>
               </div>
+              <h4>1. Identificação & Aquisição</h4>
+              <p>Foco nos 4 gargalos da pecuária leiteira; elicitação direta de publicações técnicas da Embrapa, NRC e normas do MAPA.</p>
             </div>
-
-            <div class="card" style="border-top: 3px solid var(--accent-blue);">
-              <h4 style="color: var(--accent-blue); display: flex; align-items: center; gap: 8px;">
-                <i data-lucide="repeat" style="width: 18px; height: 18px;"></i> Sprints Scrum (56h de Maratona)
-              </h4>
-              <p style="margin-bottom: 6px;">Ciclos curtos de 2 a 4 horas com incrementos de software testáveis:</p>
-              <div class="code-box" style="font-size: 0.78rem;">
-• Sprint 1: Elicitação & Modelagem de Regras JSON
-• Sprint 2: Motor de Inferência & API REST Express
-• Sprint 3: UI Reativa, Tailwind e Gráficos Recharts
-• Sprint 4: Auditoria Contábil, Presets e Auto-inferência
+            <div class="card" style="border-top: 3px solid var(--accent-amber);">
+              <div class="card-icon" style="background: #fff7ed; color: var(--accent-amber);">
+                <i data-lucide="layers" style="width: 20px; height: 20px;"></i>
               </div>
+              <h4>2. Conceituação & Formalização</h4>
+              <p>Criação do catálogo de 33 variáveis ontológicas em <code>variables.json</code> e 25 regras declarativas em <code>rules.json</code>.</p>
+            </div>
+            <div class="card" style="border-top: 3px solid var(--accent-emerald);">
+              <div class="card-icon" style="background: #f0fdf4; color: var(--accent-emerald);">
+                <i data-lucide="check-check" style="width: 20px; height: 20px;"></i>
+              </div>
+              <h4>3. Validação Contínua</h4>
+              <p>Testes automatizados com 5 presets de fazendas reais e auditoria rigorosa dos cálculos antes de ir para a interface.</p>
             </div>
           </div>
         </div>
 
-        <div style="font-size: 0.85rem; color: var(--text-muted);">
-          A união perfeita entre rigor científico zootécnico e velocidade de engenharia de software.
+        <div style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">
+          ⏱️ <strong>Sprints em 56h:</strong> Sprint 1 (Motor & Regras) ➔ Sprint 2 (Interface Reativa) ➔ Sprint 3 (Simulador & XAI) ➔ Sprint 4 (Auditoria & Refinamento).
         </div>
       </div>
 
       <!-- ==========================================
-           SLIDE 5: Dinâmica de Pair Programming com IA
+           SLIDE 5: Divisão de Papéis (Humano vs. IA)
            ========================================== -->
       <div class="slide" data-slide="5">
         <div>
           <span class="slide-badge badge-blue">
-            <i data-lucide="cpu" style="width: 14px; height: 14px;"></i> Parceria de Alta Performance
+            <i data-lucide="users" style="width: 14px; height: 14px;"></i> Parceria de Alta Performance
           </span>
           <h2 class="slide-title">Divisão de Papéis</h2>
-          <p class="slide-subtitle">A inteligência artificial não substitui a decisão humana: ela atua como multiplicadora de força quando orquestrada com especificações claras.</p>
+          <p class="slide-subtitle">A inteligência artificial não substituiu a equipe humana; ela operou como um amplificador cognitivo e programador de par em tempo integral.</p>
         </div>
 
         <div class="slide-body">
           <div class="grid-2">
-            <div class="card" style="border-top: 3px solid var(--accent-red);">
-              <h4 style="color: var(--accent-red);">🧑‍💻 Papel do Humano (Estratégia, Domínio & Auditoria)</h4>
-              <ul style="padding-left: 20px; font-size: 0.82rem; color: var(--text-body); line-height: 1.6;">
-                <li>Definir o escopo de negócio e os pilares do Tema 3.</li>
-                <li>Elicitar dados oficiais da Embrapa (COE/COT/CT) e Thom (ITU).</li>
-                <li>Auditar rigorosamente cada fórmula e apontar inconsistências.</li>
-                <li>Avaliar a usabilidade da interface e direcionar a experiência (UX).</li>
-                <li>Validar os cenários de simulação contra a realidade prática de campo.</li>
+            <div class="card" style="border-top: 3px solid var(--accent-red); background: #ffffff;">
+              <h4 style="color: var(--accent-red);">
+                <i data-lucide="user-check" style="width: 20px; height: 20px;"></i> Papel do Humano (Especialista & Arquiteto)
+              </h4>
+              <ul style="margin-left: 20px; font-size: 0.88rem; line-height: 1.6; color: var(--text-body);">
+                <li>Define os conceitos e a lógica zootécnica de domínio.</li>
+                <li>Audita as fórmulas matemáticas (ex: cálculo correto de ITU e COT).</li>
+                <li>Avalia criticamente a experiência do usuário (UX sem atrito).</li>
+                <li>Aprova e valida os diagnósticos gerados contra dados reais.</li>
               </ul>
             </div>
-
-            <div class="card" style="border-top: 3px solid var(--accent-blue);">
-              <h4 style="color: var(--accent-blue);">🤖 Papel da IA — Gemini 2.5 Pro (Aceleração & Código)</h4>
-              <ul style="padding-left: 20px; font-size: 0.82rem; color: var(--text-body); line-height: 1.6;">
-                <li>Estruturar o monorepo desacoplado (Node.js API + React SPA).</li>
-                <li>Implementar o motor de inferência Forward Chaining determinístico.</li>
-                <li>Construir componentes visuais fluidos com Tailwind CSS e Recharts.</li>
-                <li>Executar refatorações cirúrgicas em segundos sob comando do time.</li>
-                <li>Manter a documentação técnica e o log formal de prompts sincronizados.</li>
+            <div class="card" style="border-top: 3px solid var(--accent-blue); background: #ffffff;">
+              <h4 style="color: var(--accent-blue);">
+                <i data-lucide="bot" style="width: 20px; height: 20px;"></i> Papel da IA (Google Gemini 2.5 Pro / Antigravity)
+              </h4>
+              <ul style="margin-left: 20px; font-size: 0.88rem; line-height: 1.6; color: var(--text-body);">
+                <li>Estrutura o catálogo JSON declarativo de variáveis e regras.</li>
+                <li>Implementa o motor determinístico com Forward Chaining e MYCIN.</li>
+                <li>Gera componentes React modernos com Recharts e Tailwind.</li>
+                <li>Conduz refatorações rápidas e bateria de testes automatizados.</li>
               </ul>
             </div>
           </div>
         </div>
 
-        <div style="font-size: 0.85rem; color: var(--text-muted);">
-          Resultado: Desenvolvimento até 10x mais rápido sem qualquer perda de controle técnico ou metodológico.
+        <div style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">
+          🤝 <strong>Resultado da Parceria:</strong> O que levaria semanas de desenvolvimento foi entregue com qualidade sênior em menos de 56 horas.
         </div>
       </div>
 
       <!-- ==========================================
-           SLIDE 6: Engenharia de Prompts em Microetapas
+           SLIDE 6: A Engenharia de Prompt na Prática
            ========================================== -->
       <div class="slide" data-slide="6">
         <div>
-          <span class="slide-badge badge-amber">
-            <i data-lucide="layers" style="width: 14px; height: 14px;"></i> Esteira de Engenharia de Prompt
+          <span class="slide-badge badge-crimson">
+            <i data-lucide="terminal" style="width: 14px; height: 14px;"></i> Esteira de Engenharia de Prompt
           </span>
           <h2 class="slide-title">Decompondo o Problema em Prompts Cirúrgicos</h2>
-          <p class="slide-subtitle">Em vez de comandos genéricos, estruturamos uma esteira de prompts com contexto, restrições e critérios de aceite rastreados no PROMPT_LOG.md.</p>
-        </div>
-
-        <div class="slide-body">
-          <div class="grid-3">
-            <div class="card">
-              <div class="card-icon" style="background: #fef2f2; color: var(--accent-red);">
-                <i data-lucide="search" style="width: 20px; height: 20px;"></i>
-              </div>
-              <h4>1. Elicitação Contextual</h4>
-              <p>Prompts fornecendo as bases oficiais da Embrapa e exigindo o mapeamento estrito das 33 variáveis sem invenções arbitrárias.</p>
-            </div>
-            <div class="card">
-              <div class="card-icon" style="background: #eff6ff; color: var(--accent-blue);">
-                <i data-lucide="code" style="width: 20px; height: 20px;"></i>
-              </div>
-              <h4>2. Regras Declarativas JSON</h4>
-              <p>Prompts exigindo regras em JSON estruturado com operadores booleanos claros (AND, OR, &gt;, &lt;) e Fatores de Certeza MYCIN.</p>
-            </div>
-            <div class="card">
-              <div class="card-icon" style="background: #fff7ed; color: var(--accent-amber);">
-                <i data-lucide="refresh-cw" style="width: 20px; height: 20px;"></i>
-              </div>
-              <h4>3. Refinamento Iterativo</h4>
-              <p>Prompts apontando bugs e detalhes de usabilidade detectados nos testes de campo para correção imediata.</p>
-            </div>
-          </div>
-        </div>
-
-        <div style="font-size: 0.85rem; color: var(--text-muted);">
-          Cada prompt gerou um incremento testável, documentado e versionado no repositório.
-        </div>
-      </div>
-
-      <!-- ==========================================
-           SLIDE 7: Casos Reais de Auditoria e Refinamento
-           ========================================== -->
-      <div class="slide" data-slide="7">
-        <div>
-          <span class="slide-badge badge-red">
-            <i data-lucide="wrench" style="width: 14px; height: 14px;"></i> Ciclo de Melhoria Contínua
-          </span>
-          <h2 class="slide-title">Auditoria e Refinamento em Ação</h2>
-          <p class="slide-subtitle">Como identificamos detalhes finos durante os testes do sistema e guiamos o Gemini 2.5 Pro para corrigi-los cirurgicamente.</p>
-        </div>
-
-        <div class="slide-body">
-          <div class="grid-3">
-            <div class="card" style="border-top: 3px solid var(--accent-red);">
-              <h4>1. Fórmula do Lucro Real</h4>
-              <p style="font-size: 0.8rem; margin-bottom: 6px;"><strong>O que vimos:</strong> Os gráficos mostravam margem bruta simplificada em vez do lucro econômico real.</p>
-              <p style="font-size: 0.8rem; color: var(--accent-emerald);"><strong>Ajuste com IA:</strong> Refatoramos a calculadora de custos para descontar COT e CT conforme a metodologia Custopec da Embrapa.</p>
-            </div>
-
-            <div class="card" style="border-top: 3px solid var(--accent-amber);">
-              <h4>2. Usabilidade dos Inputs</h4>
-              <p style="font-size: 0.8rem; margin-bottom: 6px;"><strong>O que vimos:</strong> Ao apagar um campo numérico, um zero persistia e atrapalhava a digitação no formulário.</p>
-              <p style="font-size: 0.8rem; color: var(--accent-emerald);"><strong>Ajuste com IA:</strong> Implementamos suporte a string vazia na UI com sanitização dinâmica para zero no backend.</p>
-            </div>
-
-            <div class="card" style="border-top: 3px solid var(--accent-blue);">
-              <h4>3. Auto-Inferência ao Vivo</h4>
-              <p style="font-size: 0.8rem; margin-bottom: 6px;"><strong>O que vimos:</strong> O usuário precisava clicar em botões repetidamente a cada parâmetro alterado.</p>
-              <p style="font-size: 0.8rem; color: var(--accent-emerald);"><strong>Ajuste com IA:</strong> Criamos debounce suave de 150ms para diagnóstico instantâneo e responsivo em tempo real.</p>
-            </div>
-          </div>
-        </div>
-
-        <div style="font-size: 0.85rem; color: var(--text-muted);">
-          A IA executou as mudanças complexas de código em segundos, sob orientação precisa e teste do time.
-        </div>
-      </div>
-
-      <!-- ==========================================
-           SLIDE 8: As Regras do Sistema (Os 4 Pilares)
-           ========================================== -->
-      <div class="slide" data-slide="8">
-        <div>
-          <span class="slide-badge badge-emerald">
-            <i data-lucide="shield-check" style="width: 14px; height: 14px;"></i> Conhecimento Especialista
-          </span>
-          <h2 class="slide-title">As Regras do Sistema</h2>
-          <p class="slide-subtitle">Sintetizamos 25 regras zootécnicas e financeiras em 4 pilares práticos e intuitivos.</p>
-        </div>
-
-        <div class="slide-body">
-          <div class="grid-2">
-            <div class="card">
-              <h4 style="color: var(--accent-red); display: flex; align-items: center; gap: 8px;">
-                <i data-lucide="dollar-sign" style="width: 18px; height: 18px;"></i> 1. Pilar Financeiro (Sustentabilidade)
-              </h4>
-              <p>Identifica se a fazenda está tendo lucro verdadeiro ou se está sofrendo <strong>descapitalização silenciosa</strong> (pagando as contas imediatas mas consumindo maquinário e patrimônio).</p>
-            </div>
-
-            <div class="card">
-              <h4 style="color: var(--accent-amber); display: flex; align-items: center; gap: 8px;">
-                <i data-lucide="sun" style="width: 18px; height: 18px;"></i> 2. Pilar Bioclimático (Calor / ITU)
-              </h4>
-              <p>Mede a combinação de temperatura e umidade pela equação de Thom. Se o ITU passar de 72, alerta o produtor sobre a queda inevitável na produção e calcula a perda em reais/dia.</p>
-            </div>
-
-            <div class="card">
-              <h4 style="color: var(--accent-crimson); display: flex; align-items: center; gap: 8px;">
-                <i data-lucide="wheat" style="width: 18px; height: 18px;"></i> 3. Pilar Nutricional & Ruminal
-              </h4>
-              <p>Cruza a proporção de volumoso vs. concentrado e a ureia no leite (NUL) para avisar se o rebanho está em risco de acidose (SARA) ou desperdício de ração cara nas fezes.</p>
-            </div>
-
-            <div class="card">
-              <h4 style="color: var(--accent-blue); display: flex; align-items: center; gap: 8px;">
-                <i data-lucide="award" style="width: 18px; height: 18px;"></i> 4. Pilar Sanitário & Qualidade
-              </h4>
-              <p>Analisa CCS, CBT e taxas de mastite para indicar bonificações de até +R$ 0,15/L ou evitar penalizações pesadas do laticínio conforme a IN 76/77 do MAPA.</p>
-            </div>
-          </div>
-        </div>
-
-        <div style="font-size: 0.85rem; color: var(--text-muted);">
-          Tudo explicado visualmente no módulo SE → ENTÃO, sem exigir conhecimentos avançados de zootecnia.
-        </div>
-      </div>
-
-      <!-- ==========================================
-           SLIDE 9: Motor Determinístico vs. Caixa Preta
-           ========================================== -->
-      <div class="slide" data-slide="9">
-        <div>
-          <span class="slide-badge badge-red">
-            <i data-lucide="check-circle" style="width: 14px; height: 14px;"></i> Arquitetura Auditável
-          </span>
-          <h2 class="slide-title">Por Que Motor Determinístico e Não Caixa Preta?</h2>
-          <p class="slide-subtitle">Diferente de modelos puramente estatísticos ou LLMs soltos, nosso sistema explica exatamente o porquê de cada diagnóstico com regras SE → ENTÃO.</p>
-        </div>
-
-        <div class="slide-body">
-          <div class="grid-2">
-            <div class="card" style="border-left: 4px solid var(--accent-rose); background: #fffcfc;">
-              <h4 style="color: var(--accent-rose);">A 'Caixa Preta' Tradicional</h4>
-              <p>Modelos de Deep Learning ou prompts livres sem ancoragem determinística chegam a um número sem conseguir provar a cadeia de raciocínio. No agronegócio, errar um cálculo de ração ou financeiro custa centenas de milhares de reais.</p>
-            </div>
-
-            <div class="card" style="border-left: 4px solid var(--accent-emerald); background: #fcfdfc;">
-              <h4 style="color: var(--accent-emerald);">A Nossa Abordagem: Inteligência Explicável (XAI)</h4>
-              <p>Cada diagnóstico do MicroLeiteMacroNegocios exibe a regra exata que foi disparada, o Fator de Certeza matemático (MYCIN CF) e o passo a passo lógico para o produtor e para o técnico agropecuário.</p>
-            </div>
-          </div>
-
-          <div class="code-box" style="margin-top: 8px; font-size: 0.8rem;">
-<strong>SE</strong> ITU &gt; 72.0 <strong>E</strong> Escore Corporal &lt; 2.75 <strong>E</strong> Perda Estimada &gt; 1.5 L/vaca/dia
-<strong>ENTÃO</strong> [CRÍTICO] Estresse Térmico Agudo com Queda de Produção (CF: +0.85)
-<strong>AÇÃO:</strong> Acionar aspersores e ventiladores na linha de cocho 45min antes da ordenha.
-          </div>
-        </div>
-
-        <div style="font-size: 0.85rem; color: var(--text-muted);">
-          Confiabilidade jurídica e técnica indispensável para cooperativas, agrônomos e bancos rurais.
-        </div>
-      </div>
-
-      <!-- ==========================================
-           SLIDE 10: O Produto Final Entregue
-           ========================================== -->
-      <div class="slide" data-slide="10">
-        <div>
-          <span class="slide-badge badge-blue">
-            <i data-lucide="check" style="width: 14px; height: 14px;"></i> Resultado da Maratona
-          </span>
-          <h2 class="slide-title">O Produto Final</h2>
-          <p class="slide-subtitle">Um sistema especialista completo, testado, documentado e pronto para uso real pelo produtor.</p>
+          <p class="slide-subtitle">Como estruturamos os pedidos à IA para garantir código limpo, padronizado e livre de alucinações matemáticas.</p>
         </div>
 
         <div class="slide-body">
           <div class="grid-4">
-            <div class="card">
-              <div class="card-icon" style="background: #fef2f2; color: var(--accent-red);">
-                <i data-lucide="sliders" style="width: 20px; height: 20px;"></i>
-              </div>
-              <h4>Presets 1-Clique</h4>
-              <p>5 perfis reais brasileiros (Alta Eficiência, Estresse Térmico, Mastite, Pasto Familiar, Milho Caro).</p>
+            <div class="card" style="border-top: 3px solid #64748b;">
+              <span style="font-size: 0.72rem; font-weight: 800; color: #64748b;">PASSO 1</span>
+              <h4>Elicitação</h4>
+              <p><em>"Defina o schema JSON com as 33 variáveis essenciais de zootecnia e economia da Embrapa."</em></p>
             </div>
-            <div class="card">
-              <div class="card-icon" style="background: #eff6ff; color: var(--accent-blue);">
-                <i data-lucide="trending-up" style="width: 20px; height: 20px;"></i>
-              </div>
-              <h4>Gráficos Recharts</h4>
-              <p>Sensibilidade de lucro por preço, composição de custos Embrapa e curva teórica DEL (305 dias).</p>
+            <div class="card" style="border-top: 3px solid var(--accent-amber);">
+              <span style="font-size: 0.72rem; font-weight: 800; color: var(--accent-amber);">PASSO 2</span>
+              <h4>Estruturação</h4>
+              <p><em>"Crie as 25 regras declarativas com premissas SE-ENTÃO e Fatores de Certeza do MYCIN."</em></p>
             </div>
-            <div class="card">
-              <div class="card-icon" style="background: #fff7ed; color: var(--accent-amber);">
-                <i data-lucide="globe" style="width: 20px; height: 20px;"></i>
-              </div>
-              <h4>Mercado & CEPEA</h4>
-              <p>Cotações estaduais de leite, milho, soja e metas oficiais da Embrapa para comparação de fazendas.</p>
+            <div class="card" style="border-top: 3px solid var(--accent-blue);">
+              <span style="font-size: 0.72rem; font-weight: 800; color: var(--accent-blue);">PASSO 3</span>
+              <h4>Implementação</h4>
+              <p><em>"Implemente o motor de Forward Chaining desacoplado com testes unitários cobrindo casos críticos."</em></p>
             </div>
-            <div class="card">
-              <div class="card-icon" style="background: #f0fdf4; color: var(--accent-emerald);">
-                <i data-lucide="file-text" style="width: 20px; height: 20px;"></i>
-              </div>
-              <h4>Laudo em PDF</h4>
-              <p>Exportação pericial formatada em 1 clique para assistência técnica, cooperativas e bancos.</p>
+            <div class="card" style="border-top: 3px solid var(--accent-emerald);">
+              <span style="font-size: 0.72rem; font-weight: 800; color: var(--accent-emerald);">PASSO 4</span>
+              <h4>Refinamento</h4>
+              <p><em>"Ajuste a interface para auto-inferência reativa (debounce 150ms) e sem travamento de zeros."</em></p>
             </div>
           </div>
         </div>
 
-        <div style="font-size: 0.85rem; color: var(--text-muted);">
-          Interface responsiva, moderna, com tema claro profissional e sem sobrecarga cognitiva.
+        <div style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">
+          📐 <strong>Chave do Sucesso:</strong> Prompts de escopo único, com contratos de entrada e saída claramente especificados.
         </div>
       </div>
 
       <!-- ==========================================
-           SLIDE 11: Comparativo de Mercado
+           SLIDE 7: Auditoria e Refinamento
            ========================================== -->
-      <div class="slide" data-slide="11">
+      <div class="slide" data-slide="7">
         <div>
-          <span class="slide-badge badge-red">
-            <i data-lucide="layers" style="width: 14px; height: 14px;"></i> Diferenciais de Mercado
+          <span class="slide-badge badge-amber">
+            <i data-lucide="shield-check" style="width: 14px; height: 14px;"></i> Ciclo de Melhoria Contínua
           </span>
-          <h2 class="slide-title">Comparativo</h2>
-          <p class="slide-subtitle">Como o MicroLeiteMacroNegocios se compara às soluções que o produtor rural tem disponíveis hoje.</p>
+          <h2 class="slide-title">Auditoria e Refinamento em Ação</h2>
+          <p class="slide-subtitle">Exemplos reais de como a intervenção humana corrigiu desvios da IA e transformou uma boa ideia em um produto de alta precisão.</p>
         </div>
 
         <div class="slide-body">
-          <table style="width: 100%; border-collapse: collapse; font-size: 0.82rem; background: #ffffff; border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color);">
+          <div class="grid-3">
+            <div class="card" style="border-left: 4px solid var(--accent-red); background: #ffffff;">
+              <span style="font-size: 0.72rem; font-weight: 800; color: var(--accent-red);">CASO REAL 1</span>
+              <h4>Custo Operacional Total (COT)</h4>
+              <p><strong>Desvio:</strong> A IA havia misturado o custo da terra dentro do COT.<br>
+              <strong>Auditoria Humana:</strong> Corrigimos para a metodologia oficial Embrapa Custopec (COE = desembolso, COT = +depreciação, CT = +oportunidade da terra).</p>
+            </div>
+            <div class="card" style="border-left: 4px solid var(--accent-amber); background: #ffffff;">
+              <span style="font-size: 0.72rem; font-weight: 800; color: var(--accent-amber);">CASO REAL 2</span>
+              <h4>Usabilidade: Inputs Numéricos</h4>
+              <p><strong>Desvio:</strong> Ao apagar um campo numérico, a tela ficava travada com '0' feio e NaN.<br>
+              <strong>Auditoria Humana:</strong> Implementamos tratamento dinâmico para permitir digitação livre e conversão limpa em zero.</p>
+            </div>
+            <div class="card" style="border-left: 4px solid var(--accent-emerald); background: #ffffff;">
+              <span style="font-size: 0.72rem; font-weight: 800; color: var(--accent-emerald);">CASO REAL 3</span>
+              <h4>Auto-Inferência em Tempo Real</h4>
+              <p><strong>Desvio:</strong> O usuário precisava clicar em 'Calcular' a cada alteração.<br>
+              <strong>Auditoria Humana:</strong> Adicionamos debounce de 150ms: o produtor mexe no slider ou digita e vê a resposta na hora!</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">
+          🎯 <strong>Lição Aprendida:</strong> A IA acelera 10x o desenvolvimento, mas a auditoria técnica humana é insubstituível.
+        </div>
+      </div>
+
+      <!-- ==========================================
+           SLIDE 8: As Regras do Sistema
+           ========================================== -->
+      <div class="slide" data-slide="8">
+        <div>
+          <span class="slide-badge badge-crimson">
+            <i data-lucide="book-open" style="width: 14px; height: 14px;"></i> Conhecimento Especialista
+          </span>
+          <h2 class="slide-title">As Regras do Sistema</h2>
+          <p class="slide-subtitle">Toda a inteligência do sistema foi codificada em estruturas transparentes, inspecionáveis e cientificamente fundamentadas.</p>
+        </div>
+
+        <div class="slide-body">
+          <div class="grid-2">
+            <div class="card" style="background: #ffffff;">
+              <h4 style="color: var(--accent-red);"><i data-lucide="database" style="width: 18px; height: 18px;"></i> Catálogo Ontológico (33 Variáveis)</h4>
+              <p style="margin-bottom: 8px;">Divididas em 6 dimensões fundamentais do agronegócio de leite:</p>
+              <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                <span style="font-size: 0.75rem; background: #fee2e2; color: #991b1b; padding: 3px 8px; border-radius: 6px; font-weight: 700;">Zootécnicas (7)</span>
+                <span style="font-size: 0.75rem; background: #fef3c7; color: #b45309; padding: 3px 8px; border-radius: 6px; font-weight: 700;">Ambiência/ITU (4)</span>
+                <span style="font-size: 0.75rem; background: #fff1f2; color: #be123c; padding: 3px 8px; border-radius: 6px; font-weight: 700;">Sanidade/Mastite (7)</span>
+                <span style="font-size: 0.75rem; background: #dbeafe; color: #1d4ed8; padding: 3px 8px; border-radius: 6px; font-weight: 700;">Nutrição/SARA (4)</span>
+                <span style="font-size: 0.75rem; background: #f1f5f9; color: #475569; padding: 3px 8px; border-radius: 6px; font-weight: 700;">Mão de Obra (3)</span>
+                <span style="font-size: 0.75rem; background: #d1fae5; color: #065f46; padding: 3px 8px; border-radius: 6px; font-weight: 700;">Econômicas/Custopec (8)</span>
+              </div>
+            </div>
+            <div class="card" style="background: #ffffff;">
+              <h4 style="color: var(--accent-crimson);"><i data-lucide="check-square" style="width: 18px; height: 18px;"></i> 25 Regras Especialistas Declarativas</h4>
+              <p style="margin-bottom: 8px;">Estrutura declarativa com tratamento de incerteza pelo modelo MYCIN:</p>
+              <div style="background: #0f172a; color: #f8fafc; padding: 10px 14px; border-radius: 10px; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; line-height: 1.45;">
+                <span style="color: #fca5a5;">SE</span> itu &gt; 78 <span style="color: #fca5a5;">E</span> consumo_concentrado &gt; 7.0<br>
+                <span style="color: #93c5fd;">ENTÃO</span> diagnostico = "Acidose Agravada por Calor"<br>
+                <span style="color: #86efac;">CERTEZA (CF)</span> = 0.90 | <span style="color: #fde047;">STATUS</span> = "CRITICO"
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">
+          🔍 <strong>Auditabilidade:</strong> Qualquer agrônomo ou produtor pode ler as regras e entender exatamente por que o diagnóstico foi emitido.
+        </div>
+      </div>
+
+      <!-- ==========================================
+           SLIDE 9: Por Que Sistema Especialista e Não Caixa Preta?
+           ========================================== -->
+      <div class="slide" data-slide="9">
+        <div>
+          <span class="slide-badge badge-blue">
+            <i data-lucide="cpu" style="width: 14px; height: 14px;"></i> Arquitetura Auditável
+          </span>
+          <h2 class="slide-title">Por Que Motor Determinístico e Não Caixa Preta?</h2>
+          <p class="slide-subtitle">No campo, um conselho errado sobre nutrição ou sanidade pode quebrar o produtor. Decisões críticas exigem determinismo e explicabilidade total.</p>
+        </div>
+
+        <div class="slide-body">
+          <div class="grid-3">
+            <div class="card" style="border-top: 3px solid var(--accent-red);">
+              <div class="card-icon" style="background: #fef2f2; color: var(--accent-red);">
+                <i data-lucide="check-circle" style="width: 20px; height: 20px;"></i>
+              </div>
+              <h4>Zero Alucinação</h4>
+              <p>Os cálculos e diagnósticos seguem rigorosamente as equações matemáticas da Embrapa. O sistema nunca "inventa" números.</p>
+            </div>
+            <div class="card" style="border-top: 3px solid var(--accent-amber);">
+              <div class="card-icon" style="background: #fff7ed; color: var(--accent-amber);">
+                <i data-lucide="eye" style="width: 20px; height: 20px;"></i>
+              </div>
+              <h4>Explicabilidade (XAI)</h4>
+              <p>Para cada diagnóstico, o sistema mostra a regra disparada, as premissas satisfeitas e a justificativa técnica clara.</p>
+            </div>
+            <div class="card" style="border-top: 3px solid var(--accent-emerald);">
+              <div class="card-icon" style="background: #f0fdf4; color: var(--accent-emerald);">
+                <i data-lucide="wifi-off" style="width: 20px; height: 20px;"></i>
+              </div>
+              <h4>100% Offline e Seguro</h4>
+              <p>Funciona no galpão sem precisar de sinal de internet e sem enviar dados confidenciais da fazenda para servidores externos.</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">
+          🛡️ <strong>IA Confiável:</strong> A IA generativa foi usada para <em>construir</em> o sistema; a tomada de decisão no campo é <em>determinística e auditável</em>.
+        </div>
+      </div>
+
+      <!-- ==========================================
+           SLIDE 10: O Produto Final & Demonstração Prática
+           ========================================== -->
+      <div class="slide" data-slide="10">
+        <div>
+          <span class="slide-badge badge-emerald">
+            <i data-lucide="sparkles" style="width: 14px; height: 14px;"></i> Resultado da Maratona
+          </span>
+          <h2 class="slide-title">O Produto Final</h2>
+          <p class="slide-subtitle">Uma aplicação web completa, reativa e profissional construída em menos de 56 horas de maratona.</p>
+        </div>
+
+        <div class="slide-body">
+          <div class="grid-2">
+            <div class="card" style="background: #ffffff; border-left: 4px solid var(--accent-red);">
+              <h4 style="color: var(--accent-red);"><i data-lucide="activity" style="width: 18px; height: 18px;"></i> Cenário Real: Crise Sanitária (Mastite & CBT)</h4>
+              <p style="margin-bottom: 8px;">Fazenda com 52 vacas em lactação, temperatura de 28,5°C e CCS de 620.000:</p>
+              <div class="grid-2" style="gap: 8px;">
+                <div class="metric-box">
+                  <span class="metric-value" style="color: var(--accent-red);">79.1 ITU</span>
+                  <span class="metric-label">Estresse Severo (-2.88 L/vaca)</span>
+                </div>
+                <div class="metric-box">
+                  <span class="metric-value" style="color: var(--accent-red);">-R$ 0,12 /L</span>
+                  <span class="metric-label">Margem Líquida (-R$ 3.587/mês)</span>
+                </div>
+              </div>
+            </div>
+            <div class="card" style="background: #ffffff; border-left: 4px solid var(--accent-emerald);">
+              <h4 style="color: var(--accent-emerald);"><i data-lucide="trending-up" style="width: 18px; height: 18px;"></i> Resultado Pós-Simulação com 1 Clique</h4>
+              <p style="margin-bottom: 8px;">Simulando ventiladores no galpão e higienização correta de ordenha:</p>
+              <div class="grid-2" style="gap: 8px;">
+                <div class="metric-box">
+                  <span class="metric-value" style="color: var(--accent-emerald);">70.4 ITU</span>
+                  <span class="metric-label">Zona de Conforto Pleno</span>
+                </div>
+                <div class="metric-box">
+                  <span class="metric-value" style="color: var(--accent-emerald);">+R$ 0,41 /L</span>
+                  <span class="metric-label">Lucro Líquido (+R$ 14.172/mês)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color); padding-top: 12px;">
+          <span style="font-size: 0.88rem; font-weight: 700; color: var(--text-main);">
+            Preset: <strong style="color: var(--accent-red);">'Fazenda com Crise Sanitária (Mastite & CBT Alta)'</strong>
+          </span>
+          <a href="http://localhost:3000" target="_blank" class="btn btn-primary">
+            <i data-lucide="play" style="width: 16px; height: 16px;"></i> Iniciar Demonstração Prática
+          </a>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           SLIDE 11: Comparativo de Mercado & Viabilidade
+           ========================================== -->
+      <div class="slide" data-slide="11">
+        <div>
+          <span class="slide-badge badge-blue">
+            <i data-lucide="bar-chart-2" style="width: 14px; height: 14px;"></i> Diferenciais de Mercado
+          </span>
+          <h2 class="slide-title">Comparativo</h2>
+          <p class="slide-subtitle">Como nossa solução se compara com as alternativas existentes hoje no mercado agropecuário.</p>
+        </div>
+
+        <div class="slide-body">
+          <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.88rem; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color);">
             <thead>
-              <tr style="background: #f8fafc; border-bottom: 2px solid var(--border-color); text-align: left;">
-                <th style="padding: 11px 16px; color: var(--text-main); font-weight: 800;">Funcionalidade / Solução</th>
-                <th style="padding: 11px 16px; color: var(--text-muted);">Caderninho / Planilhas</th>
-                <th style="padding: 11px 16px; color: var(--text-muted);">Softwares ERP Rurais</th>
-                <th style="padding: 11px 16px; color: var(--accent-red); font-weight: 800; background: #fff1f2;">MicroLeiteMacroNegocios</th>
+              <tr style="background: #f1f5f9; border-bottom: 2px solid var(--border-color);">
+                <th style="padding: 10px 16px; color: var(--text-main); font-weight: 800;">Critério de Avaliação</th>
+                <th style="padding: 10px 16px; color: var(--text-muted);">Caderno / Planilha</th>
+                <th style="padding: 10px 16px; color: var(--text-muted);">ERPs Tradicionais</th>
+                <th style="padding: 10px 16px; color: var(--accent-red); font-weight: 800; background: #fff1f2;">MicroLeiteMacroNegocios</th>
               </tr>
             </thead>
-            <tbody style="divide-y: 1px solid var(--border-color);">
+            <tbody>
               <tr style="border-bottom: 1px solid var(--border-color);">
-                <td style="padding: 11px 16px; font-weight: 700; color: var(--text-main);">Diagnóstico Zootécnico Automático</td>
-                <td style="padding: 11px 16px; color: var(--accent-rose); font-weight: 600;">❌ Não</td>
-                <td style="padding: 11px 16px; color: var(--accent-rose); font-weight: 600;">❌ Raro</td>
-                <td style="padding: 11px 16px; color: var(--accent-emerald); font-weight: 800; background: #fff1f2;">✅ Sim (25 Regras Especialistas)</td>
+                <td style="padding: 9px 16px; font-weight: 700; color: var(--text-main);">Diagnóstico Automático</td>
+                <td style="padding: 9px 16px; color: var(--accent-rose); font-weight: 600;">❌ Inexistente</td>
+                <td style="padding: 9px 16px; color: var(--accent-amber); font-weight: 600;">⚠️ Apenas Relatórios</td>
+                <td style="padding: 9px 16px; color: var(--accent-emerald); font-weight: 800; background: #fff1f2;">✅ 25 Regras Embrapa</td>
               </tr>
               <tr style="border-bottom: 1px solid var(--border-color);">
-                <td style="padding: 11px 16px; font-weight: 700; color: var(--text-main);">Cálculo de Estresse Térmico (ITU)</td>
-                <td style="padding: 11px 16px; color: var(--accent-rose); font-weight: 600;">❌ Não</td>
-                <td style="padding: 11px 16px; color: var(--accent-rose); font-weight: 600;">❌ Não</td>
-                <td style="padding: 11px 16px; color: var(--accent-emerald); font-weight: 800; background: #fff1f2;">✅ Sim (Fórmula de Thom)</td>
+                <td style="padding: 9px 16px; font-weight: 700; color: var(--text-main);">Índice de Estresse Térmico (ITU)</td>
+                <td style="padding: 9px 16px; color: var(--accent-rose); font-weight: 600;">❌ Não calcula</td>
+                <td style="padding: 9px 16px; color: var(--accent-rose); font-weight: 600;">❌ Raro / Pago à parte</td>
+                <td style="padding: 9px 16px; color: var(--accent-emerald); font-weight: 800; background: #fff1f2;">✅ Integrado com perda em L/dia</td>
               </tr>
               <tr style="border-bottom: 1px solid var(--border-color);">
-                <td style="padding: 11px 16px; font-weight: 700; color: var(--text-main);">Alerta de Descapitalização Silenciosa</td>
-                <td style="padding: 11px 16px; color: var(--accent-rose); font-weight: 600;">❌ Não</td>
-                <td style="padding: 11px 16px; color: var(--accent-amber); font-weight: 600;">⚠️ Confuso</td>
-                <td style="padding: 11px 16px; color: var(--accent-emerald); font-weight: 800; background: #fff1f2;">✅ Sim (Custopec COE/COT/CT)</td>
+                <td style="padding: 9px 16px; font-weight: 700; color: var(--text-main);">Alerta de Descapitalização Silenciosa</td>
+                <td style="padding: 9px 16px; color: var(--accent-rose); font-weight: 600;">❌ Não</td>
+                <td style="padding: 9px 16px; color: var(--accent-amber); font-weight: 600;">⚠️ Confuso</td>
+                <td style="padding: 9px 16px; color: var(--accent-emerald); font-weight: 800; background: #fff1f2;">✅ Sim (Custopec COE/COT/CT)</td>
               </tr>
               <tr>
-                <td style="padding: 11px 16px; font-weight: 700; color: var(--text-main);">Simulação Interativa em Tempo Real</td>
-                <td style="padding: 11px 16px; color: var(--accent-rose); font-weight: 600;">❌ Não</td>
-                <td style="padding: 11px 16px; color: var(--accent-rose); font-weight: 600;">❌ Não</td>
-                <td style="padding: 11px 16px; color: var(--accent-emerald); font-weight: 800; background: #fff1f2;">✅ Sim (150ms Debounce)</td>
+                <td style="padding: 9px 16px; font-weight: 700; color: var(--text-main);">Simulação Interativa em Tempo Real</td>
+                <td style="padding: 9px 16px; color: var(--accent-rose); font-weight: 600;">❌ Não</td>
+                <td style="padding: 9px 16px; color: var(--accent-rose); font-weight: 600;">❌ Não</td>
+                <td style="padding: 9px 16px; color: var(--accent-emerald); font-weight: 800; background: #fff1f2;">✅ Sim (150ms Debounce)</td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <div style="font-size: 0.85rem; color: var(--text-muted);">
-          Transforma o produtor rural em um gestor agropecuário de alta precisão.
+        <div style="font-size: 0.88rem; color: var(--text-muted); font-weight: 600;">
+          🚀 Transforma o produtor rural em um gestor agropecuário de alta precisão.
         </div>
       </div>
 
       <!-- ==========================================
-           SLIDE 12: Conclusão & Demonstração Prática
+           SLIDE 12: Conclusão & Próximos Passos
            ========================================== -->
       <div class="slide" data-slide="12">
         <div>
@@ -1149,7 +1220,9 @@
         </div>
 
         <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color); padding-top: 14px;">
-          <span style="font-weight: 800; color: var(--text-main); font-size: 1rem;">Muito obrigado! Estamos abertos às perguntas da banca.</span>
+          <span style="font-weight: 800; color: var(--text-main); font-size: 1.05rem;">
+            Muito obrigado! Estamos abertos às perguntas da banca.
+          </span>
           <a href="http://localhost:3000" target="_blank" class="btn btn-primary">
             <i data-lucide="play" style="width: 16px; height: 16px;"></i> Iniciar Demonstração Prática
           </a>
@@ -1170,110 +1243,112 @@
       </button>
     </div>
 
-    <div class="slide-counter">
-      Slide <span id="currentSlideNumber" style="color: var(--accent-red);">1</span> de <span id="totalSlideNumber">12</span>
+    <div class="slide-pills-container" id="slidePills">
+      <!-- Injetado dinamicamente via JS -->
     </div>
 
-    <div style="display: flex; align-items: center; gap: 8px;">
-      <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">Dica: Use as setas ← / → do teclado ou a barra de espaço</span>
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <span style="font-size: 0.82rem; color: #94a3b8; font-weight: 600;">
+        Use <kbd style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px; color: #fff;">←</kbd> / <kbd style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px; color: #fff;">→</kbd> para navegar
+      </span>
     </div>
   </footer>
 
   <!-- Modal Roteiro de Fala do Apresentador -->
-  <div id="speechModal" style="display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(8px); z-index: 200; align-items: center; justify-content: center; padding: 20px;">
-    <div style="background: #ffffff; border-radius: 24px; max-width: 900px; width: 100%; max-height: 88vh; display: flex; flex-direction: column; box-shadow: var(--shadow-xl); border: 1px solid var(--border-color); overflow: hidden;">
+  <div id="speechModal" style="display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(12px); z-index: 200; align-items: center; justify-content: center; padding: 20px;">
+    <div style="background: #ffffff; border-radius: 24px; max-width: 920px; width: 100%; max-height: 88vh; display: flex; flex-direction: column; box-shadow: var(--shadow-xl); border: 1px solid var(--border-color); overflow: hidden;">
       <div style="padding: 20px 28px; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; background: #fff5f5;">
         <div style="display: flex; align-items: center; gap: 12px;">
-          <div style="width: 38px; height: 38px; border-radius: 12px; background: #900000; color: #fff; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm);">
+          <div style="width: 40px; height: 40px; border-radius: 12px; background: #900000; color: #fff; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm);">
             <i data-lucide="mic" style="width: 20px; height: 20px;"></i>
           </div>
           <div>
-            <h3 style="font-size: 1.15rem; font-weight: 900; color: #0f172a;">Roteiro Oficial do Apresentador (Pitch Master — 13 Minutos)</h3>
-            <p style="font-size: 0.78rem; color: #64748b;">Guia slide a slide com minutagem oficial, entonação e falas literais para a banca examinadora</p>
+            <h3 style="font-size: 1.18rem; font-weight: 900; color: #0f172a;">Roteiro Oficial do Apresentador (Pitch Master — 13 Minutos)</h3>
+            <p style="font-size: 0.8rem; color: #64748b;">Fala completa sincronizada com os tempos de cada slide</p>
           </div>
         </div>
-        <button onclick="toggleSpeechModal()" style="border: none; background: #f1f5f9; width: 34px; height: 34px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center;">
-          <i data-lucide="x" style="width: 18px; height: 18px;"></i>
+        <button onclick="toggleSpeechModal()" class="btn btn-outline" style="border-radius: 50%; width: 36px; height: 36px; padding: 0; display: flex; align-items: center; justify-content: center;">
+          <i data-lucide="x" style="width: 18px; height: 18px; color: #0f172a;"></i>
         </button>
       </div>
 
-      <div style="padding: 24px 28px; overflow-y: auto; line-height: 1.7; font-size: 0.88rem; color: #334155; display: flex; flex-direction: column; gap: 18px;">
+      <div style="padding: 24px 28px; overflow-y: auto; flex: 1; display: flex; flex-direction: column; gap: 20px; font-size: 0.95rem; line-height: 1.6;">
         <div style="background: #f8fafc; padding: 18px; border-radius: 14px; border-left: 4px solid #900000;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-            <h4 style="font-weight: 800; color: #0f172a;">Slide 1: Abertura, Identidade & Propósito</h4>
-            <span style="font-size: 0.75rem; font-weight: 700; color: #900000; background: #fee2e2; padding: 2px 8px; border-radius: 6px;">0:00 – 0:45 (45s)</span>
+            <h4 style="font-weight: 800; color: #0f172a;">Slide 1: Capa & Identificação Oficial</h4>
+            <span style="font-size: 0.75rem; font-weight: 700; color: #900000; background: #fee2e2; padding: 2px 8px; border-radius: 6px;">00:00 – 01:00 (1m00s)</span>
           </div>
-          <p style="font-style: italic; color: #1e293b;">"Boa noite, ilustres membros da banca examinadora, professores e colegas! Somos a equipe do <strong>MicroLeiteMacroNegocios</strong> — uma plataforma desenvolvida ao longo de <strong>56 horas de maratona</strong> no Hackathon UFJF 2026 para revolucionar o Tema 3. O nosso propósito é transformar o microprodutor de leite em um macronégocio sustentável e altamente lucrativo. Como diz nosso lema: fazer a pecuária brasileira <strong>Muu</strong>ito Melhor!"</p>
+          <p style="font-style: italic; color: #1e293b;">"Bom dia a todos os membros da banca e colegas. Somos a equipe MicroLeiteMacroNegocios. Apresentamos hoje o nosso Sistema Especialista de Apoio à Decisão para Pecuária Leiteira, com o slogan Muuuito Melhoor. Desenvolvido no Hackathon UFJF 2026 com o Google Gemini 2.5 Pro via Antigravity em 56 horas de maratona."</p>
         </div>
 
-        <div style="background: #f8fafc; padding: 18px; border-radius: 14px; border-left: 4px solid #dc2626;">
+        <div style="background: #f8fafc; padding: 18px; border-radius: 14px; border-left: 4px solid #d97706;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-            <h4 style="font-weight: 800; color: #0f172a;">Slide 2: A Anatomia da Crise no Campo (4 Dores Reais)</h4>
-            <span style="font-size: 0.75rem; font-weight: 700; color: #dc2626; background: #fee2e2; padding: 2px 8px; border-radius: 6px;">0:45 – 2:00 (1m15s)</span>
+            <h4 style="font-weight: 800; color: #0f172a;">Slide 2: A Dor Real do Produtor de Leite no Brasil</h4>
+            <span style="font-size: 0.75rem; font-weight: 700; color: #d97706; background: #fef3c7; padding: 2px 8px; border-radius: 6px;">01:00 – 02:15 (1m15s)</span>
           </div>
-          <p style="font-style: italic; color: #1e293b;">"Começamos pela dor real do produtor, que sangra dinheiro em 4 frentes: <strong>1. Descapitalização Oculta:</strong> calcula o custo apenas pelo desembolso imediato (COE) e esquece a depreciação e remuneração da terra. <strong>2. Estresse Térmico (ITU > 72):</strong> perdas de 1,5 a 3,5 litros/vaca/dia no calor do sudeste. <strong>3. Desequilíbrio Nutricional (SARA):</strong> excesso de ração cara e acidose ruminal. <strong>4. Penalizações de Mastite (MAPA IN 76/77):</strong> perdas de até 25 centavos por litro por CCS alta."</p>
+          <p style="font-style: italic; color: #1e293b;">"A atividade leiteira tem margens estreitas. O produtor perde dinheiro em 4 gargalos invisíveis: Descapitalização silenciosa (COE vs COT/CT), Estresse Térmico por calor (ITU acima de 72 cortando até 3,5 L/vaca/dia), Desperdício de Ração e Acidose Ruminal (SARA com NUL > 16 mg/dL), e Penalizações de Mastite (CCS > 400k com cortes de até R$ 0,25/litro)."</p>
         </div>
 
-        <div style="background: #f8fafc; padding: 18px; border-radius: 14px; border-left: 4px solid #1d4ed8;">
+        <div style="background: #f8fafc; padding: 18px; border-radius: 14px; border-left: 4px solid #2563eb;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-            <h4 style="font-weight: 800; color: #0f172a;">Slide 3: O Dilema da IA no Agro (Por que Caixa Preta é Risco?)</h4>
-            <span style="font-size: 0.75rem; font-weight: 700; color: #1d4ed8; background: #dbeafe; padding: 2px 8px; border-radius: 6px;">2:00 – 3:00 (1m00s)</span>
+            <h4 style="font-weight: 800; color: #0f172a;">Slide 3: O Desafio dos Hackathons — Como Evitar a Alucinação?</h4>
+            <span style="font-size: 0.75rem; font-weight: 700; color: #2563eb; background: #dbeafe; padding: 2px 8px; border-radius: 6px;">02:15 – 03:15 (1m00s)</span>
           </div>
-          <p style="font-style: italic; color: #1e293b;">"No agronegócio e na medicina, caixa preta causa falência. Se um LLM alucinar uma dosagem de concentrado ou custo contábil, o produtor quebra. Nossa arquitetura adota duas frentes: usamos IA Agêntica de última geração (<strong>Google Gemini 2.5 Pro via Antigravity</strong>) para acelerar o desenvolvimento, mas entregamos um <strong>Motor Determinístico baseado em Regras Formais e Fatores de Certeza MYCIN</strong>. Zero alucinações em produção e 100% de explicabilidade."</p>
+          <p style="font-style: italic; color: #1e293b;">"Em maratonas de 56 horas, o erro mais comum é pedir tudo de uma vez à IA, gerando alucinações matemáticas e caixas pretas perigosas. Nossa abordagem: decompor o problema em etapas rigorosas, mantendo o humano no controle conceitual e a IA na execução estruturada."</p>
         </div>
 
-        <div style="background: #f8fafc; padding: 18px; border-radius: 14px; border-left: 4px solid #c2410c;">
+        <div style="background: #f8fafc; padding: 18px; border-radius: 14px; border-left: 4px solid #d97706;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-            <h4 style="font-weight: 800; color: #0f172a;">Slide 4: Engenharia do Conhecimento: Sadrey + Scrum em 56h</h4>
-            <span style="font-size: 0.75rem; font-weight: 700; color: #c2410c; background: #ffedd5; padding: 2px 8px; border-radius: 6px;">3:00 – 4:15 (1m15s)</span>
+            <h4 style="font-weight: 800; color: #0f172a;">Slide 4: O Modelo de Organização — Metodologia Sadrey + Scrum</h4>
+            <span style="font-size: 0.75rem; font-weight: 700; color: #d97706; background: #fef3c7; padding: 2px 8px; border-radius: 6px;">03:15 – 04:30 (1m15s)</span>
           </div>
-          <p style="font-style: italic; color: #1e293b;">"Seguimos rigorosamente o ciclo clássico de Sadrey em 5 etapas: <strong>1. Identificação</strong> dos gargalos agro; <strong>2. Aquisição</strong> do conhecimento com Embrapa Custopec e NRC; <strong>3. Conceituação</strong> em ontologia de 33 variáveis normalizadas; <strong>4. Formalização</strong> em 25 regras JSON puras; e <strong>5. Validação</strong> com casos reais. Tudo orquestrado em 5 Sprints Scrum de 8 a 12 horas com entregas incrementais auditadas."</p>
+          <p style="font-style: italic; color: #1e293b;">"Adotamos as 5 etapas da Metodologia Sadrey (Identificação, Aquisição, Conceituação, Formalização e Validação) integradas a Sprints de 12 horas do Scrum. Isso garantiu que cada regra matemática fosse exaustivamente testada antes de ir para a interface gráfica."</p>
         </div>
 
-        <div style="background: #f8fafc; padding: 18px; border-radius: 14px; border-left: 4px solid #881337;">
+        <div style="background: #f8fafc; padding: 18px; border-radius: 14px; border-left: 4px solid #2563eb;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-            <h4 style="font-weight: 800; color: #0f172a;">Slide 5: Pair Programming com Google Gemini 2.5 Pro</h4>
-            <span style="font-size: 0.75rem; font-weight: 700; color: #881337; background: #ffe4e6; padding: 2px 8px; border-radius: 6px;">4:15 – 5:30 (1m15s)</span>
+            <h4 style="font-weight: 800; color: #0f172a;">Slide 5: Parceria de Alta Performance — Divisão de Papéis</h4>
+            <span style="font-size: 0.75rem; font-weight: 700; color: #2563eb; background: #dbeafe; padding: 2px 8px; border-radius: 6px;">04:30 – 05:45 (1m15s)</span>
           </div>
-          <p style="font-style: italic; color: #1e293b;">"Uma verdadeira simbiose humano-máquina: o Humano assumiu o papel de <strong>Arquiteto e Especialista de Domínio</strong> (definindo equações, premissas zootécnicas e requisitos de usabilidade), enquanto o <strong>Gemini 2.5 Pro</strong> atuou como <strong>Engenheiro de Scaffolding</strong> (estruturando JSON declarativo, motor Forward Chaining, componentes reativos Tailwind/Recharts e suítes de testes automatizados)."</p>
-        </div>
-
-        <div style="background: #f8fafc; padding: 18px; border-radius: 14px; border-left: 4px solid #4338ca;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-            <h4 style="font-weight: 800; color: #0f172a;">Slide 6: Esteira de Prompts & Rastreabilidade</h4>
-            <span style="font-size: 0.75rem; font-weight: 700; color: #4338ca; background: #e0e7ff; padding: 2px 8px; border-radius: 6px;">5:30 – 6:30 (1m00s)</span>
-          </div>
-          <p style="font-style: italic; color: #1e293b;">"Criamos uma esteira de prompts em 4 camadas modulares: prompts de elicitação conceitual, prompts de formalização declarativa JSON, prompts de implementação modular e prompts de auditoria e testes. Todo o histórico de geração e refatoração está registrado com transparência pericial no arquivo <code>PROMPT_LOG.md</code> do repositório."</p>
-        </div>
-
-        <div style="background: #f8fafc; padding: 18px; border-radius: 14px; border-left: 4px solid #15803d;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-            <h4 style="font-weight: 800; color: #0f172a;">Slide 7: Casos Reais de Auditoria Humano-IA & Refinamento</h4>
-            <span style="font-size: 0.75rem; font-weight: 700; color: #15803d; background: #dcfce7; padding: 2px 8px; border-radius: 6px;">6:30 – 7:45 (1m15s)</span>
-          </div>
-          <p style="font-style: italic; color: #1e293b;">"Três exemplos da indispensável auditoria humana: <strong>1. Correção Contábil Embrapa:</strong> impedimos a IA de misturar o custo da terra no COT, separando COE, COT e CT. <strong>2. Usabilidade Reativa:</strong> eliminamos zeros travados em inputs com debounce de 150ms. <strong>3. Guardrails Biológicos:</strong> o sistema bloqueia incoerências lógicas como declarar 10 vacas em lactação com 2 vacas adultas totais ou escores fora de 1 a 5."</p>
-        </div>
-
-        <div style="background: #f8fafc; padding: 18px; border-radius: 14px; border-left: 4px solid #b45309;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-            <h4 style="font-weight: 800; color: #0f172a;">Slide 8: Os 4 Pilares da Base Especialista & Fórmulas</h4>
-            <span style="font-size: 0.75rem; font-weight: 700; color: #b45309; background: #fef3c7; padding: 2px 8px; border-radius: 6px;">7:45 – 9:00 (1m15s)</span>
-          </div>
-          <p style="font-style: italic; color: #1e293b;">"25 regras estruturadas em 4 pilares: <strong>1. Bioclimático:</strong> fórmula de Thom para ITU e perdas NRC. <strong>2. Nutricional:</strong> proporção volumoso:concentrado e Nitrogênio Ureico no Leite (NUL). <strong>3. Sanitário:</strong> faixas de bonificação e corte da IN 76/77 (CCS e CBT). <strong>4. Econômico:</strong> Margem Bruta, Margem Líquida, Lucro Econômico e Ponto de Equilíbrio em litros/dia."</p>
+          <p style="font-style: italic; color: #1e293b;">"O humano atuou como Arquiteto de Domínio e Validador Técnico; o Gemini 2.5 Pro atuou como Pair Programmer de alta velocidade, estruturando arquivos JSON, gerando o motor Forward Chaining e componentes Recharts em tempo recorde."</p>
         </div>
 
         <div style="background: #f8fafc; padding: 18px; border-radius: 14px; border-left: 4px solid #b91c1c;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-            <h4 style="font-weight: 800; color: #0f172a;">Slide 9: Motor de Inferência XAI & Algoritmo MYCIN</h4>
-            <span style="font-size: 0.75rem; font-weight: 700; color: #b91c1c; background: #fee2e2; padding: 2px 8px; border-radius: 6px;">9:00 – 10:00 (1m00s)</span>
+            <h4 style="font-weight: 800; color: #0f172a;">Slide 6: A Engenharia de Prompt na Prática</h4>
+            <span style="font-size: 0.75rem; font-weight: 700; color: #b91c1c; background: #fee2e2; padding: 2px 8px; border-radius: 6px;">05:45 – 07:00 (1m15s)</span>
           </div>
-          <p style="font-style: italic; color: #1e293b;">"Motor de Encadeamento para Frente com propagação de Fatores de Certeza Shortliffe: CFcomb = CF1 + CF2(1 - |CF1|). Na interface, o módulo de Explicabilidade (XAI) decompõe cada recomendação em premissas SE-ENTÃO com valores reais e justificativa técnica pericial."</p>
+          <p style="font-style: italic; color: #1e293b;">"Dividimos os prompts em 4 fases cirúrgicas: Elicitação Ontológica, Estruturação Declarativa (sem código misturado), Implementação Modular em Node.js/React e Refinamento de Usabilidade com Debounce."</p>
         </div>
 
-        <div style="background: #f8fafc; padding: 18px; border-radius: 14px; border-left: 4px solid #047857;">
+        <div style="background: #f8fafc; padding: 18px; border-radius: 14px; border-left: 4px solid #d97706;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+            <h4 style="font-weight: 800; color: #0f172a;">Slide 7: Auditoria e Refinamento — Casos Reais</h4>
+            <span style="font-size: 0.75rem; font-weight: 700; color: #d97706; background: #fef3c7; padding: 2px 8px; border-radius: 6px;">07:00 – 08:00 (1m00s)</span>
+          </div>
+          <p style="font-style: italic; color: #1e293b;">"Mostramos 3 casos onde o olhar humano fez a diferença: correção do Custo Operacional Total (separando terra no CT), eliminação do travamento de zeros em campos vazios e implantação da auto-inferência em tempo real com 150ms."</p>
+        </div>
+
+        <div style="background: #f8fafc; padding: 18px; border-radius: 14px; border-left: 4px solid #b91c1c;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+            <h4 style="font-weight: 800; color: #0f172a;">Slide 8: Conhecimento Especialista — As Regras do Sistema</h4>
+            <span style="font-size: 0.75rem; font-weight: 700; color: #b91c1c; background: #fee2e2; padding: 2px 8px; border-radius: 6px;">08:00 – 09:00 (1m00s)</span>
+          </div>
+          <p style="font-style: italic; color: #1e293b;">"Apresentamos o catálogo de 33 variáveis divididas em 6 dimensões do agronegócio e as 25 regras especialistas puras. Cada regra possui premissas claras, grau de severidade e Fator de Certeza MYCIN."</p>
+        </div>
+
+        <div style="background: #f8fafc; padding: 18px; border-radius: 14px; border-left: 4px solid #2563eb;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+            <h4 style="font-weight: 800; color: #0f172a;">Slide 9: Por Que Sistema Especialista Determinístico e Não Caixa Preta?</h4>
+            <span style="font-size: 0.75rem; font-weight: 700; color: #2563eb; background: #dbeafe; padding: 2px 8px; border-radius: 6px;">09:00 – 10:00 (1m00s)</span>
+          </div>
+          <p style="font-style: italic; color: #1e293b;">"Na agropecuária, a explicabilidade salva fazendas. Nosso motor explica o porquê de cada diagnóstico no padrão SE → ENTÃO, roda 100% offline no galpão e elimina qualquer risco de alucinação."</p>
+        </div>
+
+        <div style="background: #f8fafc; padding: 18px; border-radius: 14px; border-left: 4px solid #059669;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
             <h4 style="font-weight: 800; color: #0f172a;">Slide 10: Demonstração Prática & Walkthrough da Plataforma</h4>
-            <span style="font-size: 0.75rem; font-weight: 700; color: #047857; background: #d1fae5; padding: 2px 8px; border-radius: 6px;">10:00 – 11:30 (1m30s)</span>
+            <span style="font-size: 0.75rem; font-weight: 700; color: #059669; background: #d1fae5; padding: 2px 8px; border-radius: 6px;">10:00 – 11:30 (1m30s)</span>
           </div>
           <p style="font-style: italic; color: #1e293b;">"Carregando a <strong>'Fazenda com Crise Sanitária (Mastite & CBT Alta)'</strong>, o painel acusa 4 alertas graves: ITU 79, CCS 620k e margem negativa de R$ -0,12/L (descapitalizando R$ 3.600/mês). No simulador interativo, ajustamos a ventilação e a ordenha: a margem líquida sobe para +R$ 0,38 a +R$ 0,41/L (+R$ 14.000 a +R$ 15.000/mês)! Com um clique, emitimos o laudo executivo em PDF para o produtor."</p>
         </div>
@@ -1286,42 +1361,58 @@
           <p style="font-style: italic; color: #1e293b;">"Muito superior ao caderninho de papel (que é reativo e cego) e aos ERPs caros (que exigem internet constante e entregam dados frios). O MicroLeiteMacroNegocios roda localmente, sem custos recorrentes e com foco 100% prescritivo."</p>
         </div>
 
-        <div style="background: #f8fafc; padding: 18px; border-radius: 14px; border-left: 4px solid #900000;">
+        <div style="background: #f8fafc; padding: 18px; border-radius: 14px; border-left: 4px solid #059669;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-            <h4 style="font-weight: 800; color: #0f172a;">Slide 12: Conclusão, Impacto no Campo & Perguntas</h4>
-            <span style="font-size: 0.75rem; font-weight: 700; color: #900000; background: #fee2e2; padding: 2px 8px; border-radius: 6px;">12:15 – 13:00 (45s)</span>
+            <h4 style="font-weight: 800; color: #0f172a;">Slide 12: Conclusão, Impacto & Abertura para a Banca</h4>
+            <span style="font-size: 0.75rem; font-weight: 700; color: #059669; background: #d1fae5; padding: 2px 8px; border-radius: 6px;">12:15 – 13:00 (45s)</span>
           </div>
-          <p style="font-style: italic; color: #1e293b;">"Entregamos uma ferramenta de transformação socioeconômica para o produtor de leite. Convidamos a banca examinadora a testar a plataforma interativa e estamos à inteira disposição para responder às suas perguntas. Com o MicroLeiteMacroNegocios, a gestão da fazenda fica Muuito Melhor!"</p>
+          <p style="font-style: italic; color: #1e293b;">"Concluímos com três pilares: Lucratividade comprovada, Bem-Estar Animal e Futuro com IoT. Agradecemos à banca avaliadora da XXVIII Semana da Computação da UFJF e estamos à disposição para perguntas e demonstração ao vivo!"</p>
         </div>
       </div>
     </div>
   </div>
 
   <script>
-    // Inicializar ícones Lucide
+    // Inicialização dos Ícones Lucide
     lucide.createIcons();
 
+    // Controle de Slides
     let currentSlide = 1;
-    const totalSlides = 12;
-
     const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
     const progressBar = document.getElementById('progressBar');
-    const currentSlideNumber = document.getElementById('currentSlideNumber');
-    const totalSlideNumber = document.getElementById('totalSlideNumber');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
+    const slidePillsContainer = document.getElementById('slidePills');
 
-    totalSlideNumber.textContent = totalSlides;
-
-    function toggleSpeechModal() {
-      const modal = document.getElementById('speechModal');
-      if (modal.style.display === 'none' || !modal.style.display) {
-        modal.style.display = 'flex';
-      } else {
-        modal.style.display = 'none';
-      }
-      lucide.createIcons();
+    // Gerar Pills de Navegação Inferiores
+    for (let i = 1; i <= totalSlides; i++) {
+      const pill = document.createElement('div');
+      pill.className = `slide-pill ${i === 1 ? 'active' : ''}`;
+      pill.textContent = i;
+      pill.title = `Ir para o Slide ${i}`;
+      pill.onclick = () => goToSlide(i);
+      slidePillsContainer.appendChild(pill);
     }
+
+    // Cronômetro do Pitch
+    let startTime = Date.now();
+    let timerInterval = null;
+
+    function startTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        const elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
+        const mins = String(Math.floor(elapsedSeconds / 60)).padStart(2, '0');
+        const secs = String(elapsedSeconds % 60).padStart(2, '0');
+        const timerEl = document.getElementById('elapsedTime');
+        if (timerEl) {
+          timerEl.textContent = `${mins}:${secs}`;
+          if (elapsedSeconds > 780) { // > 13 minutos
+            timerEl.style.color = '#ef4444';
+          }
+        }
+      }, 1000);
+    }
+    startTimer();
 
     function updateSlide() {
       slides.forEach((slide, index) => {
@@ -1332,19 +1423,35 @@
         }
       });
 
-      // Atualizar barra de progresso
-      const progress = (currentSlide / totalSlides) * 100;
-      progressBar.style.width = `${progress}%`;
+      // Atualizar Pills
+      document.querySelectorAll('.slide-pill').forEach((pill, idx) => {
+        if (idx + 1 === currentSlide) {
+          pill.classList.add('active');
+        } else {
+          pill.classList.remove('active');
+        }
+      });
 
-      // Atualizar contador
-      currentSlideNumber.textContent = currentSlide;
+      // Atualizar Botões de Navegação
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      if (prevBtn) prevBtn.disabled = currentSlide === 1;
+      if (nextBtn) nextBtn.disabled = currentSlide === totalSlides;
 
-      // Estado dos botões
-      prevBtn.disabled = currentSlide === 1;
-      nextBtn.disabled = currentSlide === totalSlides;
+      // Atualizar Barra de Progresso
+      if (progressBar) {
+        const progressPercentage = (currentSlide / totalSlides) * 100;
+        progressBar.style.width = `${progressPercentage}%`;
+      }
 
-      // Re-criar ícones
       lucide.createIcons();
+    }
+
+    function goToSlide(n) {
+      if (n >= 1 && n <= totalSlides) {
+        currentSlide = n;
+        updateSlide();
+      }
     }
 
     function nextSlide() {
@@ -1361,41 +1468,45 @@
       }
     }
 
-    // Teclado
+    // Modal de Roteiro de Fala
+    function toggleSpeechModal() {
+      const modal = document.getElementById('speechModal');
+      if (modal.style.display === 'flex') {
+        modal.style.display = 'none';
+      } else {
+        modal.style.display = 'flex';
+      }
+    }
+
+    // Atalhos de Teclado
     document.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
       if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
         e.preventDefault();
         nextSlide();
       } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
         e.preventDefault();
         prevSlide();
+      } else if (e.key === 'f' || e.key === 'F') {
+        e.preventDefault();
+        toggleFullscreen();
+      } else if (e.key === 'm' || e.key === 'M') {
+        e.preventDefault();
+        toggleSpeechModal();
+      } else if (e.key === 'Escape') {
+        const modal = document.getElementById('speechModal');
+        if (modal.style.display === 'flex') {
+          modal.style.display = 'none';
+        }
       } else if (e.key === 'Home') {
         e.preventDefault();
-        currentSlide = 1;
-        updateSlide();
+        goToSlide(1);
       } else if (e.key === 'End') {
         e.preventDefault();
-        currentSlide = totalSlides;
-        updateSlide();
+        goToSlide(totalSlides);
       }
     });
-
-    // Touch Swipe para dispositivos móveis
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    document.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    }, false);
-
-    document.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      if (touchStartX - touchEndX > 50) {
-        nextSlide();
-      } else if (touchEndX - touchStartX > 50) {
-        prevSlide();
-      }
-    }, false);
 
     // Fullscreen Toggle
     function toggleFullscreen() {
@@ -1415,12 +1526,11 @@
       btn.innerHTML = '<span>Gerando PDF...</span>';
       btn.disabled = true;
 
-      // Ativar todos os slides temporariamente para renderizar o PDF
       slides.forEach(s => s.style.display = 'flex');
 
       const element = document.getElementById('presentationDeck');
       const opt = {
-        margin: [10, 10, 10, 10],
+        margin: [0, 0, 0, 0],
         filename: 'MicroLeiteMacroNegocios-Apresentacao-Oficial.pdf',
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { scale: 2, useCORS: true },
@@ -1428,7 +1538,6 @@
       };
 
       html2pdf().set(opt).from(element).save().then(() => {
-        // Restaurar estado visual dos slides
         slides.forEach(s => s.style.display = '');
         updateSlide();
         btn.innerHTML = originalText;
