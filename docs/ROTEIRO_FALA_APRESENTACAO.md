@@ -1,172 +1,197 @@
-# 🎙️ Roteiro e Fala Oficial do Apresentador (Pitch Master — 56 Horas)
+# 🎙️ Roteiro e Fala Oficial do Apresentador (Pitch Master — 13 Minutos)
 
 > **Projeto:** MicroLeiteMacroNegocios  
 > **Slogan:** <span style="color: #dc2626; font-weight: 900;">Muu</span><span style="color: #000000; font-weight: 900;">ito Melhor</span>  
-> **Evento:** XXVIII Semana da Computação DCC/UFJF & RERUM (Hackathon UFJF 2026 — 56 Horas)  
+> **Evento:** XXVIII Semana da Computação DCC/UFJF & RERUM (Hackathon UFJF 2026 — Maratona de 56 Horas)  
 > **Tema 3:** Economia, Zootecnia e Qualidade do Leite  
-> **Tempo Recomendado de Pitch:** 6 a 8 minutos  
-> **Perfil do Apresentador:** Confiante, dinâmico, embasado e articulado, equilibrando o valor para o agronegócio e a excelência em Engenharia de Software / IA.
+> **Tempo Total do Pitch:** **13 minutos** (13:00)  
+> **Perfil do Apresentador:** Confiante, dinâmico, técnico e envolvente. O objetivo é demonstrar com maestria o valor para o agronegócio, o rigor científico da Engenharia do Conhecimento (Sadrey) e a excelência da esteira de Inteligência Artificial com Google Gemini 2.5 Pro.
 
 ---
 
-## ⏱️ Minutagem e Visão Geral da Apresentação
+## ⏱️ Grade de Minutagem Oficial (13 Minutos)
 
-| Slide | Título / Tema | Tempo Sugerido | Objetivo do Slide |
-| :---: | :--- | :---: | :--- |
-| **1** | Capa Oficial & Identidade | 0:30 | Gancho de abertura, apresentação do time e do tema. |
-| **2** | As 4 Dores Reais da Pecuária Leiteira | 1:00 | Criar empatia com a dor do produtor (descapitalização e perdas). |
-| **3** | O Desafio do Hackathon & Filosofia com IA | 0:45 | Quebrar o mito da caixa preta vs. IA auditável. |
-| **4** | Organização: Sadrey + Scrum em 56h | 0:45 | Explicar o método de engenharia de conhecimento e sprints. |
-| **5** | Pair Programming com Google Gemini 2.5 Pro | 0:45 | Demonstrar a divisão de papéis Humano (Arquiteto) vs. IA (Scaffolding). |
-| **6** | Esteira de Engenharia de Prompts | 0:45 | Mostrar o rigor técnico de prompts e rastreabilidade (`PROMPT_LOG.md`). |
-| **7** | Casos Reais de Auditoria Humano-IA | 0:45 | Provar que a equipe auditou a IA (Embrapa Custopec, debounce, inputs). |
-| **8** | Síntese das Regras: 4 Pilares do Agro | 0:45 | Explicar os pilares econômico, bioclimático, nutricional e sanitário. |
-| **9** | Motor Determinístico XAI & MYCIN | 0:45 | Destacar a conformidade com as regras do hackathon e transparência. |
-| **10** | Demonstração do Produto Entregue | 1:00 | Mostrar presets, simulações ao vivo, gráficos e laudo em PDF. |
-| **11** | Comparativo de Mercado | 0:30 | Posicionar o produto contra o caderninho e ERPs legados. |
-| **12** | Conclusão, Impacto & Call to Action | 0:30 | Fechamento memorável com o slogan *Muuito Melhor*. |
-
----
-
-## 📜 Roteiro Slide a Slide com Fala Exata
+| Slide | Título / Tema | Minutagem | Tempo | Objetivo Central da Fala |
+| :---: | :--- | :---: | :---: | :--- |
+| **1** | Capa Oficial, Identidade & Propósito | 0:00 – 0:45 | 45s | Gancho de abertura impactante, apresentação da equipe e do slogan. |
+| **2** | A Anatomia da Crise no Campo: 4 Dores Reais | 0:45 – 2:00 | 1m15s | Gerar profunda empatia com os prejuízos invisíveis da pecuária de leite. |
+| **3** | O Dilema da IA no Agro: Por que Caixa Preta Quebra Fazendas? | 2:00 – 3:00 | 1m00s | Justificar a escolha: IA Agêntica no Dev vs. Motor Determinístico no Prod. |
+| **4** | Engenharia do Conhecimento: Sadrey + Scrum em 56h | 3:00 – 4:15 | 1m15s | Explicar o rigor metodológico das 5 etapas e a gestão ágil em 5 sprints. |
+| **5** | Pair Programming com Google Gemini 2.5 Pro | 4:15 – 5:30 | 1m15s | Detalhar a simbiose: Humano (Arquiteto) vs. IA (Scaffolding & Testes). |
+| **6** | Esteira de Prompts Estruturada & Rastreabilidade | 5:30 – 6:30 | 1m00s | Expor a decomposição de prompts e o registro no `PROMPT_LOG.md`. |
+| **7** | Casos Reais de Auditoria Humano-IA & Refinamento | 6:30 – 7:45 | 1m15s | Provar a auditoria ativa: Custopec, guardrails biológicos e debounce. |
+| **8** | Os 4 Pilares da Base Especialista & Fórmulas Reais | 7:45 – 9:00 | 1m15s | Demonstrar solidez zootécnica: Thom ITU, NRC, Custopec e MAPA IN 76/77. |
+| **9** | Motor de Inferência XAI & Algoritmo MYCIN | 9:00 – 10:00 | 1m00s | Apresentar o encadeamento para frente, cálculo de CF e explicabilidade. |
+| **10** | Demonstração Prática & Walkthrough da Plataforma | 10:00 – 11:30 | 1m30s | Narrar a simulação ao vivo da Fazenda Crítica para Fazenda Eficiente. |
+| **11** | Posicionamento de Mercado & Viabilidade | 11:30 – 12:15 | 45s | Comparar com o caderninho e ERPs legados; viabilidade de adoção. |
+| **12** | Conclusão, Impacto no Campo & Convite à Banca | 12:15 – 13:00 | 45s | Fechamento memorável, apelo ao agronegócio e transição para perguntas. |
 
 ---
 
-### 🐮 Slide 1: Capa Oficial & Abertura
-**⏱️ Tempo:** 0:00 – 0:30  
-**🎯 Tom de Voz:** Entusiasmado, seguro e profissional.
-
-> *"Boa noite, membros da banca examinadora, professores e colegas!*  
-> *Somos a equipe do **MicroLeiteMacroNegocios** — uma solução concebida durante esta maratona de **56 horas** no Hackathon UFJF 2026 para revolucionar a tomada de decisão no **Tema 3: Economia, Zootecnia e Qualidade do Leite**.*  
-> *O nosso propósito é claro: transformar o microprodutor de leite em um macronégocio sustentável, lucrativo e cientificamente gerido. Como gostamos de dizer: fazer a pecuária brasileira **Muu**ito Melhor!"*
+## 📜 Roteiro Slide a Slide com Fala Detalhada e Gestual
 
 ---
 
-### 🚨 Slide 2: O Problema Real da Fazenda (4 Gargalos Críticos)
-**⏱️ Tempo:** 0:30 – 1:30  
-**🎯 Tom de Voz:** Reflexivo e enfático.
+### 🐮 Slide 1: Capa Oficial, Identidade & Propósito
+- **⏱️ Minutagem:** 0:00 – 0:45 (45 segundos)
+- **🎯 Postura & Tom de Voz:** Cabeça erguida, sorriso empático, voz firme e entusiasmada.
 
-> *"Para criar um sistema de alto impacto, começamos olhando para a realidade do campo. O produtor de leite no Brasil sangra dinheiro em quatro frentes silenciosas:*  
-> 1. *Primeiro, a **Descapitalização Oculta**: ele olha apenas para o dinheiro que sobra no fim do mês (o COE), mas esquece da depreciação de máquinas e da remuneração da terra. Parece que dá lucro, mas a fazenda está consumindo o próprio patrimônio.*  
-> 2. *Segundo, o **Estresse Térmico por Calor**: em dias quentes com ITU acima de 72, as vacas param de ruminar e perdem até 3,5 litros de leite por dia sem que o produtor perceba a causa.*  
-> 3. *Terceiro, a **Acidose Ruminal (SARA)**: o excesso de ração concentrada sem volumoso suficiente gera acidose e desperdício de nitrogênio na urina.*  
-> 4. *E quarto, as **Penalizações de Mastite (MAPA IN 76/77)**: CCS alta corta até 25 centavos por litro na indústria.*  
-> *O produtor precisa de uma consultoria zootécnica de elite, 24 horas por dia, 100% auditável."*
+> *"Boa noite, ilustres membros da banca examinadora, professores e colegas de maratona!*  
+> *Nós somos a equipe responsável pelo desenvolvimento do **MicroLeiteMacroNegocios** — uma plataforma especialista concebida, validada e entregue ao longo de **56 horas ininterruptas** de maratona no Hackathon UFJF 2026, respondendo ao desafio do **Tema 3: Economia, Zootecnia e Qualidade do Leite**.*  
+> *O nosso propósito nasceu de uma constatação simples, porém urgente: a maioria esmagadora dos produtores de leite do Brasil trabalha de sol a sol sem saber se está tendo lucro real ou consumindo o próprio patrimônio. Criamos um verdadeiro copiloto zootécnico e financeiro para transformar o microprodutor familiar em um macronégocio de alta eficiência.*  
+> *E como o nosso lema sintetiza: fazer a pecuária leiteira **Muu**ito Melhor!"*
 
 ---
 
-### 🧠 Slide 3: O Desafio do Hackathon & Filosofia com IA
-**⏱️ Tempo:** 1:30 – 2:15  
-**🎯 Tom de Voz:** Técnico e propositivo.
+### 🚨 Slide 2: A Anatomia da Crise no Campo (As 4 Dores Reais)
+- **⏱️ Minutagem:** 0:45 – 2:00 (1 minuto e 15 segundos)
+- **🎯 Postura & Tom de Voz:** Expressão séria, ritmo pausado, usando as mãos para pontuar cada uma das 4 dores.
 
-> *"Em uma maratona de 56 horas, o caminho fácil seria jogar esses dados em um chatbot generativo. Mas no agronegócio e na medicina, **caixa preta é risco de falência**.*  
-> *LLMs podem alucinar doses de ração ou confundir fórmulas de custos. Por isso, a nossa filosofia de IA foi clara: **usar Inteligência Artificial Agêntica de ponta (Google Gemini 2.5 Pro) no processo de desenvolvimento**, mas construir para o produtor um **Motor de Inferência Determinístico, Baseado em Regras Formais e Fatores de Certeza do modelo MYCIN**.*  
-> *O resultado é zero alucinação em tempo de execução e 100% de explicabilidade."*
+> *"Para construir uma ferramenta transformadora, não começamos pelo código; começamos pela dor do produtor rural. Analisando a pecuária nacional, identificamos quatro gargalos críticos que drenam silenciosamente o caixa da fazenda:*  
+> *1. **A Descapitalização Oculta:** O produtor calcula seu custo olhando apenas o saldo da conta corrente — o Custo Operacional Efetivo. Ele esquece que o trator está desgastando, as cercas apodrecendo e a terra tem custo de oportunidade. Ele tem a ilusão de lucro enquanto sua infraestrutura se desfaz.*  
+> *2. **O Estresse Térmico Bioclimático:** No calor do sudeste brasileiro, quando o Índice de Temperatura e Umidade (o ITU) supera 72, as vacas entram em hipertermia, diminuem o consumo de matéria seca e perdem entre 1,5 e 3,5 litros de leite por dia sem que o produtor entenda o porquê.*  
+> *3. **O Desequilíbrio Nutricional e a Acidose (SARA):** Quando o custo de ração ultrapassa 60% do desembolso total ou a proporção concentrado/volumoso desregula o rúmen, a fazenda perde dinheiro duas vezes: pagando insumo caro e excretando nitrogênio na urina.*  
+> *4. **As Penalizações de Mastite (Instruções Normativas MAPA 76 e 77):** Uma Contagem de Células Somáticas (CCS) acima de 500 mil faz o laticínio confiscar até 25 centavos por litro no pagamento mensal.*  
+> *O produtor precisa de uma consultoria agronômica pericial contínua, acessível e instantânea."*
 
 ---
 
-### 📐 Slide 4: Organização: Metodologia Sadrey + Scrum em 56 Horas
-**⏱️ Tempo:** 2:15 – 3:00  
-**🎯 Tom de Voz:** Estruturado e metodológico.
+### 🧠 Slide 3: O Dilema da IA no Agronegócio (Por que Caixa Preta é Risco de Falência?)
+- **⏱️ Minutagem:** 2:00 – 3:00 (1 minuto)
+- **🎯 Postura & Tom de Voz:** Questionador e resolutivo.
 
-> *"Como nos organizamos para entregar um produto desse porte em 56 horas?*  
-> *Unimos duas metodologias consagradas:*  
-> *Na Engenharia do Conhecimento, seguimos rigorosamente as **5 etapas de Sadrey**: Identificação do problema, Aquisição do conhecimento científico junto à Embrapa e ao NRC, Conceituação em um catálogo ontológico de 33 variáveis, Formalização em 25 regras declarativas em JSON, e Validação prática com dados de fazendas reais.*  
-> *Na Gestão de Software, aplicamos o **Scrum** em micro-sprints ágeis de 2 a 4 horas com checkpoints de integração contínua, garantindo que a cada ciclo tínhamos um incremento executável e testado."*
+> *"Diante desse desafio em um hackathon de 56 horas, qual seria o caminho mais tentador? Chamar a API de um modelo de linguagem genérico e pedir para ele 'dar uma dica' ao produtor.*  
+> *No entanto, na zootecnia de precisão, **respostas de caixa preta com probabilidade estocástica são inadmissíveis**. Se um LLM alucinar uma dosagem de concentrado ou errar a depreciação de uma ordenhadeira, o produtor quebra.*  
+> *Por isso, a nossa equipe estabeleceu uma arquitetura de duas frentes:*  
+> *Utilizamos **Inteligência Artificial Agêntica de última geração — o Google Gemini 2.5 Pro via Antigravity** — como aceleradora extrema da nossa esteira de desenvolvimento, mas o produto final entregue ao produtor é um **Motor Especialista Determinístico, baseado em Regras de Produção Formais e Fatores de Certeza do Modelo MYCIN de Stanford**.*  
+> *Garantimos 100% de explicabilidade, zero alucinações e total conformidade com o edital do hackathon."*
+
+---
+
+### 📐 Slide 4: Engenharia do Conhecimento: Sadrey + Scrum em 56 Horas
+- **⏱️ Minutagem:** 3:00 – 4:15 (1 minuto e 15 segundos)
+- **🎯 Postura & Tom de Voz:** Metódico, demonstrando maestria de engenharia de software.
+
+> *"Como conseguimos modelar todo esse ecossistema em 56 horas sem perder o rigor científico? Combinando a Engenharia do Conhecimento de **Sadrey** com a agilidade do **Scrum**.*  
+> *Seguimos fielmente o ciclo de 5 fases de Sadrey para sistemas especialistas:*  
+> - *Fase 1 - **Identificação:** Mapeamos os nós críticos de decisão da pecuária de leite.*  
+> - *Fase 2 - **Aquisição:** Elicitamos o conhecimento empírico e científico dos manuais da Embrapa Gado de Leite, Custopec, equações do NRC e normativas do MAPA.*  
+> - *Fase 3 - **Conceituação:** Estruturamos uma ontologia de 33 variáveis normalizadas com tipos, unidades e limites zootécnicos.*  
+> - *Fase 4 - **Formalização:** Convertemos a literatura em 25 regras declarativas `SE-ENTÃO` puras em JSON com pesos de certeza.*  
+> - *Fase 5 - **Validação:** Submetemos o motor a baterias de testes com dados de fazendas reais e casos limites.*  
+> *Tudo isso orquestrado em 5 Sprints Scrum de 8 a 12 horas, gerando incrementos de código auditados a cada checkpoint."*
 
 ---
 
 ### 🤝 Slide 5: Pair Programming com Google Gemini 2.5 Pro
-**⏱️ Tempo:** 3:00 – 3:45  
-**🎯 Tom de Voz:** Inovador e colaborativo.
+- **⏱️ Minutagem:** 4:15 – 5:30 (1 minuto e 15 segundos)
+- **🎯 Postura & Tom de Voz:** Técnico, valorizando a parceria humano-máquina.
 
-> *"A interação humano-IA foi um verdadeiro Pair Programming de alta performance:*  
-> *Nós, humanos, assumimos o papel de **Arquitetos e Especialistas de Domínio**: definimos as premissas zootécnicas, auditamos os modelos matemáticos e exigimos usabilidade sem atritos.*  
-> *O modelo **Google Gemini 2.5 Pro (via Antigravity Agentic AI)** assumiu o papel de **Acelerador de Engenharia**: estruturação de esquemas declarativos JSON, scaffolding do motor Forward Chaining, componentes reativos com Recharts e refatoração contínua de código.*  
-> *Isso nos deu velocidade de maratona com o rigor de uma consultoria sênior."*
-
----
-
-### ⚙️ Slide 6: Esteira de Engenharia de Prompts e Rastreabilidade
-**⏱️ Tempo:** 3:45 – 4:30  
-**🎯 Tom de Voz:** Preciso e documentado.
-
-> *"Não fizemos prompts genéricos. Dividimos a esteira de prompts em microetapas encadeadas:*  
-> *Prompts de elicitação conceitual, seguidos por prompts de formalização declarativa pura em JSON, prompts de implementação modular e prompts de auditoria cruzada.*  
-> *Todo esse processo está 100% registrado e rastreável no arquivo `PROMPT_LOG.md` do repositório, garantindo total reprodutibilidade do projeto."*
+> *"A dinâmica com a inteligência artificial não foi de automação cega, mas de um **Pair Programming simbiótico e disciplinado**:*  
+> *Nós, humanos, atuamos como **Arquitetos e Especialistas de Domínio**: definimos as fórmulas zootécnicas, estruturamos os requisitos de negócio, auditamos a lógica matemática e desenhamos a experiência de uso.*  
+> *O modelo **Google Gemini 2.5 Pro** atuou como **Engenheiro de Implementação e Scaffolding**: gerando a estrutura tipada dos dados em JSON, implementando o algoritmo de Forward Chaining com MYCIN, montando a biblioteca de componentes reativos com Tailwind e Recharts, e escrevendo suítes de testes automatizados.*  
+> *Essa divisão clara permitiu que a equipe focasse 80% do tempo na qualidade das regras e na usabilidade do produtor, enquanto a IA reduzia a zero o atrito de codificação repetitiva."*
 
 ---
 
-### 🔍 Slide 7: Casos Reais de Auditoria e Refinamento
-**⏱️ Tempo:** 4:30 – 5:15  
-**🎯 Tom de Voz:** Crítico e seguro.
+### ⚙️ Slide 6: Esteira de Engenharia de Prompts & Rastreabilidade
+- **⏱️ Minutagem:** 5:30 – 6:30 (1 minuto)
+- **🎯 Postura & Tom de Voz:** Preciso, apontando para a documentação técnica.
 
-> *"E por que a auditoria humana foi indispensável? Vou citar três exemplos reais:*  
-> 1. *Na primeira versão, a IA misturou o custo de oportunidade da terra dentro do Custo Operacional Total. A nossa auditoria corrigiu na hora para seguir fielmente o padrão **Embrapa Custopec**, separando COE (desembolso), COT (+ depreciação) e CT (+ remuneração do capital).*  
-> 2. *Na usabilidade, o input travava com zeros à esquerda quando o usuário apagava o número. Implementamos um normalizador reativo para digitação limpa.*  
-> 3. *Criamos um algoritmo com debounce de 150ms para auto-inferência em tempo real e regras de consistência biológica: se você tiver 2 vacas adultas, o sistema impede logicamente de colocar 10 em lactação."*
-
----
-
-### 📊 Slide 8: Síntese das Regras: 4 Pilares do Agronegócio
-**⏱️ Tempo:** 5:15 – 6:00  
-**🎯 Tom de Voz:** Didático e abrangente.
-
-> *"A nossa base especialista consolida 25 regras declarativas em 4 grandes pilares:*  
-> *1. **Pilar Financeiro:** Alerta de descapitalização silenciosa e cálculo de ponto de equilíbrio.*  
-> *2. **Pilar Bioclimático:** Fórmula de Thom para Índice de Temperatura e Umidade (ITU) e perdas calóricas.*  
-> *3. **Pilar Nutricional:** Relação volumoso:concentrado para prevenção de acidose e dosagem de Nitrogênio Ureico no Leite (NUL).*  
-> *4. **Pilar Sanitário:** Conformidade com Instruções Normativas MAPA 76 e 77 para bonificação por CCS, CBT e sólidos.*  
-> *Tudo parametrizado com fontes da Embrapa, CEPEA/USP e NRC."*
+> *"Para que a IA trabalhasse com precisão cirúrgica, desenvolvemos um pipeline de prompts modulares em 4 camadas:*  
+> *1. **Prompts de Elicitação:** 'Consolide as tabelas de bonificação da IN 76/77 em faixas discretas de CCS e CBT.'*  
+> *2. **Prompts de Estruturação Declarativa:** 'Converta a fórmula de Thom para estresse térmico em uma regra puramente declarativa em JSON com Fator de Certeza 0.85.'*  
+> *3. **Prompts de Implementação Modular:** 'Crie a função de combinação MYCIN garantindo que Fatores de Certeza acumulados permaneçam estritamente no intervalo [-1, +1].'*  
+> *4. **Prompts de Refinamento e Testes:** 'Gere casos de teste para verificar fazenda com CCS 600k e ITU 79.'*  
+> *Toda essa esteira de prompts e respostas está documentada no arquivo `PROMPT_LOG.md` no repositório, garantindo rastreabilidade total do projeto."*
 
 ---
 
-### 🛡️ Slide 9: Motor Determinístico vs. Caixa Preta (XAI & MYCIN)
-**⏱️ Tempo:** 6:00 – 6:45  
-**🎯 Tom de Voz:** Técnico e convincente.
+### 🔍 Slide 7: Casos Reais de Auditoria Humano-IA & Refinamento
+- **⏱️ Minutagem:** 6:30 – 7:45 (1 minuto e 15 segundos)
+- **🎯 Postura & Tom de Voz:** Analítico, ressaltando o espírito crítico da equipe.
 
-> *"Para cada diagnóstico gerado, o nosso Módulo de Explicabilidade (XAI) decompõe a inferência em linguagem natural:*  
-> *O usuário clica e vê exatamente a premissa `SE ... ENTÃO ...`, quais variáveis bateram e qual o Fator de Certeza do modelo MYCIN, variando de -1.0 a +1.0.*  
-> *O produtor não recebe uma ordem mágica; ele recebe uma trilha de auditoria pericial que pode levar ao seu banco ou ao seu cooperado."*
-
----
-
-### 💻 Slide 10: O Produto Final Entregue
-**⏱️ Tempo:** 6:45 – 7:30  
-**🎯 Tom de Voz:** Prático e vendedor.
-
-> *"O resultado de 56 horas de trabalho é uma plataforma web completa rodando 100% local:*  
-> - *5 presets de fazendas reais para demonstração em 1 clique.*  
-> - *Simulador interativo 'O que acontece se...'.*  
-> - *Painel gráfico com decomposição Embrapa, curva de lactação e sensibilidade de preço.*  
-> - *Cotações de mercado CEPEA e dados IBGE SIDRA.*  
-> - *E emissão instantânea de Laudo Pericial em PDF formatado para o produtor."*
+> *"A intervenção humana foi fundamental para impedir desvios conceituais. Destaquemos três intervenções decisivas:*  
+> *Primeiro: Na modelagem contábil inicial, a IA agrupou o custo de oportunidade da terra dentro do Custo Operacional Total. Intervimos imediatamente e readequamos o modelo ao rigor da **Embrapa Custopec**, garantindo a tríade clássica: COE (desembolso de caixa), COT (+ depreciações e pró-labore) e CT (+ remuneração do capital).*  
+> *Segundo: Nos inputs numéricos, identificamos um problema de usabilidade em que o zero inicial travava a digitação em dispositivos móveis. Refatoramos a lógica de parsing para garantir edição fluida e reativa com debounce de 150ms.*  
+> *Terceiro: Criamos **Guardrails de Consistência Biológica**: o sistema rejeita aberrações lógicas, como declarar 10 vacas em lactação em um rebanho de 2 vacas totais, escores corporais fora da escala de 1 a 5 ou porcentagens fora de 0 a 100%. A inteligência do sistema protege o produtor de seus próprios erros de digitação."*
 
 ---
 
-### 🏆 Slide 11: Comparativo de Mercado
-**⏱️ Tempo:** 7:30 – 8:00  
-**🎯 Tom de Voz:** Estratégico.
+### 📊 Slide 8: Os 4 Pilares da Base Especialista & Fórmulas Reais
+- **⏱️ Minutagem:** 7:45 – 9:00 (1 minuto e 15 segundos)
+- **🎯 Postura & Tom de Voz:** Didático, transmitindo autoridade agropecuária.
 
-> *"Enquanto o caderninho é reativo e os ERPs rurais tradicionais cobram mensalidades caras apenas para emitir relatórios estáticos, o **MicroLeiteMacroNegocios** entrega diagnóstico prescritivo, motor especialista auditável e simulação econômica sem custo e sem dependência de nuvem."*
-
----
-
-### 🌟 Slide 12: Conclusão & Demonstração ao Vivo
-**⏱️ Tempo:** 8:00 – 8:30  
-**🎯 Tom de Voz:** Inspirador e de fechamento.
-
-> *"O MicroLeiteMacroNegocios prova que o casamento entre Sistemas Especialistas Determinísticos e a Engenharia Agêntica com IA é o futuro do software de missão crítica.*  
-> *Convidamos a banca a testar os presets e simulações ao vivo agora mesmo.*  
-> *Muito obrigado, e tenham certeza: com o MicroLeiteMacroNegocios, a gestão do leite fica **Muu**ito Melhor!"*
+> *"A nossa base de conhecimento reúne 25 regras especialistas divididas em 4 pilares científicos inegociáveis:*  
+> *1. **Pilar Bioclimático:** Implementamos a equação de Thom: $ITU = 0{,}8 \cdot T + \frac{UR}{100} \cdot (T - 14{,}4) + 46{,}4$. Quando o ITU atinge a faixa de alerta (72 a 78) ou perigo (>79), o sistema calcula a perda diária estimada em litros por vaca via NRC.*  
+> *2. **Pilar Nutricional:** Avaliamos a relação volumoso:concentrado (ideal 60:40) e o Nitrogênio Ureico no Leite (NUL, ideal 10 a 14 mg/dL), diagnosticando acidose ruminal subclínica ou desperdício proteico.*  
+> *3. **Pilar Sanitário:** Classificação conforme MAPA IN 76/77 — bonificando CCS < 250k e CBT < 50k, e penalizando severamente CCS > 500k.*  
+> *4. **Pilar Econômico:** Apuração de Margem Bruta, Margem Líquida, Lucro Econômico e Ponto de Equilíbrio em litros/dia.*  
+> *Todas as regras contam com justificativa técnica e plano de ação imediato."*
 
 ---
 
-## 💡 Dicas de Postura e Respostas para Perguntas da Banca
+### 🛡️ Slide 9: Motor de Inferência XAI & Algoritmo MYCIN
+- **⏱️ Minutagem:** 9:00 – 10:00 (1 minuto)
+- **🎯 Postura & Tom de Voz:** Técnico, demonstrando robustez computacional.
 
-1. **Se a banca perguntar: "Onde a IA foi usada no projeto?"**
-   - *Resposta:* "A IA generativa (Google Gemini 2.5 Pro) foi usada no processo de engenharia de software e elicitação de conhecimento em pair programming. O sistema especialista em execução é 100% determinístico baseado em regras de produção e modelo MYCIN, atendendo estritamente ao regulamento do hackathon e garantindo explicabilidade total."
-2. **Se a banca perguntar: "Como garantiram que os cálculos econômicos estão certos?"**
-   - *Resposta:* "Adotamos a metodologia oficial Embrapa Custopec, dividindo os custos em COE (desembolso direto), COT (incluindo depreciações de máquinas e pró-labore familiar) e CT (adicionando a remuneração de oportunidade do capital e da terra)."
-3. **Se a banca perguntar: "Como o sistema impede dados absurdos?"**
-   - *Resposta:* "Implementamos guardrails de consistência zootécnica bidirecionais no formulário e no backend: o número de vacas em lactação nunca pode exceder o total de vacas adultas, porcentagens são limitadas a 0-100%, e escores corporais seguem a escala oficial de 1 a 5."
+> *"O coração do MicroLeiteMacroNegocios é o nosso motor de **Encadeamento para Frente (Forward Chaining)**.*  
+> *As variáveis alimentam as premissas, ativam regras e propagam Fatores de Certeza utilizando a fórmula clássica de Shortliffe:*  
+> $$CF_{comb} = CF_1 + CF_2 \cdot (1 - |CF_1|)$$  
+> *Além disso, construímos uma camada nativa de **IA Explicável (XAI)**:*  
+> *Ao clicar em qualquer recomendação, o produtor ou técnico visualiza a cadeia lógica completa: 'A regra R03 disparou porque sua CCS foi de 550.000 (limite 500.000) e a perda de bonificação estimada é de R$ 0,15/L com Fator de Certeza de 95%'.*  
+> *Essa transparência transforma o sistema em um instrumento pericial confiável para bancos, cooperativas e consultores rurais."*
+
+---
+
+### 💻 Slide 10: Demonstração Prática & Walkthrough da Plataforma
+- **⏱️ Minutagem:** 10:00 – 11:30 (1 minuto e 30 segundos)
+- **🎯 Postura & Tom de Voz:** Prático, narrando com entusiasmo a tela do sistema.
+
+> *"Vamos agora a uma demonstração prática do que o produtor vivencia ao usar o sistema:*  
+> *Ao carregar o preset da **'Fazenda Bela Vista (Mastite e Estresse)'**, o painel imediatamente entra em status Crítico com 4 diagnósticos:*  
+> *- O termômetro de ITU em 79 acusa perda de 2,8 litros/vaca/dia por estresse calórico.*  
+> *- A CCS em 620.000 acusa desconto de R$ 0,18 por litro pelo laticínio.*  
+> *- A margem líquida por litro está negativa em R$ -0,12 — a fazenda está descapitalizando R$ 3.600 ao mês.*  
+> *O produtor então abre o nosso **Simulador Interativo 'O que acontece se...'**:*  
+> *Ele simula a instalação de ventiladores no barracão (reduzindo o ITU para 71) e melhorias na rotina de ordenha (reduzindo a CCS para 220.000).*  
+> *Instantaneamente, em tempo real, os gráficos do Recharts mostram a margem líquida virando para R$ +0,38 por litro — um ganho líquido de mais de R$ 15.000 por mês!*  
+> *Com um único clique no botão **'Baixar Laudo PDF'**, o sistema gera um relatório executivo formatado com assinatura técnica pronto para ser levado ao banco."*
+
+---
+
+### 🏆 Slide 11: Posicionamento de Mercado & Viabilidade
+- **⏱️ Minutagem:** 11:30 – 12:15 (45 segundos)
+- **🎯 Postura & Tom de Voz:** Estratégico e comercial.
+
+> *"Onde o MicroLeiteMacroNegocios se posiciona no mercado?*  
+> *De um lado, 70% dos pequenos produtores usam o **caderninho de papel** — uma gestão puramente reativa, sem projeção de cenários e sem diagnóstico preventivo.*  
+> *Do outro lado, os **ERPs rurais corporativos** cobram milhares de reais em mensalidades, exigem conexão constante com a internet e entregam relatórios contábeis frios que o produtor não compreende.*  
+> *O **MicroLeiteMacroNegocios** preenche exatamente o espaço vazio: uma solução ágil, determinística, 100% gratuita, capaz de rodar localmente na fazenda e com foco direto na tomada de decisão prescritiva."*
+
+---
+
+### 🌟 Slide 12: Conclusão, Impacto no Campo & Convite à Banca
+- **⏱️ Minutagem:** 12:15 – 13:00 (45 segundos)
+- **🎯 Postura & Tom de Voz:** Inspirador, confiante e conclusivo.
+
+> *"Concluímos esta maratona de 56 horas com a convicção de que entregamos não apenas um software, mas uma ferramenta de transformação socioeconômica para a cadeia do leite.*  
+> *Provamos que a união entre Engenharia do Conhecimento rigorosa, Sistemas Especialistas Determinísticos e Pair Programming de alta performance com IA é o caminho para criar tecnologia de missão crítica de classe mundial.*  
+> *Convidamos agora todos os membros da banca examinadora a explorarem a plataforma, testarem os presets e as simulações ao vivo.*  
+> *Muito obrigado pela atenção de todos, e lembrem-se: com o MicroLeiteMacroNegocios, a gestão da sua fazenda fica **Muu**ito Melhor! Estamos abertos às suas perguntas."*
+
+---
+
+## 🛡️ Guia de Quebra de Objeções & Respostas para a Banca (Q&A)
+
+### 1. "Onde a inteligência artificial generativa atuou de fato no projeto?"
+> **Resposta:** "A IA generativa (Google Gemini 2.5 Pro) atuou na esteira de desenvolvimento de software e engenharia do conhecimento: na aceleração da estruturação ontológica em JSON, no scaffolding do motor de Forward Chaining e combinação MYCIN, nos componentes reativos de interface e na geração das suítes de testes automatizados. O sistema em tempo de execução opera sob regras determinísticas estritas, garantindo que nenhum diagnóstico agronômico sofra de alucinação probabilística, em total conformidade com o edital do hackathon."
+
+### 2. "Como vocês garantem a acurácia dos custos da fazenda sem distorções?"
+> **Resposta:** "Implementamos a metodologia oficial **Custopec da Embrapa Gado de Leite**. Separamos rigidamente o Custo Operacional Efetivo (COE, que são as despesas diretas de caixa), o Custo Operacional Total (COT, que soma a depreciação de benfeitorias/máquinas e o pró-labore do produtor) e o Custo Total (CT, que remunera o capital empatado e o custo de oportunidade da terra). Isso impede a descapitalização silenciosa."
+
+### 3. "Como o sistema trata dados inconsistentes ou absurdos inseridos pelo usuário?"
+> **Resposta:** "Possuímos uma camada dupla de guardrails zootécnicos no frontend e no backend. Se o usuário tentar inserir mais vacas em lactação do que o total de vacas adultas, o sistema ajusta e impede a condição logicamente impossível. Além disso, escores corporais são restritos ao intervalo 1.0 a 5.0, porcentagens a 0-100% e campos numéricos contam com normalização reativa de string com debounce de 150ms."
+
+### 4. "O que diferencia o modelo MYCIN de uma simples árvore de IF/ELSE?"
+> **Resposta:** "Um conjunto estático de IF/ELSE atribui certeza binária (0 ou 1) e não sabe lidar com evidências concorrentes. O modelo MYCIN permite que múltiplos sintomas (ex: CCS alta + temperatura corporal alta + queda de sólidos) combinem seus Fatores de Certeza de forma não linear, resultando em um grau de convicção graduado (ex: CF 0.95) com rastreamento pericial de quais premissas contribuíram para a inferência."
