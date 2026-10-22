@@ -3,28 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BovInSight — Apresentação Hackathon UFJF 2026 (Tema 3)</title>
+  <title>BovInSight — Apresentação Hackathon UFJF 2026</title>
   
   <!-- Google Fonts & Lucide Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
-  <!-- html2pdf.js for 1-click high quality PDF export -->
+  <!-- html2pdf.js para download em PDF com 1 clique -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
   <style>
     :root {
-      --bg-dark: #090d16;
-      --bg-card: rgba(20, 27, 45, 0.75);
-      --bg-card-border: rgba(255, 255, 255, 0.08);
-      --accent-emerald: #10b981;
-      --accent-cyan: #06b6d4;
-      --accent-amber: #f59e0b;
-      --accent-rose: #f43f5e;
-      --accent-indigo: #6366f1;
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
+      --bg-body: #f8fafc;
+      --bg-card: #ffffff;
+      --border-color: #e2e8f0;
+      --border-card: #e2e8f0;
+      --accent-emerald: #059669;
+      --accent-emerald-light: #ecfdf5;
+      --accent-emerald-border: #a7f3d0;
+      --accent-blue: #0284c7;
+      --accent-blue-light: #f0f9ff;
+      --accent-amber: #d97706;
+      --accent-amber-light: #fffbeb;
+      --accent-rose: #e11d48;
+      --accent-rose-light: #fff1f2;
+      --accent-indigo: #4f46e5;
+      --accent-indigo-light: #eef2ff;
+      --text-main: #0f172a;
+      --text-body: #334155;
+      --text-muted: #64748b;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.04);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.08), 0 8px 10px -6px rgb(0 0 0 / 0.04);
     }
 
     * {
@@ -35,29 +47,31 @@
 
     body {
       font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: radial-gradient(ellipse at top right, #131c31 0%, #090d16 100%);
-      color: var(--text-main);
+      background: #f1f5f9;
+      background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+      background-size: 24px 24px;
+      color: var(--text-body);
       min-height: 100vh;
-      overflow-x: hidden;
       display: flex;
       flex-direction: column;
     }
 
-    /* Top Action Bar */
+    /* Barra Superior Fixa */
     header {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      height: 64px;
-      background: rgba(9, 13, 22, 0.85);
+      height: 68px;
+      background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--bg-card-border);
+      border-bottom: 1px solid var(--border-color);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 28px;
+      padding: 0 32px;
       z-index: 100;
+      box-shadow: var(--shadow-sm);
     }
 
     .brand {
@@ -66,40 +80,40 @@
       gap: 12px;
       font-size: 1.15rem;
       font-weight: 800;
+      color: var(--text-main);
       letter-spacing: -0.02em;
     }
 
     .brand-logo {
-      width: 36px;
-      height: 36px;
-      background: linear-gradient(135deg, #10b981, #06b6d4);
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, #059669, #0284c7);
       border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #fff;
+      box-shadow: 0 4px 10px rgba(5, 150, 105, 0.25);
     }
 
     .brand span {
-      background: linear-gradient(135deg, #34d399, #38bdf8);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: var(--accent-emerald);
     }
 
     .header-controls {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 8px 16px;
+      padding: 9px 18px;
       border-radius: 12px;
       font-size: 0.85rem;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       transition: all 0.2s ease;
       text-decoration: none;
@@ -107,45 +121,46 @@
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, #10b981, #059669);
+      background: #059669;
       color: white;
-      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+      box-shadow: 0 2px 8px rgba(5, 150, 105, 0.25);
     }
     .btn-primary:hover {
-      background: linear-gradient(135deg, #059669, #047857);
+      background: #047857;
       transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(5, 150, 105, 0.35);
     }
 
     .btn-secondary {
-      background: rgba(255, 255, 255, 0.05);
-      border-color: var(--bg-card-border);
-      color: #cbd5e1;
+      background: #ffffff;
+      border-color: var(--border-color);
+      color: var(--text-body);
+      box-shadow: var(--shadow-sm);
     }
     .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.1);
-      color: #fff;
+      background: #f8fafc;
+      color: var(--text-main);
+      border-color: #cbd5e1;
     }
 
-    /* Presentation Canvas */
+    /* Container Principal */
     main {
       flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 88px 24px 80px;
-      position: relative;
+      padding: 92px 24px 84px;
     }
 
     .deck-container {
       width: 100%;
-      max-width: 1200px;
+      max-width: 1220px;
       aspect-ratio: 16 / 9;
-      min-height: 600px;
+      min-height: 620px;
       background: var(--bg-card);
-      backdrop-filter: blur(16px);
-      border: 1px solid var(--bg-card-border);
-      border-radius: 28px;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+      border: 1px solid var(--border-card);
+      border-radius: 24px;
+      box-shadow: var(--shadow-xl);
       position: relative;
       overflow: hidden;
       display: flex;
@@ -155,15 +170,16 @@
     .slide {
       position: absolute;
       inset: 0;
-      padding: 48px 56px;
+      padding: 44px 52px;
       opacity: 0;
       visibility: hidden;
-      transform: translateX(40px);
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateX(30px);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       overflow-y: auto;
+      background: #ffffff;
     }
 
     .slide.active {
@@ -172,115 +188,120 @@
       transform: translateX(0);
     }
 
+    /* Badges */
     .slide-badge {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 4px 12px;
+      padding: 4px 14px;
       border-radius: 20px;
       font-size: 0.75rem;
-      font-weight: 700;
+      font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.05em;
       margin-bottom: 12px;
     }
-    .badge-green { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
-    .badge-cyan { background: rgba(6, 182, 212, 0.15); color: #38bdf8; border: 1px solid rgba(6, 182, 212, 0.3); }
-    .badge-amber { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
-    .badge-purple { background: rgba(99, 102, 241, 0.15); color: #a5b4fc; border: 1px solid rgba(99, 102, 241, 0.3); }
+    .badge-green { background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; }
+    .badge-blue { background: #f0f9ff; color: #0369a1; border: 1px solid #bae6fd; }
+    .badge-amber { background: #fffbeb; color: #b45309; border: 1px solid #fde68a; }
+    .badge-rose { background: #fff1f2; color: #be123c; border: 1px solid #fecdd3; }
+    .badge-indigo { background: #eef2ff; color: #4338ca; border: 1px solid #c7d2fe; }
 
     .slide-title {
-      font-size: 2.2rem;
-      font-weight: 800;
+      font-size: 2.15rem;
+      font-weight: 900;
       line-height: 1.15;
       letter-spacing: -0.03em;
-      color: #fff;
-      margin-bottom: 12px;
+      color: var(--text-main);
+      margin-bottom: 8px;
     }
 
     .slide-subtitle {
-      font-size: 1.05rem;
+      font-size: 1rem;
       color: var(--text-muted);
-      max-width: 850px;
+      max-width: 880px;
       line-height: 1.5;
     }
 
     .slide-body {
       flex: 1;
-      margin: 28px 0;
+      margin: 20px 0;
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
 
-    /* Grid Layouts */
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    /* Grids */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
     .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
     .grid-6 { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
 
+    /* Cards Brancos & Claros */
     .card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 18px;
-      padding: 22px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
       transition: all 0.2s ease;
     }
     .card:hover {
-      background: rgba(255, 255, 255, 0.05);
-      border-color: rgba(255, 255, 255, 0.12);
+      border-color: #cbd5e1;
+      box-shadow: var(--shadow-md);
       transform: translateY(-2px);
     }
 
     .card-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .card h4 {
-      font-size: 1.05rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-      color: #f1f5f9;
+      font-size: 0.98rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+      color: var(--text-main);
     }
 
     .card p {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      line-height: 1.5;
+      font-size: 0.84rem;
+      color: var(--text-body);
+      line-height: 1.45;
     }
 
     .code-box {
       font-family: 'JetBrains Mono', monospace;
-      background: rgba(0, 0, 0, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 14px;
-      padding: 16px;
-      font-size: 0.85rem;
-      color: #38bdf8;
-      line-height: 1.6;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 14px;
+      font-size: 0.8rem;
+      color: #0f172a;
+      line-height: 1.55;
     }
 
-    /* Footer Navigation */
+    /* Barra Inferior Fixa */
     footer {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
       height: 64px;
-      background: rgba(9, 13, 22, 0.85);
+      background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(12px);
-      border-top: 1px solid var(--bg-card-border);
+      border-top: 1px solid var(--border-color);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 28px;
+      padding: 0 32px;
       z-index: 100;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.02);
     }
 
     .progress-bar-container {
@@ -288,21 +309,21 @@
       bottom: 64px;
       left: 0;
       right: 0;
-      height: 3px;
-      background: rgba(255, 255, 255, 0.05);
+      height: 4px;
+      background: #e2e8f0;
     }
 
     .progress-bar {
       height: 100%;
-      background: linear-gradient(90deg, #10b981, #06b6d4);
+      background: linear-gradient(90deg, #059669, #0284c7);
       width: 0%;
       transition: width 0.3s ease;
     }
 
     .nav-btn {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--bg-card-border);
-      color: white;
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
       width: 40px;
       height: 40px;
       border-radius: 12px;
@@ -311,29 +332,32 @@
       justify-content: center;
       cursor: pointer;
       transition: all 0.2s ease;
+      box-shadow: var(--shadow-sm);
     }
     .nav-btn:hover:not(:disabled) {
-      background: rgba(255, 255, 255, 0.15);
-      transform: scale(1.05);
+      background: #f1f5f9;
+      border-color: #cbd5e1;
+      transform: scale(1.04);
     }
     .nav-btn:disabled {
-      opacity: 0.3;
+      opacity: 0.35;
       cursor: not-allowed;
     }
 
     .slide-counter {
       font-size: 0.85rem;
-      font-weight: 700;
+      font-weight: 800;
       color: var(--text-muted);
     }
 
-    /* Print Styles (PDF Generation) */
+    /* Modo de Impressão e PDF */
     @media print {
       header, footer, .progress-bar-container {
         display: none !important;
       }
       body {
-        background: #090d16 !important;
+        background: #ffffff !important;
+        background-image: none !important;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
       }
@@ -346,7 +370,6 @@
         width: 100% !important;
         aspect-ratio: auto !important;
         border: none !important;
-        background: transparent !important;
         box-shadow: none !important;
       }
       .slide {
@@ -357,8 +380,9 @@
         page-break-after: always !important;
         page-break-inside: avoid !important;
         min-height: 100vh !important;
-        padding: 40px !important;
+        padding: 36px 44px !important;
         display: flex !important;
+        background: #ffffff !important;
       }
     }
   </style>
@@ -369,13 +393,13 @@
   <header>
     <div class="brand">
       <div class="brand-logo">
-        <i data-lucide="sparkles" style="width: 20px; height: 20px;"></i>
+        <i data-lucide="sparkles" style="width: 22px; height: 22px;"></i>
       </div>
-      <div>BovInSight <span>Pitch Deck</span></div>
+      <div>BovInSight <span style="font-weight: 500; color: var(--text-muted); font-size: 0.95rem;">• Apresentação do Projeto</span></div>
     </div>
     <div class="header-controls">
       <a href="http://localhost:3000" target="_blank" class="btn btn-secondary">
-        <i data-lucide="external-link" style="width: 16px; height: 16px;"></i>
+        <i data-lucide="play-circle" style="width: 16px; height: 16px; color: var(--accent-emerald);"></i>
         Abrir Aplicação
       </a>
       <button onclick="downloadPDF()" id="pdfBtn" class="btn btn-primary">
@@ -388,192 +412,192 @@
     </div>
   </header>
 
-  <!-- Progress Bar -->
+  <!-- Barra de Progresso -->
   <div class="progress-bar-container">
     <div class="progress-bar" id="progressBar"></div>
   </div>
 
-  <!-- Main Presentation Canvas -->
+  <!-- Deck de Apresentação -->
   <main>
     <div class="deck-container" id="presentationDeck">
 
-      <!-- SLIDE 1: Capa -->
+      <!-- SLIDE 1: Capa & Apresentação -->
       <div class="slide active" data-slide="1">
         <div>
           <span class="slide-badge badge-green">
-            <i data-lucide="award" style="width: 14px; height: 14px;"></i> Hackathon UFJF 2026 • Tema 3
+            <i data-lucide="award" style="width: 14px; height: 14px;"></i> Hackathon UFJF 2026 • Tema 3: Economia, Zootecnia e Qualidade do Leite
           </span>
-          <h1 class="slide-title" style="font-size: 3rem; margin-top: 8px;">
-            BovInSight / <span style="background: linear-gradient(135deg, #10b981, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">PecuáriaExpert</span>
+          <h1 class="slide-title" style="font-size: 2.8rem; margin-top: 6px;">
+            BovInSight <span style="color: var(--accent-emerald);">AgroExpert</span>
           </h1>
-          <p class="slide-subtitle" style="font-size: 1.25rem;">
-            Sistema Especialista em Economia, Zootecnia, Ambiência e Qualidade do Leite baseado em Regras Determinísticas e Fatores de Certeza (MYCIN).
+          <p class="slide-subtitle" style="font-size: 1.15rem; color: var(--text-body);">
+            O copiloto especialista do produtor de leite: inteligência artificial determinística para acabar com prejuízos invisíveis na fazenda.
           </p>
         </div>
 
         <div class="slide-body">
-          <div class="grid-4" style="margin-top: 16px;">
-            <div class="card">
-              <div class="card-icon" style="background: rgba(16, 185, 129, 0.15); color: #34d399;">
+          <div class="grid-4" style="margin-top: 8px;">
+            <div class="card" style="border-top: 3px solid var(--accent-emerald);">
+              <div class="card-icon" style="background: var(--accent-emerald-light); color: var(--accent-emerald);">
                 <i data-lucide="cpu" style="width: 20px; height: 20px;"></i>
               </div>
-              <h4>Motor Determinístico</h4>
-              <p>25 regras declarativas com encadeamento para frente (Forward Chaining).</p>
+              <h4>Motor Especialista</h4>
+              <p>25 regras zootécnicas e econômicas com raciocínio encadeado e auditável.</p>
             </div>
-            <div class="card">
-              <div class="card-icon" style="background: rgba(6, 182, 212, 0.15); color: #38bdf8;">
-                <i data-lucide="thermometer-sun" style="width: 20px; height: 20px;"></i>
+            <div class="card" style="border-top: 3px solid var(--accent-blue);">
+              <div class="card-icon" style="background: var(--accent-blue-light); color: var(--accent-blue);">
+                <i data-lucide="sun" style="width: 20px; height: 20px;"></i>
               </div>
-              <h4>Bioclimatologia (ITU)</h4>
-              <p>Fórmula de Thom & NRC para estresse térmico e perdas produtivas.</p>
+              <h4>Alerta de Calor (ITU)</h4>
+              <p>Mede o estresse térmico das vacas e calcula na hora o leite perdido.</p>
             </div>
-            <div class="card">
-              <div class="card-icon" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24;">
+            <div class="card" style="border-top: 3px solid var(--accent-amber);">
+              <div class="card-icon" style="background: var(--accent-amber-light); color: var(--accent-amber);">
                 <i data-lucide="dollar-sign" style="width: 20px; height: 20px;"></i>
               </div>
-              <h4>Custos Embrapa</h4>
-              <p>Auditoria formal de COE, COT, CT e alerta contra descapitalização.</p>
+              <h4>Lucro Real Embrapa</h4>
+              <p>Separa custo operacional do custo total para blindar o patrimônio do produtor.</p>
             </div>
-            <div class="card">
-              <div class="card-icon" style="background: rgba(99, 102, 241, 0.15); color: #a5b4fc;">
+            <div class="card" style="border-top: 3px solid var(--accent-indigo);">
+              <div class="card-icon" style="background: var(--accent-indigo-light); color: var(--accent-indigo);">
                 <i data-lucide="zap" style="width: 20px; height: 20px;"></i>
               </div>
-              <h4>Inferência Real-time</h4>
-              <p>Diagnósticos imediatos com debounce de 150ms e simulações 'E se...'.</p>
+              <h4>Simulação Instantânea</h4>
+              <p>Testa melhorias com 1 clique ("E se eu resfriar as vacas?") com resposta em tempo real.</p>
             </div>
           </div>
         </div>
 
-        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.06); pt: 16px;">
-          <span style="font-size: 0.8rem; color: var(--text-muted);">XXVIII Semana da Computação DCC/UFJF & RERUM</span>
-          <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">Metodologia Sadrey de Engenharia de Conhecimento</span>
+        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color); padding-top: 14px;">
+          <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted);">XXVIII Semana da Computação DCC/UFJF & RERUM</span>
+          <span style="font-size: 0.85rem; color: var(--accent-emerald); font-weight: 700;">Metodologia Sadrey de Engenharia de Conhecimento</span>
         </div>
       </div>
 
-      <!-- SLIDE 2: O Problema Real -->
+      <!-- SLIDE 2: O Problema Real da Fazenda -->
       <div class="slide" data-slide="2">
         <div>
-          <span class="slide-badge badge-rose" style="background: rgba(244,63,94,0.15); color: #fb7185; border: 1px solid rgba(244,63,94,0.3);">
-            <i data-lucide="alert-triangle" style="width: 14px; height: 14px;"></i> O Desafio no Campo
+          <span class="slide-badge badge-rose">
+            <i data-lucide="alert-triangle" style="width: 14px; height: 14px;"></i> O Problema
           </span>
-          <h2 class="slide-title">As Dores do Produtor de Leite no Brasil</h2>
-          <p class="slide-subtitle">Margens estreitas, custos voláteis e perdas silenciosas que levam propriedades à falência sem diagnóstico prévio.</p>
+          <h2 class="slide-title">Onde o Produtor de Leite Mais Perde Dinheiro?</h2>
+          <p class="slide-subtitle">Muitos produtores trabalham duro todos os dias, mas fecham o ano no vermelho por causa de problemas que não aparecem no caderninho.</p>
         </div>
 
         <div class="slide-body">
           <div class="grid-2">
-            <div class="card" style="border-left: 4px solid var(--accent-rose);">
-              <h4 style="color: #fb7185;">1. Descapitalização Silenciosa</h4>
-              <p>O produtor tem fluxo de caixa positivo no mês (Receita > COE), mas esquece a depreciação e custo da terra (COT/CT), perdendo patrimônio sem perceber.</p>
+            <div class="card" style="border-left: 4px solid var(--accent-rose); background: #fffcfc;">
+              <h4 style="color: var(--accent-rose);">1. A Descapitalização Silenciosa</h4>
+              <p>O leite entra, as contas do mês são pagas, mas o trator envelhece e as benfeitorias desgastam sem provisão contábil. No fim do ano, o produtor precisa vender vacas para fechar o caixa.</p>
             </div>
-            <div class="card" style="border-left: 4px solid var(--accent-amber);">
-              <h4 style="color: #fbbf24;">2. Estresse Térmico por Calor (ITU)</h4>
-              <p>Em climas tropicais, ITU acima de 72 derruba a ingestão de matéria seca e provoca queda de até 30% na produção de leite sem que o produtor identifique a causa bioclimática.</p>
+            <div class="card" style="border-left: 4px solid var(--accent-amber); background: #fffdfa;">
+              <h4 style="color: var(--accent-amber);">2. O Calor Invisível (Estresse Térmico)</h4>
+              <p>Vaca holandesa sofre com calor acima de 24°C e alta umidade. O estresse térmico derruba o apetite e corta até 4 litros de leite por vaca todos os dias sem que o produtor perceba a causa.</p>
             </div>
-            <div class="card" style="border-left: 4px solid var(--accent-cyan);">
-              <h4 style="color: #38bdf8;">3. Acidose Ruminal (SARA) & Dieta</h4>
-              <p>Excesso de concentrado (&lt;50% volumoso) acidifica o rúmen, eleva o NUL e causa descarte precoce de matrizes.</p>
+            <div class="card" style="border-left: 4px solid var(--accent-blue); background: #fafcff;">
+              <h4 style="color: var(--accent-blue);">3. Desperdício na Ração & Acidose</h4>
+              <p>Dar concentrado demais sem o volumoso certo acidifica o rúmen da vaca (SARA), desperdiça proteína cara nas fezes e causa problemas graves de casco.</p>
             </div>
-            <div class="card" style="border-left: 4px solid var(--accent-indigo);">
-              <h4 style="color: #a5b4fc;">4. Mastite Subclínica e Penalização</h4>
-              <p>CCS e CBT elevadas causam perdas volumétricas ocultas e penalizações de até R$ 0,25/litro no laticínio.</p>
+            <div class="card" style="border-left: 4px solid var(--accent-indigo); background: #fafaff;">
+              <h4 style="color: var(--accent-indigo);">4. Mastite e Cortes no Preço do Litro</h4>
+              <p>Células somáticas (CCS) e bactérias (CBT) altas não apenas estragam o leite: o laticínio desconta até R$ 0,25 por litro entregue no final do mês.</p>
             </div>
           </div>
         </div>
 
-        <div style="font-size: 0.8rem; color: var(--text-muted);">
-          *Dados baseados em pesquisas de campo da Embrapa Gado de Leite e CEPEA/Esalq-USP.
+        <div style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">
+          💡 <strong>Missão do BovInSight:</strong> Transformar dados simples do dia a dia em diagnóstico claro, certeiro e com plano de ação imediato.
         </div>
       </div>
 
       <!-- SLIDE 3: Metodologia Sadrey -->
       <div class="slide" data-slide="3">
         <div>
-          <span class="slide-badge badge-purple">
-            <i data-lucide="git-merge" style="width: 14px; height: 14px;"></i> Metodologia Sadrey
+          <span class="slide-badge badge-indigo">
+            <i data-lucide="git-merge" style="width: 14px; height: 14px;"></i> Metodologia
           </span>
-          <h2 class="slide-title">Ciclo de Vida de Engenharia de Conhecimento</h2>
-          <p class="slide-subtitle">Como estruturamos o processo de desenvolvimento para garantir rigor científico e rastreabilidade total.</p>
+          <h2 class="slide-title">Como Construímos o Projeto: Metodologia Sadrey</h2>
+          <p class="slide-subtitle">Seguimos o ciclo formal de engenharia de conhecimento para garantir que as regras fossem 100% confiáveis e comprovadas.</p>
         </div>
 
         <div class="slide-body">
           <div class="grid-6">
-            <div class="card" style="text-align: center;">
-              <div style="font-weight: 800; font-size: 1.2rem; color: #34d399; margin-bottom: 6px;">1</div>
-              <h4 style="font-size: 0.85rem;">Identificação</h4>
-              <p style="font-size: 0.75rem;">Mapeamento das vulnerabilidades e dores da pecuária leiteira.</p>
+            <div class="card" style="text-align: center; border-top: 3px solid #059669;">
+              <div style="font-weight: 900; font-size: 1.3rem; color: var(--accent-emerald); margin-bottom: 4px;">1</div>
+              <h4 style="font-size: 0.85rem;">Identificar</h4>
+              <p style="font-size: 0.76rem;">Mapeamos os gargalos de zootecnia e finanças no campo.</p>
             </div>
-            <div class="card" style="text-align: center;">
-              <div style="font-weight: 800; font-size: 1.2rem; color: #38bdf8; margin-bottom: 6px;">2</div>
-              <h4 style="font-size: 0.85rem;">Aquisição</h4>
-              <p style="font-size: 0.75rem;">Elicitação de dados da Embrapa, NRC, Custopec e CEPEA.</p>
+            <div class="card" style="text-align: center; border-top: 3px solid #0284c7;">
+              <div style="font-weight: 900; font-size: 1.3rem; color: var(--accent-blue); margin-bottom: 4px;">2</div>
+              <h4 style="font-size: 0.85rem;">Elicitar</h4>
+              <p style="font-size: 0.76rem;">Coletamos fórmulas e metas da Embrapa, NRC e CEPEA.</p>
             </div>
-            <div class="card" style="text-align: center;">
-              <div style="font-weight: 800; font-size: 1.2rem; color: #fbbf24; margin-bottom: 6px;">3</div>
-              <h4 style="font-size: 0.85rem;">Conceituação</h4>
-              <p style="font-size: 0.75rem;">Ontologia de 33 variáveis em 6 eixos zootécnicos e financeiros.</p>
+            <div class="card" style="text-align: center; border-top: 3px solid #d97706;">
+              <div style="font-weight: 900; font-size: 1.3rem; color: var(--accent-amber); margin-bottom: 4px;">3</div>
+              <h4 style="font-size: 0.85rem;">Modelar</h4>
+              <p style="font-size: 0.76rem;">Criamos 33 variáveis em 6 categorias zootécnicas.</p>
             </div>
-            <div class="card" style="text-align: center;">
-              <div style="font-weight: 800; font-size: 1.2rem; color: #a5b4fc; margin-bottom: 6px;">4</div>
-              <h4 style="font-size: 0.85rem;">Formalização</h4>
-              <p style="font-size: 0.75rem;">25 regras declarativas com Fatores de Certeza MYCIN.</p>
+            <div class="card" style="text-align: center; border-top: 3px solid #4f46e5;">
+              <div style="font-weight: 900; font-size: 1.3rem; color: var(--accent-indigo); margin-bottom: 4px;">4</div>
+              <h4 style="font-size: 0.85rem;">Formalizar</h4>
+              <p style="font-size: 0.76rem;">Escrevemos 25 regras SE-ENTÃO com Fatores de Certeza.</p>
             </div>
-            <div class="card" style="text-align: center;">
-              <div style="font-weight: 800; font-size: 1.2rem; color: #f43f5e; margin-bottom: 6px;">5</div>
-              <h4 style="font-size: 0.85rem;">Implementação</h4>
-              <p style="font-size: 0.75rem;">Motor Node.js desacoplado + SPA React interativo.</p>
+            <div class="card" style="text-align: center; border-top: 3px solid #e11d48;">
+              <div style="font-weight: 900; font-size: 1.3rem; color: var(--accent-rose); margin-bottom: 4px;">5</div>
+              <h4 style="font-size: 0.85rem;">Construir</h4>
+              <p style="font-size: 0.76rem;">Backend em Node.js com motor de inferência + React UI.</p>
             </div>
-            <div class="card" style="text-align: center;">
-              <div style="font-weight: 800; font-size: 1.2rem; color: #10b981; margin-bottom: 6px;">6</div>
-              <h4 style="font-size: 0.85rem;">Validação</h4>
-              <p style="font-size: 0.75rem;">Testes de estresse com 5 cenários reais e calibração XAI.</p>
+            <div class="card" style="text-align: center; border-top: 3px solid #059669;">
+              <div style="font-weight: 900; font-size: 1.3rem; color: var(--accent-emerald); margin-bottom: 4px;">6</div>
+              <h4 style="font-size: 0.85rem;">Validar</h4>
+              <p style="font-size: 0.76rem;">Testamos com 5 fazendas reais e refinamos a usabilidade.</p>
             </div>
           </div>
         </div>
 
-        <div style="font-size: 0.8rem; color: var(--text-muted);">
-          Garante que o conhecimento especialista seja preservado sem viés e de forma 100% auditável.
+        <div style="font-size: 0.85rem; color: var(--text-muted);">
+          Garante que o conhecimento especialista seja preservado sem "alucinações" e com total transparência.
         </div>
       </div>
 
-      <!-- SLIDE 4: Coleta de Requisitos & Fontes -->
+      <!-- SLIDE 4: Coleta de Requisitos -->
       <div class="slide" data-slide="4">
         <div>
-          <span class="slide-badge badge-cyan">
-            <i data-lucide="book-open" style="width: 14px; height: 14px;"></i> Coleta de Requisitos
+          <span class="slide-badge badge-blue">
+            <i data-lucide="book-open" style="width: 14px; height: 14px;"></i> Requisitos & Especialistas
           </span>
-          <h2 class="slide-title">Bases Científicas e Normativas Integradas</h2>
-          <p class="slide-subtitle">Nenhuma regra foi inventada: todas foram calibradas com fontes oficiais de referência agropecuária.</p>
+          <h2 class="slide-title">De Onde Vieram as Regras do Sistema?</h2>
+          <p class="slide-subtitle">Nenhuma regra foi inventada ou chutada: todas foram calibradas com as maiores autoridades de pecuária do Brasil e do mundo.</p>
         </div>
 
         <div class="slide-body">
           <div class="grid-3">
-            <div class="card">
-              <div class="card-icon" style="background: rgba(16, 185, 129, 0.15); color: #34d399;">
-                <i data-lucide="layers" style="width: 20px; height: 20px;"></i>
+            <div class="card" style="border-top: 3px solid var(--accent-emerald);">
+              <div class="card-icon" style="background: var(--accent-emerald-light); color: var(--accent-emerald);">
+                <i data-lucide="check-check" style="width: 20px; height: 20px;"></i>
               </div>
               <h4>Embrapa Gado de Leite</h4>
-              <p>Metodologia oficial Custopec para cálculo de COE, COT, CT, taxa de desfrute e índices de reprodução (DEL, IEP, TXP).</p>
+              <p>Metodologia oficial <strong>Custopec</strong> para cálculo de custos (COE, COT, CT) e metas de reprodução (dias em lactação, intervalo entre partos e taxa de prenhez).</p>
             </div>
-            <div class="card">
-              <div class="card-icon" style="background: rgba(6, 182, 212, 0.15); color: #38bdf8;">
-                <i data-lucide="sun" style="width: 20px; height: 20px;"></i>
+            <div class="card" style="border-top: 3px solid var(--accent-blue);">
+              <div class="card-icon" style="background: var(--accent-blue-light); color: var(--accent-blue);">
+                <i data-lucide="thermometer" style="width: 20px; height: 20px;"></i>
               </div>
-              <h4>NRC & Thom (1959)</h4>
-              <p>Índice de Temperatura e Umidade (ITU) e curvas de estresse calórico para gado Holandês e Girolando no Brasil.</p>
+              <h4>NRC & Thom (Bioclimatologia)</h4>
+              <p>Equação internacional de <strong>Índice de Temperatura e Umidade (ITU)</strong> para medir o conforto animal e a perda estimada de leite em climas tropicais.</p>
             </div>
-            <div class="card">
-              <div class="card-icon" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24;">
-                <i data-lucide="bar-chart-3" style="width: 20px; height: 20px;"></i>
+            <div class="card" style="border-top: 3px solid var(--accent-amber);">
+              <div class="card-icon" style="background: var(--accent-amber-light); color: var(--accent-amber);">
+                <i data-lucide="trending-up" style="width: 20px; height: 20px;"></i>
               </div>
-              <h4>CEPEA & MAPA IN 76/77</h4>
-              <p>Tabelas de bonificação e penalização de qualidade por faixas de CCS, CBT, gordura e proteína láctea.</p>
+              <h4>CEPEA / USP & MAPA IN 76/77</h4>
+              <p>Tabelas reais de bonificação e desconto do preço do leite de acordo com a qualidade higiênica e sanitária (CCS e CBT).</p>
             </div>
           </div>
         </div>
 
-        <div style="font-size: 0.8rem; color: var(--text-muted);">
-          Permite ao sistema agir com autoridade técnica idêntica à de um auditor agropecuário sênior.
+        <div style="font-size: 0.85rem; color: var(--text-muted);">
+          O sistema atua com o mesmo rigor e critérios de um consultor zootécnico e contábil sênior.
         </div>
       </div>
 
@@ -581,238 +605,237 @@
       <div class="slide" data-slide="5">
         <div>
           <span class="slide-badge badge-green">
-            <i data-lucide="cpu" style="width: 14px; height: 14px;"></i> Arquitetura
+            <i data-lucide="cpu" style="width: 14px; height: 14px;"></i> Como Funciona por Dentro
           </span>
-          <h2 class="slide-title">Motor de Inferência Determinístico & XAI</h2>
-          <p class="slide-subtitle">Forward Chaining transparente, combinando Fatores de Certeza e trilha de auditoria explicativa.</p>
+          <h2 class="slide-title">Motor de Inferência: Raciocínio Auditável (XAI)</h2>
+          <p class="slide-subtitle">Diferente de modelos de 'caixa preta', nosso sistema explica exatamente o porquê de cada alerta com regras SE → ENTÃO.</p>
         </div>
 
         <div class="slide-body">
           <div class="grid-2">
             <div class="card">
-              <h4>Fluxo de Execução</h4>
-              <div class="code-box" style="font-size: 0.8rem;">
-1. Fatos de Entrada (Rebanho, Clima, Custos)
+              <h4 style="margin-bottom: 10px; color: var(--accent-emerald);">Fluxo Rápido de Raciocínio</h4>
+              <div class="code-box">
+1. O usuário digita os dados ou escolhe um preset
    ↓
-2. Normalização e Cálculos Embrapa (ITU, COT, CT)
+2. O sistema calcula ITU, Custos Embrapa e Índices
    ↓
-3. Avaliação de Premissas (25 Regras SE-ENTÃO)
+3. Avalia 25 Regras Especialistas simultaneamente
    ↓
-4. Propagação de Certeza: CF = CF_regra * min(CF_premissas)
+4. Aplica Fatores de Certeza MYCIN (-1.0 até +1.0)
    ↓
-5. Geração de Trilha XAI + Plano de Ação Priorizado
+5. Gera Plano de Ação Imediato + Justificativa Visual
               </div>
             </div>
             <div class="card">
-              <h4>Exemplo de Regra Declarativa (R08)</h4>
-              <div class="code-box" style="font-size: 0.75rem;">
-SE:
-  itu > 72.0 (Estresse Térmico)
-  E relacao_volumoso_concentrado < 50.0 (Dieta Rica)
-ENTÃO:
-  Diagnóstico: "Acidose Ruminal sob Estresse Térmico"
-  Status: CRITICO | Severidade: 5 | CF: +0.92
-  Ação: "Oferecer tamponantes (Bicarbonato) e resfriamento"
+              <h4 style="margin-bottom: 10px; color: var(--accent-blue);">Exemplo Real de Regra (R08)</h4>
+              <div class="code-box" style="font-size: 0.78rem;">
+<strong>SE:</strong>
+  • ITU da fazenda > 72.0 (Estresse Térmico por Calor)
+  • E Relação Volumoso &lt; 50% (Ração Concentrada em excesso)
+<strong>ENTÃO:</strong>
+  • Diagnóstico: "Risco Severo de Acidose sob Estresse Térmico"
+  • Status: CRÍTICO | Grau de Certeza: +92%
+  • Recomendação: "Fornecer bicarbonato de sódio e ligar aspersores"
               </div>
             </div>
           </div>
         </div>
 
-        <div style="font-size: 0.8rem; color: var(--text-muted);">
-          100% auditável: cada diagnóstico expõe exatamente quais premissas foram disparadas.
+        <div style="font-size: 0.85rem; color: var(--text-muted);">
+          O produtor e o veterinário podem conferir cada linha de raciocínio no Módulo de Explicação.
         </div>
       </div>
 
-      <!-- SLIDE 6: Modelagem Matemática -->
+      <!-- SLIDE 6: A Matemática por Trás -->
       <div class="slide" data-slide="6">
         <div>
           <span class="slide-badge badge-amber">
-            <i data-lucide="calculator" style="width: 14px; height: 14px;"></i> Modelagem Matemática
+            <i data-lucide="calculator" style="width: 14px; height: 14px;"></i> Matemática do Campo
           </span>
-          <h2 class="slide-title">Equações Zootécnicas e Econômicas Centrais</h2>
-          <p class="slide-subtitle">Fórmulas implementadas no núcleo do backend para garantir precisão contábil e bioclimática.</p>
+          <h2 class="slide-title">Equações Embrapa & Bioclimáticas</h2>
+          <p class="slide-subtitle">Tratamento rigoroso dos dados para garantir que os números reflitam a realidade financeira da fazenda.</p>
         </div>
 
         <div class="slide-body">
           <div class="grid-2">
             <div class="card">
-              <h4>Bioclimatologia (ITU Thom / NRC)</h4>
+              <h4 style="color: var(--accent-blue);">Conforto Térmico Bovino (ITU Thom / NRC)</h4>
               <div class="code-box" style="margin-top: 8px;">
-ITU = 0.8 * T + (UR / 100) * (T - 14.4) + 46.4
+ITU = 0.8 * Temp + (Umid / 100) * (Temp - 14.4) + 46.4
 
-• ITU ≤ 72.0  → Conforto Térmico
-• 72.1 a 78.0 → Estresse Leve/Moderado (-1.5 L/vaca/dia)
-• ITU > 78.0  → Estresse Severo/Crítico (-3.5 L/vaca/dia)
+• Até 72.0  → Conforto (Produção 100%)
+• 72.1 a 78 → Estresse Leve (Perde ~1.5 L/vaca/dia)
+• Acima 78  → Estresse Crítico (Perde ~3.5 L/vaca/dia)
               </div>
             </div>
             <div class="card">
-              <h4>Estrutura de Custos Embrapa Custopec</h4>
+              <h4 style="color: var(--accent-emerald);">Custos da Embrapa (Custopec)</h4>
               <div class="code-box" style="margin-top: 8px;">
-COE = Alimentação + Mão de Obra + Sanidade + Energia
-COT = COE + Depreciações + Pró-labore Familiar
-CT  = COT + Custo de Oportunidade do Capital
+• COE = Ração + Salários + Remédios + Energia
+• COT = COE + Depreciação de Máquinas + Pró-labore
+• CT  = COT + Custo de Oportunidade do Capital
 
-• Margem Bruta   = Receita - COE
-• Margem Líquida = Receita - COT (Sustentabilidade Médio Prazo)
-• Lucro Real     = Receita - CT  (Lucro Econômico Verdadeiro)
+→ Margem Líquida = Receita - COT (Sustenta a fazenda)
+→ Lucro Real     = Receita - CT  (Lucro verdadeiro)
               </div>
             </div>
           </div>
         </div>
 
-        <div style="font-size: 0.8rem; color: var(--text-muted);">
-          Diferencia o produtor que "paga as contas do mês" daquele que realmente lucra de forma sustentável.
+        <div style="font-size: 0.85rem; color: var(--text-muted);">
+          Elimina o risco de o produtor achar que está lucrando só porque sobrou dinheiro no fim do mês.
         </div>
       </div>
 
-      <!-- SLIDE 7: Funcionalidades & Interface -->
+      <!-- SLIDE 7: Funcionalidades & Telas -->
       <div class="slide" data-slide="7">
         <div>
           <span class="slide-badge badge-green">
-            <i data-lucide="layout" style="width: 14px; height: 14px;"></i> Funcionalidades do Produto
+            <i data-lucide="layout" style="width: 14px; height: 14px;"></i> O Produto em Ação
           </span>
-          <h2 class="slide-title">Experiência de Usuário Moderna e Intuitiva</h2>
-          <p class="slide-subtitle">Construído em React.js + Tailwind CSS com feedback instantâneo e design responsivo.</p>
+          <h2 class="slide-title">Interface Amigável, Visual e Rápida</h2>
+          <p class="slide-subtitle">Criado para ser fácil de usar tanto no computador do escritório quanto no celular ou tablet na sala de ordenha.</p>
         </div>
 
         <div class="slide-body">
           <div class="grid-4">
             <div class="card">
-              <div class="card-icon" style="background: rgba(16, 185, 129, 0.15); color: #34d399;">
+              <div class="card-icon" style="background: var(--accent-emerald-light); color: var(--accent-emerald);">
                 <i data-lucide="zap" style="width: 20px; height: 20px;"></i>
               </div>
               <h4>Auto-Inferência</h4>
-              <p>Reavaliação reativa em 150ms sem necessidade de recarregar ou clicar em botões.</p>
+              <p>Os gráficos e diagnósticos mudam na hora enquanto você digita, sem precisar recarregar.</p>
             </div>
             <div class="card">
-              <div class="card-icon" style="background: rgba(6, 182, 212, 0.15); color: #38bdf8;">
+              <div class="card-icon" style="background: var(--accent-blue-light); color: var(--accent-blue);">
                 <i data-lucide="sparkles" style="width: 20px; height: 20px;"></i>
               </div>
               <h4>Simulador "E se..."</h4>
-              <p>Botões de 1 clique para testar resfriamento, bonificação de CCS e dieta 60% volumoso.</p>
+              <p>Botões de 1 clique para ver o ganho ao instalar ventiladores ou bonificar o leite.</p>
             </div>
             <div class="card">
-              <div class="card-icon" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24;">
+              <div class="card-icon" style="background: var(--accent-amber-light); color: var(--accent-amber);">
                 <i data-lucide="shield-alert" style="width: 20px; height: 20px;"></i>
               </div>
               <h4>Plano Priorizado</h4>
-              <p>Elenco das top 3 ações corretivas imediatas no topo dos resultados.</p>
+              <p>Destaca as 3 ações mais urgentes no topo da tela para guiar o produtor.</p>
             </div>
             <div class="card">
-              <div class="card-icon" style="background: rgba(99, 102, 241, 0.15); color: #a5b4fc;">
-                <i data-lucide="printer" style="width: 20px; height: 20px;"></i>
+              <div class="card-icon" style="background: var(--accent-indigo-light); color: var(--accent-indigo);">
+                <i data-lucide="file-text" style="width: 20px; height: 20px;"></i>
               </div>
-              <h4>Laudo Pericial</h4>
-              <p>Emissão de relatório técnico completo pronto para impressão e assinatura agronômica.</p>
+              <h4>Laudo Pericial PDF</h4>
+              <p>Gera relatório completo formatado para impressão e entrega ao produtor ou agrônomo.</p>
             </div>
           </div>
         </div>
 
-        <div style="font-size: 0.8rem; color: var(--text-muted);">
-          Interface fluida com crachás de conformidade Embrapa em cada campo do formulário.
+        <div style="font-size: 0.85rem; color: var(--text-muted);">
+          Inclui 5 cenários pré-configurados (Fazenda Modelo, Estresse Térmico, Mastite, Descapitalização e Familiar).
         </div>
       </div>
 
-      <!-- SLIDE 8: Diferenciais Competitivos -->
+      <!-- SLIDE 8: Por que o BovInSight é Diferente? -->
       <div class="slide" data-slide="8">
         <div>
-          <span class="slide-badge badge-purple">
-            <i data-lucide="check-circle-2" style="width: 14px; height: 14px;"></i> Diferenciais
+          <span class="slide-badge badge-indigo">
+            <i data-lucide="check-circle" style="width: 14px; height: 14px;"></i> Comparativo
           </span>
-          <h2 class="slide-title">Por que o BovInSight é Superior?</h2>
-          <p class="slide-subtitle">Comparativo contra as alternativas existentes no mercado agropecuário.</p>
+          <h2 class="slide-title">BovInSight vs. Outras Ferramentas</h2>
+          <p class="slide-subtitle">A maioria dos programas só guarda números; o BovInSight interpreta os dados e diz o que fazer.</p>
         </div>
 
         <div class="slide-body">
-          <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; background: #ffffff; border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden;">
             <thead>
-              <tr style="border-bottom: 2px solid rgba(255,255,255,0.1); text-align: left;">
-                <th style="padding: 12px; color: var(--text-muted);">Recurso / Capacidade</th>
-                <th style="padding: 12px; color: var(--text-muted);">Planilhas Excel</th>
-                <th style="padding: 12px; color: var(--text-muted);">Softwares Agro Comuns</th>
-                <th style="padding: 12px; color: #34d399;">BovInSight (Nosso)</th>
+              <tr style="background: #f8fafc; border-bottom: 2px solid var(--border-color); text-align: left;">
+                <th style="padding: 12px 16px; color: var(--text-main);">Recurso / Capacidade</th>
+                <th style="padding: 12px 16px; color: var(--text-muted);">Planilhas Excel</th>
+                <th style="padding: 12px 16px; color: var(--text-muted);">Softwares Comuns</th>
+                <th style="padding: 12px 16px; color: var(--accent-emerald); font-weight: 800;">BovInSight (Nosso)</th>
               </tr>
             </thead>
             <tbody>
-              <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                <td style="padding: 12px; font-weight: 600;">Diagnóstico Especialista Autônomo</td>
-                <td style="padding: 12px; color: #f43f5e;">❌ Não</td>
-                <td style="padding: 12px; color: #f43f5e;">❌ Apenas relatórios passivos</td>
-                <td style="padding: 12px; color: #34d399; font-weight: 700;">✅ Sim (25 regras ativas)</td>
+              <tr style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 11px 16px; font-weight: 700; color: var(--text-main);">Diagnóstico Automático</td>
+                <td style="padding: 11px 16px; color: var(--accent-rose); font-weight: 600;">❌ Não</td>
+                <td style="padding: 11px 16px; color: var(--accent-rose); font-weight: 600;">❌ Apenas relatórios</td>
+                <td style="padding: 11px 16px; color: var(--accent-emerald); font-weight: 800; background: #f0fdf4;">✅ Sim (25 regras ativas)</td>
               </tr>
-              <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                <td style="padding: 12px; font-weight: 600;">Explicabilidade (XAI SE→ENTÃO)</td>
-                <td style="padding: 12px; color: #f43f5e;">❌ Não</td>
-                <td style="padding: 12px; color: #f43f5e;">❌ Caixa preta</td>
-                <td style="padding: 12px; color: #34d399; font-weight: 700;">✅ 100% Auditável</td>
+              <tr style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 11px 16px; font-weight: 700; color: var(--text-main);">Explicação do 'Porquê' (XAI)</td>
+                <td style="padding: 11px 16px; color: var(--accent-rose); font-weight: 600;">❌ Não</td>
+                <td style="padding: 11px 16px; color: var(--accent-rose); font-weight: 600;">❌ Caixa preta</td>
+                <td style="padding: 11px 16px; color: var(--accent-emerald); font-weight: 800; background: #f0fdf4;">✅ 100% Auditável</td>
               </tr>
-              <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                <td style="padding: 12px; font-weight: 600;">Cálculo Bioclimático ITU Integrado</td>
-                <td style="padding: 12px; color: #f43f5e;">❌ Não</td>
-                <td style="padding: 12px; color: #fbbf24;">⚠️ Módulo pago raro</td>
-                <td style="padding: 12px; color: #34d399; font-weight: 700;">✅ Sim (Fórmula Thom/NRC)</td>
+              <tr style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 11px 16px; font-weight: 700; color: var(--text-main);">Estresse Térmico Integrado (ITU)</td>
+                <td style="padding: 11px 16px; color: var(--accent-rose); font-weight: 600;">❌ Não</td>
+                <td style="padding: 11px 16px; color: var(--accent-amber); font-weight: 600;">⚠️ Raro / Inexistente</td>
+                <td style="padding: 11px 16px; color: var(--accent-emerald); font-weight: 800; background: #f0fdf4;">✅ Sim (Thom / NRC)</td>
               </tr>
-              <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                <td style="padding: 12px; font-weight: 600;">Detecção de Descapitalização Silenciosa</td>
-                <td style="padding: 12px; color: #f43f5e;">❌ Não</td>
-                <td style="padding: 12px; color: #fbbf24;">⚠️ Parcial</td>
-                <td style="padding: 12px; color: #34d399; font-weight: 700;">✅ Sim (COE, COT e CT)</td>
+              <tr style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 11px 16px; font-weight: 700; color: var(--text-main);">Alerta de Descapitalização Silenciosa</td>
+                <td style="padding: 11px 16px; color: var(--accent-rose); font-weight: 600;">❌ Não</td>
+                <td style="padding: 11px 16px; color: var(--accent-amber); font-weight: 600;">⚠️ Confuso</td>
+                <td style="padding: 11px 16px; color: var(--accent-emerald); font-weight: 800; background: #f0fdf4;">✅ Sim (COE, COT, CT)</td>
               </tr>
               <tr>
-                <td style="padding: 12px; font-weight: 600;">Simulação Reativa em Tempo Real</td>
-                <td style="padding: 12px; color: #f43f5e;">❌ Não</td>
-                <td style="padding: 12px; color: #f43f5e;">❌ Não</td>
-                <td style="padding: 12px; color: #34d399; font-weight: 700;">✅ Sim (Debounce 150ms)</td>
+                <td style="padding: 11px 16px; font-weight: 700; color: var(--text-main);">Simulação Interativa em Tempo Real</td>
+                <td style="padding: 11px 16px; color: var(--accent-rose); font-weight: 600;">❌ Não</td>
+                <td style="padding: 11px 16px; color: var(--accent-rose); font-weight: 600;">❌ Não</td>
+                <td style="padding: 11px 16px; color: var(--accent-emerald); font-weight: 800; background: #f0fdf4;">✅ Sim (150ms Debounce)</td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <div style="font-size: 0.8rem; color: var(--text-muted);">
-          Transforma dados dispersos em decisões econômicas de alta rentabilidade.
+        <div style="font-size: 0.85rem; color: var(--text-muted);">
+          Transforma o produtor de leite em um gestor de alta precisão.
         </div>
       </div>
 
-      <!-- SLIDE 9: Conclusão & Impacto -->
+      <!-- SLIDE 9: Conclusão & Próximos Passos -->
       <div class="slide" data-slide="9">
         <div>
           <span class="slide-badge badge-green">
-            <i data-lucide="target" style="width: 14px; height: 14px;"></i> Conclusão & Futuro
+            <i data-lucide="target" style="width: 14px; height: 14px;"></i> Conclusão & Impacto
           </span>
-          <h2 class="slide-title">Impacto no Agronegócio Brasileiro</h2>
-          <p class="slide-subtitle">Democratizando a inteligência agronômica de ponta para produtores de todos os portes.</p>
+          <h2 class="slide-title">O Futuro do Leite Começa Aqui</h2>
+          <p class="slide-subtitle">Democratizando o conhecimento de ponta da Embrapa para apoiar desde o pequeno produtor familiar até as grandes fazendas industriais.</p>
         </div>
 
         <div class="slide-body">
           <div class="grid-3">
-            <div class="card">
-              <div class="card-icon" style="background: rgba(16, 185, 129, 0.15); color: #34d399;">
+            <div class="card" style="border-top: 3px solid var(--accent-emerald);">
+              <div class="card-icon" style="background: var(--accent-emerald-light); color: var(--accent-emerald);">
                 <i data-lucide="trending-up" style="width: 20px; height: 20px;"></i>
               </div>
-              <h4>Sustentabilidade Financeira</h4>
-              <p>Evita a falência de propriedades médias e pequenas ao diagnosticar perdas antes da venda forçada de matrizes.</p>
+              <h4>Lucratividade Sustentável</h4>
+              <p>Evita a perda de patrimônio e otimiza a receita em cada centavo do litro de leite.</p>
             </div>
-            <div class="card">
-              <div class="card-icon" style="background: rgba(6, 182, 212, 0.15); color: #38bdf8;">
+            <div class="card" style="border-top: 3px solid var(--accent-blue);">
+              <div class="card-icon" style="background: var(--accent-blue-light); color: var(--accent-blue);">
                 <i data-lucide="heart" style="width: 20px; height: 20px;"></i>
               </div>
               <h4>Bem-Estar Animal</h4>
-              <p>Redução do sofrimento térmico e diminuição de descarte precoce por claudicação e mastite.</p>
+              <p>Vacas bem alimentadas, livres de calor e sem dor produzem mais e vivem muito mais tempo.</p>
             </div>
-            <div class="card">
-              <div class="card-icon" style="background: rgba(99, 102, 241, 0.15); color: #a5b4fc;">
-                <i data-lucide="radio" style="width: 20px; height: 20px;"></i>
+            <div class="card" style="border-top: 3px solid var(--accent-indigo);">
+              <div class="card-icon" style="background: var(--accent-indigo-light); color: var(--accent-indigo);">
+                <i data-lucide="wifi" style="width: 20px; height: 20px;"></i>
               </div>
-              <h4>Roadmap IoT & Offline</h4>
-              <p>Próximas etapas: integração com sensores de galpão (Free-Stall/Compost Barn) e app mobile offline para o campo.</p>
+              <h4>Próximos Passos (IoT & App)</h4>
+              <p>Integração com sensores de galpão (Free-Stall/Compost Barn) e app móvel 100% offline para o campo.</p>
             </div>
           </div>
         </div>
 
-        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.06); pt: 16px;">
-          <span style="font-weight: 700; color: #fff;">Obrigado! Perguntas da Banca?</span>
+        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color); padding-top: 14px;">
+          <span style="font-weight: 800; color: var(--text-main); font-size: 1rem;">Muito obrigado! Estamos abertos às perguntas da banca.</span>
           <a href="http://localhost:3000" target="_blank" class="btn btn-primary">
-            <i data-lucide="play" style="width: 16px; height: 16px;"></i> Iniciar Demonstração ao Vivo
+            <i data-lucide="play" style="width: 16px; height: 16px;"></i> Iniciar Demonstração Prática
           </a>
         </div>
       </div>
@@ -820,7 +843,7 @@ CT  = COT + Custo de Oportunidade do Capital
     </div>
   </main>
 
-  <!-- Footer Navigation -->
+  <!-- Barra Inferior de Navegação -->
   <footer>
     <div style="display: flex; align-items: center; gap: 8px;">
       <button onclick="prevSlide()" id="prevBtn" class="nav-btn" title="Slide Anterior (Seta Esquerda)">
@@ -832,16 +855,16 @@ CT  = COT + Custo de Oportunidade do Capital
     </div>
 
     <div class="slide-counter">
-      Slide <span id="currentSlideNumber" style="color: #34d399;">1</span> de <span id="totalSlideNumber">9</span>
+      Slide <span id="currentSlideNumber" style="color: var(--accent-emerald);">1</span> de <span id="totalSlideNumber">9</span>
     </div>
 
     <div style="display: flex; align-items: center; gap: 8px;">
-      <span style="font-size: 0.75rem; color: var(--text-muted);">Use ← / → ou Espaço</span>
+      <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">Dica: Use as setas ← / → do teclado ou a barra de espaço</span>
     </div>
   </footer>
 
   <script>
-    // Inicializar Lucide Icons
+    // Inicializar ícones Lucide
     lucide.createIcons();
 
     // Controle dos Slides
@@ -884,7 +907,7 @@ CT  = COT + Custo de Oportunidade do Capital
       }
     }
 
-    // Teclado
+    // Navegação via Teclado
     document.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
         e.preventDefault();
@@ -895,7 +918,7 @@ CT  = COT + Custo de Oportunidade do Capital
       }
     });
 
-    // Fullscreen
+    // Modo Tela Cheia
     function toggleFullscreen() {
       if (!document.fullscreenElement) {
         document.documentElement.requestFullscreen().catch(() => {});
@@ -904,17 +927,16 @@ CT  = COT + Custo de Oportunidade do Capital
       }
     }
 
-    // Baixar em PDF de Alta Qualidade
+    // Baixar em PDF com Fundo Claro Perfeito
     function downloadPDF() {
       const btn = document.getElementById('pdfBtn');
       const originalHTML = btn.innerHTML;
       btn.innerHTML = `<i data-lucide="loader-2" style="width: 16px; height: 16px; animation: spin 1s linear infinite;"></i> Gerando PDF...`;
       lucide.createIcons();
 
-      // Configuração para renderizar todos os slides ordenadamente em paisagem
       const element = document.createElement('div');
-      element.style.background = '#090d16';
-      element.style.color = '#f8fafc';
+      element.style.background = '#ffffff';
+      element.style.color = '#0f172a';
       element.style.padding = '0';
       element.style.fontFamily = "'Plus Jakarta Sans', sans-serif";
 
@@ -927,10 +949,11 @@ CT  = COT + Custo de Oportunidade do Capital
         slideClone.style.visibility = 'visible';
         slideClone.style.transform = 'none';
         slideClone.style.position = 'relative';
-        slideClone.style.padding = '36px 44px';
+        slideClone.style.padding = '32px 40px';
         slideClone.style.minHeight = '100vh';
         slideClone.style.pageBreakAfter = 'always';
         slideClone.style.border = 'none';
+        slideClone.style.background = '#ffffff';
         element.appendChild(slideClone);
       });
 
@@ -938,7 +961,7 @@ CT  = COT + Custo de Oportunidade do Capital
         margin:       0,
         filename:     'BovInSight-Apresentacao-Hackathon-UFJF-2026.pdf',
         image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#090d16' },
+        html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
         jsPDF:        { unit: 'in', format: 'a4', orientation: 'landscape' }
       };
 
@@ -947,13 +970,13 @@ CT  = COT + Custo de Oportunidade do Capital
         lucide.createIcons();
       }).catch(err => {
         console.error('Erro ao gerar PDF:', err);
-        window.print(); // Fallback se o html2pdf falhar
+        window.print();
         btn.innerHTML = originalHTML;
         lucide.createIcons();
       });
     }
 
-    // Inicialização
+    // Inicializar no primeiro slide
     showSlide(0);
   </script>
 </body>
