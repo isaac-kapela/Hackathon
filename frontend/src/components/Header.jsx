@@ -16,7 +16,7 @@ export default function Header({ activeTab, setActiveTab }) {
           {/* Logo & Branding */}
           <div className="flex items-center space-x-3.5">
             <div className="relative">
-              <div className="w-12 h-12 rounded-2xl overflow-hidden shadow-lg shadow-emerald-950/40 border-2 border-emerald-400/40 bg-slate-800 flex items-center justify-center">
+              <div className="w-12 h-12 rounded-2xl overflow-hidden shadow-lg shadow-red-950/40 border-2 border-red-500/40 bg-slate-800 flex items-center justify-center">
                 <img 
                   src="/logo.jpeg" 
                   alt="BovInSight Logo" 
@@ -28,8 +28,8 @@ export default function Header({ activeTab, setActiveTab }) {
                 />
               </div>
               <span className="absolute -bottom-1 -right-1 flex h-3.5 w-3.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border-2 border-slate-900"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-red-600 border-2 border-slate-900"></span>
               </span>
             </div>
             
@@ -38,12 +38,12 @@ export default function Header({ activeTab, setActiveTab }) {
                 <h1 className="font-black text-xl text-white tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
                   BovInSight
                 </h1>
-                <span className="text-[11px] bg-emerald-500/15 text-emerald-400 font-bold px-2.5 py-0.5 rounded-full border border-emerald-500/30 tracking-wide uppercase">
-                  Hackathon UFJF 2026
+                <span className="text-[11px] bg-red-500/15 text-red-400 font-bold px-2.5 py-0.5 rounded-full border border-red-500/30 tracking-wide uppercase">
+                  Hackathon UFJF 2026 (32h)
                 </span>
               </div>
               <p className="text-xs text-slate-400 font-medium">
-                Sistema Especialista Zootécnico & Econômico • <span className="text-emerald-400/90 font-semibold">Tema 3</span>
+                Sistema Especialista Zootécnico & Econômico • <span className="text-red-400/90 font-semibold">Tema 3</span>
               </p>
             </div>
           </div>
@@ -60,7 +60,7 @@ export default function Header({ activeTab, setActiveTab }) {
                     onClick={() => setActiveTab(item.id)}
                     className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 ${
                       isActive
-                        ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-900/30'
+                        ? 'bg-gradient-to-r from-red-700 to-rose-700 text-white shadow-md shadow-red-950/40'
                         : 'text-slate-300 hover:text-white hover:bg-slate-700/50'
                     }`}
                   >
@@ -76,12 +76,12 @@ export default function Header({ activeTab, setActiveTab }) {
                 href="/apresentacao.html"
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-emerald-500/15 to-emerald-600/15 hover:from-emerald-500/25 hover:to-emerald-600/25 border border-emerald-400/30 text-emerald-300 hover:text-emerald-200 rounded-xl text-xs font-bold transition-all shadow-sm"
+                className="flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-red-500/15 to-red-600/15 hover:from-red-500/25 hover:to-red-600/25 border border-red-400/30 text-red-300 hover:text-red-200 rounded-xl text-xs font-bold transition-all shadow-sm"
                 title="Abrir Apresentação do Produto (Slides em HTML/PDF)"
               >
-                <Presentation className="w-3.5 h-3.5 text-emerald-400" />
+                <Presentation className="w-3.5 h-3.5 text-red-400" />
                 <span>Pitch Produto</span>
-                <ExternalLink className="w-2.5 h-2.5 text-emerald-400/60" />
+                <ExternalLink className="w-2.5 h-2.5 text-red-400/60" />
               </a>
 
               <a

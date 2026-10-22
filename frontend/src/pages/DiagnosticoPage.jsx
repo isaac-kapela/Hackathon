@@ -227,11 +227,11 @@ export default function DiagnosticoPage() {
               onClick={() => setAutoRun(!autoRun)}
               className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all border flex items-center gap-1.5 ${
                 autoRun 
-                  ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40' 
+                  ? 'bg-red-500/20 text-red-300 border-red-500/40' 
                   : 'bg-slate-800 text-slate-400 border-slate-700'
               }`}
             >
-              <Zap className={`w-3.5 h-3.5 ${autoRun ? 'text-emerald-400 fill-emerald-400' : 'text-slate-500'}`} />
+              <Zap className={`w-3.5 h-3.5 ${autoRun ? 'text-red-400 fill-red-400' : 'text-slate-500'}`} />
               <span>{autoRun ? 'Auto-Inferência Ativa' : 'Manual'}</span>
             </button>
           </div>
@@ -248,15 +248,15 @@ export default function DiagnosticoPage() {
                 onClick={() => aplicarPreset(key)}
                 className={`p-3 text-left rounded-2xl transition-all border flex flex-col justify-between ${
                   isSelected
-                    ? 'bg-gradient-to-br from-emerald-600 to-teal-700 text-white border-emerald-400 ring-2 ring-emerald-400/50 shadow-lg'
+                    ? 'bg-gradient-to-br from-red-700 to-rose-800 text-white border-red-400 ring-2 ring-red-400/50 shadow-lg'
                     : 'bg-slate-800/80 hover:bg-slate-700/80 border-slate-700 text-slate-200'
                 }`}
               >
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-xs font-black truncate">{item.nome.split('(')[0]}</span>
-                  {isSelected && <CheckCircle2 className="w-3.5 h-3.5 text-emerald-200 shrink-0" />}
+                  {isSelected && <CheckCircle2 className="w-3.5 h-3.5 text-red-200 shrink-0" />}
                 </div>
-                <span className={`text-[10px] truncate ${isSelected ? 'text-emerald-100' : 'text-slate-400'}`}>
+                <span className={`text-[10px] truncate ${isSelected ? 'text-red-100' : 'text-slate-400'}`}>
                   {key === 'alta_eficiencia' ? 'Bônus e Conforto' :
                    key === 'estresse_termico_e_acidose' ? 'ITU Alto e Ração' :
                    key === 'mastite_e_qualidade_critica' ? 'Mastite e CBT' :
@@ -294,14 +294,14 @@ export default function DiagnosticoPage() {
           <div className="flex items-center justify-between border-b border-slate-100 pb-4">
             <div>
               <h2 className="text-xl font-black text-slate-900 flex items-center gap-2">
-                <Sliders className="w-5 h-5 text-emerald-600" />
+                <Sliders className="w-5 h-5 text-red-600" />
                 Ajuste os Parâmetros
               </h2>
               <p className="text-xs text-slate-500 mt-0.5">Altere os campos para simular o impacto imediato</p>
             </div>
 
-            <div className="flex items-center gap-1.5 bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1 rounded-full font-mono text-[11px] font-bold">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <div className="flex items-center gap-1.5 bg-red-50 text-red-800 border border-red-200 px-3 py-1 rounded-full font-mono text-[11px] font-bold">
+              <span className="w-2 h-2 rounded-full bg-red-600 animate-pulse"></span>
               <span>25 Regras</span>
             </div>
           </div>
@@ -312,7 +312,7 @@ export default function DiagnosticoPage() {
               type="button"
               onClick={() => setActiveFormTab('zootecnia')}
               className={`py-2 px-1 rounded-xl transition-all flex items-center justify-center space-x-1 ${
-                activeFormTab === 'zootecnia' ? 'bg-white text-emerald-700 shadow-sm font-black' : 'hover:text-slate-900'
+                activeFormTab === 'zootecnia' ? 'bg-white text-red-700 shadow-sm font-black' : 'hover:text-slate-900'
               }`}
             >
               <Activity className="w-3.5 h-3.5" />
@@ -795,7 +795,7 @@ export default function DiagnosticoPage() {
               disabled={loading}
               className="w-full py-4 bg-slate-900 hover:bg-slate-800 disabled:opacity-60 text-white font-black rounded-2xl shadow-xl transition-all flex items-center justify-center gap-2.5 text-xs uppercase tracking-wider mt-4 hover:shadow-slate-900/30 active:scale-[0.99]"
             >
-              <Play className="w-4 h-4 text-emerald-400 fill-emerald-400" />
+              <Play className="w-4 h-4 text-red-400 fill-red-400" />
               {loading ? 'Calculando Inferência...' : 'Reavaliar Rebanho & Custos'}
             </button>
           </form>
@@ -824,7 +824,7 @@ export default function DiagnosticoPage() {
               <button
                 type="button"
                 onClick={() => aplicarOtimizacao('dieta')}
-                className="p-2 text-left bg-emerald-50/70 hover:bg-emerald-100/80 border border-emerald-200/80 rounded-xl font-bold text-emerald-950 transition-all"
+                className="p-2 text-left bg-red-50/70 hover:bg-red-100/80 border border-red-200/80 rounded-xl font-bold text-red-950 transition-all"
               >
                 🌾 Dieta Ruminal 60%
               </button>
@@ -857,7 +857,7 @@ export default function DiagnosticoPage() {
                 <div className="bg-white rounded-3xl p-5 sm:p-6 border border-slate-200/90 shadow-sm space-y-3">
                   <div className="flex items-center justify-between pb-2 border-b border-slate-100">
                     <span className="text-xs font-black uppercase tracking-wider text-slate-800 flex items-center gap-2">
-                      <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                      <ShieldCheck className="w-4 h-4 text-red-600" />
                       Plano de Ação Imediato Priorizado
                     </span>
                     <span className="text-[11px] font-bold text-slate-500">
@@ -1003,7 +1003,7 @@ export default function DiagnosticoPage() {
                 onClick={() => setShowReportModal(true)}
                 className="px-5 py-3 text-xs font-bold text-slate-800 bg-white border border-slate-200/90 hover:bg-slate-50 shadow-sm rounded-2xl flex items-center gap-2.5 transition-all hover:shadow hover:-translate-y-0.5"
               >
-                <FileText className="w-4 h-4 text-emerald-600" />
+                <FileText className="w-4 h-4 text-red-600" />
                 <span>Emitir Laudo Técnico Especialista</span>
               </button>
             </div>

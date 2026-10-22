@@ -23,7 +23,7 @@ export default function ExplanationModule({ regrasDisparadas = [], memoriaTrabal
   if (!regrasDisparadas || regrasDisparadas.length === 0) {
     return (
       <div className="bg-white rounded-3xl shadow-sm border border-slate-200/90 p-8 sm:p-10 text-center text-slate-500">
-        <div className="w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center mx-auto mb-4 text-emerald-600 border border-emerald-100 shadow-sm">
+        <div className="w-14 h-14 bg-red-50 rounded-2xl flex items-center justify-center mx-auto mb-4 text-red-600 border border-red-100 shadow-sm">
           <Award className="w-7 h-7" />
         </div>
         <h4 className="text-lg font-black text-slate-900 mb-1">Nenhuma Não-Conformidade Crítica Detectada</h4>
@@ -35,7 +35,7 @@ export default function ExplanationModule({ regrasDisparadas = [], memoriaTrabal
   }
 
   const categoryBadges = {
-    financeira: { bg: 'bg-emerald-50 text-emerald-700 border-emerald-200', icon: DollarSign },
+    financeira: { bg: 'bg-red-50 text-red-700 border-red-200', icon: DollarSign },
     qualidade: { bg: 'bg-cyan-50 text-cyan-700 border-cyan-200', icon: Droplets },
     zootecnica: { bg: 'bg-indigo-50 text-indigo-700 border-indigo-200', icon: Activity },
     mercado: { bg: 'bg-amber-50 text-amber-700 border-amber-200', icon: Sparkles },
@@ -49,7 +49,7 @@ export default function ExplanationModule({ regrasDisparadas = [], memoriaTrabal
     <div className="bg-white rounded-3xl shadow-sm border border-slate-200/90 p-6 sm:p-7 space-y-5">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-4 border-b border-slate-100 gap-3">
         <div className="flex items-center space-x-3">
-          <div className="p-2.5 bg-emerald-500/10 text-emerald-700 rounded-2xl border border-emerald-500/20">
+          <div className="p-2.5 bg-red-500/10 text-red-700 rounded-2xl border border-red-500/20">
             <HelpCircle className="w-5 h-5" />
           </div>
           <div>
@@ -151,9 +151,9 @@ export default function ExplanationModule({ regrasDisparadas = [], memoriaTrabal
                   </div>
 
                   {/* Bloco 3: Plano de Ação Recomendado */}
-                  <div className="bg-gradient-to-br from-emerald-50/80 via-teal-50/60 to-emerald-50/80 border border-emerald-200/90 rounded-2xl p-4 text-emerald-950">
-                    <span className="text-[10px] font-black uppercase tracking-wider text-emerald-800 mb-1.5 flex items-center">
-                      <AlertCircle className="w-4 h-4 mr-1.5 text-emerald-700" />
+                  <div className="bg-gradient-to-br from-red-50/80 via-rose-50/60 to-red-50/80 border border-red-200/90 rounded-2xl p-4 text-red-950">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-red-800 mb-1.5 flex items-center">
+                      <AlertCircle className="w-4 h-4 mr-1.5 text-red-700" />
                       Recomendação Zootécnica & Manejo Corretivo
                     </span>
                     <p className="text-xs leading-relaxed font-medium">{regra.conclusao?.recomendacao}</p>

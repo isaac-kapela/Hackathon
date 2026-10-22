@@ -67,7 +67,7 @@ export default function BaseConhecimentoPage() {
       <div className="bg-white rounded-3xl shadow-sm border border-slate-200/90 p-6 space-y-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-4 border-b border-slate-100 gap-4">
           <div className="flex items-center space-x-3">
-            <div className="p-3 bg-emerald-100 text-emerald-700 rounded-2xl">
+            <div className="p-3 bg-red-100 text-red-700 rounded-2xl">
               <BookOpen className="w-6 h-6" />
             </div>
             <div>
@@ -84,7 +84,7 @@ export default function BaseConhecimentoPage() {
             <button
               onClick={() => { setActiveSubTab('regras'); setSearchTerm(''); }}
               className={`px-4 py-2 rounded-xl transition-all ${
-                activeSubTab === 'regras' ? 'bg-white text-emerald-800 shadow-sm font-black' : 'text-slate-600 hover:text-slate-900'
+                activeSubTab === 'regras' ? 'bg-white text-red-800 shadow-sm font-black' : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               Regras de Produção ({regras.length})
@@ -92,7 +92,7 @@ export default function BaseConhecimentoPage() {
             <button
               onClick={() => { setActiveSubTab('variaveis'); setSearchTerm(''); }}
               className={`px-4 py-2 rounded-xl transition-all ${
-                activeSubTab === 'variaveis' ? 'bg-white text-emerald-800 shadow-sm font-black' : 'text-slate-600 hover:text-slate-900'
+                activeSubTab === 'variaveis' ? 'bg-white text-red-800 shadow-sm font-black' : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               Dicionário de Variáveis ({variaveis.length})
@@ -109,7 +109,7 @@ export default function BaseConhecimentoPage() {
               placeholder={activeSubTab === 'regras' ? 'Buscar regra por nome ou ID...' : 'Buscar variável...'}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+              className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium focus:bg-white focus:ring-2 focus:ring-red-500 focus:outline-none"
             />
           </div>
 

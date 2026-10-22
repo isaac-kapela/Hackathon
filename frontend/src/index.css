@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-slate-50 text-slate-800 antialiased selection:bg-emerald-500 selection:text-white;
+    @apply bg-slate-50 text-slate-800 antialiased selection:bg-red-600 selection:text-white;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   }
 
@@ -45,10 +45,10 @@
 /* Subtle glow animations */
 @keyframes pulseGlow {
   0%, 100% {
-    box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+    box-shadow: 0 0 15px rgba(185, 28, 28, 0.2);
   }
   50% {
-    box-shadow: 0 0 25px rgba(16, 185, 129, 0.45);
+    box-shadow: 0 0 25px rgba(185, 28, 28, 0.45);
   }
 }
 

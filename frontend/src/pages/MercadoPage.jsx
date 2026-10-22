@@ -59,13 +59,13 @@ export default function MercadoPage() {
       <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white p-7 rounded-3xl shadow-xl border border-slate-700/60">
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
           <div className="flex items-start space-x-4">
-            <div className="p-3 bg-emerald-500/20 border border-emerald-400/30 rounded-2xl text-emerald-400 shrink-0">
+            <div className="p-3 bg-red-500/20 border border-red-400/30 rounded-2xl text-red-400 shrink-0">
               <TrendingUp className="w-7 h-7" />
             </div>
             <div>
               <div className="flex items-center gap-2">
                 <h2 className="text-xl font-black text-white">Mercado, Cotações & Benchmarks Oficiais</h2>
-                <span className="text-xs bg-emerald-500/20 text-emerald-300 font-bold px-2.5 py-0.5 rounded-full border border-emerald-500/30 uppercase tracking-wider">
+                <span className="text-xs bg-red-500/20 text-red-300 font-bold px-2.5 py-0.5 rounded-full border border-red-500/30 uppercase tracking-wider">
                   CEPEA • IBGE • EMBRAPA
                 </span>
               </div>
@@ -80,7 +80,7 @@ export default function MercadoPage() {
             disabled={loading}
             className="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-200 font-bold text-xs rounded-xl flex items-center gap-2 transition-all shadow-sm shrink-0"
           >
-            <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin text-emerald-400' : 'text-slate-400'}`} />
+            <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin text-red-400' : 'text-slate-400'}`} />
             <span>{loading ? 'Atualizando...' : 'Atualizar Cotações'}</span>
           </button>
         </div>
@@ -96,20 +96,20 @@ export default function MercadoPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           
           {/* Card 1: Preço Médio Brasil Leite */}
-          <div className="p-5 bg-gradient-to-br from-emerald-50/70 to-teal-50/70 rounded-3xl border border-emerald-200/80 shadow-sm flex flex-col justify-between">
+          <div className="p-5 bg-gradient-to-br from-red-50/70 to-rose-50/70 rounded-3xl border border-red-200/80 shadow-sm flex flex-col justify-between">
             <div>
-              <span className="text-xs font-bold text-emerald-900 uppercase tracking-wider block">Leite Médio Produtor (Brasil)</span>
-              <span className="text-[11px] text-emerald-600 font-medium">Média ponderada CEPEA Líquido</span>
+              <span className="text-xs font-bold text-red-900 uppercase tracking-wider block">Leite Médio Produtor (Brasil)</span>
+              <span className="text-[11px] text-red-600 font-medium">Média ponderada CEPEA Líquido</span>
             </div>
             <div className="mt-4">
               <div className="flex items-baseline gap-1.5">
-                <span className="text-3xl font-black text-emerald-950">
+                <span className="text-3xl font-black text-red-950">
                   R$ {mercado.leite_cepea_medio !== undefined ? mercado.leite_cepea_medio.toFixed(2) : '2.48'}
                 </span>
-                <span className="text-xs font-bold text-emerald-700">/ litro</span>
+                <span className="text-xs font-bold text-red-700">/ litro</span>
               </div>
-              <p className="text-[11px] text-emerald-800 mt-1 font-semibold flex items-center gap-1">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+              <p className="text-[11px] text-red-800 mt-1 font-semibold flex items-center gap-1">
+                <CheckCircle2 className="w-3.5 h-3.5 text-red-600" />
                 Base para cálculo de receita bruta
               </p>
             </div>

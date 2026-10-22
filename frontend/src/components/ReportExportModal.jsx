@@ -27,7 +27,7 @@ export default function ReportExportModal({ isOpen, onClose, resultado, indicado
         {/* Header Modal */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 bg-slate-50">
           <div className="flex items-center gap-2.5">
-            <div className="p-2 bg-emerald-100 text-emerald-700 rounded-xl">
+            <div className="p-2 bg-red-100 text-red-700 rounded-xl">
               <FileText className="w-5 h-5" />
             </div>
             <div>
@@ -47,9 +47,9 @@ export default function ReportExportModal({ isOpen, onClose, resultado, indicado
             <button
               type="button"
               onClick={handleDownloadJson}
-              className="px-3.5 py-2 text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-xl hover:bg-emerald-100 flex items-center gap-1.5 transition-colors shadow-xs"
+              className="px-3.5 py-2 text-xs font-bold text-red-700 bg-red-50 border border-red-200 rounded-xl hover:bg-red-100 flex items-center gap-1.5 transition-colors shadow-xs"
             >
-              <Download className="w-4 h-4 text-emerald-600" />
+              <Download className="w-4 h-4 text-red-600" />
               <span>Exportar JSON</span>
             </button>
             <button
@@ -75,8 +75,8 @@ export default function ReportExportModal({ isOpen, onClose, resultado, indicado
                   className="w-14 h-14 rounded-2xl object-cover border border-slate-200 shadow-sm shrink-0"
                 />
                 <div>
-                  <span className="text-[10px] font-black uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                    BovInSight • Hackathon UFJF 2026
+                  <span className="text-[10px] font-black uppercase tracking-wider text-red-700 bg-red-50 px-2 py-0.5 rounded border border-red-200">
+                    BovInSight • Hackathon UFJF 2026 (32h)
                   </span>
                   <h1 className="text-2xl font-black text-slate-900 mt-1">Laudo Especialista de Avaliação Zootécnica & Econômica</h1>
                   <p className="text-xs text-slate-500 mt-0.5">Fundamentação: Embrapa Gado de Leite, MAPA IN 76/77, NRC Dairy Cattle e CEPEA</p>

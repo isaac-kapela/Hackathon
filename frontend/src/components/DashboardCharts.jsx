@@ -72,7 +72,7 @@ export default function DashboardCharts({ indicadores, formData }) {
 
   const dadosComposicaoCustos = [
     { name: 'Ração Concentrada', valor: Math.round(custoRacaoMes), color: '#3b82f6' },
-    { name: 'Volumoso / Silagem', valor: Math.round(custoVolumosoMes), color: '#10b981' },
+    { name: 'Volumoso / Silagem', valor: Math.round(custoVolumosoMes), color: '#b91c1c' },
     { name: 'Mão de Obra Contratada', valor: Math.round(custoMaoObraMes), color: '#8b5cf6' },
     { name: 'Outros Diretos (Energia/Sanidade)', valor: Math.round(outrosCustosMes), color: '#f59e0b' },
     { name: 'Depreciação de Máquinas', valor: Math.round(depreciacaoMes), color: '#64748b' },
@@ -126,10 +126,10 @@ export default function DashboardCharts({ indicadores, formData }) {
           <div className="mb-4">
             <div className="flex items-center justify-between gap-2">
               <h4 className="text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center gap-2">
-                <DollarSign className="w-4 h-4 text-emerald-600" />
+                <DollarSign className="w-4 h-4 text-red-600" />
                 Evolução do Lucro e Margem Líquida Mensal
               </h4>
-              <span className="text-xs font-mono text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full font-bold border border-emerald-200">
+              <span className="text-xs font-mono text-red-800 bg-red-100 px-3 py-1 rounded-full font-bold border border-red-200">
                 Preço Atual: R$ {basePreco.toFixed(2)}/L
               </span>
             </div>
@@ -143,12 +143,12 @@ export default function DashboardCharts({ indicadores, formData }) {
               <AreaChart data={dadosEvolucaoLucro} margin={{ top: 10, right: 15, left: 5, bottom: 5 }}>
                 <defs>
                   <linearGradient id="colorLucro" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#10b981" stopOpacity={0.8}/>
-                    <stop offset="95%" stopColor="#10b981" stopOpacity={0.05}/>
+                    <stop offset="5%" stopColor="#b91c1c" stopOpacity={0.8}/>
+                    <stop offset="95%" stopColor="#b91c1c" stopOpacity={0.05}/>
                   </linearGradient>
                   <linearGradient id="colorLucroReal" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#14b8a6" stopOpacity={0.7}/>
-                    <stop offset="95%" stopColor="#14b8a6" stopOpacity={0.05}/>
+                    <stop offset="5%" stopColor="#e11d48" stopOpacity={0.7}/>
+                    <stop offset="95%" stopColor="#e11d48" stopOpacity={0.05}/>
                   </linearGradient>
                   <linearGradient id="colorReceita" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.4}/>
@@ -166,8 +166,8 @@ export default function DashboardCharts({ indicadores, formData }) {
                 <Area type="monotone" dataKey="Receita" stroke="#3b82f6" fillOpacity={1} fill="url(#colorReceita)" name="Receita Bruta" />
                 <Line type="monotone" dataKey="COT" stroke="#ef4444" strokeWidth={2} strokeDasharray="4 4" name="Custo Operacional (COT)" dot={false} />
                 <Line type="monotone" dataKey="CT" stroke="#64748b" strokeWidth={2} strokeDasharray="2 2" name="Custo Total c/ Capital (CT)" dot={false} />
-                <Area type="monotone" dataKey="MargemLiquida" stroke="#10b981" strokeWidth={2} fillOpacity={1} fill="url(#colorLucro)" name="Margem Líquida (Rec - COT)" />
-                <Area type="monotone" dataKey="LucroReal" stroke="#14b8a6" strokeWidth={2.5} fillOpacity={1} fill="url(#colorLucroReal)" name="Lucro Real (Rec - CT)" />
+                <Area type="monotone" dataKey="MargemLiquida" stroke="#b91c1c" strokeWidth={2} fillOpacity={1} fill="url(#colorLucro)" name="Margem Líquida (Rec - COT)" />
+                <Area type="monotone" dataKey="LucroReal" stroke="#e11d48" strokeWidth={2.5} fillOpacity={1} fill="url(#colorLucroReal)" name="Lucro Real (Rec - CT)" />
               </AreaChart>
             </ResponsiveContainer>
           </div>
@@ -220,7 +220,7 @@ export default function DashboardCharts({ indicadores, formData }) {
         <div className="p-6 rounded-3xl border border-slate-200/80 bg-slate-50/50 hover:bg-white transition-all hover:shadow-md">
           <div className="mb-4">
             <h4 className="text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center gap-2">
-              <Layers className="w-4 h-4 text-emerald-600" />
+              <Layers className="w-4 h-4 text-red-600" />
               Margens Unitárias por Litro Produzido (R$/Litro)
             </h4>
             <p className="text-xs text-slate-500 mt-1">
@@ -239,7 +239,7 @@ export default function DashboardCharts({ indicadores, formData }) {
                   contentStyle={{ backgroundColor: '#ffffff', borderRadius: '16px', border: '1px solid #cbd5e1', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)', fontSize: '12px' }}
                 />
                 <Legend wrapperStyle={{ fontSize: '12px', paddingTop: '10px' }} />
-                <Bar dataKey="Preço Líquido Recebido" fill="#10b981" radius={[8, 8, 0, 0]} />
+                <Bar dataKey="Preço Líquido Recebido" fill="#b91c1c" radius={[8, 8, 0, 0]} />
                 <Bar dataKey="COE (Desembolso Direto)" fill="#f59e0b" radius={[8, 8, 0, 0]} />
                 <Bar dataKey="COT (Operacional Total)" fill="#ef4444" radius={[8, 8, 0, 0]} />
                 <Bar dataKey="CT (Custo Total c/ Capital)" fill="#64748b" radius={[8, 8, 0, 0]} />
