@@ -1,7 +1,7 @@
 # 📄 Documento Técnico: Especificação Formal do Problema, Modelagem e Arquitetura da Solução
 
 > **Projeto:** MicroLeiteMacroNegocios  
-> **Evento:** XXVIII Semana da Computação DCC/UFJF & RERUM (Hackathon UFJF 2026 — Maratona de 32 Horas) — **Tema 3: Economia, Zootecnia e Qualidade do Leite**  
+> **Evento:** XXVIII Semana da Computação DCC/UFJF & RERUM (Hackathon UFJF 2026 — Maratona de 56 Horas) — **Tema 3: Economia, Zootecnia e Qualidade do Leite**  
 > **Classificação:** Sistema Especialista Baseado em Regras com Incerteza (MYCIN/Shortliffe) e Raciocínio Baseado em Fatos  
 > **Modelo de IA & Ferramentas:** Google Gemini 2.5 Pro (Antigravity Agentic AI) para Elicitação de Conhecimento, Arquitetura e Pair Programming  
 > **Autores:** Equipe MicroLeiteMacroNegocios  
@@ -162,7 +162,7 @@ CF_1 + CF_2 \times (1 + CF_1), & \text{se } CF_1, CF_2 < 0
 
 ## 7. Metodologia de Desenvolvimento, Sadrey, Scrum e Pair Programming com IA
 
-A construção do **MicroLeiteMacroNegocios** em um prazo restrito de **32 horas de maratona (Hackathon)** exigiu uma abordagem disciplinada de **Engenharia de Software e Engenharia do Conhecimento**, combinando o modelo clássico de **Sadrey** para sistemas especialistas, o framework ágil **Scrum** para gestão de entregas rápidas, e uma esteira avançada de **Pair Programming com IA (Google Gemini 2.5 Pro / Antigravity Agentic AI)**.
+A construção do **MicroLeiteMacroNegocios** em um prazo restrito de **56 horas de maratona (Hackathon)** exigiu uma abordagem disciplinada de **Engenharia de Software e Engenharia do Conhecimento**, combinando o modelo clássico de **Sadrey** para sistemas especialistas, o framework ágil **Scrum** para gestão de entregas rápidas, e uma esteira avançada de **Pair Programming com IA (Google Gemini 2.5 Pro / Antigravity Agentic AI)**.
 
 ```mermaid
 flowchart TD
@@ -173,8 +173,8 @@ flowchart TD
         S4 --> S5["Validação<br/>(Casos de Teste Reais)"]
     end
 
-    subgraph SCRUM["2. Gestão Ágil (Scrum em 32h)"]
-        SC1["Product Backlog<br/>(Histórias de Usuário)"] --> SC2["Sprints de 2h a 4h<br/>(Ciclos de Foco)"]
+    subgraph SCRUM["2. Gestão Ágil (Scrum em 56h)"]
+        SC1["Product Backlog<br/>(Histórias de Usuário)"] --> SC2["Sprints de Foco<br/>(Ciclos de Entrega)"]
         SC2 --> SC3["Daily Standups & Checkpoints<br/>(Ajustes de Rota)"]
         SC3 --> SC4["Incremento Funcional<br/>(Executável & Testado)"]
     end
@@ -194,14 +194,14 @@ flowchart TD
 4. **Formalização Lógica:** Conversão do conhecimento em 25 regras declarativas de produção (`rules.json`) com premissas booleanas/aritméticas e Fatores de Certeza ($CF \in [-1, +1]$).
 5. **Implementação & Validação:** Implementação do motor determinístico desacoplado e validação contínua contra 5 presets de fazendas representativas.
 
-### 7.2. O Framework Scrum na Maratona de 32 Horas
+### 7.2. O Framework Scrum na Maratona de 56 Horas
 O tempo do hackathon foi distribuído em microciclos iterativos:
-- **Sprint 0 (Horas 0–4):** Definição de escopo do Tema 3, arquitetura e elicitação de variáveis ontológicas.
-- **Sprint 1 (Horas 4–10):** Construção do motor de inferência em Node.js com algoritmo de encadeamento para frente e cálculo MYCIN.
-- **Sprint 2 (Horas 10–18):** Desenvolvimento da interface reativa em React, Tailwind CSS e componentes de visualização com Recharts.
-- **Sprint 3 (Horas 18–24):** Módulo de Explicabilidade (XAI), simulação de cenários interativos e exportação de laudos periciais.
-- **Sprint 4 (Horas 24–28):** Auditoria de usabilidade (debounce 150ms, tratamento de strings vazias, refinamento de paleta carmesim/vermelha `#900000`).
-- **Sprint 5 (Horas 28–32):** Consolidação da documentação técnica, deck de apresentação em 12 slides com exportador PDF e testes finais.
+- **Sprint 0 (Horas 0–8):** Definição de escopo do Tema 3, arquitetura e elicitação de variáveis ontológicas.
+- **Sprint 1 (Horas 8–20):** Construção do motor de inferência em Node.js com algoritmo de encadeamento para frente e cálculo MYCIN.
+- **Sprint 2 (Horas 20–32):** Desenvolvimento da interface reativa em React, Tailwind CSS e componentes de visualização com Recharts.
+- **Sprint 3 (Horas 32–42):** Módulo de Explicabilidade (XAI), simulação de cenários interativos e exportação de laudos periciais.
+- **Sprint 4 (Horas 42–48):** Auditoria de usabilidade (debounce 150ms, tratamento de strings vazias, refinamento de paleta carmesim/vermelha `#900000`, consistência biológica).
+- **Sprint 5 (Horas 48–56):** Consolidação da documentação técnica, deck de apresentação em 12 slides com teleprompter interativo e testes finais.
 
 ### 7.3. O Papel do Desenvolvedor Humano vs. A Inteligência Artificial
 

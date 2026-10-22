@@ -433,12 +433,22 @@
         <img src="logo.jpeg" alt="Logo" onerror="this.style.display='none'">
       </div>
       <div>
-        <span>MicroLeite<span style="color: var(--accent-red);">MacroNegocios</span></span>
-        <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600; display: block;">Hackathon UFJF 2026 (32h) • Tema 3</span>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span>MicroLeite<span style="color: var(--accent-red);">MacroNegocios</span></span>
+          <span style="background: #ffffff; padding: 2px 8px; border-radius: 6px; border: 1px solid #fecaca; font-size: 0.72rem; font-weight: 900; display: inline-flex; align-items: center; box-shadow: var(--shadow-sm);">
+            <span style="color: #dc2626;">Muu</span><span style="color: #000000;">ito Melhor</span>
+          </span>
+        </div>
+        <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600; display: block;">Hackathon UFJF 2026 (56h) • Tema 3</span>
       </div>
     </div>
 
     <div class="header-actions">
+      <button onclick="toggleSpeechModal()" class="btn btn-outline" style="border-color: #fecaca; color: var(--accent-red);" title="Abrir Roteiro de Fala do Apresentador">
+        <i data-lucide="mic" style="width: 16px; height: 16px; color: var(--accent-red);"></i>
+        <span>Roteiro de Fala</span>
+      </button>
+
       <button onclick="downloadPDF()" class="btn btn-outline" id="btnPdf" title="Baixar todos os slides em PDF">
         <i data-lucide="file-down" style="width: 16px; height: 16px; color: var(--accent-red);"></i>
         <span>Baixar PDF</span>
@@ -472,7 +482,7 @@
           <div>
             <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 6px;">
               <span class="slide-badge badge-red">
-                <i data-lucide="award" style="width: 14px; height: 14px;"></i> Hackathon UFJF 2026 (32 Horas) • Tema 3
+                <i data-lucide="award" style="width: 14px; height: 14px;"></i> Hackathon UFJF 2026 (56 Horas) • Tema 3
               </span>
               <span class="slide-badge badge-blue">
                 <i data-lucide="bot" style="width: 14px; height: 14px;"></i> IA Pair: Google Gemini 2.5 Pro (Antigravity)
@@ -579,7 +589,7 @@
             <i data-lucide="target" style="width: 14px; height: 14px;"></i> Engenharia de Software & IA
           </span>
           <h2 class="slide-title">O Desafio dos Hackathons: Como Evitar a Alucinação?</h2>
-          <p class="slide-subtitle">Como cobrir economia, zootecnia, bioclimatologia e qualidade do leite em apenas 32 horas sem gerar código raso ou regras desconexas?</p>
+          <p class="slide-subtitle">Como cobrir economia, zootecnia, bioclimatologia e qualidade do leite em apenas 56 horas sem gerar código raso ou regras desconexas?</p>
         </div>
 
         <div class="slide-body">
@@ -609,7 +619,7 @@
             <i data-lucide="git-merge" style="width: 14px; height: 14px;"></i> Metodologias Integradas
           </span>
           <h2 class="slide-title">Metodologia Sadrey (Especialista) + Scrum (Agilidade)</h2>
-          <p class="slide-subtitle">Unimos o rigor científico do ciclo Sadrey na modelagem do conhecimento com a velocidade e entregas contínuas do Scrum em sprints de 32h.</p>
+          <p class="slide-subtitle">Unimos o rigor científico do ciclo Sadrey na modelagem do conhecimento com a velocidade e entregas contínuas do Scrum em sprints de 56h.</p>
         </div>
 
         <div class="slide-body">
@@ -630,7 +640,7 @@
 
             <div class="card" style="border-top: 3px solid var(--accent-blue);">
               <h4 style="color: var(--accent-blue); display: flex; align-items: center; gap: 8px;">
-                <i data-lucide="repeat" style="width: 18px; height: 18px;"></i> Sprints Scrum (32h de Maratona)
+                <i data-lucide="repeat" style="width: 18px; height: 18px;"></i> Sprints Scrum (56h de Maratona)
               </h4>
               <p style="margin-bottom: 6px;">Ciclos curtos de 2 a 4 horas com incrementos de software testáveis:</p>
               <div class="code-box" style="font-size: 0.78rem;">
@@ -1034,6 +1044,68 @@
     </div>
   </footer>
 
+  <!-- Modal Roteiro de Fala do Apresentador -->
+  <div id="speechModal" style="display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(8px); z-index: 200; align-items: center; justify-content: center; padding: 20px;">
+    <div style="background: #ffffff; border-radius: 24px; max-width: 900px; width: 100%; max-height: 88vh; display: flex; flex-direction: column; box-shadow: var(--shadow-xl); border: 1px solid var(--border-color); overflow: hidden;">
+      <div style="padding: 20px 28px; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; background: #fff5f5;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="width: 38px; height: 38px; border-radius: 12px; background: #900000; color: #fff; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm);">
+            <i data-lucide="mic" style="width: 20px; height: 20px;"></i>
+          </div>
+          <div>
+            <h3 style="font-size: 1.15rem; font-weight: 900; color: #0f172a;">Roteiro e Fala do Apresentador (Pitch Master — 56h)</h3>
+            <p style="font-size: 0.78rem; color: #64748b;">Guia slide a slide com minutagem e entonação para a banca examinadora</p>
+          </div>
+        </div>
+        <button onclick="toggleSpeechModal()" style="border: none; background: #f1f5f9; width: 34px; height: 34px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+          <i data-lucide="x" style="width: 18px; height: 18px;"></i>
+        </button>
+      </div>
+
+      <div style="padding: 24px 28px; overflow-y: auto; line-height: 1.7; font-size: 0.88rem; color: #334155; display: flex; flex-direction: column; gap: 18px;">
+        <div style="background: #f8fafc; padding: 18px; border-radius: 14px; border-left: 4px solid #900000;">
+          <h4 style="font-weight: 800; color: #0f172a; margin-bottom: 4px;">Slide 1: Abertura & Identidade (0:00 - 0:30)</h4>
+          <p style="font-style: italic; color: #1e293b;">"Boa noite, membros da banca examinadora! Somos a equipe do <strong>MicroLeiteMacroNegocios</strong> — desenvolvido durante esta maratona de 56 horas para revolucionar a tomada de decisão no Tema 3. O nosso propósito é transformar o microprodutor de leite em um macronégocio lucrativo. Fazer a pecuária brasileira <strong>Muu</strong>ito Melhor!"</p>
+        </div>
+
+        <div style="background: #f8fafc; padding: 18px; border-radius: 14px; border-left: 4px solid #dc2626;">
+          <h4 style="font-weight: 800; color: #0f172a; margin-bottom: 4px;">Slide 2: As 4 Dores Reais da Fazenda (0:30 - 1:30)</h4>
+          <p style="font-style: italic; color: #1e293b;">"O produtor sangra dinheiro em 4 frentes: 1. Descapitalização Oculta (ignora depreciação e custo da terra); 2. Estresse Térmico por ITU (perde até 3,5L/vaca/dia no calor); 3. Acidose Ruminal SARA e desperdício de ração cara; 4. Penalizações de Mastite e CCS da IN 76/77."</p>
+        </div>
+
+        <div style="background: #f8fafc; padding: 18px; border-radius: 14px; border-left: 4px solid #1d4ed8;">
+          <h4 style="font-weight: 800; color: #0f172a; margin-bottom: 4px;">Slide 3: O Desafio & Filosofia de IA (1:30 - 2:15)</h4>
+          <p style="font-style: italic; color: #1e293b;">"No agronegócio, caixa preta é risco de falência. Por isso, usamos IA generativa de ponta (Google Gemini 2.5 Pro) no desenvolvimento, mas construímos um motor determinístico baseado em 25 regras formais e fatores de certeza MYCIN para o produtor. Zero alucinação."</p>
+        </div>
+
+        <div style="background: #f8fafc; padding: 18px; border-radius: 14px; border-left: 4px solid #c2410c;">
+          <h4 style="font-weight: 800; color: #0f172a; margin-bottom: 4px;">Slide 4: Sadrey + Scrum em 56h (2:15 - 3:00)</h4>
+          <p style="font-style: italic; color: #1e293b;">"Seguimos as 5 etapas da Metodologia Sadrey: Identificação, Aquisição com a Embrapa, Conceituação de 33 variáveis ontológicas, Formalização em JSON e Validação prática, gerenciadas em micro-sprints ágeis de 2 a 4h no Scrum."</p>
+        </div>
+
+        <div style="background: #f8fafc; padding: 18px; border-radius: 14px; border-left: 4px solid #881337;">
+          <h4 style="font-weight: 800; color: #0f172a; margin-bottom: 4px;">Slides 5 & 6: Pair Programming com Gemini 2.5 Pro (3:00 - 4:30)</h4>
+          <p style="font-style: italic; color: #1e293b;">"O Humano atuou como Arquiteto e Auditor de Domínio; o Gemini 2.5 Pro acelerou a implementação de regras, motor Forward Chaining e UI reativa, tudo documentado passo a passo no PROMPT_LOG.md."</p>
+        </div>
+
+        <div style="background: #f8fafc; padding: 18px; border-radius: 14px; border-left: 4px solid #15803d;">
+          <h4 style="font-weight: 800; color: #0f172a; margin-bottom: 4px;">Slides 7 & 8: Auditoria Real & 4 Pilares (4:30 - 6:00)</h4>
+          <p style="font-style: italic; color: #1e293b;">"Auditamos a IA para seguir estritamente o Custo Real Embrapa Custopec (COE/COT/CT), auto-inferência com debounce 150ms e guardrails biológicos (não permite 10 vacas em lactação com 2 no total)."</p>
+        </div>
+
+        <div style="background: #f8fafc; padding: 18px; border-radius: 14px; border-left: 4px solid #b91c1c;">
+          <h4 style="font-weight: 800; color: #0f172a; margin-bottom: 4px;">Slides 9 & 10: XAI, MYCIN & Produto Entregue (6:00 - 7:30)</h4>
+          <p style="font-style: italic; color: #1e293b;">"Módulo Explicativo SE-ENTÃO 100% auditável, 5 presets de fazendas em 1-clique, simulador 'O que acontece se...', cotações CEPEA e laudo pericial formatado em PDF."</p>
+        </div>
+
+        <div style="background: #f8fafc; padding: 18px; border-radius: 14px; border-left: 4px solid #0f172a;">
+          <h4 style="font-weight: 800; color: #0f172a; margin-bottom: 4px;">Slides 11 & 12: Comparativo & Conclusão (7:30 - 8:30)</h4>
+          <p style="font-style: italic; color: #1e293b;">"Muito superior ao caderninho e a ERPs caros. Convidamos a banca para testar a aplicação agora mesmo. Com o MicroLeiteMacroNegocios, a gestão da fazenda fica Muuito Melhor!"</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
     // Inicializar ícones Lucide
     lucide.createIcons();
@@ -1049,6 +1121,16 @@
     const nextBtn = document.getElementById('nextBtn');
 
     totalSlideNumber.textContent = totalSlides;
+
+    function toggleSpeechModal() {
+      const modal = document.getElementById('speechModal');
+      if (modal.style.display === 'none' || !modal.style.display) {
+        modal.style.display = 'flex';
+      } else {
+        modal.style.display = 'none';
+      }
+      lucide.createIcons();
+    }
 
     function updateSlide() {
       slides.forEach((slide, index) => {

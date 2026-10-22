@@ -1,6 +1,6 @@
 # 🐮 MicroLeiteMacroNegocios: Sistema Especialista em Pecuária Leiteira
 
-> **Hackathon UFJF 2026 (Maratona de 32 Horas)** — XXVIII Semana da Computação DCC/UFJF & RERUM Engenharia de Sistemas  
+> **Hackathon UFJF 2026 (Maratona de 56 Horas)** — XXVIII Semana da Computação DCC/UFJF & RERUM Engenharia de Sistemas  
 > **Tema 3:** Análise Econômica, Zootécnica e Qualidade do Leite  
 > **Metodologias:** Engenharia do Conhecimento (Sadrey) + Gestão Ágil de Software (Scrum)  
 > **Modelo de IA Utilizado no Desenvolvimento:** Google Gemini 2.5 Pro (Antigravity Agentic AI) para Elicitação de Conhecimento e Pair Programming  

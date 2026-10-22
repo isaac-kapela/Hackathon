@@ -1,6 +1,6 @@
 # 🐮 MicroLeiteMacroNegocios — Apresentação Técnica e Executiva do Projeto
 
-> **Hackathon UFJF 2026 (32h)** — XXVIII Semana da Computação DCC/UFJF & RERUM  
+> **Hackathon UFJF 2026 (56h)** — XXVIII Semana da Computação DCC/UFJF & RERUM  
 > **Tema 3:** Economia, Zootecnia e Qualidade do Leite  
 > **Metodologias:** Engenharia do Conhecimento (Metodologia Sadrey) + Gestão Ágil de Software (Framework Scrum)  
 > **Modelo de IA Utilizado:** Google Gemini 2.5 Pro (Antigravity Agentic AI / DeepMind) para Pair Programming e Engenharia de Conhecimento  

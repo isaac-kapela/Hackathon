@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # =============================================================================
 #  MicroLeiteMacroNegocios - Script de Inicialização Rápida & Unificada
-#  Hackathon UFJF 2026 (32h) - Tema 3: Economia, Zootecnia e Qualidade do Leite
+#  Hackathon UFJF 2026 (56h) - Tema 3: Economia, Zootecnia e Qualidade do Leite
 # =============================================================================
 
 set -e

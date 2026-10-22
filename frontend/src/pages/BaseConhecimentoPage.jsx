@@ -204,17 +204,21 @@ export default function BaseConhecimentoPage() {
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {filteredVariaveis.map((v) => (
-                  <tr key={v.id} className="hover:bg-slate-50/50 transition-colors">
-                    <td className="p-3.5 font-mono font-bold text-indigo-700">{v.id}</td>
-                    <td className="p-3.5 font-bold text-slate-800">{v.nome}</td>
+                  <tr key={v.id} className="hover:bg-red-50/30 transition-colors">
+                    <td className="p-3.5">
+                      <span className="font-mono font-black text-xs text-red-700 bg-red-100/80 px-2.5 py-1 rounded-lg border border-red-300 shadow-sm inline-block">
+                        {v.id}
+                      </span>
+                    </td>
+                    <td className="p-3.5 font-black text-red-950 text-sm">{v.nome}</td>
                     <td className="p-3.5 capitalize">
-                      <span className="px-2.5 py-0.5 bg-slate-100 text-slate-700 rounded-full text-[11px] font-bold border border-slate-200">
+                      <span className="px-2.5 py-0.5 bg-red-50 text-red-800 rounded-full text-[11px] font-bold border border-red-200">
                         {v.categoria}
                       </span>
                     </td>
-                    <td className="p-3.5 text-slate-600">{v.tipo} ({v.unidade})</td>
-                    <td className="p-3.5 font-mono text-slate-900 font-bold">{v.padrao}</td>
-                    <td className="p-3.5 text-slate-500 max-w-xs">{v.descricao}</td>
+                    <td className="p-3.5 text-slate-700 font-semibold">{v.tipo} ({v.unidade})</td>
+                    <td className="p-3.5 font-mono text-red-800 font-bold bg-slate-50 px-2 py-0.5 rounded border border-slate-200">{v.padrao}</td>
+                    <td className="p-3.5 text-slate-600 max-w-xs">{v.descricao}</td>
                   </tr>
                 ))}
               </tbody>
