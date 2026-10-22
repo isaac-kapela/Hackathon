@@ -1,0 +1,23 @@
+{
+  "name": "bovinsight-monorepo",
+  "version": "1.0.0",
+  "description": "Sistema Especialista Zootécnico & Econômico para Pecuária Leiteira - Hackathon UFJF 2026",
+  "scripts": {
+    "start": "bash start.sh",
+    "dev": "bash start.sh",
+    "dev:backend": "cd backend && npm start",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "slides": "xdg-open docs/apresentacao.html || open docs/apresentacao.html"
+  },
+  "keywords": [
+    "sistema-especialista",
+    "pecuaria-leiteira",
+    "zootecnia",
+    "mycin",
+    "embrapa",
+    "hackathon-ufjf"
+  ],
+  "author": "Equipe BovInSight / Hackathon UFJF 2026",
+  "license": "MIT"
+}

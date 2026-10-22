@@ -1,5 +1,5 @@
 import React from 'react';
-import { Cpu, BookOpen, TrendingUp, Sparkles, ShieldCheck, Activity } from 'lucide-react';
+import { Cpu, BookOpen, TrendingUp, Sparkles, ShieldCheck, Activity, Presentation, ExternalLink } from 'lucide-react';
 
 export default function Header({ activeTab, setActiveTab }) {
   const navItems = [
@@ -28,7 +28,7 @@ export default function Header({ activeTab, setActiveTab }) {
             <div>
               <div className="flex items-center space-x-2.5">
                 <h1 className="font-black text-xl text-white tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
-                  RERUM AgroExpert
+                  BovInSight
                 </h1>
                 <span className="text-[11px] bg-emerald-500/15 text-emerald-400 font-bold px-2.5 py-0.5 rounded-full border border-emerald-500/30 tracking-wide uppercase">
                   Hackathon UFJF 2026
@@ -40,27 +40,41 @@ export default function Header({ activeTab, setActiveTab }) {
             </div>
           </div>
 
-          {/* Navigation Tabs */}
-          <nav className="flex items-center bg-slate-800/80 p-1.5 rounded-2xl border border-slate-700/60 shadow-inner">
-            {navItems.map((item) => {
-              const Icon = item.icon;
-              const isActive = activeTab === item.id;
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => setActiveTab(item.id)}
-                  className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 ${
-                    isActive
-                      ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-900/30'
-                      : 'text-slate-300 hover:text-white hover:bg-slate-700/50'
-                  }`}
-                >
-                  <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-slate-400'}`} />
-                  <span>{item.label}</span>
-                </button>
-              );
-            })}
-          </nav>
+          {/* Navigation Tabs & Presentation Button */}
+          <div className="flex items-center gap-3">
+            <nav className="flex items-center bg-slate-800/80 p-1.5 rounded-2xl border border-slate-700/60 shadow-inner">
+              {navItems.map((item) => {
+                const Icon = item.icon;
+                const isActive = activeTab === item.id;
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => setActiveTab(item.id)}
+                    className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 ${
+                      isActive
+                        ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-900/30'
+                        : 'text-slate-300 hover:text-white hover:bg-slate-700/50'
+                    }`}
+                  >
+                    <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-slate-400'}`} />
+                    <span>{item.label}</span>
+                  </button>
+                );
+              })}
+            </nav>
+
+            <a
+              href="/apresentacao.html"
+              target="_blank"
+              rel="noreferrer"
+              className="hidden md:flex items-center gap-2 px-3.5 py-2.5 bg-gradient-to-r from-amber-500/20 to-amber-600/20 hover:from-amber-500/30 hover:to-amber-600/30 border border-amber-400/40 text-amber-300 hover:text-amber-200 rounded-2xl text-xs font-bold transition-all shadow-sm"
+              title="Abrir Apresentação do Projeto (Slides em HTML/PDF)"
+            >
+              <Presentation className="w-4 h-4 text-amber-400" />
+              <span>Apresentação (Pitch)</span>
+              <ExternalLink className="w-3 h-3 text-amber-400/70" />
+            </a>
+          </div>
 
         </div>
       </div>

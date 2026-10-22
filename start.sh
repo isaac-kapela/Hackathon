@@ -1,30 +1,87 @@
 #!/usr/bin/env bash
-# Script para iniciar backend e frontend simultaneamente em localhost
+# =============================================================================
+#  BovInSight / PecuáriaExpert - Script de Inicialização Rápida & Unificada
+#  Hackathon UFJF 2026 - Tema 3: Economia, Zootecnia e Qualidade do Leite
+# =============================================================================
 
-echo "================================================================="
-echo "  INICIANDO SISTEMA ESPECIALISTA EM PECUÁRIA LEITEIRA"
-echo "  Hackathon UFJF 2026 - RERUM Engenharia de Sistemas"
-echo "================================================================="
+set -e
 
-# Inicia backend na porta 5000
-echo "[1/2] Iniciando Backend (Node.js API)..."
-cd "$(dirname "$0")/backend" && npm start &
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BACKEND_PORT=5000
+FRONTEND_PORT=3000
+
+echo ""
+echo "================================================================="
+echo "   🐮 BovInSight — Sistema Especialista Zootécnico & Econômico"
+echo "   XXVIII Semana da Computação DCC/UFJF & RERUM • Tema 3"
+echo "================================================================="
+echo ""
+
+# 1. Liberar portas caso estejam ocupadas por processos anteriores
+free_port() {
+  local port=$1
+  local pid=$(lsof -ti tcp:$port 2>/dev/null || true)
+  if [ -n "$pid" ]; then
+    echo "⚠️  Porta $port em uso pelo processo $pid. Liberando..."
+    kill -9 $pid 2>/dev/null || true
+    sleep 0.5
+  fi
+}
+
+echo "🔍 Verificando portas e ambiente..."
+free_port $BACKEND_PORT
+free_port $FRONTEND_PORT
+
+# 2. Verificar e instalar dependências se necessário
+if [ ! -d "$DIR/backend/node_modules" ]; then
+  echo "📦 Instalando dependências do backend..."
+  cd "$DIR/backend" && npm install --silent
+fi
+
+if [ ! -d "$DIR/frontend/node_modules" ]; then
+  echo "📦 Instalando dependências do frontend..."
+  cd "$DIR/frontend" && npm install --silent
+fi
+
+# 3. Garantir apresentação copiada para a pasta pública
+mkdir -p "$DIR/frontend/public"
+cp "$DIR/docs/apresentacao.html" "$DIR/frontend/public/apresentacao.html" 2>/dev/null || true
+
+# 4. Iniciar Backend (Node.js API)
+echo "🚀 [1/2] Iniciando Backend API (Porta $BACKEND_PORT)..."
+cd "$DIR/backend" && npm start > /dev/null 2>&1 &
 BACKEND_PID=$!
 
-# Aguarda 1 segundo
-sleep 1
+# Aguarda 0.8s para subida da API
+sleep 0.8
 
-# Inicia frontend na porta 3000
-echo "[2/2] Iniciando Frontend (Vite React)..."
-cd "$(dirname "$0")/frontend" && npm run dev &
+# 5. Iniciar Frontend (Vite React)
+echo "💻 [2/2] Iniciando Frontend React (Porta $FRONTEND_PORT)..."
+cd "$DIR/frontend" && npm run dev > /dev/null 2>&1 &
 FRONTEND_PID=$!
 
 echo ""
-echo " Sistema rodando com sucesso em LOCALHOST:"
-echo " - Frontend (Interface): http://localhost:3000"
-echo " - Backend (API REST):   http://localhost:5000"
+echo "================================================================="
+echo "   ✅ SISTEMA PRONTO E RODANDO EM LOCALHOST!"
+echo "================================================================="
+echo "   📱 Interface Principal:   http://localhost:$FRONTEND_PORT"
+echo "   📊 Apresentação (Pitch):  http://localhost:$FRONTEND_PORT/apresentacao.html"
+echo "   ⚙️  API REST Backend:      http://localhost:$BACKEND_PORT/api/health"
+echo "================================================================="
 echo ""
-echo "Pressione Ctrl+C para encerrar."
+echo "💡 Dica: Pressione Ctrl+C para encerrar todos os serviços."
+echo ""
 
-trap "kill $BACKEND_PID $FRONTEND_PID 2>/dev/null" EXIT
+# Cleanup ao sair com Ctrl+C
+cleanup() {
+  echo ""
+  echo "🛑 Encerrando serviços BovInSight..."
+  kill $BACKEND_PID $FRONTEND_PID 2>/dev/null || true
+  free_port $BACKEND_PORT
+  free_port $FRONTEND_PORT
+  echo "✨ Serviços finalizados com sucesso."
+  exit 0
+}
+
+trap cleanup SIGINT SIGTERM EXIT
 wait
