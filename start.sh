@@ -43,9 +43,11 @@ if [ ! -d "$DIR/frontend/node_modules" ]; then
   cd "$DIR/frontend" && npm install --silent
 fi
 
-# 3. Garantir apresentação copiada para a pasta pública
+# 3. Garantir apresentações e assets copiados para a pasta pública
 mkdir -p "$DIR/frontend/public"
 cp "$DIR/docs/apresentacao.html" "$DIR/frontend/public/apresentacao.html" 2>/dev/null || true
+cp "$DIR/docs/apresentacao_processo_ia.html" "$DIR/frontend/public/apresentacao_processo_ia.html" 2>/dev/null || true
+cp "$DIR/docs/logo.jpeg" "$DIR/frontend/public/logo.jpeg" 2>/dev/null || true
 
 # 4. Iniciar Backend (Node.js API)
 echo "🚀 [1/2] Iniciando Backend API (Porta $BACKEND_PORT)..."
@@ -64,9 +66,10 @@ echo ""
 echo "================================================================="
 echo "   ✅ SISTEMA PRONTO E RODANDO EM LOCALHOST!"
 echo "================================================================="
-echo "   📱 Interface Principal:   http://localhost:$FRONTEND_PORT"
-echo "   📊 Apresentação (Pitch):  http://localhost:$FRONTEND_PORT/apresentacao.html"
-echo "   ⚙️  API REST Backend:      http://localhost:$BACKEND_PORT/api/health"
+echo "   📱 Interface Principal:        http://localhost:$FRONTEND_PORT"
+echo "   🎯 Pitch do Produto (Modelo 1): http://localhost:$FRONTEND_PORT/apresentacao.html"
+echo "   🤖 Processo & IA (Modelo 2):   http://localhost:$FRONTEND_PORT/apresentacao_processo_ia.html"
+echo "   ⚙️  API REST Backend:           http://localhost:$BACKEND_PORT/api/health"
 echo "================================================================="
 echo ""
 echo "💡 Dica: Pressione Ctrl+C para encerrar todos os serviços."

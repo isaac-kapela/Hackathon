@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Processo, Metodologia e Parceria Humano + IA — Hackathon UFJF 2026</title>
+  
+  <!-- Google Fonts & Lucide Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- html2pdf.js para exportação instantânea de PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <style>
+    :root {
+      --bg-body: #f8fafc;
+      --bg-card: #ffffff;
+      --border-color: #e2e8f0;
+      --border-card: #e2e8f0;
+      --accent-emerald: #059669;
+      --accent-emerald-light: #ecfdf5;
+      --accent-blue: #0284c7;
+      --accent-blue-light: #f0f9ff;
+      --accent-amber: #d97706;
+      --accent-amber-light: #fffbeb;
+      --accent-rose: #e11d48;
+      --accent-rose-light: #fff1f2;
+      --accent-indigo: #4f46e5;
+      --accent-indigo-light: #eef2ff;
+      --text-main: #0f172a;
+      --text-body: #334155;
+      --text-muted: #64748b;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.04);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.08), 0 8px 10px -6px rgb(0 0 0 / 0.04);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f1f5f9;
+      background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+      background-size: 24px 24px;
+      color: var(--text-body);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Barra Superior Fixa */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 68px;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
+    }
+
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+    }
+
+    .brand-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: var(--accent-indigo);
+      color: white;
+      box-shadow: 0 2px 8px rgba(79, 70, 229, 0.25);
+    }
+    .btn-primary:hover {
+      background: #4338ca;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35);
+    }
+
+    .btn-secondary {
+      background: #ffffff;
+      border-color: var(--border-color);
+      color: var(--text-body);
+      box-shadow: var(--shadow-sm);
+    }
+    .btn-secondary:hover {
+      background: #f8fafc;
+      color: var(--text-main);
+      border-color: #cbd5e1;
+    }
+
+    /* Container Principal */
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 92px 24px 84px;
+    }
+
+    .deck-container {
+      width: 100%;
+      max-width: 1220px;
+      aspect-ratio: 16 / 9;
+      min-height: 620px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 24px;
+      box-shadow: var(--shadow-xl);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: 44px 52px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(30px);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow-y: auto;
+      background: #ffffff;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+    }
+
+    /* Badges */
+    .slide-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+    }
+    .badge-indigo { background: #eef2ff; color: #4338ca; border: 1px solid #c7d2fe; }
+    .badge-emerald { background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; }
+    .badge-blue { background: #f0f9ff; color: #0369a1; border: 1px solid #bae6fd; }
+    .badge-amber { background: #fffbeb; color: #b45309; border: 1px solid #fde68a; }
+
+    .slide-title {
+      font-size: 2.15rem;
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .slide-subtitle {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 880px;
+      line-height: 1.5;
+    }
+
+    .slide-body {
+      flex: 1;
+      margin: 18px 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* Grids */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+    /* Cards */
+    .card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
+    }
+    .card:hover {
+      border-color: #cbd5e1;
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .card-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+
+    .card h4 {
+      font-size: 0.98rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+      color: var(--text-main);
+    }
+
+    .card p {
+      font-size: 0.84rem;
+      color: var(--text-body);
+      line-height: 1.45;
+    }
+
+    .code-box {
+      font-family: 'JetBrains Mono', monospace;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 14px;
+      font-size: 0.8rem;
+      color: #0f172a;
+      line-height: 1.55;
+    }
+
+    /* Barra Inferior Fixa */
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 64px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      z-index: 100;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.02);
+    }
+
+    .progress-bar-container {
+      position: fixed;
+      bottom: 64px;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: #e2e8f0;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #4f46e5, #059669);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .nav-btn {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-sm);
+    }
+    .nav-btn:hover:not(:disabled) {
+      background: #f1f5f9;
+      border-color: #cbd5e1;
+      transform: scale(1.04);
+    }
+    .nav-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    .slide-counter {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--text-muted);
+    }
+
+    /* Print / PDF */
+    @media print {
+      header, footer, .progress-bar-container {
+        display: none !important;
+      }
+      body {
+        background: #ffffff !important;
+        background-image: none !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      main {
+        padding: 0 !important;
+        display: block !important;
+      }
+      .deck-container {
+        max-width: none !important;
+        width: 100% !important;
+        aspect-ratio: auto !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+      .slide {
+        position: relative !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        page-break-after: always !important;
+        page-break-inside: avoid !important;
+        min-height: 100vh !important;
+        padding: 36px 44px !important;
+        display: flex !important;
+        background: #ffffff !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Action Bar -->
+  <header>
+    <div class="brand">
+      <div class="brand-logo">
+        <img src="logo.jpeg" alt="Logo" onerror="this.parentElement.innerHTML='🤖'">
+      </div>
+      <div>BovInSight <span style="font-weight: 500; color: var(--text-muted); font-size: 0.92rem;">• Metodologia, Processo & Parceria Humano + IA</span></div>
+    </div>
+    <div class="header-controls">
+      <a href="apresentacao.html" class="btn btn-secondary" title="Ver Apresentação Focada em Negócio/Produto">
+        <i data-lucide="layout-grid" style="width: 16px; height: 16px; color: var(--accent-emerald);"></i>
+        Ver Pitch do Produto
+      </a>
+      <a href="http://localhost:3000" target="_blank" class="btn btn-secondary">
+        <i data-lucide="play-circle" style="width: 16px; height: 16px; color: var(--accent-indigo);"></i>
+        Abrir Sistema
+      </a>
+      <button onclick="downloadPDF()" id="pdfBtn" class="btn btn-primary">
+        <i data-lucide="download" style="width: 16px; height: 16px;"></i>
+        Baixar PDF deste Modelo
+      </button>
+      <button onclick="toggleFullscreen()" class="btn btn-secondary" title="Tela Cheia">
+        <i data-lucide="maximize" style="width: 16px; height: 16px;"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Barra de Progresso -->
+  <div class="progress-bar-container">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <!-- Deck de Apresentação -->
+  <main>
+    <div class="deck-container" id="presentationDeck">
+
+      <!-- SLIDE 1: Capa de Processo e IA -->
+      <div class="slide active" data-slide="1">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 24px;">
+          <div>
+            <span class="slide-badge badge-indigo">
+              <i data-lucide="sparkles" style="width: 14px; height: 14px;"></i> Hackathon UFJF 2026 • Engenharia de Software & IA
+            </span>
+            <h1 class="slide-title" style="font-size: 2.7rem; margin-top: 6px;">
+              Do Conceito ao Produto: <span style="color: var(--accent-indigo);">Parceria Humano + IA</span>
+            </h1>
+            <p class="slide-subtitle" style="font-size: 1.15rem; color: var(--text-body);">
+              Como organizamos nosso fluxo de trabalho, dividimos o problema em microetapas e interagimos com a Inteligência Artificial para construir o BovInSight com velocidade recorde e zero alucinação.
+            </p>
+          </div>
+          <div style="width: 86px; height: 86px; border-radius: 20px; overflow: hidden; border: 2px solid var(--border-color); box-shadow: var(--shadow-md); shrink: 0; background: #fff;">
+            <img src="logo.jpeg" alt="Logo" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'">
+          </div>
+        </div>
+
+        <div class="slide-body">
+          <div class="grid-4" style="margin-top: 8px;">
+            <div class="card" style="border-top: 3px solid var(--accent-indigo);">
+              <div class="card-icon" style="background: var(--accent-indigo-light); color: var(--accent-indigo);">
+                <i data-lucide="git-branch" style="width: 20px; height: 20px;"></i>
+              </div>
+              <h4>Sadrey + Scrum</h4>
+              <p>Ciclo especialista combinado com sprints rápidos e metas bem delimitadas.</p>
+            </div>
+            <div class="card" style="border-top: 3px solid var(--accent-blue);">
+              <div class="card-icon" style="background: var(--accent-blue-light); color: var(--accent-blue);">
+                <i data-lucide="users" style="width: 20px; height: 20px;"></i>
+              </div>
+              <h4>Pair Programming com IA</h4>
+              <p>Humano guia estratégia e auditoria; IA acelera arquitetura, motor e código.</p>
+            </div>
+            <div class="card" style="border-top: 3px solid var(--accent-emerald);">
+              <div class="card-icon" style="background: var(--accent-emerald-light); color: var(--accent-emerald);">
+                <i data-lucide="sliders" style="width: 20px; height: 20px;"></i>
+              </div>
+              <h4>Microetapas Focadas</h4>
+              <p>Decomposição de requisitos complexos em prompts cirúrgicos e iterativos.</p>
+            </div>
+            <div class="card" style="border-top: 3px solid var(--accent-amber);">
+              <div class="card-icon" style="background: var(--accent-amber-light); color: var(--accent-amber);">
+                <i data-lucide="check-circle" style="width: 20px; height: 20px;"></i>
+              </div>
+              <h4>Validação Contínua</h4>
+              <p>Refinamento passo a passo para garantir integridade contábil e zootécnica.</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color); padding-top: 14px;">
+          <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted);">XXVIII Semana da Computação DCC/UFJF & RERUM</span>
+          <span style="font-size: 0.85rem; color: var(--accent-indigo); font-weight: 700;">Engenharia de Prompt & Desenvolvimento Ágil</span>
+        </div>
+      </div>
+
+      <!-- SLIDE 2: O Desafio de Organização -->
+      <div class="slide" data-slide="2">
+        <div>
+          <span class="slide-badge badge-blue">
+            <i data-lucide="target" style="width: 14px; height: 14px;"></i> O Desafio Inicial
+          </span>
+          <h2 class="slide-title">O Problema: Tema Amplo e Tempo Curto</h2>
+          <p class="slide-subtitle">Como cobrir economia, zootecnia, bioclimatologia e qualidade do leite sem perder o foco e sem gerar código genérico ou desconexo?</p>
+        </div>
+
+        <div class="slide-body">
+          <div class="grid-2">
+            <div class="card" style="border-left: 4px solid var(--accent-rose); background: #fffcfc;">
+              <h4 style="color: var(--accent-rose);">A Armadilha Comum</h4>
+              <p>Tentar pedir tudo de uma vez à IA ("faça um sistema de leite completo") gera código superficial, regras inventadas e sistemas que não resolvem o problema real do usuário.</p>
+            </div>
+            <div class="card" style="border-left: 4px solid var(--accent-emerald); background: #fcfdfc;">
+              <h4 style="color: var(--accent-emerald);">Nossa Estratégia Vencedora</h4>
+              <p>Dividir o desafio em <strong>microtarefas encadeadas</strong>: primeiro elicitar referências da Embrapa, depois estruturar as variáveis, formalizar as regras determinísticas e só então construir a interface interativa.</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="font-size: 0.85rem; color: var(--text-muted);">
+          💡 <strong>Princípio Orientador:</strong> O humano é o arquiteto do conhecimento e o juiz dos resultados; a IA é a executora de alta precisão.
+        </div>
+      </div>
+
+      <!-- SLIDE 3: O Modelo de Organização (Sadrey + Scrum) -->
+      <div class="slide" data-slide="3">
+        <div>
+          <span class="slide-badge badge-indigo">
+            <i data-lucide="git-merge" style="width: 14px; height: 14px;"></i> Metodologias Combinadas
+          </span>
+          <h2 class="slide-title">Sadrey (Especialista) + Scrum (Execução Ágil)</h2>
+          <p class="slide-subtitle">Usamos a Metodologia Sadrey para não errar na lógica especialista e o Scrum para manter o ritmo acelerado de entregas.</p>
+        </div>
+
+        <div class="slide-body">
+          <div class="grid-2">
+            <div class="card" style="border-top: 3px solid var(--accent-emerald);">
+              <h4 style="color: var(--accent-emerald); display: flex; align-items: center; gap: 8px;">
+                <i data-lucide="brain" style="width: 18px; height: 18px;"></i> Ciclo Sadrey (Conhecimento)
+              </h4>
+              <p style="margin-bottom: 8px;">Garantia de que as regras têm embasamento científico da Embrapa e NRC:</p>
+              <div class="code-box" style="font-size: 0.78rem;">
+1. Identificação do Problema Agro
+2. Elicitação das Fórmulas Embrapa/Thom
+3. Conceituação das 33 Variáveis
+4. Formalização das 25 Regras SE-ENTÃO
+5. Validação com Cenários Reais
+              </div>
+            </div>
+
+            <div class="card" style="border-top: 3px solid var(--accent-blue);">
+              <h4 style="color: var(--accent-blue); display: flex; align-items: center; gap: 8px;">
+                <i data-lucide="repeat" style="width: 18px; height: 18px;"></i> Sprints Scrum (Desenvolvimento)
+              </h4>
+              <p style="margin-bottom: 8px;">Ciclos rápidos de 2 a 4 horas com incrementos testáveis:</p>
+              <div class="code-box" style="font-size: 0.78rem;">
+• Sprint 1: Elicitação & Modelagem de Regras
+• Sprint 2: Motor de Inferência & API REST
+• Sprint 3: UI Reativa & Gráficos Recharts
+• Sprint 4: Auditoria, Presets e Auto-inferência
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="font-size: 0.85rem; color: var(--text-muted);">
+          A união perfeita entre rigor científico e velocidade de desenvolvimento.
+        </div>
+      </div>
+
+      <!-- SLIDE 4: Dinâmica de Pair Programming com IA -->
+      <div class="slide" data-slide="4">
+        <div>
+          <span class="slide-badge badge-blue">
+            <i data-lucide="cpu" style="width: 14px; height: 14px;"></i> Dinâmica de Trabalho
+          </span>
+          <h2 class="slide-title">Como Dividimos os Papéis: Humano vs. IA</h2>
+          <p class="slide-subtitle">A IA não substitui o raciocínio humano: ela amplifica a capacidade de execução quando guiada com clareza.</p>
+        </div>
+
+        <div class="slide-body">
+          <div class="grid-2">
+            <div class="card" style="border-top: 3px solid var(--accent-indigo);">
+              <h4 style="color: var(--accent-indigo);">🧑‍💻 Papel do Humano (Estratégia & Auditoria)</h4>
+              <ul style="padding-left: 20px; font-size: 0.82rem; color: var(--text-body); line-height: 1.6;">
+                <li>Definir a visão do produto e escopo do Tema 3.</li>
+                <li>Elicitar referências da Embrapa (COE/COT/CT) e Thom (ITU).</li>
+                <li>Auditar cada fórmula matemática e identificar inconsistências.</li>
+                <li>Avaliar a usabilidade da interface e direcionar melhorias na UX.</li>
+                <li>Validar os cenários de teste contra a realidade de campo.</li>
+              </ul>
+            </div>
+
+            <div class="card" style="border-top: 3px solid var(--accent-emerald);">
+              <h4 style="color: var(--accent-emerald);">🤖 Papel da IA (Aceleração & Construção)</h4>
+              <ul style="padding-left: 20px; font-size: 0.82rem; color: var(--text-body); line-height: 1.6;">
+                <li>Estruturar o monorepo com arquitetura modular desacoplada.</li>
+                <li>Implementar o motor de inferência Forward Chaining determinístico.</li>
+                <li>Construir componentes React fluidos com Tailwind CSS e Recharts.</li>
+                <li>Executar refatorações cirúrgicas em segundos sob comando.</li>
+                <li>Manter documentação técnica e log de prompts atualizados.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div style="font-size: 0.85rem; color: var(--text-muted);">
+          Resultado: Desenvolvimento até 10x mais rápido sem perda de controle técnico.
+        </div>
+      </div>
+
+      <!-- SLIDE 5: Engenharia de Prompts e Microetapas -->
+      <div class="slide" data-slide="5">
+        <div>
+          <span class="slide-badge badge-indigo">
+            <i data-lucide="layers" style="width: 14px; height: 14px;"></i> Engenharia de Prompt
+          </span>
+          <h2 class="slide-title">Decompondo o Problema em Prompts Cirúrgicos</h2>
+          <p class="slide-subtitle">Em vez de comandos genéricos, estruturamos uma esteira de prompts com contexto, restrições e critérios de aceite.</p>
+        </div>
+
+        <div class="slide-body">
+          <div class="grid-3">
+            <div class="card">
+              <div class="card-icon" style="background: var(--accent-blue-light); color: var(--accent-blue);">
+                <i data-lucide="search" style="width: 20px; height: 20px;"></i>
+              </div>
+              <h4>1. Elicitação Contextual</h4>
+              <p>Prompts fornecendo as bases oficiais da Embrapa e pedindo o mapeamento estrito das variáveis sem invenções.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon" style="background: var(--accent-emerald-light); color: var(--accent-emerald);">
+                <i data-lucide="code" style="width: 20px; height: 20px;"></i>
+              </div>
+              <h4>2. Regras Declarativas</h4>
+              <p>Prompts exigindo regras em JSON estruturado com operadores booleanos claros e Fatores de Certeza MYCIN.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon" style="background: var(--accent-amber-light); color: var(--accent-amber);">
+                <i data-lucide="refresh-cw" style="width: 20px; height: 20px;"></i>
+              </div>
+              <h4>3. Refinamento Iterativo</h4>
+              <p>Prompts apontando bugs específicos detectados no teste e orientando a solução exata.</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="font-size: 0.85rem; color: var(--text-muted);">
+          Cada prompt gerou um incremento testável e documentado no log oficial do projeto.
+        </div>
+      </div>
+
+      <!-- SLIDE 6: Exemplos Reais de Refinamento Iterativo -->
+      <div class="slide" data-slide="6">
+        <div>
+          <span class="slide-badge badge-amber">
+            <i data-lucide="wrench" style="width: 14px; height: 14px;"></i> Ciclo de Melhoria
+          </span>
+          <h2 class="slide-title">Auditoria e Refinamento em Ação: Casos Reais</h2>
+          <p class="slide-subtitle">Como identificamos detalhes finos durante os testes e guiamos a IA para corrigi-los cirurgicamente.</p>
+        </div>
+
+        <div class="slide-body">
+          <div class="grid-3">
+            <div class="card" style="border-top: 3px solid var(--accent-rose);">
+              <h4>1. Fórmula do Lucro Real</h4>
+              <p style="font-size: 0.8rem; margin-bottom: 6px;"><strong>O que vimos:</strong> Os gráficos mostravam margem bruta em vez do lucro econômico real.</p>
+              <p style="font-size: 0.8rem; color: var(--accent-emerald);"><strong>Ajuste com IA:</strong> Corrigimos a calculadora para descontar COT e CT (Custopec da Embrapa).</p>
+            </div>
+
+            <div class="card" style="border-top: 3px solid var(--accent-amber);">
+              <h4>2. Usabilidade dos Inputs</h4>
+              <p style="font-size: 0.8rem; margin-bottom: 6px;"><strong>O que vimos:</strong> Ao apagar um campo numérico, um zero persistia e atrapalhava a digitação.</p>
+              <p style="font-size: 0.8rem; color: var(--accent-emerald);"><strong>Ajuste com IA:</strong> Suporte a string vazia na UI com conversão dinâmica para zero no backend.</p>
+            </div>
+
+            <div class="card" style="border-top: 3px solid var(--accent-blue);">
+              <h4>3. Auto-Inferência em Tempo Real</h4>
+              <p style="font-size: 0.8rem; margin-bottom: 6px;"><strong>O que vimos:</strong> Precisava clicar em botão toda vez que mudava um valor.</p>
+              <p style="font-size: 0.8rem; color: var(--accent-emerald);"><strong>Ajuste com IA:</strong> Implementamos debounce suave de 150ms para diagnóstico instantâneo ao vivo.</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="font-size: 0.85rem; color: var(--text-muted);">
+          A IA executou as mudanças complexas de código em segundos, sob orientação precisa do time.
+        </div>
+      </div>
+
+      <!-- SLIDE 7: O Que São as Regras Definidas (Resumo Alto Nível) -->
+      <div class="slide" data-slide="7">
+        <div>
+          <span class="slide-badge badge-emerald">
+            <i data-lucide="shield-check" style="width: 14px; height: 14px;"></i> Conhecimento Sintetizado
+          </span>
+          <h2 class="slide-title">As Regras do Sistema: Resumo Sem Complicação</h2>
+          <p class="slide-subtitle">Sintetizamos 25 regras zootécnicas e financeiras em 4 pilares simples e intuitivos.</p>
+        </div>
+
+        <div class="slide-body">
+          <div class="grid-2">
+            <div class="card">
+              <h4 style="color: var(--accent-emerald); display: flex; align-items: center; gap: 8px;">
+                <i data-lucide="dollar-sign" style="width: 18px; height: 18px;"></i> 1. Pilar Financeiro (Sustentabilidade)
+              </h4>
+              <p>Identifica se a fazenda está tendo lucro verdadeiro ou se está sofrendo <strong>descapitalização silenciosa</strong> (pagando as contas do mês mas perdendo maquinário e patrimônio).</p>
+            </div>
+
+            <div class="card">
+              <h4 style="color: var(--accent-blue); display: flex; align-items: center; gap: 8px;">
+                <i data-lucide="sun" style="width: 18px; height: 18px;"></i> 2. Pilar Bioclimático (Calor / ITU)
+              </h4>
+              <p>Mede a combinação de temperatura e umidade. Se o ITU passar de 72, alerta o produtor sobre a queda inevitável na produção e calcula a perda em reais.</p>
+            </div>
+
+            <div class="card">
+              <h4 style="color: var(--accent-amber); display: flex; align-items: center; gap: 8px;">
+                <i data-lucide="wheat" style="width: 18px; height: 18px;"></i> 3. Pilar Nutricional & Ruminal
+              </h4>
+              <p>Cruza a proporção de volumoso vs. concentrado e os níveis de uréia no leite (NUL) para avisar se as vacas estão em risco de acidose (SARA) ou desperdício de ração cara.</p>
+            </div>
+
+            <div class="card">
+              <h4 style="color: var(--accent-indigo); display: flex; align-items: center; gap: 8px;">
+                <i data-lucide="award" style="width: 18px; height: 18px;"></i> 4. Pilar Sanitário & Qualidade
+              </h4>
+              <p>Analisa CCS, CBT e taxas de mastite para indicar bonificações de até +R$ 0,15/L ou evitar penalizações pesadas do laticínio.</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="font-size: 0.85rem; color: var(--text-muted);">
+          Tudo explicado visualmente no módulo SE → ENTÃO, sem exigir conhecimentos avançados de zootecnia.
+        </div>
+      </div>
+
+      <!-- SLIDE 8: O Produto Final Entregue -->
+      <div class="slide" data-slide="8">
+        <div>
+          <span class="slide-badge badge-indigo">
+            <i data-lucide="check" style="width: 14px; height: 14px;"></i> Resultado Final
+          </span>
+          <h2 class="slide-title">O Que Entregamos com Essa Abordagem?</h2>
+          <p class="slide-subtitle">Um sistema especialista completo, testado, documentado e pronto para uso real.</p>
+        </div>
+
+        <div class="slide-body">
+          <div class="grid-4">
+            <div class="card">
+              <div class="card-icon" style="background: var(--accent-emerald-light); color: var(--accent-emerald);">
+                <i data-lucide="cpu" style="width: 20px; height: 20px;"></i>
+              </div>
+              <h4>Motor Determinístico</h4>
+              <p>25 regras declarativas + Fatores de Certeza MYCIN sem caixas pretas.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon" style="background: var(--accent-blue-light); color: var(--accent-blue);">
+                <i data-lucide="zap" style="width: 20px; height: 20px;"></i>
+              </div>
+              <h4>Simulação Interativa</h4>
+              <p>Inferência em tempo real (150ms) com botões 'O que acontece se...'.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon" style="background: var(--accent-amber-light); color: var(--accent-amber);">
+                <i data-lucide="file-text" style="width: 20px; height: 20px;"></i>
+              </div>
+              <h4>Laudo Pericial PDF</h4>
+              <p>Relatório técnico pericial completo pronto para impressão e assinatura.</p>
+            </div>
+            <div class="card">
+              <div class="card-icon" style="background: var(--accent-indigo-light); color: var(--accent-indigo);">
+                <i data-lucide="book" style="width: 20px; height: 20px;"></i>
+              </div>
+              <h4>Documentação Total</h4>
+              <p>Log formal de prompts, especificação técnica e 2 modelos de apresentação.</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="font-size: 0.85rem; color: var(--text-muted);">
+          Código 100% versionado no GitHub com scripts de inicialização rápida em 1 comando.
+        </div>
+      </div>
+
+      <!-- SLIDE 9: Lições Aprendidas & Conclusão -->
+      <div class="slide" data-slide="9">
+        <div>
+          <span class="slide-badge badge-green">
+            <i data-lucide="trophy" style="width: 14px; height: 14px;"></i> Conclusão
+          </span>
+          <h2 class="slide-title">Lições de Engenharia de Software com IA</h2>
+          <p class="slide-subtitle">O segredo não é a ferramenta de IA em si, mas a metodologia humana de orquestração.</p>
+        </div>
+
+        <div class="slide-body">
+          <div class="grid-3">
+            <div class="card" style="border-top: 3px solid var(--accent-indigo);">
+              <h4>1. Decomposição é Tudo</h4>
+              <p>Problemas grandes precisam ser fatiados em microetapas claras antes de virar código.</p>
+            </div>
+            <div class="card" style="border-top: 3px solid var(--accent-emerald);">
+              <h4>2. Metodologia Guia a IA</h4>
+              <p>Usar Sadrey e Scrum evitou desvios de escopo e garantiu rigor zootécnico e contábil.</p>
+            </div>
+            <div class="card" style="border-top: 3px solid var(--accent-blue);">
+              <h4>3. Auditoria Humana Contínua</h4>
+              <p>O olhar crítico do humano foi indispensável para calibrar cálculos e refinar a experiência do usuário.</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color); padding-top: 14px;">
+          <span style="font-weight: 800; color: var(--text-main); font-size: 1rem;">Obrigado! Aberto para dúvidas da banca sobre o processo.</span>
+          <a href="http://localhost:3000" target="_blank" class="btn btn-primary">
+            <i data-lucide="play" style="width: 16px; height: 16px;"></i> Ver o Sistema em Ação
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Barra Inferior de Navegação -->
+  <footer>
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <button onclick="prevSlide()" id="prevBtn" class="nav-btn" title="Slide Anterior (Seta Esquerda)">
+        <i data-lucide="chevron-left" style="width: 20px; height: 20px;"></i>
+      </button>
+      <button onclick="nextSlide()" id="nextBtn" class="nav-btn" title="Próximo Slide (Seta Direita / Espaço)">
+        <i data-lucide="chevron-right" style="width: 20px; height: 20px;"></i>
+      </button>
+    </div>
+
+    <div class="slide-counter">
+      Slide <span id="currentSlideNumber" style="color: var(--accent-indigo);">1</span> de <span id="totalSlideNumber">9</span>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">Dica: Use as setas ← / → do teclado ou a barra de espaço</span>
+    </div>
+  </footer>
+
+  <script>
+    // Inicializar ícones Lucide
+    lucide.createIcons();
+
+    // Controle dos Slides
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    let currentSlideIndex = 0;
+
+    document.getElementById('totalSlideNumber').innerText = totalSlides;
+
+    function showSlide(index) {
+      if (index < 0) index = 0;
+      if (index >= totalSlides) index = totalSlides - 1;
+
+      currentSlideIndex = index;
+
+      slides.forEach((slide, idx) => {
+        if (idx === currentSlideIndex) {
+          slide.classList.add('active');
+        } else {
+          slide.classList.remove('active');
+        }
+      });
+
+      document.getElementById('currentSlideNumber').innerText = currentSlideIndex + 1;
+      document.getElementById('progressBar').style.width = `${((currentSlideIndex + 1) / totalSlides) * 100}%`;
+
+      document.getElementById('prevBtn').disabled = currentSlideIndex === 0;
+      document.getElementById('nextBtn').disabled = currentSlideIndex === totalSlides - 1;
+    }
+
+    function nextSlide() {
+      if (currentSlideIndex < totalSlides - 1) {
+        showSlide(currentSlideIndex + 1);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlideIndex > 0) {
+        showSlide(currentSlideIndex - 1);
+      }
+    }
+
+    // Navegação via Teclado
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        prevSlide();
+      }
+    });
+
+    // Tela Cheia
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen().catch(() => {});
+      }
+    }
+
+    // Baixar em PDF
+    function downloadPDF() {
+      const btn = document.getElementById('pdfBtn');
+      const originalHTML = btn.innerHTML;
+      btn.innerHTML = `<i data-lucide="loader-2" style="width: 16px; height: 16px; animation: spin 1s linear infinite;"></i> Gerando PDF...`;
+      lucide.createIcons();
+
+      const element = document.createElement('div');
+      element.style.background = '#ffffff';
+      element.style.color = '#0f172a';
+      element.style.padding = '0';
+      element.style.fontFamily = "'Plus Jakarta Sans', sans-serif";
+
+      slides.forEach((s) => {
+        const slideClone = s.cloneNode(true);
+        slideClone.style.display = 'flex';
+        slideClone.style.flexDirection = 'column';
+        slideClone.style.justifyContent = 'space-between';
+        slideClone.style.opacity = '1';
+        slideClone.style.visibility = 'visible';
+        slideClone.style.transform = 'none';
+        slideClone.style.position = 'relative';
+        slideClone.style.padding = '32px 40px';
+        slideClone.style.minHeight = '100vh';
+        slideClone.style.pageBreakAfter = 'always';
+        slideClone.style.border = 'none';
+        slideClone.style.background = '#ffffff';
+        element.appendChild(slideClone);
+      });
+
+      const opt = {
+        margin:       0,
+        filename:     'BovInSight-Apresentacao-Processo-Metodologia-IA.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
+        jsPDF:        { unit: 'in', format: 'a4', orientation: 'landscape' }
+      };
+
+      html2pdf().set(opt).from(element).save().then(() => {
+        btn.innerHTML = originalHTML;
+        lucide.createIcons();
+      }).catch(err => {
+        console.error('Erro ao gerar PDF:', err);
+        window.print();
+        btn.innerHTML = originalHTML;
+        lucide.createIcons();
+      });
+    }
+
+    // Inicializar
+    showSlide(0);
+  </script>
+</body>
+</html>

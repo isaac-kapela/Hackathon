@@ -71,17 +71,31 @@ export default function Header({ activeTab, setActiveTab }) {
               })}
             </nav>
 
-            <a
-              href="/apresentacao.html"
-              target="_blank"
-              rel="noreferrer"
-              className="hidden md:flex items-center gap-2 px-3.5 py-2.5 bg-gradient-to-r from-amber-500/20 to-amber-600/20 hover:from-amber-500/30 hover:to-amber-600/30 border border-amber-400/40 text-amber-300 hover:text-amber-200 rounded-2xl text-xs font-bold transition-all shadow-sm"
-              title="Abrir Apresentação do Projeto (Slides em HTML/PDF)"
-            >
-              <Presentation className="w-4 h-4 text-amber-400" />
-              <span>Apresentação (Pitch)</span>
-              <ExternalLink className="w-3 h-3 text-amber-400/70" />
-            </a>
+            <div className="hidden lg:flex items-center gap-2">
+              <a
+                href="/apresentacao.html"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-emerald-500/15 to-emerald-600/15 hover:from-emerald-500/25 hover:to-emerald-600/25 border border-emerald-400/30 text-emerald-300 hover:text-emerald-200 rounded-xl text-xs font-bold transition-all shadow-sm"
+                title="Abrir Apresentação do Produto (Slides em HTML/PDF)"
+              >
+                <Presentation className="w-3.5 h-3.5 text-emerald-400" />
+                <span>Pitch Produto</span>
+                <ExternalLink className="w-2.5 h-2.5 text-emerald-400/60" />
+              </a>
+
+              <a
+                href="/apresentacao_processo_ia.html"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-indigo-500/15 to-indigo-600/15 hover:from-indigo-500/25 hover:to-indigo-600/25 border border-indigo-400/30 text-indigo-300 hover:text-indigo-200 rounded-xl text-xs font-bold transition-all shadow-sm"
+                title="Abrir Apresentação de Metodologia, Sadrey + Scrum e Parceria Humano + IA"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
+                <span>Metodologia & IA</span>
+                <ExternalLink className="w-2.5 h-2.5 text-indigo-400/60" />
+              </a>
+            </div>
           </div>
 
         </div>
