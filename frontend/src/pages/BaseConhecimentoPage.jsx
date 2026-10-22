@@ -1,5 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { BookOpen, Database, Bookmark, Shield, CheckCircle2, Search, Filter, Sparkles, Layers } from 'lucide-react';
+import { 
+  BookOpen, 
+  Database, 
+  Bookmark, 
+  Shield, 
+  CheckCircle2, 
+  Search, 
+  Filter, 
+  Sparkles, 
+  Layers,
+  Thermometer,
+  HeartPulse,
+  Wheat,
+  Activity,
+  DollarSign,
+  Droplets
+} from 'lucide-react';
 import { apiService } from '../services/api';
 
 export default function BaseConhecimentoPage() {
@@ -34,10 +50,13 @@ export default function BaseConhecimentoPage() {
   });
 
   const categoryPills = [
-    { id: 'todas', label: 'Todas' },
-    { id: 'financeira', label: 'Financeira (COE/COT)' },
+    { id: 'todas', label: 'Todas as Regras' },
+    { id: 'financeira', label: 'Financeira & Custos' },
     { id: 'qualidade', label: 'Qualidade (IN 76/77)' },
-    { id: 'zootecnica', label: 'Zootécnica' },
+    { id: 'zootecnica', label: 'Zootécnica & Reprodução' },
+    { id: 'ambiencia', label: 'Ambiência & ITU' },
+    { id: 'saude', label: 'Saúde & Bem-Estar' },
+    { id: 'nutricao', label: 'Nutrição & Rúmen' },
     { id: 'mercado', label: 'Mercado (CEPEA)' }
   ];
 
@@ -56,7 +75,7 @@ export default function BaseConhecimentoPage() {
                 Base de Conhecimento Declarativa
               </h2>
               <p className="text-xs text-slate-500 mt-0.5">
-                Regras e variáveis estruturadas e auditáveis, com fundamentação técnica na <strong>Embrapa Gado de Leite</strong>, <strong>MAPA</strong> e <strong>CEPEA</strong>.
+                Regras de produção determinísticas e variáveis técnicas auditáveis com embasamento na <strong>Embrapa Gado de Leite</strong>, <strong>MAPA IN 76/77</strong>, <strong>NRC Dairy Cattle</strong> e <strong>CEPEA</strong>.
               </p>
             </div>
           </div>
@@ -65,7 +84,7 @@ export default function BaseConhecimentoPage() {
             <button
               onClick={() => { setActiveSubTab('regras'); setSearchTerm(''); }}
               className={`px-4 py-2 rounded-xl transition-all ${
-                activeSubTab === 'regras' ? 'bg-white text-emerald-800 shadow-sm' : 'text-slate-600 hover:text-slate-900'
+                activeSubTab === 'regras' ? 'bg-white text-emerald-800 shadow-sm font-black' : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               Regras de Produção ({regras.length})
@@ -73,7 +92,7 @@ export default function BaseConhecimentoPage() {
             <button
               onClick={() => { setActiveSubTab('variaveis'); setSearchTerm(''); }}
               className={`px-4 py-2 rounded-xl transition-all ${
-                activeSubTab === 'variaveis' ? 'bg-white text-emerald-800 shadow-sm' : 'text-slate-600 hover:text-slate-900'
+                activeSubTab === 'variaveis' ? 'bg-white text-emerald-800 shadow-sm font-black' : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               Dicionário de Variáveis ({variaveis.length})
@@ -118,7 +137,7 @@ export default function BaseConhecimentoPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 pt-2">
             {filteredRegras.map((r) => {
               const isCritico = r.conclusao?.status === 'CRITICO';
-              const isAlerta = r.conclusao?.status === 'ALERTA';
+              const isSucesso = r.conclusao?.status === 'SUCESSO';
 
               return (
                 <div 
@@ -159,7 +178,7 @@ export default function BaseConhecimentoPage() {
 
                   <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
                     <span className="capitalize font-bold text-slate-600">Categoria: {r.categoria}</span>
-                    <span className="truncate max-w-[220px] font-medium" title={r.conclusao?.fonte}>
+                    <span className="truncate max-w-[200px] font-medium" title={r.conclusao?.fonte}>
                       {r.conclusao?.fonte}
                     </span>
                   </div>

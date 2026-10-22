@@ -1,7 +1,7 @@
 {
-  "versao": "1.0.0",
-  "data_revisao": "2026-10-20",
-  "dominio": "Sistema Especialista Zootécnico e Econômico para Pecuária Leiteira",
+  "versao": "2.0.0",
+  "data_revisao": "2026-10-21",
+  "dominio": "Sistema Especialista Zootécnico, Bioclimático, Sanitário e Econômico para Pecuária Leiteira",
   "regras": [
     {
       "id": "R01",
@@ -211,6 +211,231 @@
         "resumo": "Margem líquida saudável (COT coberto), rebanho com DEL ideal e alta proporção de vacas em lactação.",
         "recomendacao": "A fazenda gera lucro real, remunera a família e acumula reserva de depreciação para expansão e modernização tecnológica contínua.",
         "fonte": "Embrapa Gado de Leite - Benchmarks de Alta Rentabilidade"
+      }
+    },
+    {
+      "id": "R13",
+      "nome": "Estresse Térmico Severo (ITU > 78) - Queda Drástica de Produção e Fertilidade",
+      "prioridade": 88,
+      "cf": 0.92,
+      "categoria": "ambiencia",
+      "condicoes": [
+        { "campo": "itu", "operador": ">", "valor": 78 }
+      ],
+      "conclusao": {
+        "status": "CRITICO",
+        "titulo": "Estresse Térmico Crítico (ITU > 78)",
+        "resumo": "O rebanho está submetido a estresse calórico severo (combinação crítica de temperatura e umidade).",
+        "recomendacao": "Vacas em estresse térmico reduzem o consumo de matéria seca em 15% a 25%, perdem de 3 a 6 kg de leite/dia e a taxa de concepção cai para menos de 15%. Ação: Acionar ventilação forçada com aspersão na sala de espera e linha de cocho, garantir sombra de pelo menos 4 a 5 m² por vaca e água limpa abundante à vontade.",
+        "fonte": "Embrapa Gado de Leite & NRC (Bioclimatologia Bovina)"
+      }
+    },
+    {
+      "id": "R14",
+      "nome": "Estresse Térmico Moderado (ITU entre 72 e 78)",
+      "prioridade": 65,
+      "cf": 0.80,
+      "categoria": "ambiencia",
+      "condicoes": [
+        { "campo": "itu", "operador": ">=", "valor": 72 },
+        { "campo": "itu", "operador": "<=", "valor": 78 }
+      ],
+      "conclusao": {
+        "status": "ALERTA",
+        "titulo": "Estresse Térmico Moderado (Início de Desconforto Calórico)",
+        "resumo": "ITU acima de 72 pontos já ativa mecanismos termorregulatórios da vaca (frequência respiratória acelerada).",
+        "recomendacao": "Reforçar o resfriamento na sala de espera pré-ordenha (aspersão intermitente e ventiladores) e fornecer dietas com maior densidade energética para compensar a leve redução de apetite nos horários mais quentes.",
+        "fonte": "Embrapa Gado de Leite"
+      }
+    },
+    {
+      "id": "R15",
+      "nome": "Desequilíbrio Ruminal / Risco de Acidose Subaguda (SARA) e Queda de Gordura",
+      "prioridade": 82,
+      "cf": 0.88,
+      "categoria": "nutricao",
+      "condicoes": [
+        { "campo": "relacao_volumoso_concentrado", "operador": "<", "valor": 45 }
+      ],
+      "conclusao": {
+        "status": "CRITICO",
+        "titulo": "Excesso de Concentrado e Risco de Acidose Ruminal (SARA)",
+        "resumo": "A proporção de volumoso na matéria seca está abaixo de 45% (concentrado acima de 55%).",
+        "recomendacao": "Risco iminente de acidose ruminal subaguda, depressão da gordura do leite, laminite (cascos danificados) e descarte precoce de matrizes. Ação: Aumentar a oferta de fibra fisicamente efetiva (FDN efetivo) na dieta e incluir tamponantes (bicarbonato de sódio a 0,75%-1% da MS).",
+        "fonte": "NRC Dairy Cattle & Journal of Dairy Science"
+      }
+    },
+    {
+      "id": "R16",
+      "nome": "Sobrecarga de Nitrogênio ou Desbalanço Energia:Proteína no Rúmen (NUL > 16 mg/dL)",
+      "prioridade": 68,
+      "cf": 0.82,
+      "categoria": "nutricao",
+      "condicoes": [
+        { "campo": "ureia_leite_nul", "operador": ">", "valor": 16 }
+      ],
+      "conclusao": {
+        "status": "ALERTA",
+        "titulo": "Nitrogênio Ureico no Leite (NUL) Elevado - Desperdício Proteico",
+        "resumo": "NUL acima de 16 mg/dL indica excesso de proteína degradável no rúmen ou falta de carboidratos fermentáveis para sintetizar proteína microbiana.",
+        "recomendacao": "O excesso de ureia causa toxicidade embrionária (prejudica a taxa de concepção e aumenta mortes embrionárias) além de gastar energia metabólica do fígado para excreção. Ajustar o teor de PB do concentrado e adicionar fontes de amido fermentável (milho moído fino).",
+        "fonte": "Embrapa Gado de Leite / NRC"
+      }
+    },
+    {
+      "id": "R17",
+      "nome": "Deficiência de Proteína Ruminal e Limitação de Produção (NUL < 10 mg/dL)",
+      "prioridade": 62,
+      "cf": 0.80,
+      "categoria": "nutricao",
+      "condicoes": [
+        { "campo": "ureia_leite_nul", "operador": "<", "valor": 10 }
+      ],
+      "conclusao": {
+        "status": "ALERTA",
+        "titulo": "Deficiência de Proteína Degradável no Rúmen (NUL < 10 mg/dL)",
+        "resumo": "NUL baixo indica que as bactérias ruminais estão com escassez de nitrogênio para degradar a fibra do volumoso.",
+        "recomendacao": "A digestão da fibra fica travada, diminuindo a passagem de alimento e a produção diária de leite. Ajustar o fornecimento proteico da dieta com farelo de soja, farelo de algodão ou ureia pecuária tratada.",
+        "fonte": "NRC Dairy Cattle"
+      }
+    },
+    {
+      "id": "R18",
+      "nome": "Balanço Energético Negativo Severo e Risco de Cetose (ECC < 2.50)",
+      "prioridade": 84,
+      "cf": 0.88,
+      "categoria": "saude",
+      "condicoes": [
+        { "campo": "escore_condicao_corporal", "operador": "<", "valor": 2.50 }
+      ],
+      "conclusao": {
+        "status": "CRITICO",
+        "titulo": "Escore Corporal Crítico (Vacas Excessivamente Magras / BEN)",
+        "resumo": "ECC médio abaixo de 2.5 indica mobilização excessiva de gordura corporal e balanço energético negativo acentuado.",
+        "recomendacao": "Vacas muito magras têm imunidade deprimida, atraso no retorno ao cio (> 90 dias vazias) e alto risco de cetose e deslocamento de abomaso. Ação: Aumentar a densidade energética da dieta do lote de transição e início de lactação, sem comprometer a fibra.",
+        "fonte": "Embrapa Gado de Leite - Manejo do Período de Transição"
+      }
+    },
+    {
+      "id": "R19",
+      "nome": "Supercondicionamento / Sobrepeso com Risco de Fígado Gorduroso (ECC > 3.75)",
+      "prioridade": 66,
+      "cf": 0.78,
+      "categoria": "saude",
+      "condicoes": [
+        { "campo": "escore_condicao_corporal", "operador": ">", "valor": 3.75 }
+      ],
+      "conclusao": {
+        "status": "ALERTA",
+        "titulo": "Supercondicionamento Corporal (Vacas Gordas - ECC > 3.75)",
+        "resumo": "Vacas com escore corporal excessivo têm queda brusca de apetite no pré-parto.",
+        "recomendacao": "Gera síndrome da vaca gorda, fígado gorduroso, cetose clínica pós-parto, distocia e retenção de placenta. Ação: Reduzir a energia da ração de vacas no terço final de lactação e secar vacas com ECC entre 3.0 e 3.25.",
+        "fonte": "Embrapa Pecuária Sudeste"
+      }
+    },
+    {
+      "id": "R20",
+      "nome": "Epidemia de Claudicação / Perdas Podais Críticas (Taxa Mancas > 8%)",
+      "prioridade": 86,
+      "cf": 0.90,
+      "categoria": "saude",
+      "condicoes": [
+        { "campo": "taxa_claudicacao", "operador": ">", "valor": 8 }
+      ],
+      "conclusao": {
+        "status": "CRITICO",
+        "titulo": "Alta Prevalência de Claudicação e Afecções Podais",
+        "resumo": "Mais de 8% do rebanho em ordenha apresenta claudicação (manqueira/lesão de casco).",
+        "recomendacao": "A dor faz a vaca passar menos tempo no cocho (-15% de ingestão de alimento) e deitada ruminando, gerando perdas diretas de 2 a 4 L/vaca/dia e queda drástica de fertilidade. Ação: Implementar casqueamento preventivo e corretivo imediato, instalar pedilúvio com sulfato de cobre/formol e revisar pisos abrasivos ou escorregadios.",
+        "fonte": "Embrapa Gado de Leite - Saúde do Casco e Bem-Estar"
+      }
+    },
+    {
+      "id": "R21",
+      "nome": "Surto de Mastite Clínica com Descarte de Leite (Mastite Clínica > 4%/mês)",
+      "prioridade": 83,
+      "cf": 0.88,
+      "categoria": "saude",
+      "condicoes": [
+        { "campo": "incidencia_mastite_clinica_mes", "operador": ">", "valor": 4 }
+      ],
+      "conclusao": {
+        "status": "CRITICO",
+        "titulo": "Incidência Elevada de Mastite Clínica (Perdas por Descarte e Remédios)",
+        "resumo": "Incidência de mastite clínica superior a 4% das vacas/mês gera grande descarte de leite com resíduos de antibiótico.",
+        "recomendacao": "Além do custo direto com medicamentos e veterinário, quartos mamários podem ser perdidos permanentemente. Ação: Revisar rotina de ordenha (teste da caneca de fundo preto obrigatório, pré e pós-dipping com desinfetante ativo), fazer cultura microbiológica e higienizar camas/piquetes.",
+        "fonte": "National Mastitis Council (NMC) & MAPA"
+      }
+    },
+    {
+      "id": "R22",
+      "nome": "Atraso na Idade ao Primeiro Parto das Novilhas (IPP > 28 meses)",
+      "prioridade": 72,
+      "cf": 0.82,
+      "categoria": "zootecnica",
+      "condicoes": [
+        { "campo": "idade_primeiro_parto_meses", "operador": ">", "valor": 28 }
+      ],
+      "conclusao": {
+        "status": "ALERTA",
+        "titulo": "Atraso no Primeiro Parto das Novilhas (IPP Elevado)",
+        "resumo": "Novilhas parindo após 28 meses representam custo de recria excessivo sem retorno.",
+        "recomendacao": "Cada mês de atraso no IPP após 24 meses custa entre R$ 200 e R$ 350 por novilha em alimentação e manejo. Ação: Monitorar ganho de peso diário (GPD) na recria (meta: 700 a 800 g/dia) para atingir peso de cobertura (360-380 kg em Holandês ou 320 kg em Girolando) aos 14-15 meses.",
+        "fonte": "Embrapa Gado de Leite - Recria de Fêmeas Leiteiras"
+      }
+    },
+    {
+      "id": "R23",
+      "nome": "Mortalidade Excessiva de Bezerras e Falha de Colostragem (Mortalidade > 5%)",
+      "prioridade": 78,
+      "cf": 0.85,
+      "categoria": "zootecnica",
+      "condicoes": [
+        { "campo": "taxa_mortalidade_bezerras", "operador": ">", "valor": 5 }
+      ],
+      "conclusao": {
+        "status": "CRITICO",
+        "titulo": "Mortalidade de Bezerras Acima do Limite de Sustentabilidade",
+        "resumo": "Taxa de mortalidade na fase de cria superior a 5% compromete a reposição futura do rebanho.",
+        "recomendacao": "Gargalo grave de colostragem (fornecer 10% do peso vivo em colostro de alta qualidade nas primeiras 6 horas de vida), cura de umbigo com iodo 10% e controle de diarreias e pneumonias no bezerreiro/casinhas tropicais.",
+        "fonte": "Embrapa Pecuária Sudeste - Criação de Bezerras"
+      }
+    },
+    {
+      "id": "R24",
+      "nome": "Baixo Rendimento Operacional da Mão de Obra (< 250 L/trabalhador/dia)",
+      "prioridade": 64,
+      "cf": 0.75,
+      "categoria": "financeira",
+      "condicoes": [
+        { "campo": "producao_litros_por_trabalhador_dia", "operador": "<", "valor": 250 }
+      ],
+      "conclusao": {
+        "status": "ALERTA",
+        "titulo": "Baixa Eficiência Produtiva por Trabalhador",
+        "resumo": "A produtividade por homem na atividade está abaixo de 250 L/dia (Meta intensiva/semi-intensiva: > 450 L/homem/dia).",
+        "recomendacao": "Indica processos operacionais manuais lentos, rotina de ordenha ineficiente ou escala de produção incompatível com o quadro de funcionários. Reorganizar rotinas de manejo, mecanizar arraçoamento e avaliar automação da extração de leite.",
+        "fonte": "Embrapa Gado de Leite - Gestão de Mão de Obra"
+      }
+    },
+    {
+      "id": "R25",
+      "nome": "Excelência Holística em Conforto, Sanidade, Reprodução e Margem",
+      "prioridade": 55,
+      "cf": 0.98,
+      "categoria": "zootecnica",
+      "condicoes": [
+        { "campo": "itu", "operador": "<", "valor": 72 },
+        { "campo": "taxa_claudicacao", "operador": "<=", "valor": 4 },
+        { "campo": "taxa_prenhez", "operador": ">=", "valor": 20 },
+        { "campo": "margem_liquida_litro", "operador": ">=", "valor": 0.30 }
+      ],
+      "conclusao": {
+        "status": "SUCESSO",
+        "titulo": "Padrão Ouro de Sustentabilidade Zootécnica, Bem-Estar e Lucratividade",
+        "resumo": "Ambiente com total conforto térmico (ITU < 72), rebanho com cascos saudáveis, fertilidade em nível superior e excelente margem financeira.",
+        "recomendacao": "A propriedade atinge o ápice de bem-estar animal e rentabilidade, servindo de modelo regional de eficiência sustentável.",
+        "fonte": "Embrapa Gado de Leite - Fazendas de Alta Performance"
       }
     }
   ]

@@ -117,12 +117,16 @@ class InferenceEngine {
       }
     }
 
-    // Determina o status geral da propriedade
+    // Determina o status geral da propriedade com balanceamento hierárquico
     let statusGeral = 'SAUDAVEL';
     if (criticalCount > 0) {
       statusGeral = 'CRITICO';
-    } else if (alertCount > 0) {
+    } else if (alertCount > 0 && alertCount > successCount) {
       statusGeral = 'ALERTA';
+    } else if (alertCount > 0 && successCount >= alertCount && alertCount >= 2) {
+      statusGeral = 'ALERTA';
+    } else {
+      statusGeral = 'SAUDAVEL';
     }
 
     return {
@@ -131,6 +135,9 @@ class InferenceEngine {
       fatorCertezaGeral: Number(cumulativeCF.toFixed(2)),
       totalRegrasAvaliadas: this.rules.length,
       totalRegrasDisparadas: firedRules.length,
+      criticalCount,
+      alertCount,
+      successCount,
       regrasDisparadas: firedRules,
       memoriaTrabalho: workingMemory
     };

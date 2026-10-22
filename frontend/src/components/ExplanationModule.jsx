@@ -1,45 +1,65 @@
 import React, { useState } from 'react';
-import { HelpCircle, ChevronDown, ChevronRight, Check, AlertCircle, Bookmark, ShieldAlert, Award, FileSpreadsheet } from 'lucide-react';
+import { 
+  HelpCircle, 
+  ChevronDown, 
+  ChevronRight, 
+  Check, 
+  AlertCircle, 
+  Bookmark, 
+  Award,
+  Sparkles,
+  Thermometer,
+  HeartPulse,
+  Wheat,
+  Activity,
+  DollarSign,
+  Droplets,
+  Layers
+} from 'lucide-react';
 
 export default function ExplanationModule({ regrasDisparadas = [], memoriaTrabalho = {} }) {
   const [openRuleId, setOpenRuleId] = useState(regrasDisparadas?.[0]?.id || null);
 
   if (!regrasDisparadas || regrasDisparadas.length === 0) {
     return (
-      <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 text-center text-slate-500">
-        <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-3 text-emerald-600">
-          <Award className="w-6 h-6" />
+      <div className="bg-white rounded-3xl shadow-sm border border-slate-200/90 p-8 sm:p-10 text-center text-slate-500">
+        <div className="w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center mx-auto mb-4 text-emerald-600 border border-emerald-100 shadow-sm">
+          <Award className="w-7 h-7" />
         </div>
-        <h4 className="text-base font-bold text-slate-800 mb-1">Nenhuma Não-Conformidade Detectada</h4>
-        <p className="text-xs text-slate-500 max-w-md mx-auto">
-          O rebanho atende a todas as metas zootécnicas da Embrapa e aos padrões sanitários da IN 76/77 do MAPA.
+        <h4 className="text-lg font-black text-slate-900 mb-1">Nenhuma Não-Conformidade Crítica Detectada</h4>
+        <p className="text-xs text-slate-500 max-w-lg mx-auto leading-relaxed">
+          O rebanho atende às metas zootécnicas, bioclimáticas e econômicas da Embrapa Gado de Leite e aos padrões sanitários da IN 76/77 do MAPA.
         </p>
       </div>
     );
   }
 
   const categoryBadges = {
-    financeira: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-    qualidade: 'bg-cyan-50 text-cyan-700 border-cyan-200',
-    zootecnica: 'bg-indigo-50 text-indigo-700 border-indigo-200',
-    mercado: 'bg-amber-50 text-amber-700 border-amber-200'
+    financeira: { bg: 'bg-emerald-50 text-emerald-700 border-emerald-200', icon: DollarSign },
+    qualidade: { bg: 'bg-cyan-50 text-cyan-700 border-cyan-200', icon: Droplets },
+    zootecnica: { bg: 'bg-indigo-50 text-indigo-700 border-indigo-200', icon: Activity },
+    mercado: { bg: 'bg-amber-50 text-amber-700 border-amber-200', icon: Sparkles },
+    ambiencia: { bg: 'bg-orange-50 text-orange-700 border-orange-200', icon: Thermometer },
+    saude: { bg: 'bg-rose-50 text-rose-700 border-rose-200', icon: HeartPulse },
+    nutricao: { bg: 'bg-lime-50 text-lime-800 border-lime-200', icon: Wheat },
+    operacional: { bg: 'bg-purple-50 text-purple-700 border-purple-200', icon: Layers }
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 space-y-4">
-      <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-        <div className="flex items-center space-x-2.5">
-          <div className="p-2 bg-emerald-100 text-emerald-700 rounded-xl">
+    <div className="bg-white rounded-3xl shadow-sm border border-slate-200/90 p-6 sm:p-7 space-y-5">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-4 border-b border-slate-100 gap-3">
+        <div className="flex items-center space-x-3">
+          <div className="p-2.5 bg-emerald-500/10 text-emerald-700 rounded-2xl border border-emerald-500/20">
             <HelpCircle className="w-5 h-5" />
           </div>
           <div>
-            <h3 className="text-lg font-black text-slate-900">Módulo de Explicação Interativo</h3>
-            <p className="text-xs text-slate-500">Trilha de auditoria transparente: entenda o porquê de cada decisão</p>
+            <h3 className="text-lg font-black text-slate-900">Módulo de Explicação & Trilha de Auditoria</h3>
+            <p className="text-xs text-slate-500">Transparência determinística: visualize a cadeia lógica (SE → ENTÃO) de cada regra disparada</p>
           </div>
         </div>
 
-        <span className="text-xs font-mono font-bold px-3 py-1 bg-slate-100 text-slate-700 rounded-full border border-slate-200">
-          {regrasDisparadas.length} regra(s) no Audit Trail
+        <span className="text-xs font-mono font-black px-3.5 py-1.5 bg-slate-100 text-slate-700 rounded-full border border-slate-200/80">
+          {regrasDisparadas.length} regra(s) disparada(s)
         </span>
       </div>
 
@@ -53,11 +73,14 @@ export default function ExplanationModule({ regrasDisparadas = [], memoriaTrabal
           if (isCritico) statusBadge = 'bg-rose-100 text-rose-900 border-rose-200';
           if (isSucesso) statusBadge = 'bg-emerald-100 text-emerald-900 border-emerald-200';
 
+          const catConf = categoryBadges[regra.categoria] || { bg: 'bg-slate-100 text-slate-600 border-slate-200', icon: Activity };
+          const CatIcon = catConf.icon;
+
           return (
             <div
               key={regra.id}
               className={`rounded-2xl border transition-all duration-200 overflow-hidden ${
-                isOpen ? 'border-slate-300 shadow-md bg-white ring-1 ring-slate-200' : 'border-slate-200 bg-slate-50/40 hover:bg-slate-50 hover:border-slate-300'
+                isOpen ? 'border-slate-300 shadow-md bg-white ring-1 ring-slate-200' : 'border-slate-200/80 bg-slate-50/50 hover:bg-slate-50 hover:border-slate-300'
               }`}
             >
               <button
@@ -65,18 +88,19 @@ export default function ExplanationModule({ regrasDisparadas = [], memoriaTrabal
                 onClick={() => setOpenRuleId(isOpen ? null : regra.id)}
                 className="w-full px-5 py-4 text-left flex items-center justify-between focus:outline-none"
               >
-                <div className="flex items-center space-x-3">
-                  <span className="font-mono text-xs font-bold px-2.5 py-1 bg-slate-200 text-slate-800 rounded-lg">
+                <div className="flex items-center space-x-3.5">
+                  <span className="font-mono text-xs font-black px-2.5 py-1 bg-slate-200/80 text-slate-800 rounded-xl">
                     #{idx + 1} {regra.id}
                   </span>
                   <div>
-                    <h4 className="font-bold text-slate-900 text-sm leading-snug">{regra.nome}</h4>
-                    <div className="flex items-center space-x-2 mt-1">
-                      <span className={`text-[10px] font-black uppercase px-2 py-0.5 rounded-full border ${statusBadge}`}>
+                    <h4 className="font-black text-slate-900 text-sm leading-snug">{regra.nome}</h4>
+                    <div className="flex items-center space-x-2 mt-1.5">
+                      <span className={`text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full border ${statusBadge}`}>
                         {regra.conclusao?.status}
                       </span>
-                      <span className={`text-[10px] font-semibold capitalize px-2 py-0.5 rounded-full border ${categoryBadges[regra.categoria] || 'bg-slate-100 text-slate-600'}`}>
-                        {regra.categoria}
+                      <span className={`text-[10px] font-bold capitalize px-2.5 py-0.5 rounded-full border flex items-center gap-1 ${catConf.bg}`}>
+                        <CatIcon className="w-3 h-3" />
+                        <span>{regra.categoria}</span>
                       </span>
                     </div>
                   </div>
@@ -84,7 +108,7 @@ export default function ExplanationModule({ regrasDisparadas = [], memoriaTrabal
 
                 <div className="flex items-center space-x-3 text-xs text-slate-500">
                   <div className="text-right hidden sm:block">
-                    <span className="font-mono font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 px-2 py-0.5 rounded text-[11px] block">
+                    <span className="font-mono font-black text-indigo-700 bg-indigo-50 border border-indigo-200 px-2 py-0.5 rounded-lg text-[11px] block">
                       CF: +{regra.cf}
                     </span>
                     <span className="text-[10px] text-slate-400 font-medium">Prioridade {regra.prioridade}</span>
@@ -94,22 +118,22 @@ export default function ExplanationModule({ regrasDisparadas = [], memoriaTrabal
               </button>
 
               {isOpen && (
-                <div className="px-5 pb-5 pt-2 border-t border-slate-100 bg-white space-y-4 text-sm">
+                <div className="px-5 pb-5 pt-2 border-t border-slate-100 bg-white space-y-4 text-sm animate-fadeIn">
                   
                   {/* Bloco 1: Premissas SE (IF) */}
                   <div>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-2">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-slate-400 block mb-2">
                       1. Condições Verificadas na Memória de Trabalho (Premissas SE)
                     </span>
-                    <div className="bg-slate-50 rounded-xl p-3 font-mono text-xs space-y-2 border border-slate-200/80">
+                    <div className="bg-slate-50 rounded-2xl p-3 font-mono text-xs space-y-2 border border-slate-200/80">
                       {regra.condicoesAvaliadas?.map((c, cIdx) => (
-                        <div key={cIdx} className="flex items-center space-x-2.5 text-slate-700 bg-white p-2 rounded-lg border border-slate-100 shadow-2xs">
+                        <div key={cIdx} className="flex items-center space-x-2.5 text-slate-700 bg-white p-2.5 rounded-xl border border-slate-200/70 shadow-2xs">
                           <div className="w-5 h-5 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center flex-shrink-0">
                             <Check className="w-3.5 h-3.5" />
                           </div>
-                          <span>
+                          <span className="text-xs">
                             <strong className="text-indigo-900">{c.campo}</strong> {c.operador} <strong>{c.valorEsperado}</strong>
-                            {' '}→ <span className="text-slate-500">Valor Atual:</span> <span className="text-emerald-700 font-bold bg-emerald-50 px-1.5 py-0.5 rounded">{typeof c.valorObservado === 'number' ? c.valorObservado.toFixed(2) : String(c.valorObservado)}</span>
+                            {' '}→ <span className="text-slate-500">Valor Observado:</span> <span className="text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-100">{typeof c.valorObservado === 'number' ? c.valorObservado.toFixed(2) : String(c.valorObservado)}</span>
                           </span>
                         </div>
                       ))}
@@ -118,28 +142,28 @@ export default function ExplanationModule({ regrasDisparadas = [], memoriaTrabal
 
                   {/* Bloco 2: Diagnóstico Técnico ENTÃO (THEN) */}
                   <div>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">
-                      2. Diagnóstico / Conclusão (ENTÃO)
+                    <span className="text-[10px] font-black uppercase tracking-wider text-slate-400 block mb-1">
+                      2. Diagnóstico Técnico (ENTÃO)
                     </span>
-                    <p className="text-slate-800 font-semibold bg-slate-50/70 p-3 rounded-xl border border-slate-150">
+                    <p className="text-slate-800 font-semibold bg-slate-50 p-3.5 rounded-2xl border border-slate-200/70 text-xs sm:text-sm">
                       {regra.conclusao?.resumo}
                     </p>
                   </div>
 
                   {/* Bloco 3: Plano de Ação Recomendado */}
-                  <div className="bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-200/80 rounded-xl p-4 text-emerald-950">
+                  <div className="bg-gradient-to-br from-emerald-50/80 via-teal-50/60 to-emerald-50/80 border border-emerald-200/90 rounded-2xl p-4 text-emerald-950">
                     <span className="text-[10px] font-black uppercase tracking-wider text-emerald-800 mb-1.5 flex items-center">
-                      <AlertCircle className="w-3.5 h-3.5 mr-1 text-emerald-700" />
-                      Recomendação de Manejo / Ação Corretiva
+                      <AlertCircle className="w-4 h-4 mr-1.5 text-emerald-700" />
+                      Recomendação Zootécnica & Manejo Corretivo
                     </span>
                     <p className="text-xs leading-relaxed font-medium">{regra.conclusao?.recomendacao}</p>
                   </div>
 
                   {/* Bloco 4: Referência Oficial */}
-                  <div className="flex items-center justify-between text-xs text-slate-400 pt-1 border-t border-slate-100">
+                  <div className="flex items-center justify-between text-xs text-slate-400 pt-2 border-t border-slate-100">
                     <div className="flex items-center space-x-1.5">
                       <Bookmark className="w-3.5 h-3.5 text-slate-400" />
-                      <span>Embasamento Técnico: <strong className="text-slate-700">{regra.conclusao?.fonte}</strong></span>
+                      <span>Embasamento: <strong className="text-slate-700 font-bold">{regra.conclusao?.fonte}</strong></span>
                     </div>
                     <span className="text-[10px] font-mono text-slate-400">ID da Regra: {regra.id}</span>
                   </div>

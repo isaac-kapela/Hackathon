@@ -1,8 +1,8 @@
 {
-  "versao": "1.0.0",
-  "data_revisao": "2026-10-20",
-  "dominio": "Economia e Zootecnia da Pecuária Leiteira",
-  "instituicao_referencia": "Embrapa Gado de Leite / CEPEA-ESALQ / MAPA IN 76/77",
+  "versao": "2.0.0",
+  "data_revisao": "2026-10-21",
+  "dominio": "Economia, Zootecnia, Bem-Estar e Sanidade da Pecuária Leiteira",
+  "instituicao_referencia": "Embrapa Gado de Leite / NRC Dairy Cattle / CEPEA-ESALQ / MAPA IN 76/77",
   "variaveis": [
     {
       "id": "producao_diaria",
@@ -38,7 +38,7 @@
       "min": 1,
       "max": 5000,
       "padrao": 64,
-      "descricao": "Número de vacas que estão sendo ordenhadas atualmente."
+      "descricao": "Número de vacas que estão sendo ordenhadas atualmente (Meta ideal: >= 80% do total de vacas)."
     },
     {
       "id": "del_medio",
@@ -65,28 +65,172 @@
       "descricao": "Média de meses entre partos consecutivos no rebanho (Meta zootécnica: 12.0 a 13.5 meses)."
     },
     {
+      "id": "taxa_deteccao_cio",
+      "nome": "Taxa de Detecção de Cios / Serviço",
+      "tipo": "numero",
+      "unidade": "%",
+      "categoria": "zootecnica",
+      "perguntavel": true,
+      "min": 10,
+      "max": 95,
+      "padrao": 60,
+      "descricao": "Percentual de vacas aptas que são identificadas em cio e inseminadas/cobertas a cada 21 dias (Meta: >= 60%)."
+    },
+    {
+      "id": "taxa_concepcao",
+      "nome": "Taxa de Concepção",
+      "tipo": "numero",
+      "unidade": "%",
+      "categoria": "zootecnica",
+      "perguntavel": true,
+      "min": 10,
+      "max": 80,
+      "padrao": 38,
+      "descricao": "Percentual de inseminações/coberturas que resultam em gestação confirmada (Meta: >= 35%)."
+    },
+    {
       "id": "taxa_prenhez",
-      "nome": "Taxa de Prenhez do Rebanho",
+      "nome": "Taxa de Prenhez do Rebanho (TXP)",
       "tipo": "numero",
       "unidade": "%",
       "categoria": "zootecnica",
       "perguntavel": true,
       "min": 5,
+      "max": 45,
+      "padrao": 22.8,
+      "descricao": "Taxa de Prenhez a cada ciclo de 21 dias = (Taxa de Serviço × Taxa de Concepção) / 100 (Meta: >= 20%)."
+    },
+    {
+      "id": "idade_primeiro_parto_meses",
+      "nome": "Idade ao Primeiro Parto das Novilhas (IPP)",
+      "tipo": "numero",
+      "unidade": "Meses",
+      "categoria": "zootecnica",
+      "perguntavel": true,
+      "min": 20,
       "max": 40,
-      "padrao": 22,
-      "descricao": "Percentual de vacas aptas que emprenham a cada ciclo de 21 dias (Meta: >= 20%)."
+      "padrao": 25,
+      "descricao": "Idade média das novilhas ao parirem pela primeira vez e entrarem em lactação (Meta Embrapa: 22 a 26 meses)."
+    },
+    {
+      "id": "taxa_mortalidade_bezerras",
+      "nome": "Taxa de Mortalidade de Bezerras",
+      "tipo": "numero",
+      "unidade": "%",
+      "categoria": "zootecnica",
+      "perguntavel": true,
+      "min": 0,
+      "max": 30,
+      "padrao": 3.0,
+      "descricao": "Mortalidade de bezerras da fase de aleitamento até o desmame (Meta: < 5%)."
+    },
+    {
+      "id": "temperatura_ambiente",
+      "nome": "Temperatura Ambiente Média da Instalação",
+      "tipo": "numero",
+      "unidade": "°C",
+      "categoria": "ambiencia",
+      "perguntavel": true,
+      "min": 5,
+      "max": 48,
+      "padrao": 24,
+      "descricao": "Temperatura média do ar no galpão/piquete durante as horas de ordenha e descanso das vacas."
+    },
+    {
+      "id": "umidade_relativa",
+      "nome": "Umidade Relativa do Ar",
+      "tipo": "numero",
+      "unidade": "%",
+      "categoria": "ambiencia",
+      "perguntavel": true,
+      "min": 20,
+      "max": 100,
+      "padrao": 68,
+      "descricao": "Umidade do ar ambiente, fundamental para calcular o Índice de Temperatura e Umidade (ITU)."
+    },
+    {
+      "id": "itu",
+      "nome": "Índice de Temperatura e Umidade (ITU/THI)",
+      "tipo": "numero",
+      "unidade": "pontos",
+      "categoria": "ambiencia",
+      "perguntavel": false,
+      "min": 40,
+      "max": 100,
+      "padrao": 72,
+      "descricao": "Indicador bioclimático de conforto térmico bovino (Conforto: < 72; Alerta: 72 a 78; Severo: > 78)."
+    },
+    {
+      "id": "escore_condicao_corporal",
+      "nome": "Escore de Condição Corporal Médio (ECC)",
+      "tipo": "numero",
+      "unidade": "escala 1 a 5",
+      "categoria": "saude",
+      "perguntavel": true,
+      "min": 1.0,
+      "max": 5.0,
+      "padrao": 3.0,
+      "descricao": "Avaliação visual e tátil da reserva de gordura corporal das vacas (Ideal em lactação: 2.75 a 3.25)."
+    },
+    {
+      "id": "taxa_claudicacao",
+      "nome": "Incidência de Claudicação (Vacas Mancas / Podologia)",
+      "tipo": "numero",
+      "unidade": "%",
+      "categoria": "saude",
+      "perguntavel": true,
+      "min": 0,
+      "max": 40,
+      "padrao": 4.0,
+      "descricao": "Percentual de vacas do lote com claudicação ou afecções podais (Meta de bem-estar: < 5%)."
+    },
+    {
+      "id": "incidencia_mastite_clinica_mes",
+      "nome": "Incidência de Mastite Clínica Mensal",
+      "tipo": "numero",
+      "unidade": "%/mês",
+      "categoria": "saude",
+      "perguntavel": true,
+      "min": 0,
+      "max": 25,
+      "padrao": 2.0,
+      "descricao": "Percentual de vacas que apresentaram grumos no leite, úbere inchado ou febre no mês (Meta: < 3%/mês)."
     },
     {
       "id": "consumo_concentrado_vaca_dia",
       "nome": "Consumo de Concentrado (Ração)",
       "tipo": "numero",
       "unidade": "kg/vaca/dia",
-      "categoria": "zootecnica",
+      "categoria": "nutricao",
       "perguntavel": true,
       "min": 0,
       "max": 18,
       "padrao": 6.0,
       "descricao": "Quantidade média diária de ração concentrada fornecida por vaca em lactação."
+    },
+    {
+      "id": "relacao_volumoso_concentrado",
+      "nome": "Proporção de Volumoso na Dieta",
+      "tipo": "numero",
+      "unidade": "% da MS",
+      "categoria": "nutricao",
+      "perguntavel": true,
+      "min": 25,
+      "max": 95,
+      "padrao": 60,
+      "descricao": "Percentual de volumoso (silagem, pasto, feno) na matéria seca total da dieta (Ideal ruminal: 50% a 70%)."
+    },
+    {
+      "id": "ureia_leite_nul",
+      "nome": "Nitrogênio Ureico no Leite (NUL / MUN)",
+      "tipo": "numero",
+      "unidade": "mg/dL",
+      "categoria": "nutricao",
+      "perguntavel": true,
+      "min": 4,
+      "max": 30,
+      "padrao": 12.5,
+      "descricao": "Indicador de equilíbrio entre proteína e carboidrato fermentável no rúmen (Faixa ideal: 10 a 14 mg/dL)."
     },
     {
       "id": "ccs",
@@ -98,7 +242,7 @@
       "min": 20,
       "max": 2000,
       "padrao": 280,
-      "descricao": "Indicador de saúde do úbere e mastite subclínica no rebanho (Limite legal MAPA IN 76/77: 500 mil céls/mL; Ideal: < 200 mil céls/mL)."
+      "descricao": "Indicador de saúde do úbere e mastite subclínica no rebanho (Limite legal MAPA IN 76/77: 500 mil céls/mL; Bônus: < 200k)."
     },
     {
       "id": "cbt",
@@ -110,7 +254,7 @@
       "min": 5,
       "max": 1000,
       "padrao": 45,
-      "descricao": "Indicador de higiene na ordenha e conservação no tanque resfriador (Limite legal MAPA IN 76/77: 300 mil UFC/mL; Padrão de Bônus: < 50 mil UFC/mL)."
+      "descricao": "Indicador de higiene na ordenha e conservação no tanque resfriador (Limite legal MAPA IN 76/77: 300 mil UFC/mL; Bônus: < 50k)."
     },
     {
       "id": "gordura_leite",
@@ -119,8 +263,8 @@
       "unidade": "%",
       "categoria": "qualidade",
       "perguntavel": true,
-      "min": 2.5,
-      "max": 5.5,
+      "min": 2.2,
+      "max": 5.8,
       "padrao": 3.7,
       "descricao": "Percentual de gordura no leite (Meta padrão: >= 3.5%)."
     },
@@ -131,10 +275,22 @@
       "unidade": "%",
       "categoria": "qualidade",
       "perguntavel": true,
-      "min": 2.5,
-      "max": 4.5,
+      "min": 2.2,
+      "max": 4.8,
       "padrao": 3.2,
       "descricao": "Percentual de proteína no leite (Meta padrão: >= 3.1%)."
+    },
+    {
+      "id": "numero_trabalhadores",
+      "nome": "Trabalhadores na Atividade Leiteira",
+      "tipo": "numero",
+      "unidade": "Pessoas",
+      "categoria": "operacional",
+      "perguntavel": true,
+      "min": 1,
+      "max": 50,
+      "padrao": 2,
+      "descricao": "Número total de trabalhadores (contratados e familiares) dedicados à ordenha e lida diária do rebanho."
     },
     {
       "id": "preco_base_leite",

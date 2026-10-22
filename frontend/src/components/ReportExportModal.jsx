@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Printer, Download, FileText } from 'lucide-react';
+import { X, Printer, Download, FileText, Award, AlertTriangle, CheckCircle2, ShieldCheck, Thermometer, Activity, DollarSign, Droplets } from 'lucide-react';
 
 export default function ReportExportModal({ isOpen, onClose, resultado, indicadores }) {
   if (!isOpen || !resultado) return null;
@@ -21,35 +21,41 @@ export default function ReportExportModal({ isOpen, onClose, resultado, indicado
   const regras = resultado.regrasDisparadas || [];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm">
-      <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm animate-fadeIn">
+      <div className="bg-white rounded-3xl max-w-4xl w-full max-h-[92vh] flex flex-col shadow-2xl overflow-hidden border border-slate-200">
+        
         {/* Header Modal */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 bg-slate-50">
-          <div className="flex items-center gap-2">
-            <FileText className="w-5 h-5 text-emerald-600" />
-            <h3 className="text-base font-bold text-slate-800">Laudo Técnico de Diagnóstico Especialista</h3>
+          <div className="flex items-center gap-2.5">
+            <div className="p-2 bg-emerald-100 text-emerald-700 rounded-xl">
+              <FileText className="w-5 h-5" />
+            </div>
+            <div>
+              <h3 className="text-base font-black text-slate-800">Laudo Técnico de Consultoria Especialista</h3>
+              <p className="text-xs text-slate-500">Auditoria zootécnica, sanitária, bioclimática e financeira</p>
+            </div>
           </div>
           <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={handlePrint}
-              className="px-3 py-1.5 text-xs font-semibold text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 flex items-center gap-1.5 transition-colors"
+              className="px-3.5 py-2 text-xs font-bold text-slate-700 bg-white border border-slate-300 rounded-xl hover:bg-slate-50 flex items-center gap-1.5 transition-colors shadow-xs"
             >
-              <Printer className="w-4 h-4" />
-              Imprimir
+              <Printer className="w-4 h-4 text-slate-600" />
+              <span>Imprimir Laudo</span>
             </button>
             <button
               type="button"
               onClick={handleDownloadJson}
-              className="px-3 py-1.5 text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-lg hover:bg-emerald-100 flex items-center gap-1.5 transition-colors"
+              className="px-3.5 py-2 text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-xl hover:bg-emerald-100 flex items-center gap-1.5 transition-colors shadow-xs"
             >
-              <Download className="w-4 h-4" />
-              Exportar JSON
+              <Download className="w-4 h-4 text-emerald-600" />
+              <span>Exportar JSON</span>
             </button>
             <button
               type="button"
               onClick={onClose}
-              className="p-1.5 text-slate-400 hover:text-slate-600 rounded-lg transition-colors"
+              className="p-2 text-slate-400 hover:text-slate-600 rounded-xl transition-colors ml-1"
             >
               <X className="w-5 h-5" />
             </button>
@@ -58,16 +64,24 @@ export default function ReportExportModal({ isOpen, onClose, resultado, indicado
 
         {/* Corpo do Relatório */}
         <div className="p-8 overflow-y-auto space-y-6 text-slate-800 print:p-0">
+          
           {/* Cabeçalho do Laudo */}
-          <div className="border-b border-slate-200 pb-4">
+          <div className="border-b border-slate-200 pb-5">
             <div className="flex justify-between items-start">
               <div>
-                <h1 className="text-xl font-bold text-slate-900">Relatório de Consultoria Zootécnica & Econômica</h1>
-                <p className="text-xs text-slate-500">Fundamentação: Metodologia Embrapa Gado de Leite & Normativa MAPA IN 76/77</p>
+                <span className="text-[10px] font-black uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                  Hackathon UFJF • RERUM Engenharia de Sistemas
+                </span>
+                <h1 className="text-2xl font-black text-slate-900 mt-1">Laudo Especialista de Avaliação Zootécnica & Econômica</h1>
+                <p className="text-xs text-slate-500 mt-0.5">Fundamentação: Embrapa Gado de Leite, MAPA IN 76/77, NRC Dairy Cattle e CEPEA</p>
               </div>
-              <div className="text-right text-xs text-slate-500">
-                <p>Data: {new Date().toLocaleDateString('pt-BR')}</p>
-                <p>Status: <span className="font-bold text-slate-800">{resultado.statusGeral}</span></p>
+              <div className="text-right text-xs text-slate-500 font-medium">
+                <p>Data de Emissão: <strong className="text-slate-800">{new Date().toLocaleDateString('pt-BR')}</strong></p>
+                <p className="mt-1">
+                  Status Geral: <span className={`font-black uppercase px-2 py-0.5 rounded text-[11px] ${
+                    resultado.statusGeral === 'CRITICO' ? 'bg-rose-100 text-rose-800' : resultado.statusGeral === 'ALERTA' ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'
+                  }`}>{resultado.statusGeral}</span>
+                </p>
               </div>
             </div>
           </div>
@@ -75,23 +89,29 @@ export default function ReportExportModal({ isOpen, onClose, resultado, indicado
           {/* Resumo de Indicadores Chave */}
           {indicadores && (
             <div>
-              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">1. Síntese de Indicadores Operacionais</h4>
+              <h4 className="text-xs font-black uppercase tracking-wider text-slate-400 mb-3">1. Síntese dos Indicadores Auditados</h4>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
-                <div className="p-3 bg-slate-50 rounded-lg border border-slate-200">
-                  <span className="text-slate-500 block">Produção Diária</span>
-                  <span className="text-sm font-bold text-slate-800">{indicadores.producao_diaria} L/dia</span>
+                <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                  <span className="text-slate-500 block text-[11px]">Produção Diária</span>
+                  <span className="text-sm font-black text-slate-900">{indicadores.producao_diaria} L/dia</span>
+                  <span className="text-[10px] text-slate-400 block">{indicadores.vacas_lactacao} vacas em lactação</span>
                 </div>
-                <div className="p-3 bg-slate-50 rounded-lg border border-slate-200">
-                  <span className="text-slate-500 block">DEL Médio</span>
-                  <span className="text-sm font-bold text-slate-800">{indicadores.del_medio} dias</span>
+                <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                  <span className="text-slate-500 block text-[11px]">DEL & IEP Médios</span>
+                  <span className="text-sm font-black text-slate-900">{indicadores.del_medio} d / {indicadores.iep_meses} m</span>
+                  <span className="text-[10px] text-slate-400 block">TXP: {indicadores.taxa_prenhez}%</span>
                 </div>
-                <div className="p-3 bg-slate-50 rounded-lg border border-slate-200">
-                  <span className="text-slate-500 block">Margem Líquida</span>
-                  <span className="text-sm font-bold text-slate-800">R$ {indicadores.margem_liquida_litro?.toFixed(2)}/L</span>
+                <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                  <span className="text-slate-500 block text-[11px]">Margem Líquida (COT)</span>
+                  <span className={`text-sm font-black ${indicadores.margem_liquida_litro > 0 ? 'text-emerald-700' : 'text-rose-700'}`}>
+                    R$ {indicadores.margem_liquida_litro?.toFixed(2)}/L
+                  </span>
+                  <span className="text-[10px] text-slate-400 block">Lucro CT: R$ {indicadores.lucro_litro?.toFixed(2)}/L</span>
                 </div>
-                <div className="p-3 bg-slate-50 rounded-lg border border-slate-200">
-                  <span className="text-slate-500 block">Qualidade (CCS / CBT)</span>
-                  <span className="text-sm font-bold text-slate-800">{indicadores.ccs}k / {indicadores.cbt}k</span>
+                <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                  <span className="text-slate-500 block text-[11px]">Ambiência & Sanidade</span>
+                  <span className="text-sm font-black text-slate-900">ITU: {indicadores.itu} ({indicadores.status_estresse_termico})</span>
+                  <span className="text-[10px] text-slate-400 block">CCS: {indicadores.ccs}k • CBT: {indicadores.cbt}k</span>
                 </div>
               </div>
             </div>
@@ -99,30 +119,35 @@ export default function ReportExportModal({ isOpen, onClose, resultado, indicado
 
           {/* Regras Disparadas e Recomendações */}
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">2. Conclusões Especialistas e Ações Recomendadas</h4>
+            <h4 className="text-xs font-black uppercase tracking-wider text-slate-400 mb-3">2. Conclusões Especialistas & Recomendações de Manejo ({regras.length} regras)</h4>
             <div className="space-y-3">
               {regras.map((c, idx) => (
-                <div key={idx} className="p-4 rounded-xl border border-slate-200 bg-white">
-                  <div className="flex items-center justify-between mb-1.5">
+                <div key={idx} className="p-4 rounded-2xl border border-slate-200 bg-white space-y-2">
+                  <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-700">
+                      <span className="text-xs font-mono font-black px-2 py-0.5 rounded-lg bg-slate-100 text-slate-700 border border-slate-200">
                         {c.id}
                       </span>
-                      <span className="text-sm font-bold text-slate-800">{c.nome}</span>
+                      <span className="text-sm font-black text-slate-800">{c.nome}</span>
                     </div>
-                    <span className="text-xs font-semibold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded">
+                    <span className="text-xs font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 px-2.5 py-0.5 rounded-full font-mono">
                       CF: +{c.cf}
                     </span>
                   </div>
-                  <p className="text-xs text-slate-600 mb-2">{c.conclusao?.resumo}</p>
-                  <div className="p-3 bg-amber-50/50 rounded-lg border border-amber-200/60 text-xs text-amber-900">
-                    <strong>Recomendação Técnica:</strong> {c.conclusao?.recomendacao}
+                  <p className="text-xs text-slate-600 font-medium">{c.conclusao?.resumo}</p>
+                  <div className="p-3 bg-amber-50/60 rounded-xl border border-amber-200/70 text-xs text-amber-950">
+                    <strong className="text-amber-900">Recomendação Técnica:</strong> {c.conclusao?.recomendacao}
                   </div>
-                  <p className="mt-1.5 text-[10px] text-slate-400 italic">Fonte: {c.conclusao?.fonte}</p>
+                  <p className="text-[10px] text-slate-400 italic">Fonte: {c.conclusao?.fonte}</p>
                 </div>
               ))}
             </div>
           </div>
+
+          <div className="pt-6 border-t border-slate-200 text-center text-xs text-slate-400">
+            <p>Sistema Especialista Zootécnico & Econômico • Desenvolvido com Motor Baseado em Regras Determinísticas</p>
+          </div>
+
         </div>
       </div>
     </div>
