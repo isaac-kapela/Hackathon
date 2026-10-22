@@ -342,7 +342,7 @@ export default function DiagnosticoPage() {
               type="button"
               onClick={() => setActiveFormTab('custos')}
               className={`py-2 px-1 rounded-xl transition-all flex items-center justify-center space-x-1 ${
-                activeFormTab === 'custos' ? 'bg-white text-indigo-700 shadow-sm font-black' : 'hover:text-slate-900'
+                activeFormTab === 'custos' ? 'bg-white text-red-700 shadow-sm font-black' : 'hover:text-slate-900'
               }`}
             >
               <DollarSign className="w-3.5 h-3.5" />
@@ -831,7 +831,7 @@ export default function DiagnosticoPage() {
               <button
                 type="button"
                 onClick={() => aplicarOtimizacao('reproducao')}
-                className="p-2 text-left bg-indigo-50/70 hover:bg-indigo-100/80 border border-indigo-200/80 rounded-xl font-bold text-indigo-950 transition-all"
+                className="p-2 text-left bg-rose-50/70 hover:bg-rose-100/80 border border-rose-200/80 rounded-xl font-bold text-rose-950 transition-all"
               >
                 🐄 83% Vacas Lactação
               </button>

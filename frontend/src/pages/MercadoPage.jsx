@@ -136,20 +136,20 @@ export default function MercadoPage() {
           </div>
 
           {/* Card 3: Farelo de Soja Tonelada */}
-          <div className="p-5 bg-gradient-to-br from-blue-50/70 to-indigo-50/70 rounded-3xl border border-blue-200/80 shadow-sm flex flex-col justify-between">
+          <div className="p-5 bg-gradient-to-br from-rose-50/70 to-red-50/70 rounded-3xl border border-rose-200/80 shadow-sm flex flex-col justify-between">
             <div>
-              <span className="text-xs font-bold text-blue-900 uppercase tracking-wider block">Farelo de Soja (Granel)</span>
-              <span className="text-[11px] text-blue-600 font-medium">Base Paranaguá/PR (CEPEA)</span>
+              <span className="text-xs font-bold text-rose-900 uppercase tracking-wider block">Farelo de Soja (Granel)</span>
+              <span className="text-[11px] text-rose-600 font-medium">Base Paranaguá/PR (CEPEA)</span>
             </div>
             <div className="mt-4">
               <div className="flex items-baseline gap-1.5">
-                <span className="text-3xl font-black text-blue-950">
+                <span className="text-3xl font-black text-rose-950">
                   R$ {mercado.soja_tonelada !== undefined ? mercado.soja_tonelada.toFixed(2) : '2100.00'}
                 </span>
-                <span className="text-xs font-bold text-blue-700">/ ton</span>
+                <span className="text-xs font-bold text-rose-700">/ ton</span>
               </div>
-              <p className="text-[11px] text-blue-800 mt-1 font-semibold flex items-center gap-1">
-                <Layers className="w-3.5 h-3.5 text-blue-600" />
+              <p className="text-[11px] text-rose-800 mt-1 font-semibold flex items-center gap-1">
+                <Layers className="w-3.5 h-3.5 text-rose-600" />
                 Compõe ~32% da proteína da ração
               </p>
             </div>
@@ -279,35 +279,35 @@ export default function MercadoPage() {
                 <td className="p-4 font-bold text-slate-900">DEL Médio (Dias em Lactação)</td>
                 <td className="p-4 text-emerald-700 font-bold">150 a 180 dias</td>
                 <td className="p-4 text-rose-700 font-bold">&gt; 180 dias</td>
-                <td className="p-4 font-mono font-bold text-indigo-700">R2 (Atraso Reprodutivo)</td>
+                <td className="p-4 font-mono font-bold text-red-700">R2 (Atraso Reprodutivo)</td>
                 <td className="p-4 text-slate-600">DEL alto indica falha de inseminação e queda na persistência da lactação.</td>
               </tr>
               <tr className="hover:bg-slate-50/60 transition-colors">
                 <td className="p-4 font-bold text-slate-900">% Vacas em Lactação</td>
                 <td className="p-4 text-emerald-700 font-bold">≥ 80% do rebanho</td>
                 <td className="p-4 text-rose-700 font-bold">&lt; 80%</td>
-                <td className="p-4 font-mono font-bold text-indigo-700">R2 (Lactação Baixa)</td>
+                <td className="p-4 font-mono font-bold text-red-700">R2 (Lactação Baixa)</td>
                 <td className="p-4 text-slate-600">Vacas secas consomem recursos fixos sem gerar receita líquida.</td>
               </tr>
               <tr className="hover:bg-slate-50/60 transition-colors">
                 <td className="p-4 font-bold text-slate-900">CCS (Contagem Células Somáticas)</td>
                 <td className="p-4 text-emerald-700 font-bold">&lt; 200 mil céls/mL</td>
                 <td className="p-4 text-rose-700 font-bold">&gt; 500 mil (Limite IN 76/77)</td>
-                <td className="p-4 font-mono font-bold text-indigo-700">R4 (Mastite / IN 76/77)</td>
+                <td className="p-4 font-mono font-bold text-red-700">R4 (Mastite / IN 76/77)</td>
                 <td className="p-4 text-slate-600">CCS &gt; 500k viola a norma MAPA e causa penalidade severa no preço do leite.</td>
               </tr>
               <tr className="hover:bg-slate-50/60 transition-colors">
                 <td className="p-4 font-bold text-slate-900">CBT (Contagem Bacteriana Total)</td>
                 <td className="p-4 text-emerald-700 font-bold">&lt; 50 mil UFC/mL</td>
                 <td className="p-4 text-rose-700 font-bold">&gt; 300 mil (Limite IN 76/77)</td>
-                <td className="p-4 font-mono font-bold text-indigo-700">R4 (Higiene / Ordenha)</td>
+                <td className="p-4 font-mono font-bold text-red-700">R4 (Higiene / Ordenha)</td>
                 <td className="p-4 text-slate-600">Falha de resfriamento ou higiene de teteiras desqualifica o leite para consumo.</td>
               </tr>
               <tr className="hover:bg-slate-50/60 transition-colors">
                 <td className="p-4 font-bold text-slate-900">Participação da Nutrição no COE</td>
                 <td className="p-4 text-emerald-700 font-bold">45% a 60%</td>
                 <td className="p-4 text-rose-700 font-bold">&gt; 65% do COE</td>
-                <td className="p-4 font-mono font-bold text-indigo-700">R1 & R6 (Eficiência Ração)</td>
+                <td className="p-4 font-mono font-bold text-red-700">R1 & R6 (Eficiência Ração)</td>
                 <td className="p-4 text-slate-600">Nutrição acima de 65% esgota a margem operacional e gera queima de caixa.</td>
               </tr>
             </tbody>

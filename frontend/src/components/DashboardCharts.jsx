@@ -109,7 +109,7 @@ export default function DashboardCharts({ indicadores, formData }) {
     <div className="bg-white rounded-3xl border border-slate-200/90 shadow-sm p-6 sm:p-8 space-y-8">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-5 border-b border-slate-100 gap-4">
         <div className="flex items-center space-x-3.5">
-          <div className="p-3 bg-gradient-to-br from-indigo-500 to-indigo-700 text-white rounded-2xl shadow-md shadow-indigo-500/20">
+          <div className="p-3 bg-gradient-to-br from-red-700 to-rose-800 text-white rounded-2xl shadow-md shadow-red-950/30">
             <TrendingUp className="w-6 h-6" />
           </div>
           <div>
@@ -177,7 +177,7 @@ export default function DashboardCharts({ indicadores, formData }) {
         <div className="p-6 rounded-3xl border border-slate-200/80 bg-slate-50/50 hover:bg-white transition-all hover:shadow-md flex flex-col justify-between">
           <div className="mb-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center gap-2">
-              <PieIcon className="w-4 h-4 text-indigo-600" />
+              <PieIcon className="w-4 h-4 text-red-600" />
               Composição Estrutural dos Custos (COE + COT)
             </h4>
             <p className="text-xs text-slate-500 mt-1">
@@ -253,7 +253,7 @@ export default function DashboardCharts({ indicadores, formData }) {
           <div className="mb-3">
             <div className="flex items-center justify-between gap-2 flex-wrap">
               <h4 className="text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center gap-2">
-                <Activity className="w-4 h-4 text-indigo-600" />
+                <Activity className="w-4 h-4 text-red-600" />
                 Curva de Lactação (305d) vs DEL Atual da Fazenda
               </h4>
               <span className={`text-xs font-mono px-3 py-1 rounded-full font-bold border ${delAtual <= 180 ? 'bg-emerald-100 text-emerald-800 border-emerald-200' : 'bg-amber-100 text-amber-800 border-amber-200'}`}>

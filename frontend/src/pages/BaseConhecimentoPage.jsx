@@ -121,7 +121,7 @@ export default function BaseConhecimentoPage() {
                   onClick={() => setSelectedCategory(pill.id)}
                   className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
                     selectedCategory === pill.id
-                      ? 'bg-slate-900 text-white shadow-sm'
+                      ? 'bg-red-800 text-white shadow-sm'
                       : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                   }`}
                 >
@@ -153,7 +153,7 @@ export default function BaseConhecimentoPage() {
                         <span className="text-[11px] font-semibold text-slate-500">
                           Prioridade: {r.prioridade}
                         </span>
-                        <span className="text-[11px] font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 px-2.5 py-0.5 rounded-full">
+                        <span className="text-[11px] font-bold text-red-800 bg-red-50 border border-red-200 px-2.5 py-0.5 rounded-full">
                           CF: +{r.cf}
                         </span>
                       </div>
@@ -169,7 +169,7 @@ export default function BaseConhecimentoPage() {
                       <ul className="space-y-1">
                         {r.condicoes.map((c, idx) => (
                           <li key={idx} className="text-xs font-mono text-slate-700 bg-white p-1.5 rounded border border-slate-100">
-                            <span className="font-bold text-indigo-900">{c.campo}</span> {c.operador} <span className="font-bold text-slate-900">{c.valor}</span>
+                            <span className="font-bold text-red-900">{c.campo}</span> {c.operador} <span className="font-bold text-slate-900">{c.valor}</span>
                           </li>
                         ))}
                       </ul>
