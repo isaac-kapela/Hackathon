@@ -67,15 +67,22 @@ export default function ReportExportModal({ isOpen, onClose, resultado, indicado
           
           {/* Cabeçalho do Laudo */}
           <div className="border-b border-slate-200 pb-5">
-            <div className="flex justify-between items-start">
-              <div>
-                <span className="text-[10px] font-black uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                  Hackathon UFJF • RERUM Engenharia de Sistemas
-                </span>
-                <h1 className="text-2xl font-black text-slate-900 mt-1">Laudo Especialista de Avaliação Zootécnica & Econômica</h1>
-                <p className="text-xs text-slate-500 mt-0.5">Fundamentação: Embrapa Gado de Leite, MAPA IN 76/77, NRC Dairy Cattle e CEPEA</p>
+            <div className="flex justify-between items-start gap-4">
+              <div className="flex items-start gap-3.5">
+                <img 
+                  src="/logo.jpeg" 
+                  alt="BovInSight Logo" 
+                  className="w-14 h-14 rounded-2xl object-cover border border-slate-200 shadow-sm shrink-0"
+                />
+                <div>
+                  <span className="text-[10px] font-black uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                    BovInSight • Hackathon UFJF 2026
+                  </span>
+                  <h1 className="text-2xl font-black text-slate-900 mt-1">Laudo Especialista de Avaliação Zootécnica & Econômica</h1>
+                  <p className="text-xs text-slate-500 mt-0.5">Fundamentação: Embrapa Gado de Leite, MAPA IN 76/77, NRC Dairy Cattle e CEPEA</p>
+                </div>
               </div>
-              <div className="text-right text-xs text-slate-500 font-medium">
+              <div className="text-right text-xs text-slate-500 font-medium shrink-0">
                 <p>Data de Emissão: <strong className="text-slate-800">{new Date().toLocaleDateString('pt-BR')}</strong></p>
                 <p className="mt-1">
                   Status Geral: <span className={`font-black uppercase px-2 py-0.5 rounded text-[11px] ${
