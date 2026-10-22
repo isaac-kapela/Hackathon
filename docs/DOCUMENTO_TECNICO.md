@@ -3,6 +3,7 @@
 > **Projeto:** MicroLeiteMacroNegocios  
 > **Evento:** XXVIII Semana da Computação DCC/UFJF & RERUM (Hackathon UFJF 2026 — Maratona de 32 Horas) — **Tema 3: Economia, Zootecnia e Qualidade do Leite**  
 > **Classificação:** Sistema Especialista Baseado em Regras com Incerteza (MYCIN/Shortliffe) e Raciocínio Baseado em Fatos  
+> **Modelo de IA & Ferramentas:** Google Gemini 2.5 Pro (Antigravity Agentic AI) para Elicitação de Conhecimento, Arquitetura e Pair Programming  
 > **Autores:** Equipe MicroLeiteMacroNegocios  
 
 ---

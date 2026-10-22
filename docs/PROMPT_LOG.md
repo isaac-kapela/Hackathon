@@ -2,7 +2,8 @@
 
 > **Projeto:** MicroLeiteMacroNegocios — Sistema Especialista Zootécnico & Econômico para Bovinocultura Leiteira  
 > **Evento:** XXVIII Semana da Computação DCC/UFJF & RERUM (Hackathon UFJF 2026 — 32h) — **Tema 3: Economia, Zootecnia e Qualidade do Leite**  
-> **Metodologia:** Engenharia do Conhecimento (Metodologia Sadrey / Ciclo de Vida de Sistemas Especialistas)  
+> **Metodologia:** Engenharia do Conhecimento (Metodologia Sadrey / Ciclo de Vida de Sistemas Especialistas) + Scrum Ágil  
+> **Modelo de IA Utilizado:** Google Gemini 2.5 Pro (Antigravity Agentic AI / DeepMind) para Pair Programming e Engenharia de Conhecimento  
 > **Período de Desenvolvimento:** 20 e 21 de Outubro de 2026  
 
 ---
