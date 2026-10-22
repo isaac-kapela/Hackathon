@@ -2,14 +2,14 @@
 
 > **Hackathon UFJF 2026** — XXVIII Semana da Computação DCC/UFJF & RERUM  
 > **Tema 3:** Economia, Zootecnia e Qualidade do Leite  
-> **Metodologia de Engenharia de Conhecimento:** Metodologia Sadrey / Ciclo de Vida de Sistemas Especialistas  
+> **Metodologias:** Engenharia do Conhecimento (Metodologia Sadrey) + Gestão Ágil de Software (Framework Scrum)  
 > **Autores:** Equipe de Desenvolvimento Hackathon UFJF 2026  
 
 ---
 
 ## 📑 Índice da Apresentação
 1. [Visão Geral & O Problema da Pecuária Leiteira](#1-visão-geral--o-problema-da-pecuária-leiteira)
-2. [Metodologia Sadrey de Engenharia de Conhecimento](#2-metodologia-sadrey-de-engenharia-de-conhecimento)
+2. [Metodologias: Sadrey (Conhecimento) & Scrum (Agilidade)](#2-metodologias-sadrey-conhecimento--scrum-agilidade)
 3. [Coleta de Requisitos e Fontes de Especialistas](#3-coleta-de-requisitos-e-fontes-de-especialistas)
 4. [Arquitetura do Sistema e Motor Especialista](#4-arquitetura-do-sistema-e-motor-especialista)
 5. [Modelagem Matemática e Zootécnica](#5-modelagem-matemática-e-zootécnica)
@@ -47,32 +47,43 @@ Um **Sistema Especialista Determinístico com Fatores de Certeza (MYCIN/Shortlif
 
 ---
 
-## 2. Metodologia Sadrey de Engenharia de Conhecimento
+## 2. Metodologias: Sadrey (Conhecimento) & Scrum (Agilidade)
 
-O desenvolvimento do sistema seguiu rigorosamente as etapas da **Metodologia Sadrey** (ciclo estruturado de desenvolvimento para sistemas especialistas baseados em conhecimento):
+O projeto combinou de forma sinérgica o rigor da **Engenharia de Conhecimento (Metodologia Sadrey)** com a velocidade e adaptação do **Framework Scrum**:
 
 ```mermaid
-flowchart LR
-    A["1. Identificação<br/>do Problema"] --> B["2. Aquisição do<br/>Conhecimento"]
-    B --> C["3. Conceituação<br/>& Ontologia"]
-    C --> D["4. Formalização<br/>Regras SE-ENTÃO"]
-    D --> E["5. Implementação<br/>Motor & UI"]
-    E --> F["6. Validação &<br/>Refinamento"]
+flowchart TD
+    subgraph SADREY["Metodologia Sadrey (Ciclo de Engenharia do Conhecimento)"]
+        A["1. Identificação<br/>do Problema"] --> B["2. Aquisição do<br/>Conhecimento (Embrapa)"]
+        B --> C["3. Conceituação<br/>(33 Variáveis Ontológicas)"]
+        C --> D["4. Formalização<br/>(25 Regras SE-ENTÃO + MYCIN)"]
+        D --> E["5. Implementação<br/>(Node.js + React)"]
+        E --> F["6. Validação &<br/>Auditoria XAI"]
+    end
+
+    subgraph SCRUM["Framework Scrum (Gestão Ágil do Hackathon)"]
+        S1["Product Backlog<br/>(Histórias de Usuário Agro)"] --> S2["Sprints Curtos & Focados<br/>(Ciclos de Entrega Contínua)"]
+        S2 --> S3["Daily Standups<br/>(Alinhamento de Gargalos)"]
+        S3 --> S4["Incremento Funcional<br/>(Sistema Executável)"]
+        S4 --> S5["Sprint Review & Refine<br/>(Auto-inferência & Simulações)"]
+    end
+
+    SADREY <--> SCRUM
 ```
 
-### Etapas Executadas:
-1. **Identificação do Problema:**
-   - Mapeamento das causas de perda econômica em fazendas de leite no Brasil (baixa eficiência reprodutiva, mastite, estresse térmico, depreciação não contabilizada).
-2. **Aquisição e Elicitação de Conhecimento:**
-   - Extração de parâmetros, limites críticos e equações oficiais de publicações da Embrapa Gado de Leite, Embrapa Pecuária Sudeste, NRC (*National Research Council*) e CEPEA/Esalq-USP.
-3. **Conceituação e Modelagem Ontológica:**
-   - Definição de **33 variáveis fundamentais** agrupadas em 6 dimensões (Zootécnica, Ambiência, Sanitária, Nutricional, Operacional e Financeira).
-4. **Formalização do Conhecimento:**
-   - Estruturação de **25 regras de produção declarativas** com condições lógicas combinatórias e atribuição de **Fatores de Certeza (CF)** pelo modelo de Shortliffe/Buchanan.
-5. **Implementação do Protótipo Funcional:**
-   - Construção do motor de inferência *Forward Chaining* em Node.js e interface interativa reativa em React com Tailwind CSS.
-6. **Validação, Auditoria e Refinamento:**
-   - Teste de consistência com 5 cenários arquetípicos (presets reais), correção da formulação de Lucro Real Econômico e implementação de simulações com auto-inferência (debounce 150ms).
+### 1. Metodologia Sadrey (Especialista):
+- **Identificação:** Mapeamento das causas reais de prejuízo nas propriedades brasileiras.
+- **Aquisição:** Elicitação formal junto a Embrapa Gado de Leite, NRC e CEPEA/USP.
+- **Conceituação:** Catálogo ontológico de 33 variáveis em 6 categorias.
+- **Formalização:** 25 regras declarativas com Fatores de Certeza combinatórios.
+- **Implementação:** Motor *Forward Chaining* desacoplado e auditável.
+- **Validação:** Calibração com 5 cenários reais de fazendas.
+
+### 2. Framework Scrum (Agilidade):
+- **Product Backlog:** Priorização baseada no impacto econômico imediato para o produtor.
+- **Sprints de Execução:** Sprints rápidos dividindo escopos de regras, motor de inferência, frontend reativo e módulo de explicação.
+- **Daily Standups:** Reuniões de alinhamento rápido para resolução de bloqueios e dependências.
+- **Incremento Potencialmente Entregável (Definition of Done):** Cada funcionalidade foi testada, validada e documentada com build e commit rastreável.
 
 ---
 
