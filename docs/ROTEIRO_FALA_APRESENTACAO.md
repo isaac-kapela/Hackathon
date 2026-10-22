@@ -149,7 +149,7 @@
 - **🎯 Postura & Tom de Voz:** Prático, narrando com entusiasmo a tela do sistema.
 
 > *"Vamos agora a uma demonstração prática do que o produtor vivencia ao usar o sistema:*  
-> *Ao carregar o preset da **'Fazenda Bela Vista (Mastite e Estresse)'**, o painel imediatamente entra em status Crítico com 4 diagnósticos:*  
+> *Ao carregar o preset da **'Fazenda com Crise Sanitária (Mastite & CBT Alta)'**, o painel imediatamente entra em status Crítico com 4 diagnósticos:*  
 > *- O termômetro de ITU em 79 acusa perda de 2,8 litros/vaca/dia por estresse calórico.*  
 > *- A CCS em 620.000 acusa desconto de R$ 0,18 por litro pelo laticínio.*  
 > *- A margem líquida por litro está negativa em R$ -0,12 — a fazenda está descapitalizando R$ 3.600 ao mês.*  

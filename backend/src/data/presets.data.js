@@ -81,37 +81,37 @@ module.exports = {
   mastite_e_qualidade_critica: {
     nome: "Fazenda com Crise Sanitária (Mastite & CBT Alta)",
     dados: {
-      producao_diaria: 1100,
-      total_vacas: 85,
-      vacas_lactacao: 60,
-      del_medio: 175,
-      iep_meses: 13.5,
-      taxa_deteccao_cio: 55,
-      taxa_concepcao: 32,
-      taxa_prenhez: 17.6,
-      idade_primeiro_parto_meses: 26,
-      taxa_mortalidade_bezerras: 7.5, // Alta mortalidade
-      temperatura_ambiente: 25,
-      umidade_relativa: 65,
-      escore_condicao_corporal: 2.8,
-      taxa_claudicacao: 9.5, // Problemas de cascos
-      incidencia_mastite_clinica_mes: 6.2, // Mastite clínica severa
-      consumo_concentrado_vaca_dia: 6.0,
-      relacao_volumoso_concentrado: 55,
-      ureia_leite_nul: 13.0,
-      ccs: 680, // Mastite subclínica severa
-      cbt: 240, // Falha de resfriamento/tanque
+      producao_diaria: 1000,
+      total_vacas: 75,
+      vacas_lactacao: 52,
+      del_medio: 180,
+      iep_meses: 13.8,
+      taxa_deteccao_cio: 50,
+      taxa_concepcao: 30,
+      taxa_prenhez: 15.0,
+      idade_primeiro_parto_meses: 27,
+      taxa_mortalidade_bezerras: 7.0, // Alta mortalidade
+      temperatura_ambiente: 28.5, // Gera ITU 79.1 (Estresse Térmico Severo)
+      umidade_relativa: 70,
+      escore_condicao_corporal: 2.7,
+      taxa_claudicacao: 8.5, // Problemas de cascos
+      incidencia_mastite_clinica_mes: 6.0, // Mastite clínica severa
+      consumo_concentrado_vaca_dia: 7.5,
+      relacao_volumoso_concentrado: 50,
+      ureia_leite_nul: 13.5,
+      ccs: 620, // Mastite subclínica severa (620k)
+      cbt: 180, // Falha de resfriamento/tanque (180k)
       gordura_leite: 3.4,
       proteina_leite: 3.0,
       numero_trabalhadores: 2,
       preco_base_leite: 2.45,
-      preco_saca_milho: 72.00,
-      preco_ton_soja: 2200.00,
-      custo_volumoso_dia: 9.00,
-      custo_mao_obra_contratada_mes: 6000,
-      outros_custos_coe_mes: 5800,
-      depreciacao_mes: 3000,
-      mao_obra_familiar_mes: 4000,
+      preco_saca_milho: 78.00,
+      preco_ton_soja: 2400.00,
+      custo_volumoso_dia: 13.50,
+      custo_mao_obra_contratada_mes: 8500,
+      outros_custos_coe_mes: 10700,
+      depreciacao_mes: 5700,
+      mao_obra_familiar_mes: 4800,
       custo_oportunidade_capital_mes: 5000
     }
   },
