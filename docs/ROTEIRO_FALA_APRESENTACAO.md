@@ -14,17 +14,17 @@
 | Slide | Título / Tema | Minutagem | Tempo | Objetivo Central da Fala |
 | :---: | :--- | :---: | :---: | :--- |
 | **1** | Capa Oficial, Identidade & Propósito | 0:00 – 0:45 | 45s | Gancho de abertura impactante, apresentação da equipe e do slogan. |
-| **2** | A Anatomia da Crise no Campo: 4 Dores Reais | 0:45 – 2:00 | 1m15s | Gerar profunda empatia com os prejuízos invisíveis da pecuária de leite. |
-| **3** | O Dilema da IA no Agro: Por que Caixa Preta Quebra Fazendas? | 2:00 – 3:00 | 1m00s | Justificar a escolha: IA Agêntica no Dev vs. Motor Determinístico no Prod. |
-| **4** | Engenharia do Conhecimento: Sadrey + Scrum em 56h | 3:00 – 4:15 | 1m15s | Explicar o rigor metodológico das 5 etapas e a gestão ágil em 5 sprints. |
-| **5** | Pair Programming com Google Gemini 2.5 Pro | 4:15 – 5:30 | 1m15s | Detalhar a simbiose: Humano (Arquiteto) vs. IA (Scaffolding & Testes). |
-| **6** | Esteira de Prompts Estruturada & Rastreabilidade | 5:30 – 6:30 | 1m00s | Expor a decomposição de prompts e o registro no `PROMPT_LOG.md`. |
-| **7** | Casos Reais de Auditoria Humano-IA & Refinamento | 6:30 – 7:45 | 1m15s | Provar a auditoria ativa: Custopec, guardrails biológicos e debounce. |
-| **8** | Os 4 Pilares da Base Especialista & Fórmulas Reais | 7:45 – 9:00 | 1m15s | Demonstrar solidez zootécnica: Thom ITU, NRC, Custopec e MAPA IN 76/77. |
-| **9** | Motor de Inferência XAI & Algoritmo MYCIN | 9:00 – 10:00 | 1m00s | Apresentar o encadeamento para frente, cálculo de CF e explicabilidade. |
-| **10** | Demonstração Prática & Walkthrough da Plataforma | 10:00 – 11:30 | 1m30s | Narrar a simulação ao vivo da Fazenda Crítica para Fazenda Eficiente. |
-| **11** | Posicionamento de Mercado & Viabilidade | 11:30 – 12:15 | 45s | Comparar com o caderninho e ERPs legados; viabilidade de adoção. |
-| **12** | Conclusão, Impacto no Campo & Convite à Banca | 12:15 – 13:00 | 45s | Fechamento memorável, apelo ao agronegócio e transição para perguntas. |
+| **2** | Onde o Produtor de Leite Mais Perde Dinheiro? | 0:45 – 2:00 | 1m15s | Gerar profunda empatia com os prejuízos invisíveis da pecuária de leite. |
+| **3** | Como Evitar a Alucinação? | 2:00 – 3:00 | 1m00s | Justificar a escolha: IA Agêntica no Dev vs. Motor Determinístico no Prod. |
+| **4** | Metodologia Sadrey (Especialista) + Scrum (Agilidade) | 3:00 – 4:15 | 1m15s | Explicar o rigor metodológico das 5 etapas e a gestão ágil em 5 sprints. |
+| **5** | Divisão de Papéis | 4:15 – 5:30 | 1m15s | Detalhar a simbiose: Humano (Arquiteto) vs. IA (Scaffolding & Testes). |
+| **6** | Decompondo o Problema em Prompts Cirúrgicos | 5:30 – 6:30 | 1m00s | Expor a decomposição de prompts e o registro no `PROMPT_LOG.md`. |
+| **7** | Auditoria e Refinamento em Ação | 6:30 – 7:45 | 1m15s | Provar a auditoria ativa: Custopec, guardrails biológicos e debounce. |
+| **8** | As Regras do Sistema | 7:45 – 9:00 | 1m15s | Demonstrar solidez zootécnica: Thom ITU, NRC, Custopec e MAPA IN 76/77. |
+| **9** | Por Que Motor Determinístico e Não Caixa Preta? | 9:00 – 10:00 | 1m00s | Apresentar o encadeamento para frente, cálculo de CF e explicabilidade. |
+| **10** | O Produto Final | 10:00 – 11:30 | 1m30s | Narrar a simulação ao vivo da Fazenda Crítica para Fazenda Eficiente. |
+| **11** | Comparativo | 11:30 – 12:15 | 45s | Comparar com o caderninho e ERPs legados; viabilidade de adoção. |
+| **12** | O Futuro da Pecuária de Leite Começa Aqui | 12:15 – 13:00 | 45s | Fechamento memorável, apelo ao agronegócio e transição para perguntas. |
 
 ---
 
@@ -56,7 +56,7 @@
 
 ---
 
-### 🧠 Slide 3: O Dilema da IA no Agronegócio (Por que Caixa Preta é Risco de Falência?)
+### 🧠 Slide 3: Como Evitar a Alucinação?
 - **⏱️ Minutagem:** 2:00 – 3:00 (1 minuto)
 - **🎯 Postura & Tom de Voz:** Questionador e resolutivo.
 
@@ -83,7 +83,7 @@
 
 ---
 
-### 🤝 Slide 5: Pair Programming com Google Gemini 2.5 Pro
+### 🤝 Slide 5: Divisão de Papéis
 - **⏱️ Minutagem:** 4:15 – 5:30 (1 minuto e 15 segundos)
 - **🎯 Postura & Tom de Voz:** Técnico, valorizando a parceria humano-máquina.
 
@@ -94,7 +94,7 @@
 
 ---
 
-### ⚙️ Slide 6: Esteira de Engenharia de Prompts & Rastreabilidade
+### ⚙️ Slide 6: Decompondo o Problema em Prompts Cirúrgicos
 - **⏱️ Minutagem:** 5:30 – 6:30 (1 minuto)
 - **🎯 Postura & Tom de Voz:** Preciso, apontando para a documentação técnica.
 
@@ -107,7 +107,7 @@
 
 ---
 
-### 🔍 Slide 7: Casos Reais de Auditoria Humano-IA & Refinamento
+### 🔍 Slide 7: Auditoria e Refinamento em Ação
 - **⏱️ Minutagem:** 6:30 – 7:45 (1 minuto e 15 segundos)
 - **🎯 Postura & Tom de Voz:** Analítico, ressaltando o espírito crítico da equipe.
 
@@ -118,7 +118,7 @@
 
 ---
 
-### 📊 Slide 8: Os 4 Pilares da Base Especialista & Fórmulas Reais
+### 📊 Slide 8: As Regras do Sistema
 - **⏱️ Minutagem:** 7:45 – 9:00 (1 minuto e 15 segundos)
 - **🎯 Postura & Tom de Voz:** Didático, transmitindo autoridade agropecuária.
 
@@ -131,7 +131,7 @@
 
 ---
 
-### 🛡️ Slide 9: Motor de Inferência XAI & Algoritmo MYCIN
+### 🛡️ Slide 9: Por Que Motor Determinístico e Não Caixa Preta?
 - **⏱️ Minutagem:** 9:00 – 10:00 (1 minuto)
 - **🎯 Postura & Tom de Voz:** Técnico, demonstrando robustez computacional.
 
@@ -144,7 +144,7 @@
 
 ---
 
-### 💻 Slide 10: Demonstração Prática & Walkthrough da Plataforma
+### 💻 Slide 10: O Produto Final
 - **⏱️ Minutagem:** 10:00 – 11:30 (1 minuto e 30 segundos)
 - **🎯 Postura & Tom de Voz:** Prático, narrando com entusiasmo a tela do sistema.
 
@@ -160,7 +160,7 @@
 
 ---
 
-### 🏆 Slide 11: Posicionamento de Mercado & Viabilidade
+### 🏆 Slide 11: Comparativo
 - **⏱️ Minutagem:** 11:30 – 12:15 (45 segundos)
 - **🎯 Postura & Tom de Voz:** Estratégico e comercial.
 
@@ -171,7 +171,7 @@
 
 ---
 
-### 🌟 Slide 12: Conclusão, Impacto no Campo & Convite à Banca
+### 🌟 Slide 12: O Futuro da Pecuária de Leite Começa Aqui
 - **⏱️ Minutagem:** 12:15 – 13:00 (45 segundos)
 - **🎯 Postura & Tom de Voz:** Inspirador, confiante e conclusivo.
 
