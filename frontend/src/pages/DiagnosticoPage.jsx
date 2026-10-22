@@ -123,10 +123,59 @@ export default function DiagnosticoPage() {
 
   const handleInputChange = (field, value) => {
     setSelectedPresetKey(null);
-    setFormData(prev => ({
-      ...prev,
-      [field]: value
-    }));
+    
+    let finalValue = value;
+    if (typeof value === 'number' && value < 0) {
+      finalValue = 0;
+    }
+
+    setFormData(prev => {
+      const updated = { ...prev, [field]: finalValue };
+
+      // Guardrail 1: Se total_vacas for reduzido abaixo de vacas_lactacao, auto-ajustar vacas_lactacao
+      if (field === 'total_vacas' && finalValue !== '') {
+        const tVacas = Math.max(0, Number(finalValue));
+        if (Number(prev.vacas_lactacao) > tVacas) {
+          updated.vacas_lactacao = tVacas;
+        }
+      }
+
+      // Guardrail 2: Se vacas_lactacao for digitado maior que total_vacas, travar em total_vacas
+      if (field === 'vacas_lactacao' && finalValue !== '') {
+        const tVacas = Math.max(0, Number(prev.total_vacas));
+        if (tVacas > 0 && Number(finalValue) > tVacas) {
+          updated.vacas_lactacao = tVacas;
+        } else if (tVacas === 0) {
+          updated.vacas_lactacao = 0;
+        }
+      }
+
+      // Guardrail 3: Se vacas_lactacao for 0, zerar producao_diaria
+      if (field === 'vacas_lactacao' && Number(finalValue) === 0) {
+        updated.producao_diaria = 0;
+      }
+
+      // Guardrail 4: Percentuais biológicos limitados entre 0 e 100%
+      const percentuais = [
+        'umidade_relativa', 'relacao_volumoso_concentrado', 'taxa_deteccao_cio', 
+        'taxa_concepcao', 'taxa_prenhez', 'taxa_claudicacao', 
+        'incidencia_mastite_clinica_mes', 'taxa_mortalidade_bezerras'
+      ];
+      if (percentuais.includes(field) && finalValue !== '') {
+        const numVal = Number(finalValue);
+        if (numVal > 100) updated[field] = 100;
+        else if (numVal < 0) updated[field] = 0;
+      }
+
+      // Guardrail 5: Escore de Condição Corporal (ECC) entre 1.0 e 5.0
+      if (field === 'escore_condicao_corporal' && finalValue !== '') {
+        const ecc = Number(finalValue);
+        if (ecc > 5.0) updated[field] = 5.0;
+        else if (ecc < 1.0 && ecc > 0) updated[field] = 1.0;
+      }
+
+      return updated;
+    });
   };
 
   const aplicarPreset = (key) => {
@@ -143,6 +192,14 @@ export default function DiagnosticoPage() {
     const dadosHigienizados = {};
     for (const [key, val] of Object.entries(dados)) {
       dadosHigienizados[key] = (val === '' || val === null || val === undefined) ? 0 : Number(val);
+    }
+
+    // Sanitização de consistência antes do disparo
+    if (dadosHigienizados.total_vacas > 0 && dadosHigienizados.vacas_lactacao > dadosHigienizados.total_vacas) {
+      dadosHigienizados.vacas_lactacao = dadosHigienizados.total_vacas;
+    }
+    if (dadosHigienizados.vacas_lactacao === 0) {
+      dadosHigienizados.producao_diaria = 0;
     }
 
     try {
@@ -205,7 +262,7 @@ export default function DiagnosticoPage() {
     <div className="space-y-8 pb-16">
       
       {/* 1. Barra de Cenários / Presets com Visual Cards Intuitivos */}
-      <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white p-6 sm:p-7 rounded-3xl shadow-xl border border-slate-700/60 flex flex-col gap-5">
+      <div className="bg-gradient-to-r from-red-950 via-[#900000] to-rose-950 text-white p-6 sm:p-7 rounded-3xl shadow-xl border border-red-800/80 flex flex-col gap-5">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div className="flex items-center space-x-3.5">
             <div className="p-3 bg-amber-400/10 border border-amber-400/20 rounded-2xl text-amber-400 shrink-0">
@@ -360,9 +417,10 @@ export default function DiagnosticoPage() {
                     <label className="block text-slate-700 font-bold mb-1">Produção Diária (L/dia)</label>
                     <input
                       type="number"
+                      min="0"
                       value={formData.producao_diaria}
                       onChange={(e) => handleInputChange('producao_diaria', e.target.value)}
-                      className="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-900 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none transition-all"
+                      className="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-900 focus:bg-white focus:ring-2 focus:ring-red-500 focus:outline-none transition-all"
                     />
                   </div>
 
@@ -370,9 +428,10 @@ export default function DiagnosticoPage() {
                     <label className="block text-slate-700 font-bold mb-1">Total Vacas Adultas</label>
                     <input
                       type="number"
+                      min="0"
                       value={formData.total_vacas}
                       onChange={(e) => handleInputChange('total_vacas', e.target.value)}
-                      className="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-900 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none transition-all"
+                      className="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-900 focus:bg-white focus:ring-2 focus:ring-red-500 focus:outline-none transition-all"
                     />
                   </div>
 
@@ -382,14 +441,16 @@ export default function DiagnosticoPage() {
                       <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${
                         livePercLact >= 80 ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'
                       }`}>
-                        {livePercLact}% ({livePercLact >= 80 ? 'Meta ok' : 'Baixo'})
+                        {livePercLact}% ({livePercLact >= 80 ? 'Meta ok' : 'Baixo'}) • Máx: {formData.total_vacas || 0}
                       </span>
                     </div>
                     <input
                       type="number"
+                      min="0"
+                      max={formData.total_vacas}
                       value={formData.vacas_lactacao}
                       onChange={(e) => handleInputChange('vacas_lactacao', e.target.value)}
-                      className="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-900 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none transition-all"
+                      className="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-900 focus:bg-white focus:ring-2 focus:ring-red-500 focus:outline-none transition-all"
                     />
                   </div>
 
@@ -406,7 +467,7 @@ export default function DiagnosticoPage() {
                       type="number"
                       value={formData.del_medio}
                       onChange={(e) => handleInputChange('del_medio', e.target.value)}
-                      className="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-900 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none transition-all"
+                      className="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-900 focus:bg-white focus:ring-2 focus:ring-red-500 focus:outline-none transition-all"
                     />
                   </div>
 
@@ -424,7 +485,7 @@ export default function DiagnosticoPage() {
                       step="0.1"
                       value={formData.iep_meses}
                       onChange={(e) => handleInputChange('iep_meses', e.target.value)}
-                      className="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-900 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none transition-all"
+                      className="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-900 focus:bg-white focus:ring-2 focus:ring-red-500 focus:outline-none transition-all"
                     />
                   </div>
 
@@ -439,7 +500,7 @@ export default function DiagnosticoPage() {
                       type="number"
                       value={formData.taxa_deteccao_cio}
                       onChange={(e) => handleInputChange('taxa_deteccao_cio', e.target.value)}
-                      className="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-900 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none transition-all"
+                      className="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-900 focus:bg-white focus:ring-2 focus:ring-red-500 focus:outline-none transition-all"
                     />
                   </div>
 
@@ -449,7 +510,7 @@ export default function DiagnosticoPage() {
                       type="number"
                       value={formData.taxa_concepcao}
                       onChange={(e) => handleInputChange('taxa_concepcao', e.target.value)}
-                      className="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-900 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none transition-all"
+                      className="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-900 focus:bg-white focus:ring-2 focus:ring-red-500 focus:outline-none transition-all"
                     />
                     <span className="text-[10px] text-slate-400 mt-0.5 block">Meta: ≥ 35%</span>
                   </div>
@@ -461,7 +522,7 @@ export default function DiagnosticoPage() {
                       step="0.5"
                       value={formData.idade_primeiro_parto_meses}
                       onChange={(e) => handleInputChange('idade_primeiro_parto_meses', e.target.value)}
-                      className="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-900 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none transition-all"
+                      className="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-900 focus:bg-white focus:ring-2 focus:ring-red-500 focus:outline-none transition-all"
                     />
                     <span className="text-[10px] text-slate-400 mt-0.5 block">Meta: 22 a 26 m</span>
                   </div>
@@ -473,7 +534,7 @@ export default function DiagnosticoPage() {
                       step="0.5"
                       value={formData.taxa_mortalidade_bezerras}
                       onChange={(e) => handleInputChange('taxa_mortalidade_bezerras', e.target.value)}
-                      className="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-900 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none transition-all"
+                      className="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-900 focus:bg-white focus:ring-2 focus:ring-red-500 focus:outline-none transition-all"
                     />
                     <span className="text-[10px] text-slate-400 mt-0.5 block">Meta de colostragem & cria: &lt; 5%</span>
                   </div>

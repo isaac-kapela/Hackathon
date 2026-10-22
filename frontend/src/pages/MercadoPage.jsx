@@ -56,7 +56,7 @@ export default function MercadoPage() {
     <div className="space-y-8 pb-16">
       
       {/* Banner Explicativo de Papel no Sistema Especialista */}
-      <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white p-7 rounded-3xl shadow-xl border border-slate-700/60">
+      <div className="bg-gradient-to-r from-red-950 via-[#900000] to-rose-950 text-white p-7 rounded-3xl shadow-xl border border-red-800/80">
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
           <div className="flex items-start space-x-4">
             <div className="p-3 bg-red-500/20 border border-red-400/30 rounded-2xl text-red-400 shrink-0">

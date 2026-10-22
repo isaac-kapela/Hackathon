@@ -6,12 +6,24 @@
  */
 
 function calculateIndicators(input) {
-  // 1. Zootecnia Básica & Estrutura do Rebanho
-  const producaoDiaria = Number(input.producao_diaria !== undefined && input.producao_diaria !== '' ? input.producao_diaria : 1200);
-  const totalVacas = Number(input.total_vacas !== undefined && input.total_vacas !== '' ? input.total_vacas : 80);
-  const vacasLactacao = Number(input.vacas_lactacao !== undefined && input.vacas_lactacao !== '' ? input.vacas_lactacao : 64);
-  const delMedio = Number(input.del_medio !== undefined && input.del_medio !== '' ? input.del_medio : 165);
-  const iepMeses = Number(input.iep_meses !== undefined && input.iep_meses !== '' ? input.iep_meses : 13.2);
+  // 1. Zootecnia Básica & Estrutura do Rebanho (Com sanitização de casos impossíveis)
+  const totalVacas = Math.max(0, Number(input.total_vacas !== undefined && input.total_vacas !== '' ? input.total_vacas : 80));
+  let vacasLactacao = Math.max(0, Number(input.vacas_lactacao !== undefined && input.vacas_lactacao !== '' ? input.vacas_lactacao : 64));
+  
+  // Guardrail zootécnico: vacas em lactação não pode exceder o total do rebanho
+  if (totalVacas > 0 && vacasLactacao > totalVacas) {
+    vacasLactacao = totalVacas;
+  } else if (totalVacas === 0) {
+    vacasLactacao = 0;
+  }
+
+  let producaoDiaria = Math.max(0, Number(input.producao_diaria !== undefined && input.producao_diaria !== '' ? input.producao_diaria : 1200));
+  if (vacasLactacao === 0) {
+    producaoDiaria = 0; // Sem vacas em lactação não há produção
+  }
+
+  const delMedio = Math.max(0, Number(input.del_medio !== undefined && input.del_medio !== '' ? input.del_medio : 165));
+  const iepMeses = Math.max(0, Number(input.iep_meses !== undefined && input.iep_meses !== '' ? input.iep_meses : 13.2));
   
   // Reprodução e Recria
   const taxaDeteccaoCio = Number(input.taxa_deteccao_cio !== undefined && input.taxa_deteccao_cio !== '' ? input.taxa_deteccao_cio : 60);
