@@ -68,8 +68,11 @@ export default function DiagnosticoPage() {
 
   const handleInputChange = (field, value) => {
     setSelectedPresetKey(null);
-    const updated = { ...formData, [field]: Number(value) };
-    setFormData(updated);
+    // Permite string vazia "" durante a digitação para não travar o zero
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
   };
 
   const aplicarPreset = (key) => {
@@ -83,8 +86,14 @@ export default function DiagnosticoPage() {
 
   const executarDiagnostico = async (dados = formData) => {
     setLoading(true);
+    // Higieniza campos vazios convertendo "" para 0 antes da inferência
+    const dadosHigienizados = {};
+    for (const [key, val] of Object.entries(dados)) {
+      dadosHigienizados[key] = (val === '' || val === null || val === undefined) ? 0 : Number(val);
+    }
+
     try {
-      const data = await apiService.executarDiagnostico(dados);
+      const data = await apiService.executarDiagnostico(dadosHigienizados);
       if (data.sucesso) {
         setResultado(data.resultado);
         setIndicadores(data.indicadores);
@@ -163,16 +172,10 @@ export default function DiagnosticoPage() {
               </h2>
               <p className="text-xs text-slate-500 mt-0.5">Indicadores zootécnicos, qualidade e custos</p>
             </div>
-            
-            <button
-              type="button"
-              onClick={() => executarDiagnostico()}
-              disabled={loading}
-              className="px-4 py-2.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 disabled:opacity-50 text-white font-bold text-xs rounded-xl shadow-md shadow-emerald-900/20 flex items-center gap-1.5 transition-all"
-            >
-              <Play className="w-3.5 h-3.5" />
-              {loading ? 'Avaliando...' : 'Avaliar'}
-            </button>
+
+            <span className="text-[11px] font-mono font-bold text-slate-500 bg-slate-100 px-3 py-1 rounded-full border border-slate-200 shrink-0">
+              Motor Ativo
+            </span>
           </div>
 
           {/* Abas do Formulário */}
@@ -455,10 +458,10 @@ export default function DiagnosticoPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-4 bg-slate-900 hover:bg-slate-800 text-white font-black rounded-2xl shadow-lg transition-all flex items-center justify-center gap-2 text-xs uppercase tracking-wider mt-4"
+              className="w-full py-4 bg-slate-900 hover:bg-slate-800 disabled:opacity-60 text-white font-black rounded-2xl shadow-xl transition-all flex items-center justify-center gap-2.5 text-xs uppercase tracking-wider mt-4 hover:shadow-slate-900/30 active:scale-[0.99]"
             >
-              <TrendingUp className="w-4 h-4 text-emerald-400" />
-              {loading ? 'Processando Inferência...' : 'Reavaliar Rebanho e Custos'}
+              <Play className="w-4 h-4 text-emerald-400 fill-emerald-400" />
+              {loading ? 'Processando Inferência...' : 'Executar Diagnóstico & Simulação'}
             </button>
           </form>
         </div>

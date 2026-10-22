@@ -23,11 +23,13 @@ export default function DashboardCharts({ indicadores, formData }) {
   if (!indicadores) return null;
 
   // 1. Dados para o Gráfico de Sensibilidade de Preço & Lucro Mensal (Evolução)
-  const basePreco = indicadores.preco_leite_ajustado || formData.preco_base_leite || 2.45;
-  const producaoMensal = (indicadores.producao_diaria || 1200) * 30;
-  const coeMensal = (indicadores.coe_total_dia || 1) * 30;
-  const cotMensal = (indicadores.cot_total_dia || 1) * 30;
-  const ctMensal = (indicadores.ct_total_dia || 1) * 30;
+  const basePreco = Number(indicadores.preco_liquido_leite || indicadores.preco_base_leite || formData.preco_base_leite || 2.45);
+  const producaoMensal = Number(indicadores.producao_mensal || (Number(formData.producao_diaria || 1200) * 30));
+  
+  // Custos mensais reais oriundos do costCalculator
+  const coeMensal = Number(indicadores.coe_mes !== undefined ? indicadores.coe_mes : (Number(formData.producao_diaria || 1200) * 30 * Number(indicadores.coe_litro || 1.8)));
+  const cotMensal = Number(indicadores.cot_mes !== undefined ? indicadores.cot_mes : (coeMensal + Number(formData.depreciacao_mes || 3200) + Number(formData.mao_obra_familiar_mes || 4000)));
+  const ctMensal = Number(indicadores.ct_mes !== undefined ? indicadores.ct_mes : (cotMensal + Number(formData.custo_oportunidade_capital_mes || 5000)));
 
   const precosVariacao = [
     Number((basePreco * 0.75).toFixed(2)),
@@ -51,18 +53,22 @@ export default function DashboardCharts({ indicadores, formData }) {
       Receita: Math.round(rec),
       COE: Math.round(coeMensal),
       COT: Math.round(cotMensal),
+      CT: Math.round(ctMensal),
+      MargemBruta: Math.round(margemBruta),
       MargemLiquida: Math.round(margemLiquida),
       LucroReal: Math.round(lucroReal)
     };
   });
 
   // 2. Dados de Composição dos Custos (Breakdown Embrapa)
-  const custoRacaoMes = (indicadores.custo_concentrado_dia || 0) * 30;
-  const custoVolumosoMes = (indicadores.custo_volumoso_dia_total || 0) * 30;
-  const custoMaoObraMes = formData.custo_mao_obra_contratada_mes || 0;
-  const outrosCustosMes = formData.outros_custos_coe_mes || 0;
-  const depreciacaoMes = formData.depreciacao_mes || 0;
-  const maoObraFamMes = formData.mao_obra_familiar_mes || 0;
+  const custoVolumosoMes = Number(formData.vacas_lactacao || 64) * Number(formData.custo_volumoso_dia || 8.50) * 30;
+  const custoAlimentacaoTotal = Number(indicadores.custo_alimentacao_total_mes || (custoVolumosoMes + 12000));
+  const custoRacaoMes = Math.max(0, custoAlimentacaoTotal - custoVolumosoMes);
+  const custoMaoObraMes = Number(formData.custo_mao_obra_contratada_mes || 0);
+  const outrosCustosMes = Number(formData.outros_custos_coe_mes || 0);
+  const depreciacaoMes = Number(formData.depreciacao_mes || 0);
+  const maoObraFamMes = Number(formData.mao_obra_familiar_mes || 0);
+  const custoOportunidadeMes = Number(formData.custo_oportunidade_capital_mes || 0);
 
   const dadosComposicaoCustos = [
     { name: 'Ração Concentrada', valor: Math.round(custoRacaoMes), color: '#3b82f6' },
@@ -70,14 +76,15 @@ export default function DashboardCharts({ indicadores, formData }) {
     { name: 'Mão de Obra Contratada', valor: Math.round(custoMaoObraMes), color: '#8b5cf6' },
     { name: 'Outros Diretos (Energia/Sanidade)', valor: Math.round(outrosCustosMes), color: '#f59e0b' },
     { name: 'Depreciação de Máquinas', valor: Math.round(depreciacaoMes), color: '#64748b' },
-    { name: 'Mão de Obra Familiar (Pró-labore)', valor: Math.round(maoObraFamMes), color: '#ec4899' }
+    { name: 'Mão de Obra Familiar (Pró-labore)', valor: Math.round(maoObraFamMes), color: '#ec4899' },
+    { name: 'Custo Oportunidade Capital', valor: Math.round(custoOportunidadeMes), color: '#14b8a6' }
   ].filter(item => item.valor > 0);
 
   // 3. Comparativo de Custo Unitário vs Preço (R$/L)
   const dadosCustosUnitarios = [
     {
       categoria: 'Preço & Custos (R$/L)',
-      'Preço Líquido Recebido': Number((indicadores.preco_leite_ajustado || basePreco).toFixed(2)),
+      'Preço Líquido Recebido': Number((indicadores.preco_liquido_leite || basePreco).toFixed(2)),
       'COE (Desembolso Direto)': Number((indicadores.coe_litro || 0).toFixed(2)),
       'COT (Operacional Total)': Number((indicadores.cot_litro || 0).toFixed(2)),
       'CT (Custo Total c/ Capital)': Number((indicadores.ct_litro || 0).toFixed(2))
@@ -85,7 +92,7 @@ export default function DashboardCharts({ indicadores, formData }) {
   ];
 
   // 4. Curva Teórica de Lactação (305 dias) e Posição do DEL Atual
-  const delAtual = indicadores.del_medio || 165;
+  const delAtual = Number(indicadores.del_medio || formData.del_medio || 165);
   const dadosCurvaLactacao = [
     { dia: 30, producaoEsperada: 28, estagio: 'Subida / Pico' },
     { dia: 60, producaoEsperada: 32, estagio: 'Pico de Lactação' },
@@ -139,6 +146,10 @@ export default function DashboardCharts({ indicadores, formData }) {
                     <stop offset="5%" stopColor="#10b981" stopOpacity={0.8}/>
                     <stop offset="95%" stopColor="#10b981" stopOpacity={0.05}/>
                   </linearGradient>
+                  <linearGradient id="colorLucroReal" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#14b8a6" stopOpacity={0.7}/>
+                    <stop offset="95%" stopColor="#14b8a6" stopOpacity={0.05}/>
+                  </linearGradient>
                   <linearGradient id="colorReceita" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.4}/>
                     <stop offset="95%" stopColor="#3b82f6" stopOpacity={0.0}/>
@@ -153,8 +164,10 @@ export default function DashboardCharts({ indicadores, formData }) {
                 />
                 <Legend wrapperStyle={{ fontSize: '12px', paddingTop: '12px' }} />
                 <Area type="monotone" dataKey="Receita" stroke="#3b82f6" fillOpacity={1} fill="url(#colorReceita)" name="Receita Bruta" />
-                <Line type="monotone" dataKey="COT" stroke="#ef4444" strokeWidth={2.5} strokeDasharray="4 4" name="Custo Operacional Total (COT)" dot={false} />
-                <Area type="monotone" dataKey="MargemLiquida" stroke="#10b981" strokeWidth={2.5} fillOpacity={1} fill="url(#colorLucro)" name="Margem Líquida (Lucro)" />
+                <Line type="monotone" dataKey="COT" stroke="#ef4444" strokeWidth={2} strokeDasharray="4 4" name="Custo Operacional (COT)" dot={false} />
+                <Line type="monotone" dataKey="CT" stroke="#64748b" strokeWidth={2} strokeDasharray="2 2" name="Custo Total c/ Capital (CT)" dot={false} />
+                <Area type="monotone" dataKey="MargemLiquida" stroke="#10b981" strokeWidth={2} fillOpacity={1} fill="url(#colorLucro)" name="Margem Líquida (Rec - COT)" />
+                <Area type="monotone" dataKey="LucroReal" stroke="#14b8a6" strokeWidth={2.5} fillOpacity={1} fill="url(#colorLucroReal)" name="Lucro Real (Rec - CT)" />
               </AreaChart>
             </ResponsiveContainer>
           </div>
