@@ -395,18 +395,153 @@
       cursor: not-allowed;
     }
 
-    /* Estilos para PDF */
+    /* ==========================================================================
+       ESTILOS EXCLUSIVOS PARA EXPORTAÇÃO EM PDF 100% PERFEITA (1 SLIDE = 1 PÁGINA)
+       ========================================================================== */
+    @page {
+      size: 297mm 210mm;
+      margin: 0;
+    }
+
     @media print {
-      header, footer, .progress-bar-container { display: none !important; }
-      body { background: #ffffff !important; }
-      main { padding: 0 !important; max-width: 100% !important; }
-      .slide {
+      *, *::before, *::after {
+        box-sizing: border-box !important;
+      }
+
+      html, body {
+        width: 297mm !important;
+        height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #ffffff !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        font-size: 13px !important;
+      }
+      
+      header, footer, .progress-bar-container, #speechModal, .floating-timer, button, .nav-btn, .speech-banner { 
+        display: none !important; 
+      }
+      
+      main { 
+        padding: 0 !important; 
+        margin: 0 !important;
+        max-width: 297mm !important; 
+        width: 297mm !important;
+        display: block !important;
+      }
+      
+      .deck-container {
+        width: 297mm !important;
+        min-height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+      }
+
+      div.slide, .slide, div[data-slide] {
         display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        width: 297mm !important;
+        height: 210mm !important;
+        max-height: 210mm !important;
+        min-height: 210mm !important;
+        box-sizing: border-box !important;
+        page-break-before: auto !important;
         page-break-after: always !important;
+        page-break-inside: avoid !important;
+        break-before: auto !important;
+        break-after: page !important;
+        break-inside: avoid !important;
+        overflow: hidden !important;
+        padding: 12mm 16mm 10mm 16mm !important;
         border: none !important;
         box-shadow: none !important;
-        min-height: 100vh !important;
         border-radius: 0 !important;
+        background: #ffffff !important;
+      }
+
+      .slide:last-child, .slide[data-slide="12"] {
+        page-break-after: avoid !important;
+        break-after: avoid !important;
+      }
+
+      .slide-title {
+        font-size: 1.55rem !important;
+        line-height: 1.2 !important;
+        margin-top: 3px !important;
+        margin-bottom: 3px !important;
+        color: #0f172a !important;
+      }
+
+      .slide-subtitle {
+        font-size: 0.85rem !important;
+        line-height: 1.3 !important;
+        margin-bottom: 6px !important;
+        color: #475569 !important;
+      }
+
+      .slide-body {
+        flex: 1 1 auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        gap: 8px !important;
+        margin: 4px 0 !important;
+      }
+
+      .card {
+        padding: 8px 12px !important;
+        border-radius: 10px !important;
+        background: #f8fafc !important;
+        border: 1px solid #e2e8f0 !important;
+      }
+
+      .card h4 {
+        font-size: 0.88rem !important;
+        margin-bottom: 2px !important;
+        color: #0f172a !important;
+      }
+
+      .card p, .card li {
+        font-size: 0.74rem !important;
+        line-height: 1.3 !important;
+        color: #334155 !important;
+      }
+
+      .card-icon {
+        width: 30px !important;
+        height: 30px !important;
+        border-radius: 6px !important;
+        margin-bottom: 4px !important;
+      }
+
+      .grid-2, .grid-3, .grid-4 {
+        gap: 8px !important;
+      }
+
+      .metric-box {
+        padding: 6px 8px !important;
+      }
+
+      .metric-value {
+        font-size: 1.2rem !important;
+      }
+
+      .metric-label {
+        font-size: 0.68rem !important;
+      }
+
+      table {
+        font-size: 0.74rem !important;
+        width: 100% !important;
+      }
+
+      th, td {
+        padding: 4px 8px !important;
       }
     }
 
@@ -1308,6 +1443,20 @@
         lucide.createIcons();
       });
     }
+
+    // Suporte a Impressão e PDF
+    window.addEventListener('beforeprint', () => {
+      document.querySelectorAll('.slide').forEach(s => {
+        s.style.display = 'flex';
+      });
+    });
+
+    window.addEventListener('afterprint', () => {
+      document.querySelectorAll('.slide').forEach(s => {
+        s.style.display = '';
+      });
+      updateSlide();
+    });
 
     // Inicialização
     updateSlide();
