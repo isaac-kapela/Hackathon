@@ -76,24 +76,12 @@ export default function Header({ activeTab, setActiveTab }) {
                 href="/apresentacao.html"
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-red-500/15 to-red-600/15 hover:from-red-500/25 hover:to-red-600/25 border border-red-400/30 text-red-300 hover:text-red-200 rounded-xl text-xs font-bold transition-all shadow-sm"
-                title="Abrir Apresentação do Produto (Slides em HTML/PDF)"
+                className="flex items-center gap-1.5 px-3.5 py-2 bg-gradient-to-r from-red-500/20 to-rose-600/20 hover:from-red-500/30 hover:to-rose-600/30 border border-red-400/40 text-red-200 hover:text-white rounded-xl text-xs font-bold transition-all shadow-sm"
+                title="Abrir Apresentação Oficial Unificada (Produto, Metodologia Sadrey, Scrum e Parceria com IA)"
               >
                 <Presentation className="w-3.5 h-3.5 text-red-400" />
-                <span>Pitch Produto</span>
+                <span>Apresentação Completa (Slides/PDF)</span>
                 <ExternalLink className="w-2.5 h-2.5 text-red-400/60" />
-              </a>
-
-              <a
-                href="/apresentacao_processo_ia.html"
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-indigo-500/15 to-indigo-600/15 hover:from-indigo-500/25 hover:to-indigo-600/25 border border-indigo-400/30 text-indigo-300 hover:text-indigo-200 rounded-xl text-xs font-bold transition-all shadow-sm"
-                title="Abrir Apresentação de Metodologia, Sadrey + Scrum e Parceria Humano + IA"
-              >
-                <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
-                <span>Metodologia & IA</span>
-                <ExternalLink className="w-2.5 h-2.5 text-indigo-400/60" />
               </a>
             </div>
           </div>

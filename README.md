@@ -1,20 +1,34 @@
-# Sistema Especialista em Pecuária Leiteira: Gestão Zootécnica & Econômica
+# 🐮 MicroLeiteMacroNegocios: Sistema Especialista em Pecuária Leiteira
 
-> **Hackathon UFJF 2026** — XXVIII Semana da Computação DCC/UFJF & RERUM Engenharia de Sistemas  
+> **Hackathon UFJF 2026 (Maratona de 32 Horas)** — XXVIII Semana da Computação DCC/UFJF & RERUM Engenharia de Sistemas  
 > **Tema 3:** Análise Econômica, Zootécnica e Qualidade do Leite  
-> **Instituições de Referência Técnica:** Embrapa Gado de Leite, MAPA (Instruções Normativas 76/77), CEPEA/ESALQ-USP e IBGE.
+> **Metodologias:** Engenharia do Conhecimento (Sadrey) + Gestão Ágil de Software (Scrum)  
+> **Modelo de IA Utilizado no Desenvolvimento:** Google Gemini 2.5 Pro (Antigravity Agentic AI) para Elicitação de Conhecimento e Pair Programming  
+> **Instituições de Referência Técnica:** Embrapa Gado de Leite (Custopec), MAPA (IN 76/77), CEPEA/ESALQ-USP, NRC e Thom (1959).
 
 ---
 
 ## 🎯 Objetivo e Visão Geral
 
-Este projeto é um **Sistema Especialista Baseado em Regras e Conhecimento Especializado** desenvolvido para auxiliar produtores e técnicos na tomada de decisão estratégica na pecuária de leite.
+O **MicroLeiteMacroNegocios** é um **Sistema Especialista Baseado em Regras e Conhecimento Especializado** desenvolvido para auxiliar produtores rurais, consultores agronômicos e cooperativas na tomada de decisão estratégica na pecuária de leite brasileira.
 
 O sistema integra:
 1. **Indicadores Zootécnicos e Reprodutivos:** Dias em Lactação (DEL), Intervalo entre Partos (IEP), Taxa de Prenhez, % Vacas em Lactação e Eficiência Alimentar do Concentrado.
-2. **Qualidade do Leite e Bonificação (MAPA IN 76/77):** Contagem de Células Somáticas (CCS), Contagem Bacteriana Total (CBT), Gordura e Proteína.
-3. **Custos Operacionais e Metodologia Embrapa:** Custo Operacional Efetivo (COE), Custo Operacional Total (COT), Custo Total (CT), Margem Bruta, Margem Líquida e Ponto de Equilíbrio.
-4. **Cotações de Mercado & Relação de Troca:** Preço do milho, farelo de soja e relação de troca milho:leite via CEPEA/ESALQ e histórico de captação IBGE SIDRA.
+2. **Bioclimatologia e Estresse Térmico:** Cálculo do Índice de Temperatura e Umidade (ITU) com estimativa de perda volumétrica diária de leite.
+3. **Qualidade do Leite e Bonificação (MAPA IN 76/77):** Contagem de Células Somáticas (CCS), Contagem Bacteriana Total (CBT), Gordura, Proteína e penalizações industriais.
+4. **Custos Operacionais e Metodologia Embrapa Custopec:** Custo Operacional Efetivo (COE), Custo Operacional Total (COT), Custo Total (CT), Margem Bruta, Margem Líquida, Lucro Real Econômico e Alerta de Descapitalização Silenciosa.
+5. **Cotações de Mercado & Relação de Troca:** Preço do milho, farelo de soja e relação de troca milho:leite via CEPEA/ESALQ e histórico de captação IBGE SIDRA.
+
+---
+
+## 📚 Documentação e Apresentação do Projeto
+
+| Documento | Localização / Link | Descrição |
+| :--- | :--- | :--- |
+| **Deck Master de Apresentação (12 Slides)** | [`docs/apresentacao.html`](file:///home/oia100739/Documentos/Hackathon/docs/apresentacao.html) | Apresentação visual interativa unificada com exportação para PDF em 1 clique |
+| **Documento Técnico de Especificação** | [`docs/DOCUMENTO_TECNICO.md`](file:///home/oia100739/Documentos/Hackathon/docs/DOCUMENTO_TECNICO.md) | Formulação formal do problema, equações Embrapa/Thom, arquitetura e engenharia com IA |
+| **Apresentação Técnica e Executiva** | [`docs/APRESENTACAO_PROJETO.md`](file:///home/oia100739/Documentos/Hackathon/docs/APRESENTACAO_PROJETO.md) | Roteiro executivo completo, comparativo de mercado e roadmap |
+| **Log de Engenharia de Prompts** | [`docs/PROMPT_LOG.md`](file:///home/oia100739/Documentos/Hackathon/docs/PROMPT_LOG.md) | Registro de prompts e esteira de pair programming humano-IA com Gemini 2.5 Pro |
 
 ---
 
@@ -22,7 +36,7 @@ O sistema integra:
 
 | Critério Obrigatório | Atendimento no Projeto |
 | :--- | :--- |
-| **Não usar LLM no sistema especialista** | Motor determinístico de inferência (*Forward Chaining*) baseado em regras formais ($R01 \dots R12$) e Fatores de Certeza ($CF$) do MYCIN. Nenhuma decisão ou cálculo depende de IA generativa. |
+| **Não usar LLM no sistema especialista** | Motor determinístico de inferência (*Forward Chaining*) baseado em 25 regras formais ($R01 \dots R25$) e Fatores de Certeza ($CF$) do MYCIN. Nenhuma decisão ou cálculo em tempo de execução depende de IA generativa. |
 | **Execução 100% Localhost** | Todo o sistema roda localmente em Node.js (porta `5000`) e React/Vite (porta `3000`), sem dependências externas obrigatórias. |
 | **Módulo de Explicação Interativo ("Por quê?")** | Trilha de auditoria detalhada (*Audit Trail*) mostrando as premissas avaliadas, os valores da memória de trabalho e a recomendação técnica fundamentada da Embrapa/MAPA. |
 | **Fatores de Certeza ($CF \in [-1.0, +1.0]$)** | Cálculo formal de combinação de evidências do modelo MYCIN e prioridades de regras (50 a 100). |
@@ -107,8 +121,8 @@ hackaton/
 │   │   ├── engine/                      # Motor Especialista (Forward-Chaining + MYCIN CF)
 │   │   │   └── InferenceEngine.js
 │   │   ├── knowledge/                   # Base de Conhecimento Declarativa (JSON)
-│   │   │   ├── rules.json               # 12 Regras de Produção (Embrapa / MAPA)
-│   │   │   └── variables.json           # Dicionário de 20 variáveis zootécnicas e financeiras
+│   │   │   ├── rules.json               # 25 Regras de Produção (Embrapa / MAPA / Thom)
+│   │   │   └── variables.json           # Dicionário de 33 variáveis zootécnicas, climáticas e financeiras
 │   │   ├── services/                    # Lógica de Negócio & Custos
 │   │   │   ├── costCalculator.js        # Fórmulas de COE, COT, CT, DEL, Conversão
 │   │   │   └── marketService.js         # API IBGE SIDRA e CEPEA
@@ -146,8 +160,8 @@ hackaton/
 | Método | Endpoint | Descrição |
 | :--- | :--- | :--- |
 | `POST` | `/api/diagnostico` | Processa os dados da fazenda, calcula indicadores Embrapa e executa o motor de inferência. |
-| `GET` | `/api/conhecimento/regras` | Retorna as 12 regras formais da base de conhecimento. |
-| `GET` | `/api/conhecimento/variaveis` | Retorna o dicionário de variáveis com tipos, faixas e descrições. |
+| `GET` | `/api/conhecimento/regras` | Retorna as 25 regras formais da base de conhecimento. |
+| `GET` | `/api/conhecimento/variaveis` | Retorna o dicionário de 33 variáveis com tipos, faixas e descrições. |
 | `GET` | `/api/mercado/benchmarks` | Retorna as cotações CEPEA e série histórica IBGE SIDRA (Tabela 1086). |
 | `GET` | `/api/presets` | Retorna cenários de demonstração pré-configurados. |
 

@@ -157,3 +157,77 @@ CF_1 + CF_2 \times (1 + CF_1), & \text{se } CF_1, CF_2 < 0
 2. **Tratamento de Strings Vazias:** Suporte a digitação natural no input, onde a remoção de caracteres deixa o campo vazio e o normalizador converte dinamicamente em zero sem poluição visual de zeros à esquerda.
 3. **Explicabilidade Transparente (Explainable AI - XAI):** O componente `ExplanationModule.jsx` decompõe cada regra ativada nas premissas que foram satisfeitas, seu status, seu grau de certeza e sua recomendação prática.
 4. **Relatório Pericial Exportável:** Módulo `ReportExportModal.jsx` com suporte à impressão e download JSON com assinatura técnica simulada.
+
+---
+
+## 7. Metodologia de Desenvolvimento, Sadrey, Scrum e Pair Programming com IA
+
+A construção do **MicroLeiteMacroNegocios** em um prazo restrito de **32 horas de maratona (Hackathon)** exigiu uma abordagem disciplinada de **Engenharia de Software e Engenharia do Conhecimento**, combinando o modelo clássico de **Sadrey** para sistemas especialistas, o framework ágil **Scrum** para gestão de entregas rápidas, e uma esteira avançada de **Pair Programming com IA (Google Gemini 2.5 Pro / Antigravity Agentic AI)**.
+
+```mermaid
+flowchart TD
+    subgraph SADREY["1. Engenharia do Conhecimento (Sadrey)"]
+        S1["Identificação<br/>(Dores Agro)"] --> S2["Aquisição<br/>(Embrapa / NRC / IN 76-77)"]
+        S2 --> S3["Conceituação<br/>(33 Variáveis Ontológicas)"]
+        S3 --> S4["Formalização<br/>(25 Regras SE-ENTÃO + MYCIN)"]
+        S4 --> S5["Validação<br/>(Casos de Teste Reais)"]
+    end
+
+    subgraph SCRUM["2. Gestão Ágil (Scrum em 32h)"]
+        SC1["Product Backlog<br/>(Histórias de Usuário)"] --> SC2["Sprints de 2h a 4h<br/>(Ciclos de Foco)"]
+        SC2 --> SC3["Daily Standups & Checkpoints<br/>(Ajustes de Rota)"]
+        SC3 --> SC4["Incremento Funcional<br/>(Executável & Testado)"]
+    end
+
+    subgraph PAIR["3. Interação Humano-IA (Gemini 2.5 Pro)"]
+        H["Humano (Especialista/Arquiteto)<br/>- Visão de Domínio Zootécnico<br/>- Definição de Premissas<br/>- Auditoria de Fórmulas e XAI"] <--> AI["IA (Gemini 2.5 Pro / Antigravity)<br/>- Estruturação Declarativa JSON<br/>- Motor Forward Chaining + MYCIN<br/>- Componentes React + Recharts<br/>- Refatoração e Testes Automatizados"]
+    end
+
+    SADREY --> PAIR
+    SCRUM --> PAIR
+```
+
+### 7.1. As 5 Etapas da Metodologia Sadrey
+1. **Identificação do Problema:** Mapeamento dos 4 grandes gargalos de rentabilidade da pecuária de leite brasileira (Descapitalização oculta, Estresse Térmico por ITU, Acidose Ruminal SARA e Penalizações de Mastite/CCS).
+2. **Aquisição do Conhecimento:** Elicitação formal de literatura científica (Embrapa Gado de Leite — Custopec, equações bioclimáticas de Thom e NRC, normas MAPA IN 76/77).
+3. **Conceituação Ontológica:** Estruturação de 33 variáveis normalizadas, separadas por tipo de dado, unidade e faixas de normalidade em `variables.json`.
+4. **Formalização Lógica:** Conversão do conhecimento em 25 regras declarativas de produção (`rules.json`) com premissas booleanas/aritméticas e Fatores de Certeza ($CF \in [-1, +1]$).
+5. **Implementação & Validação:** Implementação do motor determinístico desacoplado e validação contínua contra 5 presets de fazendas representativas.
+
+### 7.2. O Framework Scrum na Maratona de 32 Horas
+O tempo do hackathon foi distribuído em microciclos iterativos:
+- **Sprint 0 (Horas 0–4):** Definição de escopo do Tema 3, arquitetura e elicitação de variáveis ontológicas.
+- **Sprint 1 (Horas 4–10):** Construção do motor de inferência em Node.js com algoritmo de encadeamento para frente e cálculo MYCIN.
+- **Sprint 2 (Horas 10–18):** Desenvolvimento da interface reativa em React, Tailwind CSS e componentes de visualização com Recharts.
+- **Sprint 3 (Horas 18–24):** Módulo de Explicabilidade (XAI), simulação de cenários interativos e exportação de laudos periciais.
+- **Sprint 4 (Horas 24–28):** Auditoria de usabilidade (debounce 150ms, tratamento de strings vazias, refinamento de paleta carmesim/vermelha `#900000`).
+- **Sprint 5 (Horas 28–32):** Consolidação da documentação técnica, deck de apresentação em 12 slides com exportador PDF e testes finais.
+
+### 7.3. O Papel do Desenvolvedor Humano vs. A Inteligência Artificial
+
+| Dimensão | Papel do Desenvolvedor Humano | Papel da IA (Google Gemini 2.5 Pro) |
+| :--- | :--- | :--- |
+| **Domínio Zootécnico & Agro** | Define os conceitos, valida se o ITU de Thom reflete a realidade do gado leiteiro e parametriza as regras da Embrapa. | Sugere o modelo formal de dados, mapeia relações causais e estrutura as regras em formato JSON limpo. |
+| **Arquitetura de Software** | Estabelece o desacoplamento em camadas, regras de negócio isoladas e API REST stateless. | Implementa o motor de *Forward Chaining*, funções de combinação MYCIN e scaffolding completo de módulos. |
+| **Interface e Experiência (UX)** | Especifica a necessidade de visualização gráfica instantânea, usabilidade sem zeros travados e paleta visual. | Gera os gráficos interativos com Recharts, layout responsivo em Tailwind CSS e lógica de debounce. |
+| **Auditoria e Qualidade** | Audita os diagnósticos gerados, testa casos extremos e valida se a explicação SE → ENTÃO está correta. | Conduz refatorações rápidas, gera testes unitários e elabora a documentação técnica consolidada. |
+
+### 7.4. Decomposição de Tarefas e Engenharia de Prompts
+Para evitar o problema de "alucinações" ou arquiteturas monolíticas confusas, a equipe adotou um pipeline estrito de engenharia de prompts:
+1. **Prompts de Elicitação Conceitual:** Foco exclusivo na definição ontológica de variáveis e operadores lógicos.
+2. **Prompts de Estruturação Declarativa:** Geração de JSON estruturado sem código executável misturado, garantindo regras puras.
+3. **Prompts de Implementação Modular:** Criação de componentes isolados com interfaces claras de entrada e saída.
+4. **Prompts de Refinamento e Auditoria:** Submissão de cenários de teste para checagem cruzada de resultados econômicos e zootécnicos.
+
+### 7.5. Casos Reais de Auditoria Humano-IA
+- **Caso 1: Custo Operacional Total (COT) vs. Custo Total (CT):** A IA havia inicialmente agrupado a remuneração de oportunidade da terra dentro do COT. A auditoria humana identificou a não conformidade com a metodologia Embrapa Custopec e refinou o cálculo separando COE (desembolso), COT (+ depreciação e pró-labore) e CT (+ oportunidade do capital e da terra).
+- **Caso 2: Usabilidade de Digitação Numérica:** Ao apagar o valor de um input numérico, o campo ficava travado com `0` ou `NaN`. A equipe humana orientou a IA a criar um sanitizador dinâmico no `costCalculator` e no formulário React, permitindo que campos vazios fossem exibidos limpamente e processados como `0` na inferência.
+- **Caso 3: Auto-Inferência em Tempo Real:** A necessidade de clicar em botões para ver os resultados quebrava a experiência exploratória. Foi implementada uma esteira com debounce de 150ms disparando a inferência de forma assíncrona e transparente.
+
+---
+
+## 8. Conclusão, Impacto e Reprodutibilidade
+
+O **MicroLeiteMacroNegocios** prova que é possível aliar o rigor científico dos **Sistemas Especialistas Determinísticos** à velocidade produtiva da **Inteligência Artificial Generativa e Agêntica**.
+
+Ao substituir a "caixa preta" por regras declarativas abertas e auditáveis (XAI), a solução capacita o produtor de leite e os consultores agronômicos a tomar decisões embasadas em dados reais da sua fazenda, transformando o microleite em um macronégocio sustentável e lucrativo.

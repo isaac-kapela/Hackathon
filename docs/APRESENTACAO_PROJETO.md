@@ -29,12 +29,12 @@ A pecuária leiteira no Brasil enfrenta margens econômicas estreitas e alta vul
 - **Saúde e Sanidade:** Mastites subclínicas e problemas de casco (claudicação) provocam descartes precoces e penalizações severas no preço do leite (CCS/CBT).
 - **Gestão Financeira Desconectada:** O produtor frequentemente confunde fluxo de caixa momentâneo com lucro real sustentável, sofrendo **descapitalização silenciosa** ao ignorar a depreciação e o custo de oportunidade da terra.
 
-### 💡 A Solução: BovInSight / PecuáriaExpert
+### 💡 A Solução: MicroLeiteMacroNegocios
 Um **Sistema Especialista Determinístico com Fatores de Certeza (MYCIN/Shortliffe)** que integra dados zootécnicos, climáticos, sanitários e econômicos para fornecer **diagnósticos em tempo real**, **explicações transparentes (auditáveis)** e **planos de ação imediatos priorizados**.
 
 ```
    ┌────────────────────────────────────────────────────────┐
-   │                  BovInSight / PecuáriaExpert           │
+   │                 MicroLeiteMacroNegocios                │
    │                                                        │
    │  [Zootecnia] + [Clima/ITU] + [Saúde] + [Custos Embrapa]│
    │                           ▼                            │
@@ -104,7 +104,7 @@ flowchart TD
 
 ## 4. Arquitetura do Sistema e Motor Especialista
 
-A arquitetura do BovInSight é desacoplada, moderna e totalmente auditável:
+A arquitetura do MicroLeiteMacroNegocios é desacoplada, moderna e totalmente auditável:
 
 ```mermaid
 flowchart TD
@@ -195,7 +195,7 @@ flowchart TD
 
 ### 📊 Comparativo de Mercado
 
-| Recurso | Planilhas Tradicionais | Softwares de Gestão Agro | BovInSight (Nosso Sistema) |
+| Recurso | Planilhas Tradicionais | Softwares de Gestão Agro | MicroLeiteMacroNegocios (Nosso Sistema) |
 | :--- | :---: | :---: | :---: |
 | **Diagnóstico Automatizado** | ❌ Não | ❌ Apenas relatórios | ✅ **Sim (25 regras especialistas)** |
 | **Trilha Explicativa (XAI)** | ❌ Não | ❌ Não | ✅ **Sim (SE → ENTÃO auditável)** |
@@ -208,7 +208,7 @@ flowchart TD
 
 ## 8. Conclusão e Próximos Passos
 
-### 🏆 Impacto do BovInSight
+### 🏆 Impacto do MicroLeiteMacroNegocios
 - **Democratização do Acesso à Consultoria:** Leva a expertise de zootecnistas e agrônomos seniores para médios e pequenos produtores de leite.
 - **Prevenção de Falência:** Detecta a descapitalização oculta antes que o produtor precise vender matrizes para cobrir custos operacionais.
 - **Bem-Estar Animal e Sanidade:** Reduz o estresse calórico e o descarte precoce por mastite e claudicação.
@@ -220,4 +220,4 @@ flowchart TD
 
 ---
 
-> **BovInSight / PecuáriaExpert** — *Inteligência Especialista para a Sustentabilidade do Agronegócio Brasileiro.*
+> **MicroLeiteMacroNegocios** — *Inteligência Especialista para a Sustentabilidade do Agronegócio Brasileiro.*
