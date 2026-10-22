@@ -1,7 +1,7 @@
 # 📜 Registro Formal de Prompts e Evolução do Projeto (Prompt Log)
 
-> **Projeto:** BovInSight / PecuáriaExpert — Sistema Especialista Zootécnico & Econômico para Bovinocultura Leiteira  
-> **Evento:** XXVIII Semana da Computação DCC/UFJF & RERUM (Hackathon UFJF 2026) — **Tema 3: Economia, Zootecnia e Qualidade do Leite**  
+> **Projeto:** MicroLeiteMacroNegocios — Sistema Especialista Zootécnico & Econômico para Bovinocultura Leiteira  
+> **Evento:** XXVIII Semana da Computação DCC/UFJF & RERUM (Hackathon UFJF 2026 — 32h) — **Tema 3: Economia, Zootecnia e Qualidade do Leite**  
 > **Metodologia:** Engenharia do Conhecimento (Metodologia Sadrey / Ciclo de Vida de Sistemas Especialistas)  
 > **Período de Desenvolvimento:** 20 e 21 de Outubro de 2026  
 

@@ -71,12 +71,12 @@ export default function ReportExportModal({ isOpen, onClose, resultado, indicado
               <div className="flex items-start gap-3.5">
                 <img 
                   src="/logo.jpeg" 
-                  alt="BovInSight Logo" 
+                  alt="MicroLeiteMacroNegocios Logo" 
                   className="w-14 h-14 rounded-2xl object-cover border border-slate-200 shadow-sm shrink-0"
                 />
                 <div>
                   <span className="text-[10px] font-black uppercase tracking-wider text-red-700 bg-red-50 px-2 py-0.5 rounded border border-red-200">
-                    BovInSight • Hackathon UFJF 2026 (32h)
+                    MicroLeiteMacroNegocios • Hackathon UFJF 2026 (32h)
                   </span>
                   <h1 className="text-2xl font-black text-slate-900 mt-1">Laudo Especialista de Avaliação Zootécnica & Econômica</h1>
                   <p className="text-xs text-slate-500 mt-0.5">Fundamentação: Embrapa Gado de Leite, MAPA IN 76/77, NRC Dairy Cattle e CEPEA</p>

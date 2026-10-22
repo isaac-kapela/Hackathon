@@ -1,9 +1,9 @@
 # 📄 Documento Técnico: Especificação Formal do Problema, Modelagem e Arquitetura da Solução
 
-> **Projeto:** BovInSight / PecuáriaExpert  
+> **Projeto:** MicroLeiteMacroNegocios  
 > **Evento:** XXVIII Semana da Computação DCC/UFJF & RERUM (Hackathon UFJF 2026 — Maratona de 32 Horas) — **Tema 3: Economia, Zootecnia e Qualidade do Leite**  
 > **Classificação:** Sistema Especialista Baseado em Regras com Incerteza (MYCIN/Shortliffe) e Raciocínio Baseado em Fatos  
-> **Autores:** Equipe BovInSight  
+> **Autores:** Equipe MicroLeiteMacroNegocios  
 
 ---
 

@@ -19,7 +19,7 @@ export default function Header({ activeTab, setActiveTab }) {
               <div className="w-12 h-12 rounded-2xl overflow-hidden shadow-lg shadow-red-950/40 border-2 border-red-500/40 bg-slate-800 flex items-center justify-center">
                 <img 
                   src="/logo.jpeg" 
-                  alt="BovInSight Logo" 
+                  alt="MicroLeiteMacroNegocios Logo" 
                   className="w-full h-full object-cover"
                   onError={(e) => {
                     e.target.onerror = null;
@@ -36,7 +36,7 @@ export default function Header({ activeTab, setActiveTab }) {
             <div>
               <div className="flex items-center space-x-2.5">
                 <h1 className="font-black text-xl text-white tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
-                  BovInSight
+                  MicroLeiteMacroNegocios
                 </h1>
                 <span className="text-[11px] bg-red-500/15 text-red-400 font-bold px-2.5 py-0.5 rounded-full border border-red-500/30 tracking-wide uppercase">
                   Hackathon UFJF 2026 (32h)

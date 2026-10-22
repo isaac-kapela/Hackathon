@@ -1,5 +1,5 @@
 {
-  "name": "bovinsight-monorepo",
+  "name": "microleitemacronegocios-monorepo",
   "version": "1.0.0",
   "description": "Sistema Especialista Zootécnico & Econômico para Pecuária Leiteira - Hackathon UFJF 2026",
   "scripts": {
@@ -18,6 +18,6 @@
     "embrapa",
     "hackathon-ufjf"
   ],
-  "author": "Equipe BovInSight / Hackathon UFJF 2026",
+  "author": "Equipe MicroLeiteMacroNegocios / Hackathon UFJF 2026 (32h)",
   "license": "MIT"
 }

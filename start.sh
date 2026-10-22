@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # =============================================================================
-#  BovInSight / PecuáriaExpert - Script de Inicialização Rápida & Unificada
-#  Hackathon UFJF 2026 - Tema 3: Economia, Zootecnia e Qualidade do Leite
+#  MicroLeiteMacroNegocios - Script de Inicialização Rápida & Unificada
+#  Hackathon UFJF 2026 (32h) - Tema 3: Economia, Zootecnia e Qualidade do Leite
 # =============================================================================
 
 set -e
@@ -12,7 +12,7 @@ FRONTEND_PORT=3000
 
 echo ""
 echo "================================================================="
-echo "   🐮 BovInSight — Sistema Especialista Zootécnico & Econômico"
+echo "   🐮 MicroLeiteMacroNegocios — Sistema Especialista Zootécnico & Econômico"
 echo "   XXVIII Semana da Computação DCC/UFJF & RERUM • Tema 3"
 echo "================================================================="
 echo ""
@@ -78,7 +78,7 @@ echo ""
 # Cleanup ao sair com Ctrl+C
 cleanup() {
   echo ""
-  echo "🛑 Encerrando serviços BovInSight..."
+  echo "🛑 Encerrando serviços MicroLeiteMacroNegocios..."
   kill $BACKEND_PID $FRONTEND_PID 2>/dev/null || true
   free_port $BACKEND_PORT
   free_port $FRONTEND_PORT
