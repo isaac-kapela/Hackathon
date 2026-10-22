@@ -123,8 +123,8 @@ export default function DashboardCharts({ indicadores, formData }) {
         
         {/* GRÁFICO 1: Evolução / Sensibilidade de Lucro por Preço */}
         <div className="p-6 rounded-3xl border border-slate-200/80 bg-slate-50/50 hover:bg-white transition-all hover:shadow-md flex flex-col justify-between">
-          <div className="mb-4">
-            <div className="flex items-center justify-between gap-2">
+          <div className="mb-3">
+            <div className="flex items-center justify-between gap-2 flex-wrap">
               <h4 className="text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center gap-2">
                 <DollarSign className="w-4 h-4 text-red-600" />
                 Evolução do Lucro e Margem Líquida Mensal
@@ -138,9 +138,9 @@ export default function DashboardCharts({ indicadores, formData }) {
             </p>
           </div>
 
-          <div className="h-80 w-full pt-2">
+          <div className="h-96 w-full pt-2">
             <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={dadosEvolucaoLucro} margin={{ top: 10, right: 15, left: 5, bottom: 5 }}>
+              <AreaChart data={dadosEvolucaoLucro} margin={{ top: 15, right: 20, left: 20, bottom: 15 }}>
                 <defs>
                   <linearGradient id="colorLucro" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#b91c1c" stopOpacity={0.8}/>
@@ -156,18 +156,18 @@ export default function DashboardCharts({ indicadores, formData }) {
                   </linearGradient>
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                <XAxis dataKey="precoLitro" tick={{ fontSize: 11, fill: '#64748b' }} />
-                <YAxis tickFormatter={(val) => `R$ ${(val/1000).toFixed(0)}k`} tick={{ fontSize: 11, fill: '#64748b' }} />
+                <XAxis dataKey="precoLitro" tick={{ fontSize: 11, fill: '#64748b' }} dy={4} />
+                <YAxis width={72} tickFormatter={(val) => `R$ ${(val/1000).toFixed(0)}k`} tick={{ fontSize: 11, fill: '#64748b' }} />
                 <Tooltip 
                   formatter={(val, name) => [formatCurrency(val), name]}
                   contentStyle={{ backgroundColor: '#ffffff', borderRadius: '16px', border: '1px solid #cbd5e1', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)', fontSize: '12px' }}
                 />
-                <Legend wrapperStyle={{ fontSize: '12px', paddingTop: '12px' }} />
+                <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '14px' }} />
                 <Area type="monotone" dataKey="Receita" stroke="#3b82f6" fillOpacity={1} fill="url(#colorReceita)" name="Receita Bruta" />
                 <Line type="monotone" dataKey="COT" stroke="#ef4444" strokeWidth={2} strokeDasharray="4 4" name="Custo Operacional (COT)" dot={false} />
                 <Line type="monotone" dataKey="CT" stroke="#64748b" strokeWidth={2} strokeDasharray="2 2" name="Custo Total c/ Capital (CT)" dot={false} />
-                <Area type="monotone" dataKey="MargemLiquida" stroke="#b91c1c" strokeWidth={2} fillOpacity={1} fill="url(#colorLucro)" name="Margem Líquida (Rec - COT)" />
-                <Area type="monotone" dataKey="LucroReal" stroke="#e11d48" strokeWidth={2.5} fillOpacity={1} fill="url(#colorLucroReal)" name="Lucro Real (Rec - CT)" />
+                <Area type="monotone" dataKey="MargemLiquida" stroke="#b91c1c" strokeWidth={2} fillOpacity={1} fill="url(#colorLucro)" name="Margem Líquida" />
+                <Area type="monotone" dataKey="LucroReal" stroke="#e11d48" strokeWidth={2.5} fillOpacity={1} fill="url(#colorLucroReal)" name="Lucro Real" />
               </AreaChart>
             </ResponsiveContainer>
           </div>
@@ -175,7 +175,7 @@ export default function DashboardCharts({ indicadores, formData }) {
 
         {/* GRÁFICO 2: Composição dos Custos Operacionais (Metodologia Embrapa) */}
         <div className="p-6 rounded-3xl border border-slate-200/80 bg-slate-50/50 hover:bg-white transition-all hover:shadow-md flex flex-col justify-between">
-          <div className="mb-4">
+          <div className="mb-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center gap-2">
               <PieIcon className="w-4 h-4 text-indigo-600" />
               Composição Estrutural dos Custos (COE + COT)
@@ -185,15 +185,15 @@ export default function DashboardCharts({ indicadores, formData }) {
             </p>
           </div>
 
-          <div className="h-80 w-full flex items-center justify-center pt-2">
+          <div className="h-96 w-full flex items-center justify-center pt-2">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
                   data={dadosComposicaoCustos}
-                  cx="50%"
+                  cx="42%"
                   cy="50%"
-                  innerRadius={55}
-                  outerRadius={95}
+                  innerRadius={50}
+                  outerRadius={90}
                   paddingAngle={4}
                   dataKey="valor"
                 >
@@ -209,7 +209,7 @@ export default function DashboardCharts({ indicadores, formData }) {
                   layout="vertical" 
                   align="right" 
                   verticalAlign="middle" 
-                  wrapperStyle={{ fontSize: '11px', lineHeight: '22px' }}
+                  wrapperStyle={{ fontSize: '11px', lineHeight: '22px', maxWidth: '42%' }}
                 />
               </PieChart>
             </ResponsiveContainer>
@@ -218,7 +218,7 @@ export default function DashboardCharts({ indicadores, formData }) {
 
         {/* GRÁFICO 3: Comparativo Preço Líquido vs COE vs COT vs CT por Litro */}
         <div className="p-6 rounded-3xl border border-slate-200/80 bg-slate-50/50 hover:bg-white transition-all hover:shadow-md">
-          <div className="mb-4">
+          <div className="mb-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center gap-2">
               <Layers className="w-4 h-4 text-red-600" />
               Margens Unitárias por Litro Produzido (R$/Litro)
@@ -228,17 +228,17 @@ export default function DashboardCharts({ indicadores, formData }) {
             </p>
           </div>
 
-          <div className="h-80 w-full pt-2">
+          <div className="h-96 w-full pt-2">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={dadosCustosUnitarios} margin={{ top: 15, right: 15, left: 5, bottom: 5 }}>
+              <BarChart data={dadosCustosUnitarios} margin={{ top: 15, right: 20, left: 15, bottom: 15 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
-                <XAxis dataKey="categoria" tick={{ fontSize: 12, fill: '#64748b' }} />
-                <YAxis tickFormatter={(val) => `R$ ${val.toFixed(2)}`} tick={{ fontSize: 11, fill: '#64748b' }} />
+                <XAxis dataKey="categoria" tick={{ fontSize: 12, fill: '#64748b' }} dy={4} />
+                <YAxis width={65} tickFormatter={(val) => `R$ ${val.toFixed(2)}`} tick={{ fontSize: 11, fill: '#64748b' }} />
                 <Tooltip 
                   formatter={(val) => [`R$ ${Number(val).toFixed(2)}/L`]}
                   contentStyle={{ backgroundColor: '#ffffff', borderRadius: '16px', border: '1px solid #cbd5e1', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)', fontSize: '12px' }}
                 />
-                <Legend wrapperStyle={{ fontSize: '12px', paddingTop: '10px' }} />
+                <Legend wrapperStyle={{ fontSize: '12px', paddingTop: '12px' }} />
                 <Bar dataKey="Preço Líquido Recebido" fill="#b91c1c" radius={[8, 8, 0, 0]} />
                 <Bar dataKey="COE (Desembolso Direto)" fill="#f59e0b" radius={[8, 8, 0, 0]} />
                 <Bar dataKey="COT (Operacional Total)" fill="#ef4444" radius={[8, 8, 0, 0]} />
@@ -250,8 +250,8 @@ export default function DashboardCharts({ indicadores, formData }) {
 
         {/* GRÁFICO 4: Curva Teórica de Lactação e Posição do DEL Atual */}
         <div className="p-6 rounded-3xl border border-slate-200/80 bg-slate-50/50 hover:bg-white transition-all hover:shadow-md">
-          <div className="mb-4">
-            <div className="flex items-center justify-between gap-2">
+          <div className="mb-3">
+            <div className="flex items-center justify-between gap-2 flex-wrap">
               <h4 className="text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center gap-2">
                 <Activity className="w-4 h-4 text-indigo-600" />
                 Curva de Lactação (305d) vs DEL Atual da Fazenda
@@ -265,9 +265,9 @@ export default function DashboardCharts({ indicadores, formData }) {
             </p>
           </div>
 
-          <div className="h-80 w-full pt-2">
+          <div className="h-96 w-full pt-2">
             <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={dadosCurvaLactacao} margin={{ top: 15, right: 15, left: 5, bottom: 5 }}>
+              <AreaChart data={dadosCurvaLactacao} margin={{ top: 15, right: 20, left: 15, bottom: 15 }}>
                 <defs>
                   <linearGradient id="colorDEL" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#6366f1" stopOpacity={0.7}/>
@@ -275,8 +275,8 @@ export default function DashboardCharts({ indicadores, formData }) {
                   </linearGradient>
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                <XAxis dataKey="dia" tickFormatter={(d) => `${d}d`} tick={{ fontSize: 11, fill: '#64748b' }} />
-                <YAxis tickFormatter={(val) => `${val} L/v`} tick={{ fontSize: 11, fill: '#64748b' }} />
+                <XAxis dataKey="dia" tickFormatter={(d) => `${d}d`} tick={{ fontSize: 11, fill: '#64748b' }} dy={4} />
+                <YAxis width={55} tickFormatter={(val) => `${val} L/v`} tick={{ fontSize: 11, fill: '#64748b' }} />
                 <Tooltip 
                   formatter={(val, name, item) => [`${val} L/vaca/dia (${item.payload.estagio})`, 'Produção']}
                   contentStyle={{ backgroundColor: '#ffffff', borderRadius: '16px', border: '1px solid #cbd5e1', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)', fontSize: '12px' }}
