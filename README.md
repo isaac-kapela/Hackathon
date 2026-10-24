@@ -1,4 +1,4 @@
-# 🥇 PRIMEIRO COLOCADO NA HACKATON RERUM 
+#              🥇 PRIMEIRO COLOCADO NA HACKATON RERUM 🥇
 
 # 🐮 MicroLeiteMacroNegocios: Sistema Especialista em Pecuária Leiteira 
 
