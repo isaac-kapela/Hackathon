@@ -1,4 +1,6 @@
-# 🐮 MicroLeiteMacroNegocios: Sistema Especialista em Pecuária Leiteira 🥇 PRIMEIRO COLOCADO NA HACKATON RERUM 
+# 🥇 PRIMEIRO COLOCADO NA HACKATON RERUM 
+
+# 🐮 MicroLeiteMacroNegocios: Sistema Especialista em Pecuária Leiteira 
 
 > **Hackathon UFJF 2026 (Maratona de 56 Horas)** — XXVIII Semana da Computação DCC/UFJF & RERUM Engenharia de Sistemas  
 > **Tema 3:** Análise Econômica, Zootécnica e Qualidade do Leite  
